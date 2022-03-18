@@ -4,5 +4,5 @@ DROP TABLE IF EXISTS campaigns CASCADE;
 CREATE TABLE campaigns (
   id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
   name VARCHAR(100),
-  dm_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+  dm_id uuid REFERENCES users(id) ON DELETE CASCADE
 );
