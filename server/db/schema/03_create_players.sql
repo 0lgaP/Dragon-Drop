@@ -2,7 +2,7 @@
 DROP TABLE IF EXISTS players CASCADE;
 -- CREATE USERS
 CREATE TABLE players (
-  id SERIAL PRIMARY KEY,
-  user_id FOREIGN KEY REFERENCES users(id)
-  campaign_id FOREIGN KEY REFERENCES campaigns(id)
+  id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+  user_id uuid REFERENCES users(id) ON DELETE CASCADE,
+  campaign_id uuid REFERENCES campaigns(id) ON DELETE CASCADE
 );
