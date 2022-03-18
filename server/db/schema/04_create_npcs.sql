@@ -7,6 +7,6 @@ CREATE TABLE npcs (
   campaign_id uuid REFERENCES campaigns(id) ON DELETE CASCADE,
   name VARCHAR(50),
   alive BOOLEAN,
-  bio VARCHAR(300)
+  bio VARCHAR(300),
   details VARCHAR(100)
 );
