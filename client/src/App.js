@@ -2,13 +2,15 @@ import "./App.css";
 import Knight from "./tutorial-components/Knight";
 import Square from "./tutorial-components/Square";
 import Board from "./tutorial-components/Board";
+import { observe } from "./tutorial-components/Game";
 
 
-function App() {
+function App({knightPosition}) {
+ 
   return (
 
     <div className="App">
-    <Board knightPosition={[0, 0]}/>
+    <Board knightPosition={knightPosition}/>
     </div>
 
   );
