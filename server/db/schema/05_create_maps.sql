@@ -5,5 +5,5 @@ DROP TABLE IF EXISTS maps CASCADE;
 CREATE TABLE maps (
   id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
   name VARCHAR(100),
-  campaign_id FOREIGN KEY REFERENCES campaigns(id)
+  campaign_id UUID REFERENCES campaigns(id) ON DELETE CASCADE
 );
