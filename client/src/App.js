@@ -1,8 +1,8 @@
 import "./App.css";
-import Knight from "./tutorial-components/Knight";
-import Square from "./tutorial-components/Square";
+// import Knight from "./tutorial-components/Knight";
+// import Square from "./tutorial-components/Square";
 import Board from "./tutorial-components/Board";
-import { observe } from "./tutorial-components/Game";
+// import { observe } from "./tutorial-components/Game";
 
 
 function App({knightPosition}) {
