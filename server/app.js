@@ -6,6 +6,11 @@ const db = require("./configs/db.config");
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+const campaignsRouter = require('./routes/campaigns')
+const mapsRouter = require('./routes/maps')
+const npcsRouter = require('./routes/npcs')
+const partyRouter = require('./routes/party')
+const storyRouter = require('./routes/story')
 
 const app = express();
 
@@ -17,7 +22,12 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // listeners
 
-app.use("/", indexRouter);
+app.use("/", indexRouter(db));
 app.use("/users", usersRouter(db));
+app.use("/users/:id/campaigns", campaignsRouter(db));
+app.use("/users/:id/campaigns/:c_id/maps", mapsRouter(db));
+app.use("/users/:id/campaigns/:c_id/npcs", npcsRouter(db));
+app.use("/users/:id/campaigns/:c_id/party", partyRouter(db));
+app.use("/users/:id/campaigns/:c_id/story", storyRouter(db));
 
 module.exports = app;
