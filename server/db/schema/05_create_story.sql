@@ -4,5 +4,5 @@ DROP TABLE IF EXISTS story CASCADE;
 CREATE TABLE story (
   id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
   name VARCHAR(50) NOT NULL,
-  story_id uuid REFERENCES campaign(id) on DELETE CASCADE
+  campaign_id uuid REFERENCES campaigns(id) on DELETE CASCADE
 );
