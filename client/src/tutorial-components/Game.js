@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 
 // export function observe(receive) {
 //   const randPos = () => Math.floor(Math.random() * 8)
