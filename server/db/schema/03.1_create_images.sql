@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS images CASCADE;
+-- CREATE USERS
+CREATE TABLE images (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  name VARCHAR(300),
+  src TEXT
+);
