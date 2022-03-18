@@ -2,7 +2,7 @@
 DROP TABLE IF EXISTS campaigns CASCADE;
 -- CREATE USERS
 CREATE TABLE campaigns (
-  id SERIAL PRIMARY KEY,
+  id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
   name VARCHAR(100),
-  dm_id FOREIGN KEY REFERENCES users(id)
+  dm_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
