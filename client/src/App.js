@@ -1,19 +1,26 @@
 import "./App.css";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
-import DragDrop from "./chess-components/DragDrop";
+import Knight from "./tutorial-components/Knight";
+import Square from "./tutorial-components/Square";
+import Board from "./tutorial-components/Board";
+
 
 function App() {
   return (
-    <DndProvider backend={HTML5Backend}>
 
     <div className="App">
-      <h1 className="text-3xl font-bold underline">Drag Drop Test!</h1>
-      <DragDrop></DragDrop>
+    <Board knightPosition={[0, 0]}/>
     </div>
 
-    </DndProvider>
   );
 }
 
 export default App;
+
+// <DndProvider backend={HTML5Backend}>
+
+// <div className="App">
+//   <h1 className="text-3xl font-bold underline">Drag Drop Test!</h1>
+//   <DragDrop></DragDrop>
+// </div>
+
+// </DndProvider>
