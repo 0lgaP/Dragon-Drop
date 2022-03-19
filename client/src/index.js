@@ -5,10 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {observe} from './tutorial-components/Game';
 
-observe((knightPosition) =>
+observe((knightPosition, column) =>
 ReactDOM.render(
   <React.StrictMode>
-    <App knightPosition={knightPosition}/>
+    <App knightPosition={knightPosition} column={column}/>
   </React.StrictMode>,
   document.getElementById('root')
 )

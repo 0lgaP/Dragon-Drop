@@ -7,9 +7,10 @@
 
 let knightPosition = [1, 7]
 let observer = null
+let column = "a"
 
 function emitChange() {
-  observer(knightPosition)
+  observer(knightPosition, column)
 }
 
 export function observe(o) {

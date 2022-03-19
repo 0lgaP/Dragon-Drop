@@ -7,26 +7,8 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 import BoardSquare from './BoardSquare'
 
 
-// function renderSquare(i, knightPosition) {
-//   const x = i % 8
-//   const y = Math.floor(i / 8)
-//   // const isKnightHere = x === knightPosition[0] && y === knightPosition[1]
-//   // const black = (x + y) % 2 === 1
-//   // const piece = isKnightHere ? <Knight /> : null
+//LOCAL STATE GOES INTO DRAG-DROP
 
-//   return (
-    
-//     <div key={i} style={{ width: '12.5%', height: '12.5%' }}>
-//       <BoardSquare x={x} y={y}>
-//         {renderPiece(x, y, knightPosition)}
-//       </BoardSquare>
-//     </div>
-//   )
-// }
-// function renderPiece(x, y, [knightX, knightY]) {
-//   if (x === knightX && y === knightY) {
-//     return <Knight />
-//   }
 
 function renderSquare(i, knightPosition) {
   const x = i % 8
@@ -46,11 +28,6 @@ function renderPiece(x, y, [knightX, knightY]) {
   }
 }
 
-// function handleSquareClick(toX, toY) {
-//   if (canMoveKnight(toX, toY)) {
-//     moveKnight(toX, toY)
-//   }
-// }
 
 function Board({ knightPosition }) {
   const squares = []

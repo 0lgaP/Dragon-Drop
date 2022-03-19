@@ -4,13 +4,17 @@ import "./App.css";
 import Board from "./tutorial-components/Board";
 // import { observe } from "./tutorial-components/Game";
 
+//knight position should be state
 
 function App({knightPosition}) {
- 
+//const [knightPosition, setKnightPosition] = useState()
+
+//const move = () => {}
+
   return (
 
     <div className="App">
-    <Board knightPosition={knightPosition}/>
+    <Board knightPosition={knightPosition} />
     </div>
 
   );
