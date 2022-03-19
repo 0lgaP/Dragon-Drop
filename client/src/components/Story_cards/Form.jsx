@@ -5,7 +5,7 @@ function Form() {
   const [story, setStory] = useState('');
   const [map, setMap] = useState('');
   const [npc, setNpc] = useState('');
-  const [storyCard, setStoryCard] = useState('')
+
 
   const reset = () => {
     setMap("");
