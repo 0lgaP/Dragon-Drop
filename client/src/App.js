@@ -3,6 +3,16 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Header from './components/Header'
 import Navbar from './components/Navbar'
 import Home from './components/Home'
+import Login from './components/Login'
+import Register from './components/Register'
+import Profile from './components/Profile'
+import CampaignList from './components/campaign/CampaignList'
+import CampaignDetails from './components/campaign/CampaignDetails'
+import MapList from './components/campaign/MapList'
+import MapDetails from './components/campaign/MapDetails'
+import Story from './components/campaign/Story'
+import PlayerList from './components/campaign/PlayerList'
+import NPCList from './components/campaign/NPCList'
 
 function App() {
   return (
@@ -10,6 +20,7 @@ function App() {
     <div className="App">
       <Header />
       <Navbar />
+      <div className="content">
       <Switch>
         <Route exact path="/">
           <Home />
@@ -32,16 +43,20 @@ function App() {
         <Route exact path="/users/:u_id/campaigns/:c_id/maps">
           <MapList />
         </Route>
+        <Route exact path="/users/:u_id/campaigns/:c_id/maps/:m_id">
+          <MapDetails />
+        </Route>
         <Route exact path="/users/:u_id/campaigns/:c_id/story">
           <Story />
         </Route>
         <Route exact path="/users/:u_id/campaigns/:c_id/party">
-          <Party />
+          <PlayerList />
         </Route>
         <Route exact path="/users/:u_id/campaigns/:c_id/npcs">
           <NPCList />
         </Route>
       </Switch>
+      </div>
     </div>
     </Router>
   );
