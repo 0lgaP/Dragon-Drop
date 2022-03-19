@@ -1,25 +1,32 @@
 import React, { useState } from "react";
+import {useParams} from "react-router-dom";
+import useFetch from "../../hooks/useFetch";
+
+function getAppointmentsForDay(state, dayName) {
+  const dayObj = state.days.find((day) => day.name === dayName);
+  if (!dayObj || !dayObj.appointments) {
+    return [];
+  }
+
+  const appointmentsArray = dayObj.appointments;
+  const resultArray = appointmentsArray.map(
+    (appointment) => state.appointments[appointment]
+  );
+  return resultArray;
+}
 
 
 function Form() {
+  const params = useParams();
+  console.log("PARAMS", params)
+  const address = '/users/2c41cf56-a6d7-11ec-b909-0242ac120002/campaigns/8a89386b-de43-4c63-9127-3a78394d4253/npcs' ;
+  const { data: user, error, isPending } = useFetch(`http://localhost:8082${address}`)
+
+  console.log("data: user", user)
+
   const [story, setStory] = useState('');
   const [map, setMap] = useState('');
   const [npc, setNpc] = useState('');
-
-
-  const reset = () => {
-    setMap("");
-    setNpc("");
-    setStory("");
-  };
-
-  const cansel = () => {
-    reset();
-  };
-
-  function save(story, map, npc) {
-
-  }
 
   return (
 
@@ -67,7 +74,7 @@ function Form() {
   <button className="button confirm">
     Submit
   </button>
-  <button className="button cancel" onClick={cansel}>
+  <button className="button cancel" >
     Reset
   </button>
   </article>

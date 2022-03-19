@@ -6,7 +6,16 @@ module.exports = (db) => {
 
 // GET NPCS
 router.get('/', (req, res) => {
+  db.query(`SELECT * FROM npcs;`)
+  .then(data => {
 
+    res.send(data.rows).status(200)
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .json({error: err.message});
+  })
 
 });
 
