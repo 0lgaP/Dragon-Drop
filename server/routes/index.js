@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-
+module.exports = (db) => {
 // HOME PAGE
 router.get('/', function(req, res, next) {
   res.render('index');
@@ -27,4 +27,5 @@ router.put('/register', (req, res) => {
 
 });
 
-module.exports = router;
+return router
+};
