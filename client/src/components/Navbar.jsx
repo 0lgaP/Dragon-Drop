@@ -1,3 +1,4 @@
+import React from "react";
 import { Link, useParams } from "react-router-dom";
 
 const Navbar = () => {
@@ -16,9 +17,11 @@ const Navbar = () => {
     );
   }
   else {
-    <nav>
-      <h2>Get started building YOUR world today!</h2>
-    </nav>
+    return (
+      <nav>
+        <h2>Get started building YOUR world today!</h2>
+      </nav>
+    )
   }
 
 }
