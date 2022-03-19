@@ -14,6 +14,33 @@ function App() {
         <Route exact path="/">
           <Home />
         </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/register">
+          <Register />
+        </Route>
+        <Route exact path="/users/:u_id">
+          <Profile />
+        </Route>
+        <Route exact path="/users/:u_id/campaigns">
+          <CampaignList />
+        </Route>
+        <Route exact path="/users/:u_id/campaigns/:c_id">
+          <CampaignDetails />
+        </Route>
+        <Route exact path="/users/:u_id/campaigns/:c_id/maps">
+          <MapList />
+        </Route>
+        <Route exact path="/users/:u_id/campaigns/:c_id/story">
+          <Story />
+        </Route>
+        <Route exact path="/users/:u_id/campaigns/:c_id/party">
+          <Party />
+        </Route>
+        <Route exact path="/users/:u_id/campaigns/:c_id/npcs">
+          <NPCList />
+        </Route>
       </Switch>
     </div>
     </Router>
