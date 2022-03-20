@@ -24,8 +24,10 @@ function Form() {
   // const npcList = user ? getNpcNames(user) : (null)
 
   // console.log("The List", npcList)
-
-  
+  const onChange = (e) => {
+    const selectedNpc = e.target.value;
+    setNpc(selectedNpc);
+  }
   return (
     
 <section className="card">
@@ -54,16 +56,10 @@ function Form() {
         Map 1
       </option>
     </select>
-    <select className="card__dropdown--right"
-    onChange={(e) => {
-      const selectedNpc = e.target.value;
-      setNpc(selectedNpc);
-    }}>
-      <DropDownListItem/>
-      <option value="NPC 1">
-        NPC 1
-      </option>
-    </select>
+
+      <DropDownListItem onChange={onChange}/>
+
+
   </article>
 
 
