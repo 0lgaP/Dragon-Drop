@@ -17,10 +17,7 @@ function DropDownListItem(props) {
 
   return (
     <select className="card__dropdown--left" 
-    onChange={(e) => {
-      const selectedNpc = e.target.value;
-      setNpc(selectedNpc);
-    }}
+    onChange={props.onChange}
     >
       {npc.map(npc => <option key={npc.id} value={npc.name}>{npc.name}</option>)}
     </select>
