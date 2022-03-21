@@ -1,51 +1,51 @@
-import { React, useState } from "react";
-import PropTypes from 'prop-types';
-
-
-// REWORK:
-async function loginUser(credentials) {
-  return fetch('http://localhost:8081/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(credentials)
-  })
-    .then(data => data.json())
- }
-
- 
+import { useState, useContext } from "react";
+import AuthContext from "../context/AuthProvider";
+import axios from '../api/axios'
+const LOGIN_URL = "/login";
 
 const Login = ( {setToken} ) => {
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
+  const { setAuth } = useContext(AuthContext);
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const token = await loginUser({
-      username,
-      password
-    });
-    setToken(token);
+    try {
+      const response = await axios.post(LOGIN_URL, JSON.stringify({email, password}),
+      {
+        headers: { 'Content-type': 'application/json'},
+        withCredentials: true
+      });
+      const accessToken = response?.data?.accessToken;
+      setAuth({email, password, accessToken})
+      console.log(JSON.stringify(response?.data));
+      setEmail('')
+      setPassword('');
+    }
+    catch(err) {
+
+    }
   }
 
   return(
+    <section>
+    <h1>Login</h1>
     <form onSubmit={handleSubmit}>
       <label>
         <p>Email</p>
-        <input type="text" onChange={e => setUsername(e.target.value)}/>
+        <input type="text" onChange={e => setEmail(e.target.value)} value={email}/>
       </label>
       <label>
         <p>Password</p>
-        <input type="password" onChange={e => setPassword(e.target.value)}/>
+        <input type="password" onChange={e => setPassword(e.target.value)} value={password}/>
       </label>
       <div>
         <button type="submit">Submit</button>
       </div>
     </form>
+    </section>
   )
 }
-Login.propTypes = {
-  setToken: PropTypes.func.isRequired
-}
+
 export default Login;
