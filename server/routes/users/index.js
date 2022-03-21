@@ -10,7 +10,7 @@ module.exports = (router, db) => {
 
   getUsers(router, db);
 
-  postUsers(router, db);
+  postUser(router, db);
 
   fetchUser(router, db);
 
