@@ -1,6 +1,9 @@
-import React from "react";
+import { React, useState } from "react";
+import PropTypes from 'prop-types';
 
 const Register = () => {
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
 return (
   <form>
   <label>
