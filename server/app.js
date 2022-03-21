@@ -4,6 +4,11 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const db = require("./configs/db.config");
 const { v4: uuidv4 } = require("uuid");
+const cookieSession = require('cookie-session');
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2']
+}));
 
 // const indexRouter = require("./routes/index");
 // const usersRouter = require("./routes/users");
