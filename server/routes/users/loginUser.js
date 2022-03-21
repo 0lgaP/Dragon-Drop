@@ -1,8 +1,7 @@
 module.exports = (router, db) => {
-//Login User
+  //Login User
 
-router.post('/login', (req, res) => {
-  
-})
-
-}
+  router.post('/login', (req, res) => {
+    
+  })
+};

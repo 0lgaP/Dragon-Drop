@@ -3,4 +3,4 @@ module.exports = (router, db) => {
   router.get('/users', (req, res) => {
     
   })
-}
+};
