@@ -1,30 +1,35 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
+const campaignRoutes = require("./campaigns/index");
+const npcRoutes = require("./npcs/index");
+const partyRoutes = require("./party/index");
 
 
-// HOME PAGE
-router.get('/', function(req, res, next) {
-  res.render('index');
-});
+module.exports = function (router, db) {
+  // app.use("/users/:id/campaigns", campaignsRouter(db));
+  campaignRoutes(router, db);
 
-// GET LOGIN PAGE
-router.get('/login', (req, res) => {
+  // app.use("/users/:id/campaigns/:c_id/npcs")
+  npcRoutes(router, db);
 
-});
+// app.use("/users/:id/campaigns/:c_id/party")
+  partyRoutes(router, db);
 
-// SUBMIT LOGIN
-router.put('/login', (req, res) => {
 
-});
+  // // HOME PAGE
+  // router.get("/", function (req, res, next) {
+  //   res.render("index");
+  // });
 
-// GET REGISTRATION PAGE
-router.get('/register', (req, res) => {
+  // // GET LOGIN PAGE
+  // router.get("/login", (req, res) => {});
 
-});
+  // // SUBMIT LOGIN
+  // router.put("/login", (req, res) => {});
 
-// SUBMIT REGISTRATION
-router.put('/register', (req, res) => {
+  // // GET REGISTRATION PAGE
+  // router.get("/register", (req, res) => {});
 
-});
-
-module.exports = router;
+  // // SUBMIT REGISTRATION
+  // router.put("/register", (req, res) => {});
+};
