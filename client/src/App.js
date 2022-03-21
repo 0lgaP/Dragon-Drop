@@ -1,6 +1,7 @@
 import { React, useState } from 'react';
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import useToken from './hooks/useToken';
 import Header from './components/Header'
 import Navbar from './components/Navbar'
 import Home from './components/Home'
@@ -15,8 +16,10 @@ import Story from './components/campaign/Story'
 import PlayerList from './components/campaign/PlayerList'
 import NPCList from './components/campaign/NPCList'
 
+
 function App() {
-  const [token, setToken] = useState();
+  const {token, setToken} = useToken();
+  
   return (
     <Router>
     <div className="App">

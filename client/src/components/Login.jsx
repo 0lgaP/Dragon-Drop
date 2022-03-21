@@ -1,4 +1,5 @@
-import React from "react";
+import { React, useState } from "react";
+import PropTypes from 'prop-types';
 
 async function loginUser(credentials) {
   return fetch('http://localhost:8081/login', {
@@ -10,6 +11,8 @@ async function loginUser(credentials) {
   })
     .then(data => data.json())
  }
+
+ 
 
 const Login = ( {setToken} ) => {
   const [username, setUsername] = useState();
@@ -28,7 +31,7 @@ const Login = ( {setToken} ) => {
     <form onSubmit={handleSubmit}>
       <label>
         <p>Email</p>
-        <input type="text" onChange={e => setUserName(e.target.value)}/>
+        <input type="text" onChange={e => setUsername(e.target.value)}/>
       </label>
       <label>
         <p>Password</p>
@@ -40,5 +43,7 @@ const Login = ( {setToken} ) => {
     </form>
   )
 }
-
+Login.propTypes = {
+  setToken: PropTypes.func.isRequired
+}
 export default Login;

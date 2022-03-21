@@ -27,10 +27,6 @@ module.exports = function (router, db) {
   // app.use("/users/:id/campaigns/:c_id/story", storyRouter(db));
   storyRoutes(router, db);
 
-  // // HOME PAGE
-  // router.get("/", function (req, res, next) {
-  //   res.render("index");
-  // });
 
   // // GET LOGIN PAGE
 router.get("/login", (req, res) => {

@@ -1,4 +1,4 @@
 module.exports = (router, db) => {
   // GET SINGLE CAMPAIGN
-  router.get("/:c_id", (req, res) => {});
+  router.get("campaigns/:c_id", (req, res) => {});
 };
