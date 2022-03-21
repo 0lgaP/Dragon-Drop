@@ -1,6 +1,8 @@
 const getParty = require("./getParty");
 const postPlayer = require("./postPlayer");
 const fetchPlayer = require("./fetchPlayer");
+const deletePlayer = require("./deletePlayer");
+const editPlayer = require("./editPlayer");
 
 module.exports = (router, db) => {
   // -> /users/:id/campaigns/:c_id/party
@@ -13,5 +15,8 @@ module.exports = (router, db) => {
   // // SPECIFIC PLAYER
 
   fetchPlayer(router, db);
-  // return router;
+
+  deletePlayer(router, db);
+
+  editPlayer(router, db);
 };
