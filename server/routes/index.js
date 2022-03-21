@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 const campaignRoutes = require("./campaigns/index");
-const mapRoutes = require("./maps");
+const mapRoutes = require("./maps/");
 const npcRoutes = require("./npcs/index");
 const partyRoutes = require("./party/index");
 
