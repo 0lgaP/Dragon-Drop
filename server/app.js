@@ -4,11 +4,8 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const db = require("./configs/db.config");
 const { v4: uuidv4 } = require("uuid");
-const cookieSession = require('cookie-session');
-app.use(cookieSession({
-  name: 'session',
-  keys: ['key1', 'key2']
-}));
+// const cookieSession = require('cookie-session');
+const cors = require('cors');
 
 // const indexRouter = require("./routes/index");
 // const usersRouter = require("./routes/users");
@@ -24,7 +21,11 @@ const mainRouter = express.Router();
 mainRoutes(mainRouter, db);
 
 const app = express();
-
+app.use(cors());
+// app.use(cookieSession({
+//   name: 'session',
+//   keys: ['key1', 'key2']
+// }));
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

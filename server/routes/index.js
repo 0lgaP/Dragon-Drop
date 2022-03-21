@@ -6,6 +6,7 @@ const npcRoutes = require("./npcs/index");
 const partyRoutes = require("./party/index");
 const usersRoutes = require("./users/index");
 const storyRoutes = require("./story/index");
+const { application } = require("express");
 
 module.exports = function (router, db) {
   // app.use("/users/:id/campaigns", campaignsRouter(db));
@@ -32,24 +33,14 @@ module.exports = function (router, db) {
   // });
 
   // // GET LOGIN PAGE
-  // app.use("/login", (req, res) => {});
+router.get("/login", (req, res) => {
+  console.log('fetch login page');
+    res.json({
+      token: 'test123'
+    })
+  });
 
-  // router.post('/login', (req, res) => {
-  //   const email = req.body.email;
-  //   const password = req.body.password;
-  //   db.query(`SELECT * FROM users WHERE email = $1;`, [email])
-  //   .then(result => {
-
-  //     if (password === result.rows[0].password) {
-  //       req.session["user_id"] = result.rows[0].id;
-  //       res.redirect(`/users/${result.rows[0].id}`);
-  //     } else {
-  //       res.send({error: "error"});
-  //       return;
-  //     }
-
-  //   });
-  // });
+  // router.post('/login', (req, res) => {});
 
   // // SUBMIT LOGIN
   // router.put("/login", (req, res) => {});

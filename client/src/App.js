@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useState } from 'react';
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Header from './components/Header'
@@ -16,21 +16,22 @@ import PlayerList from './components/campaign/PlayerList'
 import NPCList from './components/campaign/NPCList'
 
 function App() {
+  const [token, setToken] = useState();
   return (
     <Router>
     <div className="App">
-      <Header />
-      <Navbar />
+      <Header token={token} />
+      <Navbar token={token} />
       <div className="content">
       <Switch>
         <Route exact path="/">
           <Home />
         </Route>
         <Route path="/login">
-          <Login />
+          <Login setToken={setToken} />
         </Route>
         <Route path="/register">
-          <Register />
+          <Register setToken={setToken} />
         </Route>
         <Route exact path="/users/:u_id">
           <Profile />
