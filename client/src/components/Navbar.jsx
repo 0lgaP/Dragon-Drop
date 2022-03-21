@@ -1,10 +1,10 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 
-const Navbar = () => {
-
+const Navbar = (props) => {
+  const token = props.token
   const { u_id, c_id } = useParams();
-  if (u_id) {
+  if (token) {
     return (
       <nav>
         <div className="links">

@@ -4,11 +4,12 @@ import React from 'react'
 import { Link, useParams } from "react-router-dom";
 import useFetch from '../hooks/useFetch';
 
-const Header = () => {
+const Header = (props) => {
+  const token = props.token
   const { u_id } = useParams();
   const { data: user, error, isPending } = useFetch('http://localhost:3000/users/' + u_id)
 
-  if (u_id) {
+  if (token) {
     return (
       <div className="header bg-blue-3170be ">
         <div className="header-left">
