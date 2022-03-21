@@ -1,6 +1,8 @@
 const getNPCs = require("./getNPCs");
 const postNPC = require("./postNPC");
 const fetchNPC = require("./fetchNPC");
+const deleteNPC = require("./deleteNPC");
+const editNPC = require("./editNPC");
 
 module.exports = (router, db) => {
   // -> /users/:id/campaigns/:c_id/npcs
@@ -13,5 +15,8 @@ module.exports = (router, db) => {
   // // SPECIFIC NPC
 
   fetchNPC(router, db);
-  // return router;
+
+  deleteNPC(router, db);
+
+  editNPC(router, db);
 };
