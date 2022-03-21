@@ -8,12 +8,14 @@ function DropDownListItem(props) {
   const address = '/users/2c41cf56-a6d7-11ec-b909-0242ac120002/campaigns/8a89386b-de43-4c63-9127-3a78394d4253/npcs' ;
   const { data: user, error, isPending } = useFetch(`http://localhost:8082${address}`)
 
-  useEffect(() => { loadInitialNPCs() }, []) //componsne did mount
+  useEffect(() => { loadInitialNPCs() 
   
-  async function loadInitialNPCs() {
-    const initialNPCs = await user
-    if (user) setNpc(initialNPCs)
-  }
+    async function loadInitialNPCs() {
+      const initialNPCs = await user
+      if (user) setNpc(initialNPCs)
+    }
+  }, [{npc}]) //componsne did mount
+  
 
   return (
     <select className="card__dropdown--left" 
