@@ -30,11 +30,12 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // app.use("/", indexRouter(db));
 // app.use("/users", usersRouter(db));
+
+// app.use("/users/:id/campaigns", campaignsRouter(db));
 // app.use("/users/:id/campaigns/:c_id/maps", mapsRouter(db));
 // app.use("/users/:id/campaigns/:c_id/npcs", npcsRouter(db));
 // app.use("/users/:id/campaigns/:c_id/party", partyRouter(db));
 // app.use("/users/:id/campaigns/:c_id/story", storyRouter(db));
-
 app.use("/", mainRouter);
 
 module.exports = app;

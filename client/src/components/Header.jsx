@@ -10,10 +10,10 @@ const Header = () => {
 
   if (u_id) {
     return (
-      <div className="header">
+      <div className="header bg-blue-3170be ">
         <div className="header-left">
           <img className="logo"></img>
-          <h2 id="app-name">Dragon Drop</h2>
+          <h2 id="app-name" className="text-lime-900">Dragon Drop</h2>
         </div>
         <div className="header-right">
           <Link to={`/users/${u_id}/campaigns`}><h3>Campaigns</h3></Link>
