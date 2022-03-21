@@ -1,4 +1,4 @@
 module.exports = (router, db) => {
-  // GET CAMPAIGNS
+  // CREATE CAMPAIGN
   router.post("/users/:id/campaigns", (req, res) => {});
 };

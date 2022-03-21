@@ -3,19 +3,15 @@ const postCampaign = require("./postCampaigns");
 const fetchCampaign = require("./fetchCampaign");
 
 module.exports = (router, db) => {
-  // -> /users/:id/campaigns
+  // GET ALL CAMPAIGNS FOR USER
+  // GET -> /users/:id/campaigns
   getCampaigns(router, db);
 
-  // // CREATE CAMPAIGN
-  // router.get("/new", (req, res) => {});
-
-  // // SUBMIT NEW CAMPAIGN
-  // -> /users/:id/campaigns
-  // router.put("/users/:id/campaigns", (req, res) => {});
+  // SUBMIT NEW CAMPAIGN
+  // POST -> /users/:id/campaigns
   postCampaign(router, db);
 
-  // // SPECIFIC CAMPAIGN PAGE
-  // router.get("/:c_id", (req, res) => {});
+  // SPECIFIC CAMPAIGN PAGE
+  // GET -> /users/:id/campaigns /:c_id
   fetchCampaign(router, db);
-  // return router;
 };
