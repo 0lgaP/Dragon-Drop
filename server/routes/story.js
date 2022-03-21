@@ -22,7 +22,7 @@ router.put('/', (req, res) => {
 });
 
 // SPECIFIC STORY CARD PAGE
-router.get('/:s_id', (req, res) => {
+router.get('/d:s_i', (req, res) => {
 
   
 });
