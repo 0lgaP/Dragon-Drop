@@ -14,7 +14,10 @@ module.exports = {
         'silver': '#ecebff',
         'bubble-gum': '#ff77e9',
         'bermuda': '#78dcca',
-        'sky': '#0284c7'
+        'sky': '#5085A5',
+        'sky-light': '#8FC1E3',
+        'confirm': '#B3F2E8',
+        'cancel': '#F0C0A6'
       }
     },
   },

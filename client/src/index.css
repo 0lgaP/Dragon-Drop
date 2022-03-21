@@ -22,7 +22,7 @@ code {
 }
 
 .card__container {
-  @apply px-2 py-4 
+  @apply px-2 py-4
 }
 
 .card__title {
@@ -30,25 +30,23 @@ code {
 }
 
 .card__text-area {
-  @apply shadow-sm mt-4 block w-full h-32 p-4 lg:text-lg rounded-md
+  @apply shadow-sm mt-4 block w-full h-32 p-4 lg:text-lg rounded-md bg-sky-light text-white
 }
 
-.card__dropdown--left {
-  @apply inline-block bg-white rounded px-3 py-1 text-sm font-semibold mr-6 mb-2 text-sky
+.card__dropdown {
+  @apply inline-block bg-sky-light rounded px-3 py-1 text-sm font-semibold m-2 text-white
 }
 
-.card__dropdown--right {
-  @apply inline-block bg-white rounded px-3 py-1 text-sm font-semibold mb-2 text-sky
-}
 
 .button {
-  @apply shadow-lg text-white font-semibold py-1 px-4 rounded shadow m-2 
+  @apply shadow-lg text-sky font-semibold py-1 px-4 rounded shadow m-2
 }
 
 .confirm {
-  @apply bg-tahiti
+  @apply bg-confirm
 }
 
 .cancel {
-  @apply bg-purple
+  @apply bg-cancel
 }
+
