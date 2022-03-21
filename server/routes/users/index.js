@@ -3,6 +3,7 @@ const postUsers = require("./postUsers");
 const fetchUser = require("./fetchUser");
 const loginUser = require("./loginUser");
 const deleteUser = require("./deleteUser");
+const registerUser = require("./registerUser");
 
 
 module.exports = (router, db) => {
@@ -17,6 +18,6 @@ module.exports = (router, db) => {
 
   deleteUser(router, db);
 
-
+  registerUser(router, db);
 
 }
