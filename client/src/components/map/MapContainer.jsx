@@ -27,9 +27,7 @@ export const MapContainer = ({ mapState }) => {
   const moveAsset = useCallback(
     (id, left, top, mapSize) => {
 
-      console.log(imageSize)
-
-      axios.post(`/users/${u_id}/campaigns/${c_id}/maps/${m_id}/assets/${assets[id].id}`, { left_pos: (left / (mapSize.offsetWidth / mapSize.absoluteWidth)), top_pos: (top / (mapSize.offsetHeight / mapSize.absoluteHeight)) });
+      axios.put(`/users/${u_id}/campaigns/${c_id}/maps/${m_id}/assets/${assets[id].id}`, { left_pos: (left / (mapSize.offsetWidth / mapSize.absoluteWidth)), top_pos: (top / (mapSize.offsetHeight / mapSize.absoluteHeight)) });
 
       setAssets(
         update(assets, {
@@ -108,6 +106,7 @@ export const MapContainer = ({ mapState }) => {
           const { id, left_pos, top_pos, name, img, layer_order, layer_name, scale } = assets[key];
           return (
             <AssetTile
+              urlParams={{ u_id, c_id, m_id, asset_id: id }}
               key={key}
               id={key}
               left={left_pos}

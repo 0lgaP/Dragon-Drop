@@ -1,7 +1,8 @@
 import { useDrag } from "react-dnd";
 import { ItemTypes } from "./ItemTypes";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import React from "react";
+import axios from "axios";
 
 // Styling for div container
 const style = {
@@ -24,12 +25,15 @@ export const AssetTile = ({
   parent,
   background, // background image ref
   layerInfo,
-  scale
+  scale,
+  urlParams
 }) => {
   const [loc, setLoc] = useState({
     top: top * (mapSize.offsetHeight / mapSize.absoluteHeight),
     left: left * (mapSize.offsetWidth / mapSize.absoluteWidth)
   });
+
+  const [tickTock, setTick] = useState(false);
 
   const [size, setSize] = useState({
     width:
@@ -39,6 +43,11 @@ export const AssetTile = ({
       (mapSize.absoluteHeight / 100) *
       (mapSize.offsetHeight / mapSize.absoluteHeight) * scale
   });
+
+  useEffect(() => {
+    axios.put(`/users/${urlParams.u_id}/campaigns/${urlParams.c_id}/maps/${urlParams.m_id}/assets/${urlParams.asset_id}/scale`,
+      { scale: ((size.width / (mapSize.absoluteWidth / 100)) / (mapSize.offsetWidth / mapSize.absoluteWidth)) });
+  }, [tickTock])
 
   // Handle Resize
   const handler = useCallback(() => {
@@ -51,6 +60,7 @@ export const AssetTile = ({
     function onMouseUp() {
       document.removeEventListener("mousemove", onMouseMove);
       document.removeEventListener("mouseup", onMouseUp);
+      setTick(prev => !prev)
     }
     document.addEventListener("mousemove", onMouseMove);
     document.addEventListener("mouseup", onMouseUp);
