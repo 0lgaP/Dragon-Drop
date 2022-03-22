@@ -17,7 +17,7 @@ const imageStyles = {
   maxHeight: "100%",
   width: "100%"
 };
-export const Container = () => {
+export const MapContainer = () => {
   const [assets, setAssets] = useState({
     a: {
       layer: { order: 1, name: "Foreground" },
