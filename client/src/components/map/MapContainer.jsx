@@ -21,20 +21,20 @@ const imageStyles = {
   width: "100%"
 };
 export const MapContainer = ({ mapState }) => {
-  const [assets, setAssets] = useState(mapState.data.Images);
+  const [assets, setAssets] = useState(mapState.data);
   const { u_id, c_id, m_id } = useParams();
   
   const moveAsset = useCallback(
     (id, left, top, mapSize) => {
 
-      axios.put(`/users/${u_id}/campaigns/${c_id}/maps/${m_id}/assets/${assets[id].id}`, { left_pos: (left / (mapSize.offsetWidth / mapSize.absoluteWidth)), top_pos: (top / (mapSize.offsetHeight / mapSize.absoluteHeight)) });
+      axios.put(`/users/${u_id}/campaigns/${c_id}/maps/${m_id}/assets/${assets.Images[id].id}`, { left_pos: (left / (mapSize.offsetWidth / mapSize.absoluteWidth)), top_pos: (top / (mapSize.offsetHeight / mapSize.absoluteHeight)) });
 
       setAssets(
-        update(assets, {
+        update(assets, {Images: {
           [id]: {
             $merge: { left_pos: left, top_pos: top }
           }
-        })
+        }})
       );
     },
     [assets, setAssets]
@@ -102,8 +102,8 @@ export const MapContainer = ({ mapState }) => {
       />
       {backgroundRef &&
         imageSize.absoluteWidth &&
-        Object.keys(assets).map((key) => {
-          const { id, left_pos, top_pos, name, img, layer_order, layer_name, scale } = assets[key];
+        Object.keys(assets.Images).map((key) => {
+          const { id, left_pos, top_pos, name, img, layer_order, layer_name, scale } = assets.Images[key];
           return (
             <AssetTile
               urlParams={{ u_id, c_id, m_id, asset_id: id }}
