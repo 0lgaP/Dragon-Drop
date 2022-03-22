@@ -2,6 +2,7 @@ import {React, useContext, useEffect} from "react";
 import { useParams } from "react-router-dom";
 import CampContext from "../../providers/CampProvider";
 import AuthContext, { AuthProvider } from "../../providers/AuthProvider";
+import axios from "../../api/axios";
 
 const CampaignDetails = () => {
   const {campaign, setCampaign, story, setStory} = useContext(CampContext);
@@ -9,7 +10,7 @@ const CampaignDetails = () => {
   const { auth } = useContext(AuthContext);
 
   useEffect(() => {
-    setCampaign(c_id),
+    setCampaign(c_id)
     axios.get(`user/${auth.user_id}/campaigns/${c_id}/story`)
     .then((res) => {
       setStory(res)
