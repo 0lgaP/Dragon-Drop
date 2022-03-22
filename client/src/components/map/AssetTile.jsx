@@ -45,8 +45,12 @@ export const AssetTile = ({
   });
 
   useEffect(() => {
+
+    const newScale = ((size.width / (mapSize.absoluteWidth / 100)) / (mapSize.offsetWidth / mapSize.absoluteWidth));
+
     axios.put(`/users/${urlParams.u_id}/campaigns/${urlParams.c_id}/maps/${urlParams.m_id}/assets/${urlParams.asset_id}/scale`,
-      { scale: ((size.width / (mapSize.absoluteWidth / 100)) / (mapSize.offsetWidth / mapSize.absoluteWidth)) });
+      { scale: newScale });
+    
   }, [tickTock])
 
   // Handle Resize

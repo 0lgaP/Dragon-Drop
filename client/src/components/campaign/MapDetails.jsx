@@ -13,7 +13,6 @@ const MapDetails = () => {
   const { u_id, c_id, m_id } = useParams();
   const { state, setState } = useMapData(m_id, c_id, u_id)
 
-  console.log(state)
   return (
     <React.Fragment>
     { Object.keys(state.data).length && <Map mapState={ state } /> }
