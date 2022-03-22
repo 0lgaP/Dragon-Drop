@@ -1,7 +1,6 @@
 import { React, useState } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import useToken from "./hooks/useToken";
 import useApplicationData from "./hooks/useApplicationData";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
@@ -18,25 +17,24 @@ import PlayerList from "./components/campaign/PlayerList";
 import NPCList from "./components/campaign/NPCList";
 
 function App() {
-  const { token, setToken } = useToken();
 
   const { state } = useApplicationData;
 
   return (
     <Router>
       <div className="App">
-        <Header token={token} />
-        <Navbar token={token} />
+        <Header/>
+        <Navbar/>
         <div className="content">
           <Switch>
-            <Route exact path="/">
+            <Route exact path="/"> 
               <Home />
             </Route>
             <Route path="/login">
-              <Login setToken={setToken} />
+              <Login/>
             </Route>
             <Route path="/register">
-              <Register setToken={setToken} />
+              <Register/>
             </Route>
             <Route exact path="/users/:u_id">
               <Profile />
