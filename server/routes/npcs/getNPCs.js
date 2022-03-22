@@ -3,7 +3,7 @@ module.exports = (router, db) => {
   router.get("/users/:id/campaigns/:c_id/npcs", (req, res) => {
     db.query(`SELECT * FROM npcs;`)
   .then(data => {
-
+    
     res.send(data.rows).status(200)
   })
   .catch(err => {
