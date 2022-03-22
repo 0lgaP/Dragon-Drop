@@ -14,7 +14,7 @@ const style = {
 const maxLayerCount = 300;
 
 // Box Component
-export const Box = ({
+export const AssetTile = ({
   id,
   left,
   top,
@@ -58,7 +58,7 @@ export const Box = ({
   // Handle Drag
   const [{ isDragging }, drag] = useDrag(() => {
     const dragObject = {
-      type: ItemTypes.PLAYER,
+      type: ItemTypes.ASSET,
       item: {
         setLoc,
         loc,
@@ -78,7 +78,7 @@ export const Box = ({
   if (isDragging) {
     return <img ref={drag} />;
   }
-  
+
   return (
     <div
       style={{
@@ -95,7 +95,7 @@ export const Box = ({
       <img
         src={image}
         ref={drag}
-        role="Player"
+        role="ASSET"
         alt={altThing}
         height={size.height + "px"}
         width={size.width + "px"}

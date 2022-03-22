@@ -1,7 +1,7 @@
 import { useCallback, useState, useRef } from "react";
 import { useDrop } from "react-dnd";
 import { ItemTypes } from "./ItemTypes";
-import { Box } from "./Box";
+import { AssetTile } from "./AssetTile";
 import update from "immutability-helper";
 const styles = {
   width: "100%",
@@ -18,7 +18,7 @@ const imageStyles = {
   width: "100%"
 };
 export const Container = () => {
-  const [boxes, setBoxes] = useState({
+  const [assets, setAssets] = useState({
     a: {
       layer: { order: 1, name: "Foreground" },
       top: 280,
@@ -43,31 +43,31 @@ export const Container = () => {
       imgSrc: "https://www.varietyinsight.com/images/honoree/Dwayne_Johnson.png"
     }
   });
-  const moveBox = useCallback(
+  const moveAsset = useCallback(
     (id, left, top) => {
-      setBoxes(
-        update(boxes, {
+      setAssets(
+        update(assets, {
           [id]: {
             $merge: { left, top }
           }
         })
       );
     },
-    [boxes, setBoxes]
+    [assets, setAssets]
   );
   const [, drop] = useDrop(
     () => ({
-      accept: ItemTypes.PLAYER,
+      accept: ItemTypes.ASSET,
       drop(item, monitor) {
         const delta = monitor.getDifferenceFromInitialOffset();
         const left = Math.round(item.loc.left + delta.x);
         const top = Math.round(item.loc.top + delta.y);
         item.setLoc({ left, top });
-        moveBox(item.id, left, top);
+        moveAsset(item.id, left, top);
         return undefined;
       }
     }),
-    [moveBox]
+    [moveAsset]
   );
 
   const divRef = useRef();
@@ -120,10 +120,10 @@ export const Container = () => {
       />
       {backgroundRef &&
         imageSize.absoluteWidth &&
-        Object.keys(boxes).map((key) => {
-          const { left, top, title, imgSrc, layer } = boxes[key];
+        Object.keys(assets).map((key) => {
+          const { left, top, title, imgSrc, layer } = assets[key];
           return (
-            <Box
+            <AssetTile
               key={key}
               id={key}
               left={left}
