@@ -25,7 +25,7 @@ const userAuth = window.localStorage.getItem("user_id")
           </div>
           <Link to={`/users/${u_id}`}>
             <div>
-            <img className="m-1 w-20" src="https://icon-library.com/images/dnd-icon/dnd-icon-13.jpg"></img>
+            <img className="m-1 w-20" src="https://i.imgur.com/k7kn8hJ.png"></img>
             </div>
             <div>
               <h3>{auth.email}</h3>
