@@ -18,32 +18,6 @@ const imageStyles = {
   width: "100%"
 };
 export const MapContainer = ({ mapState }) => {
-  console.log('mapContainer',mapState);
-  // const [assets, setAssets] = useState({
-  //   a: {
-  //     layer: { order: 1, name: "Foreground" },
-  //     top: 280,
-  //     left: 120,
-  //     title: "Nick 1",
-  //     imgSrc:
-  //       "https://cdn.britannica.com/64/135864-050-57268027/Nicolas-Cage-2009.jpg"
-  //   },
-  //   b: {
-  //     layer: { order: 200, name: "background" },
-  //     top: 180,
-  //     left: 20,
-  //     title: "Nick 2",
-  //     imgSrc:
-  //       "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSZjIhQYJAKltl9QjqqSQ4vjk9goWnXTt1zjNaTF4gYzdoGTYOj"
-  //   },
-  //   c: {
-  //     layer: { order: 1, name: "Foreground" },
-  //     top: 280,
-  //     left: 120,
-  //     title: "Rock",
-  //     imgSrc: "https://www.varietyinsight.com/images/honoree/Dwayne_Johnson.png"
-  //   }
-  // });
   const [assets, setAssets] = useState(mapState.data.Images);
   
   const moveAsset = useCallback(
@@ -91,7 +65,6 @@ export const MapContainer = ({ mapState }) => {
     test.onload = () => {
       const ratio = test.height / test.width;
       const parentElmHeight = img.parentElement.offsetHeight;
-  console.log(parentElmHeight - 2 === offsetHeight)
 
       setImageSize({
         ratio,
@@ -105,8 +78,6 @@ export const MapContainer = ({ mapState }) => {
       });
     };
   };
-console.log("mapState", mapState)
-console.log('assets', assets)
   return (
     <div
       ref={(self) => {
