@@ -14,7 +14,11 @@ const MapDetails = () => {
   const { state, setState } = useMapData(m_id, c_id, u_id)
 
   console.log(state)
-  return <Map mapId={m_id} />;
+  return (
+    <React.Fragment>
+    { state.data.length && <Map mapData={ state } /> }
+    </React.Fragment>
+  );
 }
 
 export default MapDetails;
