@@ -28,8 +28,8 @@ export const MapContainer = ({ mapState }) => {
   
   const moveAsset = useCallback(
     (id, left, top, mapSize, type) => {
-
       let assetType = getAssetType(type);
+      if (!assetType) return;
 
       axios.put(`/users/${u_id}/campaigns/${c_id}/maps/${m_id}/assets/${assets[assetType][id].id}`, { left_pos: (left / (mapSize.offsetWidth / mapSize.absoluteWidth)), top_pos: (top / (mapSize.offsetHeight / mapSize.absoluteHeight)) });
 
