@@ -1,11 +1,15 @@
-import React from "react";
+import { React, useState } from "react";
 
 const Register = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+
 return (
   <form>
   <label>
     <p>Email</p>
-    <input type="text" onChange={e => setUsername(e.target.value)}/>
+    <input type="text" onChange={e => setEmail(e.target.value)}/>
   </label>
   <label>
     <p>Password</p>

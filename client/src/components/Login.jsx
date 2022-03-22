@@ -1,34 +1,43 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
+import { Link } from 'react-router-dom';
+import Home from '../components/Home';
 import AuthContext from "../providers/AuthProvider";
+import useAuth from "../hooks/useAuth";
 import axios from '../api/axios'
 const LOGIN_URL = "/login";
 
-const Login = ( {setToken} ) => {
-  const { setAuth } = useContext(AuthContext);
+const Login = () => {
+  const { auth, setAuth } = useContext(AuthContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = async e => {
+  // console.log(`auth: `, auth)
+  // console.log(`user_id: `, window.localStorage.getItem("user_id"))
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post(LOGIN_URL, JSON.stringify({email, password}),
       {
         headers: { 'Content-type': 'application/json'},
       });
-      // console.log(`response`, response.data)
       const user_id = response?.data?.id
       setAuth({email, password, user_id})
-      // console.log(JSON.stringify(response?.data));
+      window.localStorage.setItem("user_id", JSON.stringify(user_id))
+      window.localStorage.setItem("user_email", JSON.stringify(email))
       setEmail('')
       setPassword('');
+      window.location.reload(true);
+      // console.log(` inside func auth: `, auth)
+      // console.log(`inside func auth user_id: `, window.localStorage.getItem("user_id"))
     }
     catch(err) {
-
+      
     }
-
+    
   }
-
+  
   return(
     <section>
     <h1>Login</h1>

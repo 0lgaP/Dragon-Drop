@@ -5,7 +5,8 @@ import AuthContext from "../providers/AuthProvider";
 const Navbar = (props) => {
   const { auth } = useContext(AuthContext);
   const { u_id, c_id } = useParams();
-  if (auth.email) {
+  const userAuth = window.localStorage.getItem("user_id")
+  if (userAuth && JSON.parse(userAuth) === auth.user_id) {
     return (
       <nav>
         <div className="links">
