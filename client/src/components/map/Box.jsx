@@ -34,9 +34,9 @@ export const Box = ({
     width:
       (mapSize.absoluteWidth / 8) *
       (mapSize.offsetWidth / mapSize.absoluteWidth),
-    // height:
-    //   (mapSize.absoluteHeight / 8) *
-    //   (mapSize.offsetHeight / mapSize.absoluteHeight)
+    height:
+      (mapSize.absoluteHeight / 8) *
+      (mapSize.offsetHeight / mapSize.absoluteHeight)
   });
 
   // Handle Resize
@@ -78,7 +78,7 @@ export const Box = ({
   if (isDragging) {
     return <img ref={drag} />;
   }
-
+  
   return (
     <div
       style={{
@@ -86,10 +86,10 @@ export const Box = ({
         left: loc.left,
         top: loc.top,
         zIndex:
-          String(maxLayerCount - layerInfo.order) +
-          (mapSize.offsetHeight + (top + size.height) < 0
+          parseInt(String(maxLayerCount - layerInfo.order) +
+          (mapSize.offsetHeight + (loc.top + size.height) < 0
             ? 1
-            : mapSize.offsetHeight + (top + size.height))
+            : mapSize.offsetHeight + (loc.top + size.height)))
       }}
     >
       <img
@@ -97,7 +97,7 @@ export const Box = ({
         ref={drag}
         role="Player"
         alt={altThing}
-        // height={size.height + "px"}
+        height={size.height + "px"}
         width={size.width + "px"}
       />
       <button onMouseDown={handler} style={{ ...style, bottom: 0, right: 0, backgroundColor: 'grey' }}>
