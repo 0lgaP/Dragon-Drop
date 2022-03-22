@@ -13,8 +13,8 @@ export default function StoryCards() {
   const { auth } = useContext(AuthContext);
   const userAuth = window.localStorage.getItem("user_id")
   
-  console.log("THIS IS AUTH", auth)
-  console.log("THIS IS USERAUTH", userAuth)
+  // console.log("THIS IS AUTH", auth)
+  // console.log("THIS IS USERAUTH", userAuth)
 
   return(
     <div className="grid-cols-3 flex">
