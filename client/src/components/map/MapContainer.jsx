@@ -104,6 +104,8 @@ export const MapContainer = ({ mapState }) => {
         alt="Background"
         src={mapState.background}
       />
+
+      {/* Renders all IMAGE type assets */}
       {backgroundRef &&
         imageSize.absoluteWidth &&
         Object.keys(assets.Images).map((key) => {
@@ -125,7 +127,9 @@ export const MapContainer = ({ mapState }) => {
               layerInfo={{order: layer_order, name: layer_name}}
             />
           );
-        })}
+        }) }
+      
+      {/* Renders all NPC type Assets */}
       {backgroundRef &&
         imageSize.absoluteWidth &&
         Object.keys(assets.NPCs).map((key) => {
