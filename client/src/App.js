@@ -23,18 +23,18 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Header token={token} />
-        <Navbar token={token} />
+        <Header/>
+        <Navbar/>
         <div className="content">
           <Switch>
-            <Route exact path="/">
+            <Route exact path="/"> 
               <Home />
             </Route>
             <Route path="/login">
-              <Login setToken={setToken} />
+              <Login/>
             </Route>
             <Route path="/register">
-              <Register setToken={setToken} />
+              <Register/>
             </Route>
             <Route exact path="/users/:u_id">
               <Profile />

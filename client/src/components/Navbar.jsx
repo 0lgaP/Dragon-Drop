@@ -1,10 +1,11 @@
-import React from "react";
+import {React, useContext} from "react";
 import { Link, useParams } from "react-router-dom";
+import AuthContext from "../providers/AuthProvider";
 
 const Navbar = (props) => {
-  const token = props.token
+  const { auth } = useContext(AuthContext);
   const { u_id, c_id } = useParams();
-  if (token) {
+  if (auth.email) {
     return (
       <nav>
         <div className="links">
