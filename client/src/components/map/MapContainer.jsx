@@ -125,7 +125,7 @@ console.log('assets', assets)
       {backgroundRef &&
         imageSize.absoluteWidth &&
         Object.keys(assets).map((key) => {
-          const { id, left_pos, top_pos, name, img, layer_order, layer_name } = assets[key];
+          const { id, left_pos, top_pos, name, img, layer_order, layer_name, scale } = assets[key];
           return (
             <AssetTile
               key={key}
@@ -135,7 +135,8 @@ console.log('assets', assets)
               altThing={name}
               mapSize={imageSize}
               image={img}
-              parent={divRef}
+              parent={ divRef }
+              scale={ scale }
               background={backgroundRef}
               layerInfo={{order: layer_order, name: layer_name}}
             />

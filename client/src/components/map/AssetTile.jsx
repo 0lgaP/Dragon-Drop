@@ -23,7 +23,8 @@ export const AssetTile = ({
   image,
   parent,
   background, // background image ref
-  layerInfo
+  layerInfo,
+  scale
 }) => {
   const [loc, setLoc] = useState({
     top: top * (mapSize.offsetHeight / mapSize.absoluteHeight),
@@ -32,11 +33,11 @@ export const AssetTile = ({
 
   const [size, setSize] = useState({
     width:
-      (mapSize.absoluteWidth / 8) *
-      (mapSize.offsetWidth / mapSize.absoluteWidth),
+      (mapSize.absoluteWidth / 100) *
+      (mapSize.offsetWidth / mapSize.absoluteWidth) * scale,
     height:
-      (mapSize.absoluteHeight / 8) *
-      (mapSize.offsetHeight / mapSize.absoluteHeight)
+      (mapSize.absoluteHeight / 100) *
+      (mapSize.offsetHeight / mapSize.absoluteHeight) * scale
   });
 
   // Handle Resize
@@ -101,7 +102,7 @@ export const AssetTile = ({
         width={size.width + "px"}
       />
       <button onMouseDown={handler} style={{ ...style, bottom: 0, right: 0, backgroundColor: 'grey' }}>
-        |||
+        ||
       </button>
     </div>
   );
