@@ -14,9 +14,9 @@ const mainRouter = express.Router();
 mainRoutes(mainRouter, db);
 
 const app = express();
-app.use(cors({origin: 'http://localhost:3000'}));
+app.use(cors({origin: 'http://localhost:3002'}));
 app.use(logger("dev"));
-app.use(express.json());
+// app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
