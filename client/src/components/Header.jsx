@@ -14,32 +14,44 @@ const userAuth = window.localStorage.getItem("user_id")
   if (userAuth && JSON.parse(userAuth) === auth.user_id) {
     const { u_id } = auth.user_id
     return (
-      <div className="header bg-blue-3170be ">
-        <div className="header-left">
+      <section className="bg-header text-xl text-textcolor flex flex-row" >
+        <div className="m-4">
           <img className="logo"></img>
-          <h2 id="app-name" className="text-lime-900">Dragon Drop</h2>
+          <h2 id="app-name" className="">Dragon Drop</h2>
         </div>
-        <div className="header-right">
+        <div className="header-right flex flex-row m-4 justify-end">
+          <div>
           <Link to={`/users/${u_id}/campaigns`}><h3>Campaigns</h3></Link>
+          </div>
           <Link to={`/users/${u_id}`}>
-            <img src="https://icon-library.com/images/dnd-icon/dnd-icon-13.jpg"></img>
-            <h3>{auth.email}</h3>
+            <div>
+            <img className="m-1 w-20" src="https://icon-library.com/images/dnd-icon/dnd-icon-13.jpg"></img>
+            </div>
+            <div>
+              <h3>{auth.email}</h3>
+            </div>
           </Link>
+          <div>
           <LogoutButton />
+          </div>
         </div>
-      </div>
+      </section>
     );
   }
   else {
     return (
-      <div className="header">
+      <div className="bg-header text-xl text-textcolor flex flex-row">
         <div className="header-left">
           <img className="logo"></img>
-          <h2 id="app-name" className="text-lime-900">Dragon Drop</h2>
+          <h2 id="app-name" className="">Dragon Drop</h2>
         </div>
-        <div className="header-right">
+        <div className="header-right flex flex-row m-4 justify-end">
+          <div>
           <Link to="/register"><h3>Register</h3></Link>
+          </div>
+          <div>
           <Link to="/login"><h3>Login</h3></Link>
+          </div>
         </div>
       </div>
     );
