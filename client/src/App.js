@@ -15,7 +15,6 @@ import MapDetails from "./components/campaign/MapDetails";
 import Story from "./components/campaign/Story";
 import PlayerList from "./components/campaign/PlayerList";
 import NPCList from "./components/campaign/NPCList";
-import Map from "./components/map";
 
 function App() {
   const { state } = useApplicationData;
@@ -27,9 +26,6 @@ function App() {
         <Navbar />
         <div className="content">
           <Switch>
-            <Route exact path="/testMcTest">
-              <Map />
-            </Route>
             <Route exact path="/">
               <Home />
             </Route>
