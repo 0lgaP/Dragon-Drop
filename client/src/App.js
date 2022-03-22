@@ -15,9 +15,7 @@ import MapDetails from "./components/campaign/MapDetails";
 import Story from "./components/campaign/Story";
 import PlayerList from "./components/campaign/PlayerList";
 import NPCList from "./components/campaign/NPCList";
-import Example from "./components/map/Example";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+import Map from "./components/map";
 
 function App() {
   const { state } = useApplicationData;
@@ -30,9 +28,7 @@ function App() {
         <div className="content">
           <Switch>
             <Route exact path="/testMcTest">
-              <DndProvider backend={HTML5Backend}>
-                <Example />
-              </DndProvider>
+              <Map />
             </Route>
             <Route exact path="/">
               <Home />
