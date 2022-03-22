@@ -28,6 +28,7 @@ function useMapData(mapId, campaignId, userId) {
       setState((prev) => ({
         ...prev,
         name: all[0].data.name,
+        background: all[0].data.background,
         data: all[1].data,
       }));
     });

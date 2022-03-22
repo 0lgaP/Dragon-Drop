@@ -16,7 +16,7 @@ const MapDetails = () => {
   console.log(state)
   return (
     <React.Fragment>
-    { state.data.length && <Map mapData={ state } /> }
+    { Object.keys(state.data).length && <Map mapData={ state } /> }
     </React.Fragment>
   );
 }

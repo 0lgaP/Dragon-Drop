@@ -7,21 +7,24 @@ module.exports = (router, db) => {
     const { u_id, c_id, m_id } = req.params;
 
     const queryNPCsForMap = `
-      SELECT *, at.name as type
+      SELECT ma.scale, ma.top_pos, ma.left_pos, n.id, n.name, n.alive, n.bio, n.details, n.img, at.name as type
       FROM map_assets ma
         JOIN asset_types at ON ma.type_id = at.id
+        JOIN npcs n on ma.asset_id = n.id
       WHERE ma.map_id = $1 AND at.name = $2;
       `;
     const queryImagesForMap = `
-      SELECT *, at.name as type
+      SELECT ma.scale, ma.top_pos, ma.left_pos, img.id, img.name, img.src as img, at.name as type
       FROM map_assets ma
         JOIN asset_types at ON ma.type_id = at.id
+        JOIN images img on ma.asset_id = img.id
       WHERE ma.map_id = $1 AND at.name = $2;
       `;
     const queryStoryCardsForMap = `
-      SELECT *, at.name as type
+      SELECT ma.scale, ma.top_pos, ma.left_pos, sc.id, sc.completed, sc.created_on, sc.story_card_text as content, sc.story_id, at.name as type
       FROM map_assets ma
         JOIN asset_types at ON ma.type_id = at.id
+        JOIN story_cards sc on ma.asset_id = sc.id
       WHERE ma.map_id = $1 AND at.name = $2;
       `;
 
@@ -40,11 +43,13 @@ module.exports = (router, db) => {
           true
         ),
     ]).then((all) => {
-      console.log({
-        NPCs: all[0],
-        Images: all[1],
-        StoryCards: all[2],
-      });
+      res
+        .json({
+          NPCs: all[0],
+          Images: all[1],
+          StoryCards: all[2],
+        })
+        .status(200);
     });
   });
 };
