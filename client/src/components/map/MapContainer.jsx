@@ -23,14 +23,18 @@ const imageStyles = {
 export const MapContainer = ({ mapState }) => {
   const [assets, setAssets] = useState(mapState.data);
   const { u_id, c_id, m_id } = useParams();
+
+  console.log(assets);
   
   const moveAsset = useCallback(
-    (id, left, top, mapSize) => {
+    (id, left, top, mapSize, type) => {
 
-      axios.put(`/users/${u_id}/campaigns/${c_id}/maps/${m_id}/assets/${assets.Images[id].id}`, { left_pos: (left / (mapSize.offsetWidth / mapSize.absoluteWidth)), top_pos: (top / (mapSize.offsetHeight / mapSize.absoluteHeight)) });
+      let assetType = getAssetType(type);
+
+      axios.put(`/users/${u_id}/campaigns/${c_id}/maps/${m_id}/assets/${assets[assetType][id].id}`, { left_pos: (left / (mapSize.offsetWidth / mapSize.absoluteWidth)), top_pos: (top / (mapSize.offsetHeight / mapSize.absoluteHeight)) });
 
       setAssets(
-        update(assets, {Images: {
+        update(assets, {[assetType]: {
           [id]: {
             $merge: { left_pos: left, top_pos: top }
           }
@@ -47,7 +51,7 @@ export const MapContainer = ({ mapState }) => {
         const left = Math.round(item.loc.left + delta.x);
         const top = Math.round(item.loc.top + delta.y);
         item.setLoc({ left, top });
-        moveAsset(item.id, left, top, item.mapSize);
+        moveAsset(item.id, left, top, item.mapSize, item.type);
         return undefined;
       }
     }),
@@ -106,7 +110,30 @@ export const MapContainer = ({ mapState }) => {
           const { id, left_pos, top_pos, name, img, layer_order, layer_name, scale } = assets.Images[key];
           return (
             <AssetTile
-              urlParams={{ u_id, c_id, m_id, asset_id: id }}
+              urlParams={ { u_id, c_id, m_id, asset_id: id } }
+              self={assets.Images[key]}
+              key={key}
+              id={key}
+              left={left_pos}
+              top={top_pos}
+              altThing={name}
+              mapSize={imageSize}
+              image={img}
+              parent={ divRef }
+              scale={ scale }
+              background={backgroundRef}
+              layerInfo={{order: layer_order, name: layer_name}}
+            />
+          );
+        })}
+      {backgroundRef &&
+        imageSize.absoluteWidth &&
+        Object.keys(assets.NPCs).map((key) => {
+          const { id, left_pos, top_pos, name, img, layer_order, layer_name, scale } = assets.NPCs[key];
+          return (
+            <AssetTile
+              urlParams={ { u_id, c_id, m_id, asset_id: id } }
+              self={assets.NPCs[key]}
               key={key}
               id={key}
               left={left_pos}
@@ -124,3 +151,14 @@ export const MapContainer = ({ mapState }) => {
     </div>
   );
 };
+
+function getAssetType(type) {
+      switch (type) {
+        case 'IMAGE':
+          return 'Images'
+        case 'NPC':
+          return 'NPCs'
+        default:
+          return null
+      }
+}

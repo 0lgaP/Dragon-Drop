@@ -26,7 +26,8 @@ export const AssetTile = ({
   background, // background image ref
   layerInfo,
   scale,
-  urlParams
+  urlParams,
+  self
 }) => {
   const [loc, setLoc] = useState({
     top: top * (mapSize.offsetHeight / mapSize.absoluteHeight),
@@ -80,7 +81,8 @@ export const AssetTile = ({
         id,
         left,
         top,
-        mapSize
+        mapSize,
+        type: self.type
       },
       collect: (monitor) => ({
         isDragging: monitor.isDragging()
