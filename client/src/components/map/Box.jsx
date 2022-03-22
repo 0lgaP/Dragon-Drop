@@ -34,9 +34,9 @@ export const Box = ({
     width:
       (mapSize.absoluteWidth / 8) *
       (mapSize.offsetWidth / mapSize.absoluteWidth),
-    height:
-      (mapSize.absoluteHeight / 8) *
-      (mapSize.offsetHeight / mapSize.absoluteHeight)
+    // height:
+    //   (mapSize.absoluteHeight / 8) *
+    //   (mapSize.offsetHeight / mapSize.absoluteHeight)
   });
 
   // Handle Resize
@@ -55,6 +55,7 @@ export const Box = ({
     document.addEventListener("mouseup", onMouseUp);
   }, []);
 
+  // Handle Drag
   const [{ isDragging }, drag] = useDrag(() => {
     const dragObject = {
       type: ItemTypes.PLAYER,
@@ -73,6 +74,7 @@ export const Box = ({
     return dragObject;
   }, [id, left, top]);
 
+  // Show Drag Overlay if img is being dragged
   if (isDragging) {
     return <img ref={drag} />;
   }
@@ -95,11 +97,11 @@ export const Box = ({
         ref={drag}
         role="Player"
         alt={altThing}
-        height={size.height + "px"}
+        // height={size.height + "px"}
         width={size.width + "px"}
       />
-      <button onMouseDown={handler} style={{ ...style, bottom: 0, right: 0 }}>
-        | | |
+      <button onMouseDown={handler} style={{ ...style, bottom: 0, right: 0, backgroundColor: 'grey' }}>
+        |||
       </button>
     </div>
   );

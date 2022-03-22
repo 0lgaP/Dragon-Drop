@@ -52,7 +52,6 @@ export const Container = () => {
           }
         })
       );
-      console.log("moveBox", left, top);
     },
     [boxes, setBoxes]
   );
@@ -81,6 +80,7 @@ export const Container = () => {
     absoluteWidth: 0
   });
 
+  // Get Actual Background Img Resolution
   const onImgLoad = ({ target: img }) => {
     const { offsetHeight, offsetWidth } = img;
     const test = new Image();
