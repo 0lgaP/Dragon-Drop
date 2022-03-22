@@ -6,6 +6,7 @@ function useMapData(mapId, campaignId, userId) {
     userId,
     campaignId,
     mapId,
+    name: "",
     data: [],
     // players: [],
     // maps: [],
@@ -18,12 +19,16 @@ function useMapData(mapId, campaignId, userId) {
     // CHANGE TO OUR DATABASE QUERIES:
     Promise.all([
       axios.get(`/users/${userId}/campaigns/${campaignId}/maps/${mapId}`),
+      axios.get(
+        `/users/${userId}/campaigns/${campaignId}/maps/${mapId}/assets`
+      ),
       // axios.get(`/api/appointments`),
       // axios.get(`/api/interviewers`)
     ]).then((all) => {
       setState((prev) => ({
         ...prev,
-        data: all[0].data,
+        name: all[0].data.name,
+        data: all[1].data,
       }));
     });
   }, []);

@@ -13,8 +13,7 @@ module.exports = (router, db) => {
       LIMIT 1;
       `;
 
-    // Returns list of maps made by user
-    helper.tryReturnJson(res, queryString, [c_id, m_id]);
-    // res.json({ hi: "helllo" });
+    // Returns map for campaign by user
+    helper.tryReturnJson(res, queryString, [c_id, m_id], true);
   });
 };

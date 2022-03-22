@@ -4,25 +4,36 @@ module.exports = function (db) {
    * @param {Object} res Response object to the client that requested data
    * @param {String} queryString SQL query to send to db
    * @param {Array<string, number>} params List of params for queryString
+   * @param {Boolean} onlyFirst Only return item in [0] of rows
    */
-  function tryReturnJson(res, queryString, params) {
+  function tryReturnJson(
+    res,
+    queryString,
+    params,
+    onlyFirst,
+    returnJsonToMePlease
+  ) {
     // Send query to DB
-    db.query(queryString, params)
-      // If successful, try to return rows to client
-      .then((response) => {
-        // Rows can be a length of one, but will still get sent to client
-        // "Absence of evidence can be evidence itself"
-        const result = response.rows;
-        if (result) return res.status(200).json(result);
+    return (
+      db
+        .query(queryString, params)
+        // If successful, try to return rows to client
+        .then((response) => {
+          // Rows can be a length of one, but will still get sent to client
+          // "Absence of evidence can be evidence itself"
+          const result = onlyFirst ? response.rows[0] : response.rows;
+          if (returnJsonToMePlease) return result;
+          if (result) return res.status(200).json(result);
 
-        // Let user know server oopsied
-        res.status(500).send("Something went wrong on our end.");
-      })
-      // General Error Catch
-      .catch((err) => {
-        console.log(err);
-        res.status(500).send("Something went wrong on our end");
-      });
+          // Let user know server oopsied
+          res.status(500).send("Something went wrong on our end.");
+        })
+        // General Error Catch
+        .catch((err) => {
+          console.log(err);
+          res.status(500).send("Something went wrong on our end");
+        })
+    );
   }
 
   /**
