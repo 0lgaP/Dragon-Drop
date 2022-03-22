@@ -1,14 +1,14 @@
 import { React, useState } from "react";
-import PropTypes from 'prop-types';
 
 const Register = () => {
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  
 return (
   <form>
   <label>
     <p>Email</p>
-    <input type="text" onChange={e => setUsername(e.target.value)}/>
+    <input type="text" onChange={e => setEmail(e.target.value)}/>
   </label>
   <label>
     <p>Password</p>

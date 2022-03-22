@@ -1,10 +1,12 @@
-import React from "react";
+import {React, useContext} from "react";
 import { Link, useParams } from "react-router-dom";
+import AuthContext from "../providers/AuthProvider";
 
 const Navbar = (props) => {
-  const token = props.token
+  const { auth } = useContext(AuthContext);
   const { u_id, c_id } = useParams();
-  if (token) {
+  const userAuth = window.localStorage.getItem("user_id")
+  if (userAuth && JSON.parse(userAuth) === auth.user_id) {
     return (
       <nav>
         <div className="links">
