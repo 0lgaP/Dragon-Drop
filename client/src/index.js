@@ -4,11 +4,14 @@ import './index.css';
 import App from './App';
 import { AuthProvider } from './providers/AuthProvider';
 import reportWebVitals from './reportWebVitals';
+import { CampProvider } from './providers/CampProvider';
 
 ReactDOM.render(
   <React.StrictMode>
     <AuthProvider>
-    <App />
+      <CampProvider>
+        <App />
+      </CampProvider>
     </AuthProvider>
   </React.StrictMode>,
   document.getElementById('root')

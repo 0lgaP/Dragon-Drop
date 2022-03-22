@@ -3,8 +3,11 @@ import useFetch from "../../hooks/useFetch";
 import AuthContext from "../../providers/AuthProvider";
 import { Link } from "react-router-dom";
 import axios from "../../api/axios";
+import { CampProvider } from "../../providers/CampProvider";
 
 const CampaignList = () => {
+  // const { campaigns } = useContext(AuthContext);
+
   // dm_id, id, name
 const [campaigns, setCampaigns] = useState([]);
 

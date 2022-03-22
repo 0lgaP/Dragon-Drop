@@ -5,30 +5,11 @@ const CampContext = createContext({});
 
 export const CampProvider = (props) => {
 
-  const rawAuth = window.localStorage.getItem("user_id")
-  const userAuth = JSON.parse(rawAuth)
-
-  const address = `/users/${userAuth}/campaigns` ;
-
-  // dm_id, id, name
-  const [campaigns, setCampaigns] = useState([]);
-
-  const [npc, setNpc] = useState([]);
-  const [map, setMap] = useState([])
-
-  useEffect(() => {
-      axios.get(`http://localhost:8082${address}`)
-      .then((res) => {
-        setCampaigns(res.data)
-      })
-  }, [setCampaigns])
-
-
-
-
+  const [campaign, setCampaign] = useState([]);
+  const [story, setStory] = useState([]);
 
   return (
-    <CampContext.Provider value={{campaigns, setCampaigns}}>
+    <CampContext.Provider value={{campaign, setCampaign, story, setStory}}>
       {props.children}
     </CampContext.Provider>
   )
