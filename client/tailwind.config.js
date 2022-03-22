@@ -17,7 +17,11 @@ module.exports = {
         'sky': '#5085A5',
         'sky-light': '#8FC1E3',
         'confirm': '#B3F2E8',
-        'cancel': '#F0C0A6'
+        'cancel': '#F0C0A6',
+        header: "#31708e",
+        primary: "#5085a5",
+        secondary: "#8fc1e3",
+        textcolor: "#f7f9fb"
       }
     },
   },
