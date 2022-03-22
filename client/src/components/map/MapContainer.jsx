@@ -3,6 +3,9 @@ import { useDrop } from "react-dnd";
 import { ItemTypes } from "./ItemTypes";
 import { AssetTile } from "./AssetTile";
 import update from "immutability-helper";
+import axios from 'axios';
+import { useParams } from "react-router-dom";
+
 const styles = {
   width: "100%",
   height: 700,
@@ -19,9 +22,15 @@ const imageStyles = {
 };
 export const MapContainer = ({ mapState }) => {
   const [assets, setAssets] = useState(mapState.data.Images);
+  const { u_id, c_id, m_id } = useParams();
   
   const moveAsset = useCallback(
-    (id, left, top) => {
+    (id, left, top, mapSize) => {
+
+      console.log(imageSize)
+
+      axios.post(`/users/${u_id}/campaigns/${c_id}/maps/${m_id}/assets/${assets[id].id}`, { left_pos: (left / (mapSize.offsetWidth / mapSize.absoluteWidth)), top_pos: (top / (mapSize.offsetHeight / mapSize.absoluteHeight)) });
+
       setAssets(
         update(assets, {
           [id]: {
@@ -40,7 +49,7 @@ export const MapContainer = ({ mapState }) => {
         const left = Math.round(item.loc.left + delta.x);
         const top = Math.round(item.loc.top + delta.y);
         item.setLoc({ left, top });
-        moveAsset(item.id, left, top);
+        moveAsset(item.id, left, top, item.mapSize);
         return undefined;
       }
     }),

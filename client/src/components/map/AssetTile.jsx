@@ -65,7 +65,8 @@ export const AssetTile = ({
         loc,
         id,
         left,
-        top
+        top,
+        mapSize
       },
       collect: (monitor) => ({
         isDragging: monitor.isDragging()

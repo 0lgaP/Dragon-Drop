@@ -4,6 +4,7 @@ const fetchMap = require("./fetchMap");
 const editMap = require("./editMap");
 const deleteMap = require("./deleteMap");
 const getMapAssets = require("./getMapAssets");
+const updateAsset = require("./updateAsset");
 
 module.exports = (router, db) => {
   // GET MAPS
@@ -28,4 +29,8 @@ module.exports = (router, db) => {
   // SPECIFIC ASSETS FOR MAP
   // GET "/users/:id/campaigns/:c_id/maps/:m_id/assets"
   getMapAssets(router, db);
+
+  // Update Map_asset table at specific index
+  // POST /users/:u_id/campaigns/:c_id/maps/:m_id/assets/:asset_id
+  updateAsset(router, db);
 };

@@ -10,21 +10,21 @@ module.exports = (router, db) => {
       "ma.scale, ma.top_pos, ma.left_pos, ma.layer_order, ma.layer_name,";
 
     const queryNPCsForMap = `
-      SELECT ${forAll} n.id, n.name, n.alive, n.bio, n.details, n.img, at.name as type
+      SELECT ${forAll} ma.id, n.name, n.alive, n.bio, n.details, n.img, at.name as type
       FROM map_assets ma
         JOIN asset_types at ON ma.type_id = at.id
         JOIN npcs n on ma.asset_id = n.id
       WHERE ma.map_id = $1 AND at.name = $2;
       `;
     const queryImagesForMap = `
-      SELECT ${forAll} img.id, img.name, img.src as img, at.name as type
+      SELECT ${forAll} ma.id, img.name, img.src as img, at.name as type
       FROM map_assets ma
         JOIN asset_types at ON ma.type_id = at.id
         JOIN images img on ma.asset_id = img.id
       WHERE ma.map_id = $1 AND at.name = $2;
       `;
     const queryStoryCardsForMap = `
-      SELECT ${forAll} sc.id, sc.completed, sc.created_on, sc.story_card_text as content, sc.story_id, at.name as type
+      SELECT ${forAll} ma.id, sc.completed, sc.created_on, sc.story_card_text as content, sc.story_id, at.name as type
       FROM map_assets ma
         JOIN asset_types at ON ma.type_id = at.id
         JOIN story_cards sc on ma.asset_id = sc.id
