@@ -45,14 +45,13 @@ export const MapContainer = ({ mapState }) => {
   //   }
   // });
   const [assets, setAssets] = useState(mapState.data.Images);
-  // const [assets, setAssets] = useState(mapState.data.Images);
   
   const moveAsset = useCallback(
     (id, left, top) => {
       setAssets(
         update(assets, {
           [id]: {
-            $merge: { left, top }
+            $merge: { left_pos: left, top_pos: top }
           }
         })
       );
@@ -129,8 +128,8 @@ console.log('assets', assets)
           const { id, left_pos, top_pos, name, img, layer_order, layer_name } = assets[key];
           return (
             <AssetTile
-              key={id}
-              id={id}
+              key={key}
+              id={key}
               left={left_pos}
               top={top_pos}
               altThing={name}
