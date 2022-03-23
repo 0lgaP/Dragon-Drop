@@ -1,25 +1,27 @@
 import React, { useState, useContext } from "react";
-import { Redirect } from 'react-router-dom';
-import Home from '../components/Home';
-import CampaignList from '../components/campaign/CampaignList'
+import { Redirect } from 'react-router-dom'
 import AuthContext from "../providers/AuthProvider";
+// import CampContext from "../providers/CampProvider";
 import axios from '../api/axios'
+
 const LOGIN_URL = "/login";
 
 const Login = () => {
-  const { auth, setAuth } = useContext(AuthContext);
-  const userAuth = window.localStorage.getItem("user_id")
+  const { setAuth } = useContext(AuthContext);
+  // const {campaign} = useContext(CampContext);
+  const rawAuth = window.localStorage.getItem("user_id")
+  const userAuth = JSON.parse(rawAuth)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const campaignsAddress = `users/${userAuth}/campaigns`
 
   // console.log(`auth: `, auth)
   // console.log(`user_id: `, window.localStorage.getItem("user_id"))
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("P", password)
-      console.log("E", email)
+      // console.log("P", password)
+      // console.log("E", email)
       const response = await axios.post(LOGIN_URL, JSON.stringify({ email, password }),
         {
           headers: { 'Content-type': 'application/json' },
@@ -59,7 +61,7 @@ const Login = () => {
   }
   else {
     return (
-      <CampaignList />
+      <Redirect to={campaignsAddress} />
     )
 
   }
