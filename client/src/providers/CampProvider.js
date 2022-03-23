@@ -1,11 +1,11 @@
 import {createContext, useState, useEffect } from 'react';
-import axios from '../api/axios';
+
 
 const CampContext = createContext({});
 
 export const CampProvider = (props) => {
 
-  const [campaign, setCampaign] = useState([]);
+  const [campaign, setCampaign] = useState('');
   const [story, setStory] = useState([]);
 
   return (

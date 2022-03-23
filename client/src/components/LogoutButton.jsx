@@ -1,9 +1,11 @@
 import { useContext, useState } from 'react';
 import AuthContext from "../providers/AuthProvider";
+import CampContext from '../providers/CampProvider';
 
 
 const LogoutButton = () => {
   const { auth, setAuth } = useContext(AuthContext)
+  const { setCampaign } = useContext(CampContext);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -11,6 +13,7 @@ const LogoutButton = () => {
   
   const handleSubmit = () => {
     setAuth({user_id: '', email: ''})
+    setCampaign(null);
     window.localStorage.clear()
     // console.log(`auth: `, auth)
     // console.log(` user_id: `, window.localStorage.getItem("user_id"))

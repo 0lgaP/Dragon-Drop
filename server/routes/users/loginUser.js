@@ -4,7 +4,7 @@ module.exports = (router, db) => {
   router.post("/login", (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
-    console.log("BOD", req)
+    // console.log("BOD", req)
     db.query(`SELECT * FROM users WHERE email = $1;`, [email])
     .then(
       (result) => {
@@ -13,7 +13,6 @@ module.exports = (router, db) => {
           // req.session["user_id"] = result.rows[0].id
           // console.log(resul)
           res.send(result.rows[0])
-          
         } else {
           res.send({ error: "error" });
           return;
