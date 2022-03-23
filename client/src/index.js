@@ -3,15 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { AuthProvider } from './providers/AuthProvider';
-import { CampProvider } from './providers/CampProvider';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
     <AuthProvider>
-      <CampProvider>
-        <App />
-      </CampProvider>
+    <App />
     </AuthProvider>
   </React.StrictMode>,
   document.getElementById('root')
