@@ -20,7 +20,7 @@ const CampaignList = () => {
   useEffect(() => {
     axios.get(`http://localhost:8082${address}`)
     .then((res) => {
-      console.log("DATAAAAA", res)
+      // console.log("DATAAAAA", res)
       setCampaigns(res.data)
     })
   }, [])
