@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import DropDownListMap from "./DropDownListMap";
 import DropDownListNpc from "./DropDownListNpc";
+import './Button.css';
+import './Card.css';
+
 
 function Form() {
   const [story, setStory] = useState('');
