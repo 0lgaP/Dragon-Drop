@@ -19,6 +19,9 @@ const [state, setState] = useState({
   story: []
 })
 
+
+
+
   useEffect(() => {
     Promise.all([
       axios.get(`${address}/npcs`),

@@ -10,10 +10,5 @@ module.exports = (router, db) => {
       console.log(`db result: `, result.rows)
       res.json(result.rows)
     });
-    .catch(err => {
-      res
-        .status(500)
-        .json({error: err.message});
-    })
 });
 }
