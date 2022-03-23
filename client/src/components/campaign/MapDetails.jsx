@@ -1,4 +1,5 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from 'react-router-dom';
 import Map from "../../components/map";
 import useMapData from "../../hooks/useMapData";
@@ -11,16 +12,26 @@ import './MapDetails.css'
 // User: rick.sandchez@gmail.com
   // Pass: pass
 const MapDetails = () => {
-  const { u_id, c_id, m_id } = useParams();
-  const { state, setState } = useMapData(m_id, c_id, u_id)
+  const params = useParams();
+  const [urlParams, setUrlParams] = useState({ ...params });
+  const { state, setState } = useMapData(urlParams.m_id, urlParams.c_id, urlParams.u_id)
+  const [mapsForCampaign, setMapsForCampaign] = useState([]);
+  const [tabStatus, setTabStatus] = useState({
+    tStoryFNotes: true,
+    tAssetsFMaps: false
+  })
+
+  useEffect(() => {
+    axios.get(`/users/${urlParams.u_id}/campaigns/${urlParams.c_id}/maps`).then(result => setMapsForCampaign(result.data));
+  }, [])
 
   return (
-    <container class='mapContainer' >
-      <div class='sidebar'>
+    <container className='mapContainer' id={ urlParams.mapId }>
+      <div className='sidebar'>
         <h2>
           { state.name }
         </h2>
-        <div class='card'>
+        <div className='card'>
           <h3>Story Cards</h3>
           <ul>
             <li>Map 1</li>
@@ -30,22 +41,32 @@ const MapDetails = () => {
             <li>Map 5</li>
           </ul>
         </div>
-        <div class='card'>
+        <div className='card'>
           <div className="tab-bar">
-            <h3>Story</h3>
-            <h3>Notes</h3>
+            <h3 onClick={ () => {
+              setTabStatus(prev => {
+                return {...prev, tStoryFNotes: true}
+              })
+            }}>Story</h3>
+            <h3 onClick={ () => {
+              setTabStatus(prev => {
+                return {...prev, tStoryFNotes: false}
+              })
+            }}>Notes</h3>
           </div>
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique tenetur explicabo suscipit quaerat totam doloremque voluptates dolores, atque, eaque ullam officiis dicta beatae labore adipisci? Doloribus atque expedita recusandae sequi.
-        </div>
+          { tabStatus.tStoryFNotes && 
+'Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique tenetur explicabo suscipit quaerat totam doloremque voluptates dolores, atque, eaque ullam officiis dicta beatae labore adipisci? Doloribus atque expedita recusandae sequi.'
+}
+          { !tabStatus.tStoryFNotes && 
+'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae ipsum unde maiores accusantium dolore officia architecto natus, esse in, sunt facere, ducimus accusamus distinctio. Rem dolorem iusto ut minima quos.'
+}
+</div>
       </div>
-      <div class='map'>
+      <div className='map'>
     { Object.keys(state.data).length && <Map mapState={ state } /> }
       </div>
-      <div class='sidebar'>
-        <h2>
-          { state.name }
-        </h2>
-        <div class='card'>
+      <div className='sidebar'>
+        <div className='card'>
           <h3>Players</h3>
           <ul>
             <li>Player 1</li>
@@ -55,12 +76,30 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique tenetur expli
             <li>Player 5</li>
           </ul>
         </div>
-        <div class='card'>
+        <div className='card'>
           <div className="tab-bar">
-            <h3>Assets</h3>
-            <h3>Maps</h3>
+            <h3 onClick={ () => {
+              setTabStatus(prev => {
+                return {...prev, tAssetsFMaps: true}
+              })
+            }}>Assets</h3>
+            <h3 onClick={ () => {
+              setTabStatus(prev => {
+                return {...prev, tAssetsFMaps: false}
+              })
+            }}>Maps</h3>
           </div>
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique tenetur explicabo suscipit quaerat totam doloremque voluptates dolores, atque, eaque ullam officiis dicta beatae labore adipisci? Doloribus atque expedita recusandae sequi.
+          <div className="card-body">
+
+          { mapsForCampaign.length && !tabStatus.tAssetsFMaps && mapsForCampaign.map(map => {
+            // return <Link to={ `/users/${urlParams.u_id}/campaigns/${urlParams.c_id}/maps/${map.id}` } onClick={() => window.location.reload()}>{map.name}</Link>
+            
+            // I am a horrible person for using react like this
+            // Ill fix it later
+            // -Josh
+            return <a className="card" onClick={() => {window.location.href=`/users/${urlParams.u_id}/campaigns/${urlParams.c_id}/maps/${map.id}`}}>{map.name}</a>
+          }) }
+          </div>
         </div>
       </div>
     </container>

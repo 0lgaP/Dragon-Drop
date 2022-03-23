@@ -10,6 +10,9 @@
 .card {
   @apply bg-primary mt-4
 }
+.card-body {
+  @apply flex flex-col p-2
+}
 .tab-bar {
   @apply flex flex-row justify-evenly
 }

@@ -18,7 +18,7 @@ function useMapData(mapId, campaignId, userId) {
   useEffect(() => {
     // CHANGE TO OUR DATABASE QUERIES:
     Promise.all([
-      axios.get(`/users/${userId}/campaigns/${campaignId}/maps/${mapId}`),
+      axios.get(`/users/${userId}/campaigns/${campaignId}/maps/${state.mapId}`),
       axios.get(
         `/users/${userId}/campaigns/${campaignId}/maps/${mapId}/assets`
       ),
