@@ -92,6 +92,15 @@ export const AssetTile = ({
     return dragObject;
   }, [id, left, top]);
 
+  // Sets size height to rendered height for tile
+    // Needed to fix dynamic z-indexing for images when using tailwind 
+  const onImgLoad = ({ target: img }) => {
+    const { offsetHeight, offsetWidth } = img;
+    setSize(prev => {
+      return { ...prev, height: offsetHeight }
+    })
+  };
+
   // Show Drag Overlay if img is being dragged
   if (isDragging) {
     return <img ref={drag} />;
@@ -114,7 +123,8 @@ export const AssetTile = ({
         src={image}
         ref={drag}
         role="ASSET"
-        alt={altThing}
+        alt={ altThing }
+        onLoad={onImgLoad}
         height={size.height + "px"}
         width={size.width + "px"}
       />

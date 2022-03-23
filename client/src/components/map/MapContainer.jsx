@@ -71,10 +71,10 @@ export const MapContainer = ({ mapState }) => {
   // Get Actual Background Img Resolution
   const onImgLoad = ({ target: img }) => {
     const { offsetHeight, offsetWidth } = img;
-    const test = new Image();
-    test.src = img.src;
-    test.onload = () => {
-      const ratio = test.height / test.width;
+    const nativeImage = new Image();
+    nativeImage.src = img.src;
+    nativeImage.onload = () => {
+      const ratio = nativeImage.height / nativeImage.width;
       const parentElmHeight = img.parentElement.offsetHeight;
 
       setImageSize({
@@ -84,8 +84,8 @@ export const MapContainer = ({ mapState }) => {
           parentElmHeight - 2 === offsetHeight
             ? offsetHeight / ratio
             : offsetWidth,
-        absoluteHeight: test.height,
-        absoluteWidth: test.width
+        absoluteHeight: nativeImage.height,
+        absoluteWidth: nativeImage.width
       });
     };
   };
