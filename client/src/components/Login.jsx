@@ -2,7 +2,6 @@ import { useState, useContext, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import Home from '../components/Home';
 import AuthContext from "../providers/AuthProvider";
-import useAuth from "../hooks/useAuth";
 import axios from '../api/axios'
 const LOGIN_URL = "/login";
 
