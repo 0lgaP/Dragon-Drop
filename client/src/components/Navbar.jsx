@@ -1,11 +1,15 @@
 import {React, useContext} from "react";
 import { Link, useParams } from "react-router-dom";
 import AuthContext from "../providers/AuthProvider";
+import CampContext from "../providers/CampProvider";
 
 const Navbar = (props) => {
   const { auth } = useContext(AuthContext);
-  const { u_id, c_id } = useParams();
+  const { campaign } = useContext(CampContext);
   const userAuth = window.localStorage.getItem("user_id")
+  const u_id = auth.user_id
+  const c_id = campaign
+  // console.log("CAMPAI", campaign)
   if (userAuth && JSON.parse(userAuth) === auth.user_id) {
     return (
       <nav className="bg-primary h-full p-1 position-absolute">
