@@ -2,7 +2,6 @@ import { useState, useContext, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import Home from '../components/Home';
 import AuthContext from "../providers/AuthProvider";
-import useAuth from "../hooks/useAuth";
 import axios from '../api/axios'
 const LOGIN_URL = "/login";
 
@@ -18,6 +17,8 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log("P", password)
+      console.log("E", email)
       const response = await axios.post(LOGIN_URL, JSON.stringify({email, password}),
       {
         headers: { 'Content-type': 'application/json'},

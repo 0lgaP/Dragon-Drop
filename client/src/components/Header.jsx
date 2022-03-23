@@ -12,34 +12,45 @@ const Header = (props) => {
   // const { data: user, error, isPending } = useFetch('http://localhost:3000/users/' + u_id)
 const userAuth = window.localStorage.getItem("user_id")
   if (userAuth && JSON.parse(userAuth) === auth.user_id) {
-    const { u_id } = auth.user_id
+    const u_id = auth.user_id
     return (
-      <div className="header bg-blue-3170be ">
-        <div className="header-left">
-          <img className="logo"></img>
-          <h2 id="app-name" className="text-lime-900">Dragon Drop</h2>
-        </div>
-        <div className="header-right">
-          <Link to={`/users/${u_id}/campaigns`}><h3>Campaigns</h3></Link>
-          <Link to={`/users/${u_id}`}>
-            <img src="https://icon-library.com/images/dnd-icon/dnd-icon-13.jpg"></img>
-            <h3>{auth.email}</h3>
-          </Link>
-          <LogoutButton />
-        </div>
-      </div>
+      <nav className="bg-header text-xl text-textcolor flex flex-row" >
+        < div className="header-left flex flex-row m-4 justify-end">
+            <div>
+              <img className="m-1 w-20" src="https://i.imgur.com/pMfFYJc.png" alt='dragon drop logo'></img>
+            </div>
+            <div className="m-4">
+              Dragon Drop
+            </div>
+          </div>
+          <div className="header-right flex flex-row m-4 justify-end">
+            <div className="m-4">
+              <Link to={`/users/${u_id}/campaigns`}><h3>Campaigns</h3></Link>
+            </div>
+            <div className="m-4">
+              <Link to={`/users/${u_id}`}>{auth.email}</Link>
+            </div>
+            <div className="m-4">
+              <LogoutButton />
+            </div>
+          </div>
+      </nav>
     );
   }
   else {
     return (
-      <div className="header">
-        <div className="header-left">
+      <div className="bg-header text-xl text-textcolor flex flex-row p-2">
+        <div className="header-left p-2 ">
           <img className="logo"></img>
-          <h2 id="app-name" className="text-lime-900">Dragon Drop</h2>
+          <h2 id="app-name" className="">Dragon Drop</h2>
         </div>
-        <div className="header-right">
+        <div className="header-right flex flex-row m-4 justify-end">
+          <div className="p-2">
           <Link to="/register"><h3>Register</h3></Link>
+          </div>
+          <div className="p-2">
           <Link to="/login"><h3>Login</h3></Link>
+          </div>
         </div>
       </div>
     );
