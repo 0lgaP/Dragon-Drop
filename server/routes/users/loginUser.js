@@ -11,7 +11,7 @@ module.exports = (router, db) => {
         if (password === result.rows[0].password) {
           console.log(`result of db query: `, result.rows[0])
           res.send(result.rows[0])
-          req.session["user_id"] = result.rows[0].id
+          // req.session["user_id"] = result.rows[0].id
         } else {
           res.send({ error: "error" });
           return;
