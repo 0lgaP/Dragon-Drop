@@ -2,7 +2,7 @@ import React from "react";
 
 const CampaignDetails = () => {
 return(
-  <div>SUp</div>
+  <div>HAiiiiii</div>
 )
 }
 

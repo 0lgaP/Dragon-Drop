@@ -16,7 +16,7 @@ module.exports = (router, db) => {
         res
           .status(500)
           .json({ error: err.message });
-      });
+      })
 
-  });
+  })
 };
