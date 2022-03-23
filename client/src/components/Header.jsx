@@ -14,28 +14,27 @@ const userAuth = window.localStorage.getItem("user_id")
   if (userAuth && JSON.parse(userAuth) === auth.user_id) {
     const u_id = auth.user_id
     return (
-      <section className="bg-header text-xl text-textcolor flex flex-row" >
-        <div className="m-4">
-          <img className="logo"></img>
-          <h2 id="app-name" className="">Dragon Drop</h2>
-        </div>
-        <div className="header-right flex flex-row m-4 justify-end">
-          <div>
-          <Link to={`/users/${u_id}/campaigns`}><h3>Campaigns</h3></Link>
-          </div>
-          <Link to={`/users/${u_id}`}>
+      <nav className="bg-header text-xl text-textcolor flex flex-row" >
+        < div className="header-left flex flex-row m-4 justify-end">
             <div>
-            <img className="m-1 w-20" src="https://icon-library.com/images/dnd-icon/dnd-icon-13.jpg"></img>
+              <img className="m-1 w-20" src="https://i.imgur.com/pMfFYJc.png" alt='dragon drop logo'></img>
             </div>
-            <div>
-              <h3>{auth.email}</h3>
+            <div className="m-4">
+              Dragon Drop
             </div>
-          </Link>
-          <div>
-          <LogoutButton />
           </div>
-        </div>
-      </section>
+          <div className="header-right flex flex-row m-4 justify-end">
+            <div className="m-4">
+              <Link to={`/users/${u_id}/campaigns`}><h3>Campaigns</h3></Link>
+            </div>
+            <div className="m-4">
+              <Link to={`/users/${u_id}`}>{auth.email}</Link>
+            </div>
+            <div className="m-4">
+              <LogoutButton />
+            </div>
+          </div>
+      </nav>
     );
   }
   else {
