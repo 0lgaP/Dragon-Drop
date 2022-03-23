@@ -21,6 +21,8 @@ const MapDetails = () => {
     tAssetsFMaps: false
   })
 
+  console.log('MapData',state)
+
   useEffect(() => {
     axios.get(`/users/${urlParams.u_id}/campaigns/${urlParams.c_id}/maps`).then(result => setMapsForCampaign(result.data));
   }, [])
@@ -31,16 +33,25 @@ const MapDetails = () => {
         <h2>
           { state.name }
         </h2>
-        <div className='card'>
+        { !!state?.data?.StoryCards?.length &&
+          <div className='card'>
           <h3>Story Cards</h3>
-          <ul>
-            <li>Map 1</li>
-            <li>Map 2</li>
-            <li>Map 3</li>
-            <li>Map 4</li>
-            <li>Map 5</li>
+            <ul>
+              { state.data.StoryCards.map(card => {
+                console.log(card)
+                return <li>
+                  <h3>
+                  { card.order }
+                  </h3>
+                  <p>
+                  { card.content }
+                  </p>
+                  Comepleted?: { card.completed.toString() }
+                </li>
+              })}
           </ul>
-        </div>
+          </div>
+        }
         <div className='card'>
           <div className="tab-bar">
             <h3 onClick={ () => {
