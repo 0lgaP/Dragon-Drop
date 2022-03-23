@@ -9,7 +9,7 @@ const Navbar = (props) => {
   const userAuth = window.localStorage.getItem("user_id")
   const u_id = auth.user_id
   const c_id = campaign
-  console.log("CAMPAI", campaign)
+  // console.log("CAMPAI", campaign)
   if (userAuth && JSON.parse(userAuth) === auth.user_id) {
     return (
       <nav className="bg-primary h-full p-1 position-absolute">
