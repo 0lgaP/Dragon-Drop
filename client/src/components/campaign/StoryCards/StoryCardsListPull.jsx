@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import './Card.css';
 import './Button.css';
-import StoryCardItem from "./StoryCardItem";
+import StoryCardItemPull from "./StoryCardItemPull";
 import AuthContext from "../../../providers/AuthProvider";
 import CampContext from "../../../providers/CampProvider";
 import axios from "../../../api/axios";
 
 
-export default function StoryCardsList() {
+export default function StoryCardsListPull() {
   const [story, setStory] = useState('');
   const { auth } = useContext(AuthContext);
   const { campaign} = useContext(CampContext);
@@ -29,7 +29,7 @@ export default function StoryCardsList() {
     })
   }, [])
 
-const parsedListItem = story && story.map(card => <StoryCardItem key={card.id} text={card.story_card_text} order={card.order_num}/>);
+const parsedListItem = story && story.map(card => <StoryCardItemPull key={card.id} text={card.story_card_text} order={card.order_num}/>);
   return (
   
     <div>

@@ -1,19 +1,27 @@
-import React, { useState, useEffect } from "react";
-import useFetch from "../../../hooks/useFetch"
+import React, { useState, useEffect, useContext } from "react";
+import axios from "../../../api/axios";
+import CampContext, { CampProvider } from "../../../providers/CampProvider";
+import AuthContext, { AuthProvider } from "../../../providers/AuthProvider";
+
 
 export default function DropDownListNpc(props) {
-  const [npc, setNpc] = useState(["NPC"])
+  const [npc, setNpc] = useState([])
+  const { auth } = useContext(AuthContext);
+  const { campaign} = useContext(CampContext);
 
-  const address = '/users/2c41cf56-a6d7-11ec-b909-0242ac120002/campaigns/8a89386b-de43-4c63-9127-3a78394d4253/npcs' ;
-  const { data: user, error, isPending } = useFetch(`http://localhost:8082${address}`);
+  const u_id = auth.user_id
+  const c_id = campaign
 
-  useEffect(() => { loadInitialNPCs() 
-  
-    async function loadInitialNPCs() {
-      const initialNPCs = await user
-      if (user) setNpc(initialNPCs)
-    }
-  }, [{npc}])
+  const address = `/users/${u_id}/campaigns/${c_id}`
+
+  useEffect(() => {
+    axios.get(`${address}/npcs`)
+    .then((res) => {
+      console.log("Dat npc", res.data)
+      setNpc(res.data)
+
+    })
+  }, [])
 
   return (
     <select className="card__dropdown" 

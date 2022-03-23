@@ -6,7 +6,9 @@ import StoryCards from "./StoryCards";
 const Story = () => {
 
   return(
+    <div> 
     <StoryCards/>
+    </div>
   )
 }
 

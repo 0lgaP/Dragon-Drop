@@ -1,13 +1,10 @@
 import React from 'react'
 
-function StoryCardItem(props) {
+function StoryCardItemPull(props) {
   return (
     <section className="card">
       <form autoComplete="off">
         <article className="card__container">
-          <button className="button order">
-            {props.order}
-          </button>
           <button className="button cancel">
             Edit
           </button>
@@ -26,4 +23,4 @@ function StoryCardItem(props) {
   )
 }
 
-export default StoryCardItem
+export default StoryCardItemPull

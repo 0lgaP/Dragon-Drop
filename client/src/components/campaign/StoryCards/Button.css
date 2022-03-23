@@ -10,3 +10,10 @@
   @apply bg-cancel
 }
 
+.order {
+  @apply bg-white rounded-full px-2 
+}
+
+.death {
+  @apply bg-bubble-gum
+}
