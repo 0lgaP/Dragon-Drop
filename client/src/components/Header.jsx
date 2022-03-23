@@ -15,13 +15,14 @@ const userAuth = window.localStorage.getItem("user_id")
     const u_id = auth.user_id
     return (
       <nav className="bg-header text-xl text-textcolor flex flex-row" >
-          <div>
-            <img className="m-1 w-20" src="https://i.imgur.com/pMfFYJc.png" alt='dragon drop logo'></img>
+        < div className="header-left flex flex-row m-4 justify-end">
+            <div>
+              <img className="m-1 w-20" src="https://i.imgur.com/pMfFYJc.png" alt='dragon drop logo'></img>
+            </div>
+            <div className="m-4">
+              Dragon Drop
+            </div>
           </div>
-          <div className="m-4">
-            <h2 id="app-name" className="">Dragon Drop</h2>
-          </div>
-
           <div className="header-right flex flex-row m-4 justify-end">
             <div className="m-4">
               <Link to={`/users/${u_id}/campaigns`}><h3>Campaigns</h3></Link>
