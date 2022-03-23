@@ -12,7 +12,7 @@ function StoryCardItem(props) {
         Toggle 💀
         </button>
           <div className="card_text-area">
-          {props.story_card_text}
+          {props.text}
           </div>
       </article>
     </form>
