@@ -1,12 +1,12 @@
 import React from "react";
-import StoryCard from "./StoryCards";
+import StoryCards from "./StoryCards";
 
 
 
 const Story = () => {
 
   return(
-    <StoryCard/>
+    <StoryCards/>
   )
 }
 

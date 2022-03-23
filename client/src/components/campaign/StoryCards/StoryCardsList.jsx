@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import './Card.css';
 import './Button.css';
+import StoryCardItem from "./StoryCardItem";
 // import AuthContext from "../../../providers/AuthProvider";
 // import CampContext from "../../../providers/CampProvider";
 import axios from "../../../api/axios";
 
 
-export default function ShowStoryCards() {
+export default function StoryCardsList() {
   const [story, setStory] = useState('');
   // const [card, setCard] = useState('');
   // const { auth } = useContext(AuthContext);
@@ -27,24 +28,13 @@ export default function ShowStoryCards() {
   }, [setStory])
 
 console.log("STORY", story)
+console.log("TEXT", story[0].story_card_text)
+const parsedListItem = story.map(card => <StoryCardItem 
+                                          key={story.id}
+                                          {...story}
+                                          />)
 
   return (
-    <section className="card">
-
-    <form autoComplete="off">
-      
-      <article className="card__container">
-        <button className="button confirm">
-          Edit
-        </button>
-        <button className="button cancel" >
-          Toggle 💀
-        </button>
-      </article>
-
-    </form>
-
-</section>
-
-  )
+    {parsedListItem}
+    )
 }

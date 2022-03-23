@@ -1,7 +1,7 @@
 
 import { createContext, useContext, useState } from 'react';
 import Form from "./Form";
-import StoryCard from './StoryCardContainer';
+import StoryCardContainer from './StoryCardContainer';
 import { Link, useParams } from "react-router-dom";
 import useFetch from '../../../hooks/useFetch';
 import AuthContext from '../../../providers/AuthProvider';
@@ -19,6 +19,7 @@ export default function StoryCards() {
   return(
     <div className="grid-cols-3 flex">
     <Form/>
+    <StoryCardContainer/>
     
     </div>
   );

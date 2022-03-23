@@ -1,14 +1,16 @@
 import React from "react";
+import StoryCardsList from "./StoryCardsList";
 
 
 
-export default function StoryCard(props) {
+
+export default function StoryCardContainer(props) {
 
 
 
   return (
     <section className="card">
-      hi
+      <StoryCardsList/>
     </section>
   )
 }
