@@ -1,10 +1,11 @@
-import { useCallback, useState, useRef } from "react";
+import { useCallback, useState, useRef, useContext } from "react";
 import { useDrop } from "react-dnd";
 import { ItemTypes } from "./ItemTypes";
 import { AssetTile } from "./AssetTile";
 import update from "immutability-helper";
 import axios from 'axios';
 import { useParams } from "react-router-dom";
+import AuthContext from "../../providers/AuthProvider";
 
 const styles = {
   width: "100%",
@@ -22,7 +23,10 @@ const imageStyles = {
 };
 export const MapContainer = ({ mapState }) => {
   const [assets, setAssets] = useState(mapState.data);
-  const { u_id, c_id, m_id } = useParams();
+  const { c_id, m_id } = useParams();
+  const { auth } = useContext(AuthContext);
+  const u_id = auth.user_id
+
 
   console.log(assets);
   

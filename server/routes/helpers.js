@@ -63,23 +63,18 @@ module.exports = function (db) {
    * @param {Array<string, number>} params List of params for queryString
    * @returns {Promise} a Promise
    */
-  function checkRights(res, checkRightsQuery, params) {
-    return (
-      db
-        .query(checkRightsQuery, params)
-        .then((response) => {
-          const result = response.rows;
-          console.log(params, checkRightsQuery);
-          if (!result.length)
-            return res.status(403).send("You dont have rights");
-          return result;
-        })
-        // General Error Catch
-        .catch((err) => {
-          console.log(err);
-          res.status(500).send("Something went wrong on our end");
-        })
-    );
+  function checkRights(res, checkRightsQuery, params, callback) {
+    db.query(checkRightsQuery, params)
+      .then((response) => {
+        const result = response.rows;
+        console.log(params, checkRightsQuery);
+        if (!result.length) throw new Error("Dont have Permsission");
+        callback();
+      })
+      // General Error Catch
+      .catch((err) => {
+        res.status(403).send(err);
+      });
   }
 
   /**
