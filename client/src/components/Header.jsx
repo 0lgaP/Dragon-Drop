@@ -12,7 +12,7 @@ const Header = (props) => {
   // const { data: user, error, isPending } = useFetch('http://localhost:3000/users/' + u_id)
 const userAuth = window.localStorage.getItem("user_id")
   if (userAuth && JSON.parse(userAuth) === auth.user_id) {
-    const { u_id } = auth.user_id
+    const  u_id  = auth.user_id
     return (
       <section className="bg-header text-xl text-textcolor flex flex-row" >
         <div className="m-4">
