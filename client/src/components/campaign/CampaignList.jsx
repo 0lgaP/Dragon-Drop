@@ -18,9 +18,9 @@ const CampaignList = () => {
   const address = `/users/${userAuth}/campaigns` ;
 
   useEffect(() => {
-    axios.get(`http://localhost:8082${address}`)
+    axios.get(`${address}`)
     .then((res) => {
-      // console.log("DATAAAAA", res)
+      console.log("Capania Data", res.data)
       setCampaigns(res.data)
     })
   }, [])

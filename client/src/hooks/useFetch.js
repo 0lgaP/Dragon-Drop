@@ -4,10 +4,10 @@ const useFetch = (url) => {
   const [data, setData] = useState(null);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);
-
+// console.log("FOO", url)
   useEffect(() => {
     const abortCont = new AbortController();
- 
+// console.log("URL",url)
       fetch(url, { signal: abortCont.signal })
       .then(res => {
         if (!res.ok) { // error coming back from server
