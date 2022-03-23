@@ -29,8 +29,9 @@ export default function StoryCardsList() {
 
 console.log("STORY", story)
 console.log("TEXT", story[0].story_card_text)
-const parsedListItem = story.map(card => <StoryCardItem key={card.id} text={card.story_card_text}/>);
+// const parsedListItem = story.map(card => <StoryCardItem key={card.id} text={card.story_card_text}/>);
   return (
-    {parsedListItem}
+    // {parsedListItem}
+    <div>Hi</div>
   )
 }

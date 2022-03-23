@@ -3,20 +3,20 @@ import React from 'react'
 function StoryCardItem(props) {
   return (
     <section className="card">
-    <form autoComplete="off">
-      <article className="card__container">
-        <button className="button confirm">
-          Edit
-        </button>
-        <button className="button cancel" >
-        Toggle 💀
-        </button>
-          <div className="card_text-area">
-          {props.text}
-          </div>
-      </article>
-    </form>
-  </section>
+      <form autoComplete="off">
+        <article className="card__container">
+          <button className="button confirm">
+            Edit
+          </button>
+          <button className="button cancel" >
+          Toggle 💀
+          </button>
+            <div className="card_text-area">
+            {props.text}
+            </div>
+        </article>
+      </form>
+    </section>
   )
 }
 
