@@ -3,10 +3,13 @@ module.exports = (router, db) => {
   // id, img, campaign_id, name, alive, bio, details
   router.get("/users/:id/campaigns/:c_id/npcs", (req, res) => {
     const campaignID = req.params.c_id
+    console.log(`campaign id from req params: `, campaignID)
     db.query(`SELECT * FROM npcs WHERE campaign_id = $1;`, [campaignID])
-    .then(data => {
-      res.send(data.rows).status(200)
-    })
+
+    .then((result) => {
+      console.log(`db result: `, result.rows)
+      res.json(result.rows)
+    });
     .catch(err => {
       res
         .status(500)
