@@ -39,16 +39,16 @@ const userAuth = window.localStorage.getItem("user_id")
   }
   else {
     return (
-      <div className="bg-header text-xl text-textcolor flex flex-row">
-        <div className="header-left">
+      <div className="bg-header text-xl text-textcolor flex flex-row p-2">
+        <div className="header-left p-2 ">
           <img className="logo"></img>
           <h2 id="app-name" className="">Dragon Drop</h2>
         </div>
         <div className="header-right flex flex-row m-4 justify-end">
-          <div>
+          <div className="p-2">
           <Link to="/register"><h3>Register</h3></Link>
           </div>
-          <div>
+          <div className="p-2">
           <Link to="/login"><h3>Login</h3></Link>
           </div>
         </div>

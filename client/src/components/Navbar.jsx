@@ -24,7 +24,7 @@ const Navbar = (props) => {
   }
   else {
     return (
-      <nav>
+      <nav className="bg-primary h-full p-4 position-absolute text-textcolor text-xl ">
         <h2>Get started building YOUR world today!</h2>
       </nav>
     )
