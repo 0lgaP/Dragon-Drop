@@ -20,18 +20,18 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Header/>
-        <Navbar/>
+        <Header />
+        <Navbar />
         <div className="content">
           <Switch>
-            <Route exact path="/"> 
+            <Route exact path="/">
               <Home />
             </Route>
             <Route path="/login">
-              <Login/>
+              <Login />
             </Route>
             <Route path="/register">
-              <Register/>
+              <Register />
             </Route>
             <Route exact path="/users/:u_id">
               <Profile />
