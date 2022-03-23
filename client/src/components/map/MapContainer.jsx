@@ -9,7 +9,7 @@ import AuthContext from "../../providers/AuthProvider";
 
 const styles = {
   width: "100%",
-  height: 700,
+  height: "100%",
   border: "1px solid black",
   position: "relative"
 };

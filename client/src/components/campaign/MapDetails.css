@@ -1,0 +1,24 @@
+.mapContainer {
+  @apply flex flex-row h-full
+}
+.map {
+  @apply w-full
+}
+.sidebar {
+  @apply p-5 w-1/6
+}
+.card {
+  @apply bg-primary mt-4
+}
+.tab-bar {
+  @apply flex flex-row justify-evenly
+}
+.tab-bar > h3 {
+  @apply m-1 bg-secondary w-full
+}
+.tab-bar > h3:hover {
+  @apply bg-header cursor-pointer 
+}
+.tab-bar > h3:active {
+  @apply bg-primary cursor-pointer 
+}
