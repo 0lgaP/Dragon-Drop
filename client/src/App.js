@@ -17,24 +17,23 @@ import PlayerList from "./components/campaign/PlayerList";
 import NPCList from "./components/campaign/NPCList";
 
 function App() {
-
   const { state } = useApplicationData;
 
   return (
     <Router>
       <div className="App">
-        <Header/>
-        <Navbar/>
+        <Header />
+        <Navbar />
         <div className="content">
           <Switch>
-            <Route exact path="/"> 
+            <Route exact path="/">
               <Home />
             </Route>
             <Route path="/login">
-              <Login/>
+              <Login />
             </Route>
             <Route path="/register">
-              <Register/>
+              <Register />
             </Route>
             <Route exact path="/users/:u_id">
               <Profile />
