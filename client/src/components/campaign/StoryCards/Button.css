@@ -1,0 +1,12 @@
+.button {
+  @apply shadow-lg text-sky font-semibold py-1 px-4 rounded shadow m-2
+}
+
+.confirm {
+  @apply bg-confirm
+}
+
+.cancel {
+  @apply bg-cancel
+}
+
