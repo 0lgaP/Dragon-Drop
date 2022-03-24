@@ -13,10 +13,11 @@ import axios from "../../../api/axios";
 
 function Form() {
   const { auth } = useContext(AuthContext);
-  const { campaign } = useContext(CampContext);
+  const { campaign_id } = useContext(CampContext);
 
   const u_id = auth.user_id
-  const c_id = campaign
+  const c_id = campaign_id
+  console.log("PROVIDER", campaign_id)
   const address = `/users/${u_id}/campaigns/${c_id}/story`
 
   // const [story, setStory] = useState('');

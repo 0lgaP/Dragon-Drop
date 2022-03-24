@@ -29,7 +29,7 @@ export const CampProvider = (props) => {
       value={{
         campaign: getCampaign,
         setCampaign,
-        rawDawgCampaign: stateCampaign,
+        campaign_id: stateCampaign,
       }}
     >
       {props.children}
