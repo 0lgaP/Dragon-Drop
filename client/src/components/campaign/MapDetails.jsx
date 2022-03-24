@@ -60,10 +60,18 @@ const MapDetails = () => {
           }
         })
       );
-
-      // console.log('added to map', test)
     })
   }
+
+  async function deleteAssetFromMap(type, id) {
+    setState(prev => {
+      const newState = { ...prev }
+      delete newState.data[type][id]
+      return newState;
+    })
+    await axios.delete(`/users/0/campaigns/0/assets/${id}`)
+  }
+
 
   useEffect(() => {
     axios.get(`/users/${urlParams.u_id}/campaigns/${urlParams.c_id}/maps`).then(result => setMapsForCampaign(result.data));
@@ -150,7 +158,8 @@ const MapDetails = () => {
             Object.keys(state.data.NPCs).map((key) => {
               return (
                 <p>
-                  {state.data.NPCs[key].name}
+                  { state.data.NPCs[key].name }
+                  <button onClick={() => deleteAssetFromMap('NPCs', key)}>DEL</button>
                 </p>)
               })
             }
@@ -158,7 +167,8 @@ const MapDetails = () => {
             Object.keys(state.data.Images).map((key) => {
                 return (
                   <p>
-                    {state.data.Images[key].name}
+                    { state.data.Images[key].name }
+                    <button onClick={() => deleteAssetFromMap('Images', key)}>DEL</button>
                   </p>
                 )
               })
