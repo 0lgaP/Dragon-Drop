@@ -101,15 +101,35 @@ const MapDetails = () => {
             }}>Maps</h3>
           </div>
           <div className="card-body">
-
-          { mapsForCampaign.length && !tabStatus.tAssetsFMaps && mapsForCampaign.map(map => {
-            // return <Link to={ `/users/${urlParams.u_id}/campaigns/${urlParams.c_id}/maps/${map.id}` } onClick={() => window.location.reload()}>{map.name}</Link>
+            {/* Assets Card */ }
             
-            // I am a horrible person for using react like this
-            // Ill fix it later
-            // -Josh
-            return <a className="card" onClick={() => {window.location.href=`/users/${urlParams.u_id}/campaigns/${urlParams.c_id}/maps/${map.id}`}}>{map.name}</a>
-          }) }
+            { !!tabStatus.tAssetsFMaps &&
+              state.data.NPCs.map(npc => {
+                <p>
+                  {npc.name}
+                </p>
+              })
+            }
+            { !!tabStatus.tAssetsFMaps &&
+              state.data.Images.map(image => {
+                return (
+                  <p>
+                    {image.name}
+                  </p>
+                )
+              })
+            }
+
+            {/* Maps Card */}
+            {!!!tabStatus.tAssetsFMaps && !!mapsForCampaign.length && mapsForCampaign.map(map => {
+              // return <Link to={ `/users/${urlParams.u_id}/campaigns/${urlParams.c_id}/maps/${map.id}` } onClick={() => window.location.reload()}>{map.name}</Link>
+              
+              // I am a horrible person for using react like this
+              // Ill fix it later
+              // -Josh
+              return <a className="card" onClick={() => {window.location.href=`/users/${urlParams.u_id}/campaigns/${urlParams.c_id}/maps/${map.id}`}}>{map.name}</a>
+            })
+            }
           </div>
         </div>
       </div>
