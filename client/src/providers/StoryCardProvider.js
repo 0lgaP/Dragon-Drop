@@ -10,7 +10,7 @@ export default function StoryCardProvider(props) {
   const { campaign } = useContext(CampContext);
   
   const u_id = auth.user_id
-  const c_id = campaign
+  const c_id = campaign()
   const address = `http://localhost:8082/users/${u_id}/campaigns/${c_id}`
 
 const [state, setState] = useState({

@@ -4,7 +4,7 @@ const npcRoutes = require("./npcs/index");
 const partyRoutes = require("./party/index");
 const usersRoutes = require("./users/index");
 const storyRoutes = require("./story/index");
-
+const assetRoutes = require("./assets");
 
 module.exports = (router, db) => {
   campaignRoutes(router, db);
@@ -23,6 +23,7 @@ module.exports = (router, db) => {
   // app.use("/users/:id/campaigns/:c_id/story", storyRouter(db));
   storyRoutes(router, db);
 
+  assetRoutes(router, db);
 
   // // HOME PAGE
   // router.get("/", function (req, res, next) {

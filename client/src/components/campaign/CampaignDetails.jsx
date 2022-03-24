@@ -8,7 +8,6 @@ const CampaignDetails = (props) => {
   const { c_id } = useParams();
   
   useEffect(()=> {
-    window.localStorage.setItem("campaign_id", JSON.stringify(c_id))
     setCampaign(c_id)
     // console.log(`id being set to campaign useContext: `, c_id)
   }, [])
