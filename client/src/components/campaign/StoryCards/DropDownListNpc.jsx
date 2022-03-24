@@ -26,6 +26,7 @@ export default function DropDownListNpc(props) {
     <select className="card__dropdown" 
     onChange={props.onChange}
     >
+      <option value="Set Npc">Set Npc</option>
       {npc.map(npc => <option key={npc.id} value={npc.id}>{npc.name}</option>)}
     </select>
   )
