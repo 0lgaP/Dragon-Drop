@@ -18,13 +18,15 @@ const NPCList = (props) => {
   const npcID = window.localStorage.getItem("npc_id");
   const u_id = JSON.parse(window.localStorage.getItem("user_id"))
   const c_id = JSON.parse(window.localStorage.getItem("campaign_id"))
-  // console.log(`u id and c id`, u_id, c_id)
   
   useEffect(() => {
     // LOAD ALL NPC CARDS
     axios.get(`http://localhost:8082${address}`)
     .then((res) => {
       setNPCs(res.data)
+    })
+    .catch((err) => {
+      console.log(err.message)
     })
     // FETCH SELECTED NPC TO POPULATE FORM
     axios.get(`http://localhost:8082${address}/${npcID}`)
@@ -38,20 +40,20 @@ const NPCList = (props) => {
 
   const list = npcs.map((character) => {
       return (
-      <NPCListItem key={character.id}  name={character.name} bio={character.bio} details={character.details} alive={character.alive} />
+      <NPCListItem id={character.id}  name={character.name} bio={character.bio} details={character.details} alive={character.alive} />
       )
   })
 
   const handleSave = ()=> { 
   // UPDATE ENTRY IN DB
-      axios.post(`http://localhost:8082${address}/${npcID}/edit`, { name, bio, details })
+      axios.put(`http://localhost:8082${address}/${npcID}/edit`, { name, bio, details })
       .then((res) => {
         setName('');
         setBio('');
         setDetails('');
-        // window.location.reload(true);
       })
-  
+      
+      // window.location.reload(true);
   }
 
   const cancelSubmit = (e) => {
