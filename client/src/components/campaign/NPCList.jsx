@@ -6,28 +6,22 @@ import axios from 'axios';
 
 const NPCList = (props) => {
   const {auth} = useContext(AuthContext);
+  // const {campaign_id} = useContext(CampContext);
   const [npcs, setNPCs] = useState([])
   const [name, setName] = useState('')
   const [bio, setBio] = useState('')
   const [details, setDetails] = useState('')
-  const rawCampaignID = window.localStorage.getItem("campaign_id")
-  const campaignID = JSON.parse(rawCampaignID)
+  const campaignID = window.localStorage.getItem("campaign_id")
+  // const campaignID = JSON.parse(rawCampaignID)
+  // console.log(`cid from local stor`, rawCampaignID);
   const address = `/users/${auth.user_id}/campaigns/${campaignID}/npcs`;
   // console.log(`address: `, address)
   useEffect(() => {
     axios.get(`http://localhost:8082${address}`)
     .then((res) => {
-<<<<<<< HEAD
-      // console.log("DATAAAAA", res.data)
       setNPCs(res.data)
     })
   }, [])
-// console.log(`npcs that were set: `, npcs)
-=======
-      setNPCs(res.data)
-    })
-  }, [])
->>>>>>> b6a82a665f5deff7cc95a140c0cd0109ec8596e4
   const list = npcs.map((character) => {
     // console.log(`npc id from map func`, character.id)
       return (

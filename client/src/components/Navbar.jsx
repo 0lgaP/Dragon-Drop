@@ -5,12 +5,12 @@ import CampContext from "../providers/CampProvider";
 
 const Navbar = (props) => {
   const { auth } = useContext(AuthContext);
-  const { campaign } = useContext(CampContext);
+  const { campaign_id } = useContext(CampContext);
   const userAuth = window.localStorage.getItem("user_id")
   const u_id = auth.user_id
-  const c_id = campaign()
+  const c_id = campaign_id
   // console.log("campaign id status in navbar: ", campaign)
- if (JSON.parse(userAuth) === auth.user_id && campaign()) {
+ if (JSON.parse(userAuth) === auth.user_id && campaign_id) {
     return (
       <nav className="bg-primary h-1/16 p-1 ">
         <div className="links flex flex-row justify-evenly h-1/16 m-6 text-textcolor text-xl">

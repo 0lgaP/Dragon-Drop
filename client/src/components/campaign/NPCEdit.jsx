@@ -12,12 +12,11 @@ const NPCList = (props) => {
   const [name, setName] = useState()
   const [bio, setBio] = useState()
   const [details, setDetails] = useState()
-  const rawCampaignID = window.localStorage.getItem("campaign_id")
-  const campaignID = JSON.parse(rawCampaignID)
+  const campaignID = window.localStorage.getItem("campaign_id");
   const address = `/users/${auth.user_id}/campaigns/${campaignID}/npcs`;
   const npcID = window.localStorage.getItem("npc_id");
-  const u_id = JSON.parse(window.localStorage.getItem("user_id"))
-  const c_id = JSON.parse(window.localStorage.getItem("campaign_id"))
+  const u_id = JSON.parse(window.localStorage.getItem("user_id"));
+  const c_id = window.localStorage.getItem("campaign_id");
   
   useEffect(() => {
     // LOAD ALL NPC CARDS

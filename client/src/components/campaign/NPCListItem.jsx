@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const NPCListItem = (props) => {
 
 const u_id = JSON.parse(window.localStorage.getItem("user_id"));
-const c_id = JSON.parse(window.localStorage.getItem("campaign_id"));
+const c_id = window.localStorage.getItem("campaign_id");
 const address = `/users/${u_id}/campaigns/${c_id}/npcs/edit`;
 const deleteAddress = `/users/${u_id}/campaigns/${c_id}/npcs/delete`
 const npcID = props.id
