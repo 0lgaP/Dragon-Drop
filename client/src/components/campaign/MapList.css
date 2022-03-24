@@ -1,0 +1,12 @@
+.map-container {
+  @apply flex flex-col content-center w-full
+}
+.map-card {
+  @apply bg-header w-auto m-auto p-2 mb-5
+}
+.map-card:hover {
+  @apply bg-primary w-auto m-auto p-2 mb-5
+}
+.map-thumbnail {
+  @apply m-auto
+}

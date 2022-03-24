@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "../../api/axios";
 import CampContext from "../../providers/CampProvider";
+import './MapList.css'
 
 const MapList = () => {
   const { c_id, u_id } = useParams()
@@ -15,11 +16,18 @@ const MapList = () => {
   console.log('hello', maps)
 
   return (
-    <React.Fragment>
+    <div className="map-container">
       {maps.length && maps.map(map => {
-        return <Link to={`maps/${map.id}`}>{ map.name } <img src={ map.background } alt={map.name} /></Link>
+        return (
+          <div className="map-card">
+            <h2>{ map.name }</h2>
+            <Link to={ `maps/${map.id}` }>
+              <img className="map-thumbnail" src={ map.background } alt={ map.name } />
+            </Link>
+          </div>
+        )
       }) }
-    </React.Fragment>
+    </div>
   );
 }
 
