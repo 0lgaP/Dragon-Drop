@@ -121,7 +121,7 @@ const MapDetails = () => {
             {/* Maps Card */}
             {!!!tabStatus.tAssetsFMaps && !!mapsForCampaign.length && mapsForCampaign.map(map => {
               return <Link to={ `${map.id}` } onClick={ () => setState(prev => {
-                return { ...prev, mapId: map.id, data: map.id === state.mapId ? { ...prev.data } : { ...prev.data, Images: {}, NPCs: {}, StoryCards: {}}}
+                return { ...prev, mapId: map.id, background: map.id === prev.mapId ? prev.background : null, data: map.id === prev.mapId ? { ...prev.data } : { ...prev.data, Images: {}, NPCs: {}, StoryCards: {}}}
               })
               }>{ map.name }</Link>
               
