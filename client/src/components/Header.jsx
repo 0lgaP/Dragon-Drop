@@ -19,7 +19,7 @@ const userAuth = window.localStorage.getItem("user_id")
             <div>
               <img className="m-1 w-20" src="https://i.imgur.com/pMfFYJc.png" alt='dragon drop logo'></img>
             </div>
-            <div className="m-4 font-merriweather">
+            <div className="m-4">
               Dragon Drop
             </div>
           </div>

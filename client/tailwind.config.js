@@ -25,6 +25,9 @@ module.exports = {
       },
       fontFamily: {
         merriweather: ['Merriweather', 'serif'],
+        alegreya: ['Alegreya', 'serif'],
+        cinzel: ['Cinzel', 'serif'],
+        fellEnglish: ['IM Fell English SC', 'serif']
       }
     },
   },
