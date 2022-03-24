@@ -182,9 +182,9 @@ const MapDetails = () => {
                   { state.data.NPCs[key].name }
                   <button onClick={ () => deleteAssetFromMap('NPCs', key) }>DEL</button>
                   <input
-            name="layer"
-            type="number"
-            value={getLayer('NPCs', key)}
+                    name="layer"
+                    type="number"
+                    value={getLayer('NPCs', key)}
                     onChange={e => updateLayer('NPCs', key, e.target.value)}
                   />
                 </p>)
@@ -195,7 +195,13 @@ const MapDetails = () => {
                 return (
                   <p>
                     { state.data.Images[key].name }
-                    <button onClick={() => deleteAssetFromMap('Images', key)}>DEL</button>
+                    <button onClick={ () => deleteAssetFromMap('Images', key) }>DEL</button>
+                    <input
+                      name="layer"
+                      type="number"
+                      value={getLayer('Images', key)}
+                      onChange={e => updateLayer('Images', key, e.target.value)}
+                    />
                   </p>
                 )
               })
@@ -218,7 +224,6 @@ const MapDetails = () => {
                     objectFit: 'contain'
                   } }>NPC - { campaignAssets.NPCs[id].name }</h1>
                     <h3>Is alive?: { campaignAssets.NPCs[id].alive.toString() }</h3>
-                    <p>
                       <ol>
                         <li>
                           { campaignAssets.NPCs[id].bio }
@@ -227,7 +232,6 @@ const MapDetails = () => {
                           { campaignAssets.NPCs[id].details }
                         </li>
                       </ol>
-                    </p>
                     <button onClick={() => addAssetToMap(id, 'npc')}>Add</button>
                   </div>                  
                 )
