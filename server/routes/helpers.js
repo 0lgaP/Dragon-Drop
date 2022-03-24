@@ -132,11 +132,24 @@ module.exports = function (db) {
       });
   }
 
+  function getTypeId(type) {
+    let char = type[0].toLowerCase();
+    switch (char) {
+      case "n":
+        return "2eb2339a-0adf-4cc4-bc09-6e27d43f15b4"; //NPC
+      case "i":
+        return "ced32085-6daf-464f-b341-daf3624999cf"; //IMAGE
+      case "s":
+        return "fa8dbb44-f356-45ae-9b57-4c07c95c56f0"; //Story_card
+    }
+  }
+
   return {
     tryReturnJson,
     tryDeleteEntity,
     checkRights,
     checkIfOwner,
     checkIfUserExists,
+    getTypeId,
   };
 };

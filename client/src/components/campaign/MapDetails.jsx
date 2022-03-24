@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from 'react-router-dom';
 import Map from "../../components/map";
+import dataHelpers from "../../hooks/dataHelpers";
 import useCampaignAssets from "../../hooks/useCampaignAssets";
 import useMapData from "../../hooks/useMapData";
 import './MapDetails.css'
@@ -22,6 +23,14 @@ const MapDetails = () => {
     tStoryFNotes: true,
     tAssetsFMaps: false
   })
+
+  function addAssetToMap(asset_id, type) {
+    // state.mapId
+    axios.post(`/users/0/campaigns/0/maps/${state.mapId}/assets`, { asset_id, type }).then(res => {
+      const test = dataHelpers().convertArrayToObject([res.data], 'id')
+      console.log('added to map', test)
+    })
+  }
 
   useEffect(() => {
     axios.get(`/users/${urlParams.u_id}/campaigns/${urlParams.c_id}/maps`).then(result => setMapsForCampaign(result.data));
@@ -149,7 +158,7 @@ const MapDetails = () => {
                         </li>
                       </ol>
                     </p>
-                    <button onClick={() => console.log(state.mapId, campaignAssets.NPCs[id])}>Add</button>
+                    <button onClick={() => addAssetToMap(id, 'npc')}>Add</button>
                   </div>                  
                 )
               })
@@ -166,7 +175,7 @@ const MapDetails = () => {
                   } }>
                     <h3>IMG - { campaignAssets.Images[id].name }</h3>
                     {/* <h3>Is alive?: { campaignAssets.Images[id].alive.toString() }</h3> */}
-                    <button onClick={() => console.log(state.mapId, campaignAssets.Images[id])}>Add</button>
+                    <button onClick={() => addAssetToMap(id, 'img')}>Add</button>
                   </div>                  
                 )
               })
