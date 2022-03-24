@@ -25,6 +25,7 @@ module.exports = (router, db) => {
           `, [map_id, data.rows[0].id, 'fa8dbb44-f356-45ae-9b57-4c07c95c56f0' ])
             .then(() => {
               console.log("POST SUCCESSFUL")
+              res.status(200)
             })
       })
       .catch((err) => {
