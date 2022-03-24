@@ -17,11 +17,17 @@ const NPCList = (props) => {
   useEffect(() => {
     axios.get(`http://localhost:8082${address}`)
     .then((res) => {
+<<<<<<< HEAD
       // console.log("DATAAAAA", res.data)
       setNPCs(res.data)
     })
   }, [])
 // console.log(`npcs that were set: `, npcs)
+=======
+      setNPCs(res.data)
+    })
+  }, [])
+>>>>>>> b6a82a665f5deff7cc95a140c0cd0109ec8596e4
   const list = npcs.map((character) => {
     // console.log(`npc id from map func`, character.id)
       return (

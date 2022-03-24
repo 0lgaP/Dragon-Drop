@@ -20,7 +20,10 @@ const CampaignList = () => {
   useEffect(() => {
     axios.get(`${address}`)
     .then((res) => {
+<<<<<<< HEAD
       // console.log("Capania Data", res.data)
+=======
+>>>>>>> b6a82a665f5deff7cc95a140c0cd0109ec8596e4
       setCampaigns(res.data)
     })
   }, [])

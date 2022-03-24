@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
   import axios from "../../../api/axios";
-  import CampContext, { CampProvider } from "../../../providers/CampProvider";
-  import AuthContext, { AuthProvider } from "../../../providers/AuthProvider";
+  import CampContext from "../../../providers/CampProvider";
+  import AuthContext from "../../../providers/AuthProvider";
 
 export default function DropDownListMap(props) {
-  const [map, setMap] = useState([])
+  const [maps, setMaps] = useState([])
   const { auth } = useContext(AuthContext);
-  const { campaign} = useContext(CampContext);
+  const { campaign } = useContext(CampContext);
 
   const u_id = auth.user_id
-  const c_id = campaign
+  const c_id = campaign()
 
   const address = `/users/${u_id}/campaigns/${c_id}`
 
@@ -17,8 +17,7 @@ export default function DropDownListMap(props) {
   useEffect(() => {
     axios.get(`${address}/maps`)
     .then((res) => {
-      console.log("Dat map", res.data)
-      setMap(res.data)
+      setMaps(res.data)
 
     })
   }, [])
@@ -27,7 +26,8 @@ export default function DropDownListMap(props) {
     <select className="card__dropdown" 
     onChange={props.onChange}
     >
-      {map.map(map => <option key={map.id} value={map.name}>{map.name}</option>)}
+      <option value="Set Map">Set Map</option>
+      {maps.map(map => <option key={map.id} value={map.id}>{map.name}</option>)}
     </select>
   )
 }
