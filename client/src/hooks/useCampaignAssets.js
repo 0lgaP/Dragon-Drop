@@ -4,7 +4,7 @@ import CampContext from "../providers/CampProvider";
 import dataHelpers from "./dataHelpers";
 
 function useCampaignAssets(campaignId, userId = 0) {
-  const { campaign, setCampaign, rawDawgCampaign } = useContext(CampContext);
+  const { campaign, setCampaign, campaign_id } = useContext(CampContext);
   const [campaignAssets, setCampaignAssets] = useState({
     campaignId: campaignId ? campaignId : campaign(),
     NPCs: {},
@@ -26,7 +26,7 @@ function useCampaignAssets(campaignId, userId = 0) {
           NPCs: dataHelpers().convertArrayToObject(res.data.NPCs, "id"),
         }));
       });
-  }, [campaignAssets.campaignId, rawDawgCampaign]);
+  }, [campaignAssets.campaignId, campaign_id]);
 
   return { campaignAssets, setCampaignAssets };
 }
