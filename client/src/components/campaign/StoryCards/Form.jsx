@@ -49,17 +49,14 @@ function Form() {
     setStory({...story, map_id: '', npc_id: '', text: ''})
   }
 
-
-  console.log("STORY", story)
+  // console.log("STORY", story)
   const createStory = (event) => {
     event.preventDefault()
       axios.post(`${address}`, story)
       .then(() => {
-        console.log("IN THEN",story)
         setStory({...story, map_id: '', npc_id: '', text: ''})
-
       })
-      .catch((err) => console.log("FISHY BIZ",err))
+      .catch((err) => console.log("Error form Form Component", err))
   }
 
   return (
