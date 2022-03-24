@@ -27,7 +27,8 @@ export const AssetTile = ({
   layerInfo,
   scale,
   urlParams,
-  self
+  self,
+  deleteMe
 }) => {
   const [loc, setLoc] = useState({
     top: top * (mapSize.offsetHeight / mapSize.absoluteHeight),
