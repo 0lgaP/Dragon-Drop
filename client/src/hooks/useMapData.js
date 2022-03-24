@@ -2,28 +2,24 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 function useMapData(mapId, campaignId, userId) {
+  const [tick, setTock] = useState(false);
+
   const [state, setState] = useState({
     userId,
     campaignId,
     mapId,
     name: "",
     data: [],
-    // players: [],
-    // maps: [],
-    // npcs: [],
-    // story: null,
-    // storycards: [],
   });
 
   useEffect(() => {
     // CHANGE TO OUR DATABASE QUERIES:
+    console.log("useEffects", state.mapId);
     Promise.all([
       axios.get(`/users/${userId}/campaigns/${campaignId}/maps/${state.mapId}`),
       axios.get(
-        `/users/${userId}/campaigns/${campaignId}/maps/${mapId}/assets`
+        `/users/${userId}/campaigns/${campaignId}/maps/${state.mapId}/assets`
       ),
-      // axios.get(`/api/appointments`),
-      // axios.get(`/api/interviewers`)
     ]).then((all) => {
       setState((prev) => ({
         ...prev,
@@ -32,9 +28,10 @@ function useMapData(mapId, campaignId, userId) {
         data: all[1].data,
       }));
     });
-  }, []);
+  }, [tick, state.mapId]);
+  console.log("UsemapData", state.data);
 
-  return { state, setState };
+  return { state, setState, setTock };
 }
 
 export default useMapData;

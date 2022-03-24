@@ -14,14 +14,14 @@ import './MapDetails.css'
 const MapDetails = () => {
   const params = useParams();
   const [urlParams, setUrlParams] = useState({ ...params });
-  const { state, setState } = useMapData(urlParams.m_id, urlParams.c_id, urlParams.u_id)
+  const { state, setState, setTock} = useMapData(urlParams.m_id, urlParams.c_id, urlParams.u_id)
   const [mapsForCampaign, setMapsForCampaign] = useState([]);
   const [tabStatus, setTabStatus] = useState({
     tStoryFNotes: true,
     tAssetsFMaps: false
   })
 
-  console.log('MapData',state)
+  console.log('MapData',state.data)
 
   useEffect(() => {
     axios.get(`/users/${urlParams.u_id}/campaigns/${urlParams.c_id}/maps`).then(result => setMapsForCampaign(result.data));
@@ -74,7 +74,7 @@ const MapDetails = () => {
 </div>
       </div>
       <div className='map'>
-    { Object.keys(state.data).length && <Map mapState={ state } /> }
+        { Object.keys(state.data).length && <Map mapState={ state } setMapState={ setState } /> }
       </div>
       <div className='sidebar'>
         <div className='card'>
@@ -122,7 +122,12 @@ const MapDetails = () => {
 
             {/* Maps Card */}
             {!!!tabStatus.tAssetsFMaps && !!mapsForCampaign.length && mapsForCampaign.map(map => {
-              // return <Link to={ `/users/${urlParams.u_id}/campaigns/${urlParams.c_id}/maps/${map.id}` } onClick={() => window.location.reload()}>{map.name}</Link>
+              // return <Link to={ `${map.id}` } onClick={ () => {
+              //   setState(prev => {
+              //     return {...prev, mapId: map.id}
+              //   })
+              //   setTock(prev => !prev)
+              // } }>{ map.name }</Link>
               
               // I am a horrible person for using react like this
               // Ill fix it later
