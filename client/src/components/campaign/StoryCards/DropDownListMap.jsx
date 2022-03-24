@@ -6,10 +6,10 @@ import React, { useState, useEffect, useContext } from "react";
 export default function DropDownListMap(props) {
   const [maps, setMaps] = useState([])
   const { auth } = useContext(AuthContext);
-  const { campaign} = useContext(CampContext);
+  const { campaign } = useContext(CampContext);
 
   const u_id = auth.user_id
-  const c_id = campaign
+  const c_id = campaign()
 
   const address = `/users/${u_id}/campaigns/${c_id}`
 
@@ -17,7 +17,6 @@ export default function DropDownListMap(props) {
   useEffect(() => {
     axios.get(`${address}/maps`)
     .then((res) => {
-      console.log("Dat map", res.data)
       setMaps(res.data)
 
     })

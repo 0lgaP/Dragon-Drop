@@ -17,7 +17,7 @@ function Form() {
 
   const u_id = auth.user_id
   const c_id = campaign
-  const address = `/users/${u_id}/campaigns/${c_id}`
+  const address = `/users/${u_id}/campaigns/${c_id}/story`
 
   // const [story, setStory] = useState('');
   // const [map, setMap] = useState('');
@@ -47,22 +47,14 @@ function Form() {
     setStory({...story, text: newStoryText})
   }
 
-  // useEffect(() => {
-  //   Promise.all([
-  //     axios.get(`${address}/npcs`),
-  //     axios.get(`${address}/maps`),
-  //     axios.get(`${address}/story`)
-  //   ]).then((all) => {
-  //     console.log("IN THE USEEFFECT IN FORM", all[0].data)
-  //     setStory((prev) => ({
-  //       ...prev,
-  //       npcs: all[0].data,
-  //       maps: all[1].data,
-  //       story: all[2].data,
-  //     }));
-  //   });
-  // }, []);
-
+  const createStory = (event, story) => {
+    event.preventDefault()
+    return Promise.resolve(
+      axios.post(`${address}`, { story })
+    ).then(() => {
+      setStory((prev) => ({...prev, npc_id: '', map_id: '', text: ''}))
+    })
+  }
 
   return (
     <section className="card">
@@ -85,14 +77,14 @@ function Form() {
   </article>
 
 
-  <button className="button confirm">
+  <button className="button confirm" type="submit" onClick={createStory}>
     Submit
   </button>
   <button className="button cancel" >
     Reset
   </button>
   </article>
-  <div>{story.text}</div>
+  {/* <div>{story.text}</div> */}
   </form>
 </section>
 

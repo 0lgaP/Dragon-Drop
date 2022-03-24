@@ -9,7 +9,7 @@ module.exports = function (db) {
   function tryReturnJson(
     res,
     queryString,
-    params,
+    params = [],
     onlyFirst,
     returnJsonToMePlease
   ) {

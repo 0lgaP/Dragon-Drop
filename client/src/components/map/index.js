@@ -1,10 +1,15 @@
 import { MapContainer } from "./MapContainer";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-const Index = ({ mapState }) => {
+const Index = ({ mapState, setMapState, id }) => {
   return (
-    <DndProvider backend={HTML5Backend}>
-      <MapContainer mapState={mapState} />
+    <DndProvider backend={HTML5Backend} id={id + 1}>
+      <MapContainer
+        mapState={mapState}
+        setMapState={setMapState}
+        id={id}
+        key={id}
+      />
     </DndProvider>
   );
 };

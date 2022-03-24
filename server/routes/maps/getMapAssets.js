@@ -30,6 +30,12 @@ module.exports = (router, db) => {
         JOIN story_cards sc on ma.asset_id = sc.id
       WHERE ma.map_id = $1 AND at.name = $2;
       `;
+    const queryPlayersForCampaign = `
+      SELECT u.email, u.id
+      FROM users u
+        JOIN players p ON u.id = p.user_id
+      WHERE p.campaign_id = $1;
+      `;
 
     // Returns map for campaign by user
     Promise.all([
@@ -45,12 +51,15 @@ module.exports = (router, db) => {
           false,
           true
         ),
+      helper // Get all Players
+        .tryReturnJson(res, queryPlayersForCampaign, [c_id], false, true),
     ]).then((all) => {
       res
         .json({
           NPCs: all[0],
           Images: all[1],
           StoryCards: all[2],
+          Players: all[3],
         })
         .status(200);
     });
