@@ -6,5 +6,6 @@ CREATE TABLE maps (
   id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
   name VARCHAR(100),
   campaign_id UUID REFERENCES campaigns(id) ON DELETE CASCADE,
-  background TEXT DEFAULT 'https://lh3.googleusercontent.com/AJ5H-eUNPd2wAQlJsADGgNNMgG7BTotJG2Uz2hnibIoiSXH_76CKuZKBrJTAaPJoZNRxQ5Q=s0'
+  background TEXT
+  -- 'https://lh3.googleusercontent.com/AJ5H-eUNPd2wAQlJsADGgNNMgG7BTotJG2Uz2hnibIoiSXH_76CKuZKBrJTAaPJoZNRxQ5Q=s0'
 );
