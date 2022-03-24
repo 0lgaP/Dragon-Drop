@@ -22,6 +22,9 @@ module.exports = {
         primary: "#5085a5",
         secondary: "#8fc1e3",
         textcolor: "#f7f9fb"
+      },
+      fontFamily: {
+        merriweather: ['Merriweather', 'serif'],
       }
     },
   },
