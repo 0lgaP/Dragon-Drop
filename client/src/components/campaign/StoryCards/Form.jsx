@@ -54,6 +54,11 @@ function Form() {
       axios.post(`${address}`, story)
       .then((response) => {
         console.log(response)
+        setStory({
+          npc_id: '',
+          map_id: '',
+          text: ''
+        })
     })
     .catch((err) => console.log(err))
   }
