@@ -1,11 +1,11 @@
 .map-container {
-  @apply flex flex-col content-center w-full
+  @apply grid grid-cols-2 gap-4 mx-4 mt-4
 }
 .map-card {
-  @apply bg-header w-auto m-auto p-2 mb-5
+  @apply bg-header w-auto m-auto p-2 delay-150 transition-all ease-in-out 
 }
 .map-card:hover {
-  @apply bg-primary w-auto m-auto p-2 mb-5
+  @apply bg-primary w-auto m-auto p-2 -translate-y-1 scale-105
 }
 .map-thumbnail {
   @apply m-auto
