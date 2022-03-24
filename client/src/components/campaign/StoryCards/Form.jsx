@@ -50,15 +50,15 @@ function Form() {
   // console.log("STORY", story)
   const createStory = (event) => {
     event.preventDefault()
-    console.log("CLI-Address", address)
       axios.post(`${address}`, story)
       .then((response) => {
-        console.log(response)
+        // console.log(response)
         setStory({
           npc_id: '',
           map_id: '',
           text: ''
         })
+        console.log(story)
     })
     .catch((err) => console.log(err))
   }
