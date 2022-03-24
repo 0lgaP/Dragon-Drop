@@ -10,10 +10,10 @@ import axios from "../../../api/axios";
 export default function StoryCardsListPull() {
   const [story, setStory] = useState('');
   const { auth } = useContext(AuthContext);
-  const { campaign_id } = useContext(CampContext);
+  const { campaign} = useContext(CampContext);
 
   const u_id = auth.user_id
-  const c_id = campaign_id
+  const c_id = campaign()
 
   const address = `/users/${u_id}/campaigns/${c_id}`
 

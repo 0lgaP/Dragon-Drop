@@ -1,6 +1,9 @@
 import React from 'react'
 
 function StoryCardItem(props) {
+
+
+
   return (
     <section className="card">
       <form autoComplete="off">
@@ -8,14 +11,17 @@ function StoryCardItem(props) {
           <button className="button order">
             {props.order}
           </button>
-          <button className="button cancel">
+          <button alt="Edit" className="button cancel">
             Edit
           </button>
-          <button className="button death" >
-          Toggle 💀
+          <button alt="Toggle Alive" className="button death" >
+          💀
           </button>
-          <button className="button confirm">
-            Done
+          <button alt="Story Card Completed" className="button confirm">
+          ✅
+          </button>
+          <button alt="Delete Story Card" className="button death">
+          🗑️
           </button>
             <div className="card__title">
             {props.text}
