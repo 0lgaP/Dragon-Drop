@@ -65,6 +65,17 @@ export const MapContainer = ({ mapState, setMapState }) => {
     [moveAsset]
   );
 
+  async function deleteAssetFromMap(type, id) {
+    console.log('deleteAsset', mapState)
+    setMapState(prev => {
+      const newState = { ...prev }
+      delete newState.data[type][id]
+      return newState;
+    })
+    const result = await axios.delete(`/users/0/campaigns/0/assets/${id}`)
+    console.log('delete asset', result)
+  }
+
   const divRef = useRef();
   const backgroundRef = useRef();
 
@@ -143,6 +154,7 @@ export const MapContainer = ({ mapState, setMapState }) => {
           const { id, left_pos, top_pos, name, img, layer_order, layer_name, scale } = assets.NPCs[key];
           return (
             <AssetTile
+              deleteMe={ () => deleteAssetFromMap('NPCs', id) }
               urlParams={ { u_id, c_id, m_id, asset_id: id } }
               self={assets.NPCs[key]}
               key={key}

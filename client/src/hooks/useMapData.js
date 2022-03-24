@@ -21,6 +21,7 @@ function useMapData(mapId, campaignId, userId) {
         `/users/${userId}/campaigns/${campaignId}/maps/${state.mapId}/assets`
       ),
     ]).then((all) => {
+      console.log("mapdata", all);
       setState((prev) => ({
         ...prev,
         name: all[0].data.name,
