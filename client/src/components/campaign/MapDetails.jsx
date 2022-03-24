@@ -69,7 +69,7 @@ const MapDetails = () => {
 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique tenetur explicabo suscipit quaerat totam doloremque voluptates dolores, atque, eaque ullam officiis dicta beatae labore adipisci? Doloribus atque expedita recusandae sequi.'
 }
           { !tabStatus.tStoryFNotes && 
-'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae ipsum unde maiores accusantium dolore officia architecto natus, esse in, sunt facere, ducimus accusamus distinctio. Rem dolorem iusto ut minima quos.'
+            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae ipsum unde maiores accusantium dolore officia architecto natus, esse in, sunt facere, ducimus accusamus distinctio. Rem dolorem iusto ut minima quos. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non nostrum iure dolore iusto. Ea ab, perferendis optio placeat officia earum cumque molestiae, illo recusandae explicabo cupiditate impedit dolorum magni expedita.'
 }
 </div>
       </div>
@@ -80,11 +80,11 @@ const MapDetails = () => {
         <div className='card'>
           <h3>Players</h3>
           <ul>
-            <li>Player 1</li>
-            <li>Player 2</li>
-            <li>Player 3</li>
-            <li>Player 4</li>
-            <li>Player 5</li>
+            { !!state?.data?.Players?.length &&
+              state.data.Players.map(player => {
+                return <li>{ player.email }</li>
+              })
+            }
           </ul>
         </div>
         <div className='card'>
