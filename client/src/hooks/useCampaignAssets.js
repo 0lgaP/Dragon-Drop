@@ -4,7 +4,6 @@ import CampContext from "../providers/CampProvider";
 import dataHelpers from "./dataHelpers";
 
 function useCampaignAssets(campaignId, userId = 0) {
-  // const [tick, setTock] = useState(false);
   const { campaign, setCampaign, rawDawgCampaign } = useContext(CampContext);
   const [campaignAssets, setCampaignAssets] = useState({
     campaignId: campaignId ? campaignId : campaign(),
