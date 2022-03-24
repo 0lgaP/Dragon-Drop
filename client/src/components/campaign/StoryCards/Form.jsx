@@ -17,12 +17,8 @@ function Form() {
 
   const u_id = auth.user_id
   const c_id = campaign_id
-  console.log("PROVIDER", campaign_id)
+  // console.log("PROVIDER", campaign_id)
   const address = `/users/${u_id}/campaigns/${c_id}/story`
-
-  // const [story, setStory] = useState('');
-  // const [map, setMap] = useState('');
-  // const [npc, setNpc] = useState('');
 
   const [story, setStory] = useState({
     npc_id: '',
@@ -74,9 +70,7 @@ function Form() {
     <DropDownListMap onChange={setMap}/>
     <DropDownListNpc onChange={setNpc}/>
 
-
   </article>
-
 
   <button className="button confirm" type="submit" onClick={createStory}>
     Submit
