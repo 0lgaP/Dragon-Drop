@@ -5,6 +5,8 @@ import Map from "../../components/map";
 import dataHelpers from "../../hooks/dataHelpers";
 import useCampaignAssets from "../../hooks/useCampaignAssets";
 import useMapData from "../../hooks/useMapData";
+import update from "immutability-helper";
+
 import './MapDetails.css'
 
 // Test URL
@@ -27,8 +29,39 @@ const MapDetails = () => {
   function addAssetToMap(asset_id, type) {
     // state.mapId
     axios.post(`/users/0/campaigns/0/maps/${state.mapId}/assets`, { asset_id, type }).then(res => {
-      const test = dataHelpers().convertArrayToObject([res.data], 'id')
-      console.log('added to map', test)
+      const newAsset = dataHelpers().convertArrayToObject([res.data], 'id')
+      const id = Object.keys(newAsset)[0]
+      console.log(newAsset[id])
+
+      let stateType = ''
+
+      switch (newAsset[id].type[0]) {
+        case 'N':
+          stateType = 'NPCs'
+          break;
+        case 'I':
+          stateType = 'Images'
+          break;
+        case 'S':
+          stateType = 'StoryCards'
+          break;
+        default:
+          stateType = 'Images'
+      }
+
+      setState(
+        update(state, {
+          data: {
+            [stateType]: {
+              [id]: {
+                $set: newAsset[id]
+              }
+            }
+          }
+        })
+      );
+
+      // console.log('added to map', test)
     })
   }
 
