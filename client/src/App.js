@@ -14,6 +14,7 @@ import MapDetails from "./components/campaign/MapDetails";
 import Story from "./components/campaign/Story";
 import PlayerList from "./components/campaign/PlayerList";
 import NPCList from "./components/campaign/NPCList";
+import NPCEdit from "./components/campaign/NPCEdit";
 
 function App() {
 
@@ -56,6 +57,9 @@ function App() {
             </Route>
             <Route exact path="/users/:u_id/campaigns/:c_id/npcs">
               <NPCList />
+            </Route>
+            <Route exact path="/users/:u_id/campaigns/:c_id/npcs/edit">
+              <NPCEdit />
             </Route>
           </Switch>
         </div>
