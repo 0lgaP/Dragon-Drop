@@ -1,0 +1,19 @@
+.button {
+  @apply shadow-lg text-sky font-semibold py-1 px-4 rounded shadow m-2
+}
+
+.confirm {
+  @apply bg-confirm
+}
+
+.cancel {
+  @apply bg-cancel
+}
+
+.order {
+  @apply bg-white rounded-full px-2 
+}
+
+.death {
+  @apply bg-bubble-gum
+}

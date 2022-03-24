@@ -9,8 +9,8 @@ const Navbar = (props) => {
   const userAuth = window.localStorage.getItem("user_id")
   const u_id = auth.user_id
   const c_id = campaign
-  // console.log("CAMPAI", campaign)
-  if (userAuth && JSON.parse(userAuth) === auth.user_id) {
+  // console.log("campaign id status in navbar: ", campaign)
+ if (JSON.parse(userAuth) === auth.user_id && campaign) {
     return (
       <nav className="bg-primary h-1/16 p-1 ">
         <div className="links flex flex-row justify-evenly h-1/16 m-6 text-textcolor text-xl">
@@ -21,7 +21,7 @@ const Navbar = (props) => {
         </div>
       </nav>
     );
-  }
+    }
   else {
     return (
       <nav className="bg-primary h-1/16 p-4 text-textcolor text-xl ">

@@ -1,23 +1,21 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import AuthContext from "../providers/AuthProvider";
+import CampContext from '../providers/CampProvider';
 
 
 const LogoutButton = () => {
-  const { auth, setAuth } = useContext(AuthContext)
+  const { setAuth } = useContext(AuthContext)
+  const { setCampaign } = useContext(CampContext);
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  
   const handleSubmit = () => {
-    setAuth({user_id: '', email: ''})
+    setAuth({email: '', user_id: ''})
+    setCampaign(null);
     window.localStorage.clear()
-    // console.log(`auth: `, auth)
-    // console.log(` user_id: `, window.localStorage.getItem("user_id"))
   }
 
   return(
-    <button onClick={handleSubmit}>Logout</button>
+    <Link to="/"><button onClick={handleSubmit}>Logout</button></Link>
   )
 }
 
