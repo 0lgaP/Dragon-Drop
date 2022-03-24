@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from 'react-router-dom';
 import Map from "../../components/map";
 import dataHelpers from "../../hooks/dataHelpers";
@@ -8,6 +8,7 @@ import useMapData from "../../hooks/useMapData";
 import update from "immutability-helper";
 
 import './MapDetails.css'
+import CampContext from "../../providers/CampProvider";
 
 // Test URL
 // http://localhost:3002/users/2c41cf56-a6d7-11ec-b909-0242ac120002/campaigns/8a89386b-de43-4c63-9127-3a78394d4253/maps/927432f7-7839-4a6d-817f-8e1a925b2706
@@ -18,6 +19,7 @@ import './MapDetails.css'
 const MapDetails = () => {
   const params = useParams();
   const [urlParams, setUrlParams] = useState({ ...params });
+  const { campaign } = useContext(CampContext)
   const { state, setState } = useMapData(urlParams.m_id, urlParams.c_id, urlParams.u_id)
   const { campaignAssets } = useCampaignAssets()
   const [mapsForCampaign, setMapsForCampaign] = useState([]);
@@ -74,6 +76,7 @@ const MapDetails = () => {
 
   async function updateLayer(type, id, layer) {
     const newOrder = parseInt(layer);
+    await axios.put(`/users/${urlParams.u_id}/campaigns/${campaign()}/maps/:m_id/assets/${id}/layer`, {layer_order: newOrder, asset_id: id});
       setState(
         update(state, {
           data: {
