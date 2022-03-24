@@ -14,8 +14,8 @@ export default function StoryCardsList() {
 
   const u_id = auth.user_id
   const c_id = campaign
-  console.log("U_ID",u_id)
-  console.log("C_ID", c_id)
+  // console.log("U_ID",u_id)
+  // console.log("C_ID", c_id)
 
   const address = `/users/${u_id}/campaigns/${c_id}`
 
@@ -23,7 +23,7 @@ export default function StoryCardsList() {
   useEffect(() => {
     axios.get(`${address}/story`)
     .then((res) => {
-      console.log("Dat Story", res.data)
+      // console.log("Dat Story", res.data)
       setStory(res.data)
 
     })

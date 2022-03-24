@@ -1,24 +1,68 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import DropDownListMap from "./DropDownListMap";
 import DropDownListNpc from "./DropDownListNpc";
 import './Button.css';
 import './Card.css';
+import AuthContext from "../../../providers/AuthProvider";
+import CampContext from "../../../providers/CampProvider";
+import axios from "../../../api/axios";
+
+
+
 
 
 function Form() {
-  const [story, setStory] = useState('');
-  const [map, setMap] = useState('');
-  const [npc, setNpc] = useState('');
+  const { auth } = useContext(AuthContext);
+  const { campaign } = useContext(CampContext);
 
-  const onNpcSelect = (e) => {
+  const u_id = auth.user_id
+  const c_id = campaign
+  const address = `/users/${u_id}/campaigns/${c_id}`
+
+  // const [story, setStory] = useState('');
+  // const [map, setMap] = useState('');
+  // const [npc, setNpc] = useState('');
+
+  const [story, setStory] = useState({
+    npc_id: '',
+    map_id: '',
+    text: ''
+  })
+
+
+  const setNpc = (e) => {
     const selectedNpc = e.target.value;
-    setNpc(selectedNpc);
+    console.log(selectedNpc)
+    setStory({...story, npc_id: selectedNpc})
   }
 
-  const onMapSelect = (e) => {
+  const setMap = (e) => {
     const selectedMap = e.target.value;
-    setMap(selectedMap);
+    console.log(selectedMap)
+    setStory({...story, map_id: selectedMap})
   }
+
+  const setStoryText = (e) => {
+    const newStoryText = e.target.value;
+    setStory({...story, text: newStoryText})
+  }
+
+  // useEffect(() => {
+  //   Promise.all([
+  //     axios.get(`${address}/npcs`),
+  //     axios.get(`${address}/maps`),
+  //     axios.get(`${address}/story`)
+  //   ]).then((all) => {
+  //     console.log("IN THE USEEFFECT IN FORM", all[0].data)
+  //     setStory((prev) => ({
+  //       ...prev,
+  //       npcs: all[0].data,
+  //       maps: all[1].data,
+  //       story: all[2].data,
+  //     }));
+  //   });
+  // }, []);
+
 
   return (
     <section className="card">
@@ -29,13 +73,13 @@ function Form() {
     </label>
     < textarea 
     className="card__text-area"
-    value={story}
-    onChange={(e)=>setStory(e.target.value)}
+    value={story.text}
+    onChange={setStoryText}
     />
   <article className="card__container">
 
-    <DropDownListMap onChange={onMapSelect}/>
-    <DropDownListNpc onChange={onNpcSelect}/>
+    <DropDownListMap onChange={setMap}/>
+    <DropDownListNpc onChange={setNpc}/>
 
 
   </article>
@@ -48,9 +92,7 @@ function Form() {
     Reset
   </button>
   </article>
-  <p>{story}</p>
-  <p>{map}</p>
-  <p>{npc}</p>
+  <div>{story.text}</div>
   </form>
 </section>
 

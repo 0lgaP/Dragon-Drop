@@ -2,13 +2,12 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function useApplicationData() {
+
   const [state, setState] = useState({
-    campaign: null,
     campaigns: [],
     players: [],
     maps: [],
     npcs: [],
-    story: null,
     storycards: []
   })
 
