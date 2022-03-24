@@ -9,7 +9,7 @@ function useMapData(mapId, campaignId, userId) {
     campaignId,
     mapId,
     name: "",
-    data: [],
+    data: {},
   });
 
   useEffect(() => {
