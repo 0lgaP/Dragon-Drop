@@ -13,7 +13,7 @@ export default function StoryCardsListPull() {
   const { campaign} = useContext(CampContext);
 
   const u_id = auth.user_id
-  const c_id = campaign
+  const c_id = campaign()
   console.log("U_ID",u_id)
   console.log("C_ID", c_id)
 

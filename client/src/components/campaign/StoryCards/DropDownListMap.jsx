@@ -6,10 +6,10 @@ import React, { useState, useEffect, useContext } from "react";
 export default function DropDownListMap(props) {
   const [map, setMap] = useState([])
   const { auth } = useContext(AuthContext);
-  const { campaign} = useContext(CampContext);
+  const { campaign } = useContext(CampContext);
 
   const u_id = auth.user_id
-  const c_id = campaign
+  const c_id = campaign()
 
   const address = `/users/${u_id}/campaigns/${c_id}`
 

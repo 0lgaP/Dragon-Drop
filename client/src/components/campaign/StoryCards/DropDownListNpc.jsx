@@ -7,10 +7,10 @@ import AuthContext, { AuthProvider } from "../../../providers/AuthProvider";
 export default function DropDownListNpc(props) {
   const [npc, setNpc] = useState([])
   const { auth } = useContext(AuthContext);
-  const { campaign} = useContext(CampContext);
+  const { campaign } = useContext(CampContext);
 
   const u_id = auth.user_id
-  const c_id = campaign
+  const c_id = campaign()
 
   const address = `/users/${u_id}/campaigns/${c_id}`
 

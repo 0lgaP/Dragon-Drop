@@ -1,18 +1,34 @@
-import {createContext, useState, useEffect } from 'react';
-
+import { createContext, useState, useEffect } from "react";
 
 const CampContext = createContext({});
 
 export const CampProvider = (props) => {
+  const [stateCampaign, setStateCampaign] = useState("");
 
-  const [campaign, setCampaign] = useState('');
+  useEffect(() => {
+    // console.log("campProv", localVal);
+    // console.log(!!!campaign && !!localVal);
+  }, []);
 
+  function getCampaign() {
+    const localVal = window.localStorage.getItem("campaign_id");
+    if (!!!stateCampaign && !!localVal) {
+      setStateCampaign(localVal);
+      return localVal;
+    }
+    return stateCampaign;
+  }
+
+  function setCampaign(campaign_id) {
+    window.localStorage.setItem("campaign_id", campaign_id);
+    setStateCampaign(campaign_id);
+  }
 
   return (
-    <CampContext.Provider value={{campaign, setCampaign}}>
+    <CampContext.Provider value={{ campaign: getCampaign, setCampaign }}>
       {props.children}
     </CampContext.Provider>
-  )
-}
+  );
+};
 
 export default CampContext;

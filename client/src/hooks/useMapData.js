@@ -28,7 +28,7 @@ function useMapData(mapId, campaignId, userId) {
         data: all[1].data,
       }));
     });
-  }, [tick, state.mapId]);
+  }, [state.mapId]);
   console.log("UsemapData", state.data);
 
   return { state, setState, setTock };
