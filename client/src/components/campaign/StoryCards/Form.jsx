@@ -28,7 +28,7 @@ function Form() {
 
   const setNpc = (e) => {
     const selectedNpc = e.target.value;
-    console.log(selectedNpc)
+    console.log("INSIDE SET NPC", selectedNpc)
     setStory({...story, npc_id: selectedNpc})
   }
 
@@ -55,7 +55,9 @@ function Form() {
     event.preventDefault()
       axios.post(`${address}`, story)
       .then(() => {
-        console.log(story)
+        console.log("IN THEN",story)
+        setStory({...story, map_id: '', npc_id: '', text: ''})
+
       })
       .catch((err) => console.log("FISHY BIZ",err))
   }
@@ -74,8 +76,8 @@ function Form() {
         />
       <article className="card__container">
 
-        <DropDownListMap onChange={setMap}/>
-        <DropDownListNpc onChange={setNpc}/>
+        <DropDownListMap onChange={setMap} value={story.map_id}/>
+        <DropDownListNpc onChange={setNpc} value={story.npc_id}/>
 
       </article>
 

@@ -27,6 +27,7 @@ export default function DropDownListMap(props) {
   return (
     <select className="card__dropdown" 
     onChange={props.onChange}
+    value={props.value}
     >
       <option value="Set Map">Set Map</option>
       {maps.map(map => <option key={map.id} value={map.id}>{map.name}</option>)}
