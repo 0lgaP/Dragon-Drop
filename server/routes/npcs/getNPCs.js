@@ -7,7 +7,7 @@ module.exports = (router, db) => {
     db.query(`SELECT * FROM npcs WHERE campaign_id = $1;`, [campaignID])
 
     .then((result) => {
-      console.log(`db result: `, result.rows)
+      // console.log(`db result: `, result.rows)
       res.json(result.rows)
     });
 });
