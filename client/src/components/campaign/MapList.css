@@ -1,11 +1,11 @@
 .map-container {
-  @apply grid grid-cols-2 gap-4 mx-4 mt-4
+  @apply grid grid-cols-2 gap-6 mx-20 mt-4 px-10
 }
 .map-card {
-  @apply bg-header w-auto m-auto p-2 delay-150 transition-all ease-in-out 
+  @apply bg-header w-[75%] m-auto p-4 delay-150 transition-all ease-in-out
 }
 .map-card:hover {
-  @apply bg-primary w-auto m-auto p-2 -translate-y-1 scale-105
+  @apply bg-primary m-auto p-2 -translate-y-1 scale-110
 }
 .map-thumbnail {
   @apply m-auto
