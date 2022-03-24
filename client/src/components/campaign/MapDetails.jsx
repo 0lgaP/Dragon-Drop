@@ -72,6 +72,24 @@ const MapDetails = () => {
     await axios.delete(`/users/0/campaigns/0/assets/${id}`)
   }
 
+  async function updateLayer(type, id, layer) {
+    const newOrder = parseInt(layer);
+      setState(
+        update(state, {
+          data: {
+            [type]: {
+              [id]: {
+                $merge: {layer_order: newOrder}
+              }
+            }
+          }
+        })
+      );
+  }
+  function getLayer(type, id) {
+    return state.data[type][id].layer_order;
+  }
+
 
   useEffect(() => {
     axios.get(`/users/${urlParams.u_id}/campaigns/${urlParams.c_id}/maps`).then(result => setMapsForCampaign(result.data));
@@ -159,7 +177,13 @@ const MapDetails = () => {
               return (
                 <p>
                   { state.data.NPCs[key].name }
-                  <button onClick={() => deleteAssetFromMap('NPCs', key)}>DEL</button>
+                  <button onClick={ () => deleteAssetFromMap('NPCs', key) }>DEL</button>
+                  <input
+            name="layer"
+            type="number"
+            value={getLayer('NPCs', key)}
+                    onChange={e => updateLayer('NPCs', key, e.target.value)}
+                  />
                 </p>)
               })
             }
