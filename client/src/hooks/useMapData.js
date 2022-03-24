@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 function useMapData(mapId, campaignId, userId) {
-  const [tick, setTock] = useState(false);
+  // const [tick, setTock] = useState(false);
 
   const [state, setState] = useState({
     userId,
@@ -14,7 +14,6 @@ function useMapData(mapId, campaignId, userId) {
 
   useEffect(() => {
     // CHANGE TO OUR DATABASE QUERIES:
-    console.log("useEffects", state.mapId);
     Promise.all([
       axios.get(`/users/${userId}/campaigns/${campaignId}/maps/${state.mapId}`),
       axios.get(
@@ -25,13 +24,27 @@ function useMapData(mapId, campaignId, userId) {
         ...prev,
         name: all[0].data.name,
         background: all[0].data.background,
-        data: all[1].data,
+        data: {
+          Images: convertArrayToObject(all[1].data.Images, "id"),
+          NPCs: convertArrayToObject(all[1].data.NPCs, "id"),
+          StoryCards: convertArrayToObject(all[1].data.StoryCards, "id"),
+          Players: all[1].data.Players,
+        },
       }));
     });
   }, [state.mapId]);
-  console.log("UsemapData", state.data);
 
-  return { state, setState, setTock };
+  function convertArrayToObject(array, key) {
+    const initialValue = {};
+    return array.reduce((obj, item) => {
+      return {
+        ...obj,
+        [item[key]]: item,
+      };
+    }, initialValue);
+  }
+
+  return { state, setState };
 }
 
 export default useMapData;

@@ -11,10 +11,8 @@ const MapList = () => {
   const [maps, setMaps] = useState([])
 
   useEffect(() => {
-    console.log('test', campaign())
     axios.get(`/users/0/campaigns/${campaign()}/maps`).then(res => setMaps(res.data))
   }, [])
-  console.log('hello', maps)
 
   return (
     <div className="map-container">

@@ -21,8 +21,6 @@ const MapDetails = () => {
     tAssetsFMaps: false
   })
 
-  console.log('MapData',state.data)
-
   useEffect(() => {
     axios.get(`/users/${urlParams.u_id}/campaigns/${urlParams.c_id}/maps`).then(result => setMapsForCampaign(result.data));
   }, [])
@@ -38,7 +36,6 @@ const MapDetails = () => {
           <h3>Story Cards</h3>
             <ul>
               { state.data.StoryCards.map(card => {
-                console.log(card)
                 return <li>
                   <h3>
                   { card.order }
@@ -74,7 +71,7 @@ const MapDetails = () => {
 </div>
       </div>
       <div className='map'>
-        { Object.keys(state.data).length && <Map mapState={ state } setMapState={ setState } /> }
+        { Object.keys(state.data).length && <Map mapState={ state } setMapState={ setState } id={ state.mapId } key={ state.mapId } /> }
       </div>
       <div className='sidebar'>
         <div className='card'>
@@ -104,17 +101,18 @@ const MapDetails = () => {
             {/* Assets Card */ }
             
             { !!tabStatus.tAssetsFMaps &&
-              state.data.NPCs.map(npc => {
+            Object.keys(state.data.NPCs).map((key) => {
+              return (
                 <p>
-                  {npc.name}
-                </p>
+                  {state.data.NPCs[key].name}
+                </p>)
               })
             }
             { !!tabStatus.tAssetsFMaps &&
-              state.data.Images.map(image => {
+            Object.keys(state.data.Images).map((key) => {
                 return (
                   <p>
-                    {image.name}
+                    {state.data.Images[key].name}
                   </p>
                 )
               })
@@ -122,17 +120,11 @@ const MapDetails = () => {
 
             {/* Maps Card */}
             {!!!tabStatus.tAssetsFMaps && !!mapsForCampaign.length && mapsForCampaign.map(map => {
-              // return <Link to={ `${map.id}` } onClick={ () => {
-              //   setState(prev => {
-              //     return {...prev, mapId: map.id}
-              //   })
-              //   setTock(prev => !prev)
-              // } }>{ map.name }</Link>
+              return <Link to={ `${map.id}` } onClick={ () => setState(prev => {
+                  return {...prev, mapId: map.id, data: map.id === state.mapId ? prev.data : []}
+              })
+              }>{ map.name }</Link>
               
-              // I am a horrible person for using react like this
-              // Ill fix it later
-              // -Josh
-              return <a className="card" onClick={() => {window.location.href=`/users/${urlParams.u_id}/campaigns/${urlParams.c_id}/maps/${map.id}`}}>{map.name}</a>
             })
             }
           </div>

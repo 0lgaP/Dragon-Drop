@@ -17,7 +17,6 @@ export default function DropDownListNpc(props) {
   useEffect(() => {
     axios.get(`${address}/npcs`)
     .then((res) => {
-      console.log("Dat npc", res.data)
       setNpc(res.data)
 
     })

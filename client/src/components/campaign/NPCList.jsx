@@ -15,11 +15,9 @@ const NPCList = (props) => {
   useEffect(() => {
     axios.get(`http://localhost:8082${address}`)
     .then((res) => {
-      console.log("DATAAAAA", res.data)
       setNPCs(res.data)
     })
   }, [])
-console.log(`npcs that were set: `, npcs)
   const list = npcs.map((character) => {
       return (
       <NPCListItem key={character.id}  name={character.name} bio={character.bio} details={character.details} alive={character.alive} />

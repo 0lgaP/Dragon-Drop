@@ -17,7 +17,6 @@ export default function DropDownListMap(props) {
   useEffect(() => {
     axios.get(`${address}/maps`)
     .then((res) => {
-      console.log("Dat map", res.data)
       setMap(res.data)
 
     })

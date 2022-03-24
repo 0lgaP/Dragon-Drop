@@ -21,14 +21,13 @@ const imageStyles = {
   maxHeight: "100%",
   width: "100%"
 };
-export const MapContainer = ({ mapState }) => {
-  const [assets, setAssets] = useState(mapState.data);
+export const MapContainer = ({ mapState, setMapState }) => {
+  // const [assets, setAssets] = useState(mapState.data);
+  const assets = mapState.data;
+  const setAssets = setMapState;
   const { c_id, m_id } = useParams();
   const { auth } = useContext(AuthContext);
   const u_id = auth.user_id
-
-
-  console.log(assets);
   
   const moveAsset = useCallback(
     (id, left, top, mapSize, type) => {
@@ -38,11 +37,15 @@ export const MapContainer = ({ mapState }) => {
       axios.put(`/users/${u_id}/campaigns/${c_id}/maps/${m_id}/assets/${assets[assetType][id].id}`, { left_pos: (left / (mapSize.offsetWidth / mapSize.absoluteWidth)), top_pos: (top / (mapSize.offsetHeight / mapSize.absoluteHeight)) });
 
       setAssets(
-        update(assets, {[assetType]: {
-          [id]: {
-            $merge: { left_pos: left, top_pos: top }
+        update(mapState, {
+          data: {
+            [assetType]: {
+              [id]: {
+                $merge: { left_pos: left, top_pos: top }
+              }
+            }
           }
-        }})
+        })
       );
     },
     [assets, setAssets]
@@ -118,8 +121,8 @@ export const MapContainer = ({ mapState }) => {
             <AssetTile
               urlParams={ { u_id, c_id, m_id, asset_id: id } }
               self={assets.Images[key]}
-              key={key}
-              id={key}
+              key={id}
+              id={id}
               left={left_pos}
               top={top_pos}
               altThing={name}
