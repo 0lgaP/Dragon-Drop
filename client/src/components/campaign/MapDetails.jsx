@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from 'react-router-dom';
 import Map from "../../components/map";
+import useCampaignAssets from "../../hooks/useCampaignAssets";
 import useMapData from "../../hooks/useMapData";
 import './MapDetails.css'
 
@@ -14,7 +15,8 @@ import './MapDetails.css'
 const MapDetails = () => {
   const params = useParams();
   const [urlParams, setUrlParams] = useState({ ...params });
-  const { state, setState, setTock} = useMapData(urlParams.m_id, urlParams.c_id, urlParams.u_id)
+  const { state, setState, setTock } = useMapData(urlParams.m_id, urlParams.c_id, urlParams.u_id)
+  const { campaignAssets } = useCampaignAssets()
   const [mapsForCampaign, setMapsForCampaign] = useState([]);
   const [tabStatus, setTabStatus] = useState({
     tStoryFNotes: true,
@@ -63,7 +65,7 @@ const MapDetails = () => {
             }}>Notes</h3>
           </div>
           { tabStatus.tStoryFNotes && 
-'Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique tenetur explicabo suscipit quaerat totam doloremque voluptates dolores, atque, eaque ullam officiis dicta beatae labore adipisci? Doloribus atque expedita recusandae sequi.'
+'Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique tenetur explicabo suscipit quaerat totam doloremque voluptates dolores, atque, eaque ullam officiis dicta beatae labore adipisci? Doloribus atque expedita recusandae sequi.' + JSON.stringify(campaignAssets)
 }
           { !tabStatus.tStoryFNotes && 
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae ipsum unde maiores accusantium dolore officia architecto natus, esse in, sunt facere, ducimus accusamus distinctio. Rem dolorem iusto ut minima quos. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non nostrum iure dolore iusto. Ea ab, perferendis optio placeat officia earum cumque molestiae, illo recusandae explicabo cupiditate impedit dolorum magni expedita.'

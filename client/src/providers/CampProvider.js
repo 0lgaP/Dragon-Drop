@@ -25,7 +25,13 @@ export const CampProvider = (props) => {
   }
 
   return (
-    <CampContext.Provider value={{ campaign: getCampaign, setCampaign }}>
+    <CampContext.Provider
+      value={{
+        campaign: getCampaign,
+        setCampaign,
+        rawDawgCampaign: stateCampaign,
+      }}
+    >
       {props.children}
     </CampContext.Provider>
   );

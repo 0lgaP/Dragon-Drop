@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import dataHelpers from "./dataHelpers";
 
 function useMapData(mapId, campaignId, userId) {
   // const [tick, setTock] = useState(false);
@@ -25,24 +26,17 @@ function useMapData(mapId, campaignId, userId) {
         name: all[0].data.name,
         background: all[0].data.background,
         data: {
-          Images: convertArrayToObject(all[1].data.Images, "id"),
-          NPCs: convertArrayToObject(all[1].data.NPCs, "id"),
-          StoryCards: convertArrayToObject(all[1].data.StoryCards, "id"),
+          Images: dataHelpers().convertArrayToObject(all[1].data.Images, "id"),
+          NPCs: dataHelpers().convertArrayToObject(all[1].data.NPCs, "id"),
+          StoryCards: dataHelpers().convertArrayToObject(
+            all[1].data.StoryCards,
+            "id"
+          ),
           Players: all[1].data.Players,
         },
       }));
     });
   }, [state.mapId]);
-
-  function convertArrayToObject(array, key) {
-    const initialValue = {};
-    return array.reduce((obj, item) => {
-      return {
-        ...obj,
-        [item[key]]: item,
-      };
-    }, initialValue);
-  }
 
   return { state, setState };
 }
