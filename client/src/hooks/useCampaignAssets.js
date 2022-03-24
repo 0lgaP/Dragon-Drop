@@ -20,7 +20,6 @@ function useCampaignAssets(campaignId, userId = 0) {
         }/assets`
       )
       .then((res) => {
-        console.log("ca", res);
         setCampaignAssets((prev) => ({
           ...prev,
           Images: dataHelpers().convertArrayToObject(res.data.Images, "id"),

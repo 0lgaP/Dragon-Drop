@@ -129,7 +129,7 @@ export const AssetTile = ({
         height={size.height + "px"}
         width={size.width + "px"}
       />
-      <button onMouseDown={deleteMe} style={{ ...style, bottom: 0, right: 0, backgroundColor: 'grey' }}>
+      <button onMouseDown={handler} style={{ ...style, bottom: 0, right: 0, backgroundColor: 'grey' }}>
         ||
       </button>
     </div>
