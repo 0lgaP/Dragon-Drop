@@ -104,11 +104,11 @@ const MapDetails = () => {
         <h2>
           { state.name }
         </h2>
-        { !!state?.data?.StoryCards?.length &&
+        { !!Object.keys(state?.data?.StoryCards)?.length &&
           <div className='card'>
           <h3>Story Cards</h3>
             <ul>
-              { state.data.StoryCards.map(card => {
+              { dataHelpers().convertObjectToArray(state.data.StoryCards).map(card => {
                 return <li>
                   <h3>
                   { card.order }
