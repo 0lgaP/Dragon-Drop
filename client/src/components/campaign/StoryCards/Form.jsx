@@ -79,7 +79,6 @@ function Form({allStories, setStories, text, id, setView}) {
     setStories(prev => {
       return {...prev, [card.id]: {...card}}
     })
-    setView(CREATE)
   })
   .catch((err) => console.log("Error From FORM's EDIT Client Call"))
 }
