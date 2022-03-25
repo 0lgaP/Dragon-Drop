@@ -99,10 +99,7 @@ const MapDetails = () => {
     axios.get(`/users/${urlParams.u_id}/campaigns/${urlParams.c_id}/maps`).then(result => setMapsForCampaign(result.data));
   }, [])
 
-  const storyCards = state.data.StoryCards ? dataHelpers().convertObjectToArray(state.data.StoryCards).map(card => {
-    return <StoryCardItem { ...card } text={ card.content } />
-    // return <h1>hi</h1>
-  }) : null
+  const storyCards = state.data.StoryCards ? dataHelpers().convertObjectToArray(state.data.StoryCards).map(card => <StoryCardItem { ...card } text={ card.content } /> ) : null
 
   return (
     <container className='mapContainer' id={ urlParams.mapId }>
