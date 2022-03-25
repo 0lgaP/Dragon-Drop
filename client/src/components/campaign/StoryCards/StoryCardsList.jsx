@@ -31,7 +31,9 @@ const onDelete = (event, id) => {
   event.preventDefault()
   axios.delete(`${address}/story/${id}`)
   .then(() => {
-    console.log("DELETED STORY")
+    console.log("ID", id)
+    console.log("DELETED STORY", story)
+
   })
   .catch((err) => console.log("Error From StoryCardList Component", err))
 }

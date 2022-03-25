@@ -7,10 +7,6 @@ import AuthContext from "../../../providers/AuthProvider";
 import CampContext from "../../../providers/CampProvider";
 import axios from "../../../api/axios";
 
-
-
-
-
 function Form() {
   const { auth } = useContext(AuthContext);
   const { campaign } = useContext(CampContext);
