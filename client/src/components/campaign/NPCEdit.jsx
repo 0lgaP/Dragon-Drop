@@ -6,15 +6,16 @@ import CampContext from '../../providers/CampProvider';
 import axios from 'axios';
 
 const NPCList = (props) => {
-  const {auth} = useContext(AuthContext);
+  const { auth } = useContext(AuthContext);
+  const {campaign} = useContext(CampContext);
+  
   const [npcs, setNPCs] = useState([])
   const [npc, setNPC] = useState();
   const [name, setName] = useState()
   const [imageURL, setImageURL] = useState('')
   const [bio, setBio] = useState()
   const [details, setDetails] = useState()
-  const campaignID = window.localStorage.getItem("campaign_id");
-  const address = `/users/${auth.user_id}/campaigns/${campaignID}/npcs`;
+  const address = `/users/${auth.user_id}/campaigns/${campaign()}/npcs`;
   const npcID = window.localStorage.getItem("npc_id");
   const u_id = JSON.parse(window.localStorage.getItem("user_id"));
   const c_id = window.localStorage.getItem("campaign_id");

@@ -6,16 +6,16 @@ import axios from 'axios';
 
 const NPCList = (props) => {
   const {auth} = useContext(AuthContext);
-  // const {campaign_id} = useContext(CampContext);
+  const {campaign_id, campaign} = useContext(CampContext);
   const [npcs, setNPCs] = useState([])
   const [name, setName] = useState('')
   const [imageURL, setImageURL] = useState('')
   const [bio, setBio] = useState('')
   const [details, setDetails] = useState('')
-  const campaignID = window.localStorage.getItem("campaign_id")
+  // const campaignID = campaign()
   // const campaignID = JSON.parse(rawCampaignID)
   // console.log(`cid from local stor`, rawCampaignID);
-  const address = `/users/${auth.user_id}/campaigns/${campaignID}/npcs`;
+  const address = `/users/${auth.user_id}/campaigns/${campaign()}/npcs`;
   // console.log(`address: `, address)
   useEffect(() => {
     axios.get(`http://localhost:8082${address}`)
