@@ -19,12 +19,12 @@ const userAuth = window.localStorage.getItem("user_id")
             <div>
               <img className="m-1 w-20" src="https://i.imgur.com/pMfFYJc.png" alt='dragon drop logo'></img>
             </div>
-            <div className="m-4">
+            <div className="m-4 mt-6 text-3xl">
               Dragon Drop
             </div>
           </div>
-          <div className="header-right flex flex-row m-4 justify-end">
-            <div className="m-4">
+          <div className="header-right flex flex-row m-4 mt-6 justify-end">
+            <div className="m-4 ">
               <Link to={`/users/${u_id}/campaigns`}><h3>Campaigns</h3></Link>
             </div>
             <div className="m-4">

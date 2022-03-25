@@ -21,8 +21,19 @@ module.exports = {
         header: "#31708e",
         primary: "#5085a5",
         secondary: "#8fc1e3",
+<<<<<<< HEAD
         textcolor: "#f7f9fb",
       },
+=======
+        textcolor: "#f7f9fb"
+      },
+      fontFamily: {
+        merriweather: ['Merriweather', 'serif'],
+        alegreya: ['Alegreya', 'serif'],
+        cinzel: ['Cinzel', 'serif'],
+        fellEnglish: ['IM Fell English', 'serif']
+      }
+>>>>>>> a5247fdbe8db7e8ffa426c6453eebba656688bb2
     },
   },
   plugins: [],

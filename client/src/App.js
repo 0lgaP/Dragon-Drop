@@ -20,7 +20,7 @@ function App() {
 
   return (
     <Router>
-      <div className="App">
+      <div className="App font-fellEnglish">
         <Header />
         <Navbar />
         <div className="content">
