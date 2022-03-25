@@ -21,7 +21,7 @@ const NPCList = (props) => {
   
   useEffect(() => {
     // LOAD ALL NPC CARDS
-    axios.get(`http://localhost:8082${address}`)
+    axios.get(`${address}`)
     .then((res) => {
       setNPCs(res.data)
     })
@@ -29,10 +29,10 @@ const NPCList = (props) => {
       console.log(err.message)
     })
     // FETCH SELECTED NPC TO POPULATE FORM
-    axios.get(`http://localhost:8082${address}/${npcID}`)
+    axios.get(`${address}/${npcID}`)
     .then((res) => {
       setName(res.data.name)
-      setImageURL(res.data.imageURL)
+      setImageURL(res.data.img)
       setBio(res.data.bio)
       setDetails(res.data.details)
       setNPC(res.data)
@@ -41,13 +41,13 @@ const NPCList = (props) => {
 
   const list = npcs.map((character) => {
       return (
-      <NPCListItem id={character.id}  image={character.imageURL} name={character.name} bio={character.bio} details={character.details} alive={character.alive} />
+      <NPCListItem id={character.id} image={character.img} name={character.name} bio={character.bio} details={character.details} alive={character.alive} />
       )
   })
 
   const handleSave = ()=> { 
   // UPDATE ENTRY IN DB
-      axios.put(`http://localhost:8082${address}/${npcID}/edit`, { name, bio, details })
+      axios.put(`${address}/${npcID}/edit`, { name, bio, details, imageURL })
       .then((res) => {
         setName('');
         setImageURL('');
