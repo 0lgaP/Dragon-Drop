@@ -10,6 +10,7 @@ const NPCList = (props) => {
   const [npcs, setNPCs] = useState([])
   const [npc, setNPC] = useState();
   const [name, setName] = useState()
+  const [imageURL, setImageURL] = useState('')
   const [bio, setBio] = useState()
   const [details, setDetails] = useState()
   const campaignID = window.localStorage.getItem("campaign_id");
@@ -31,6 +32,7 @@ const NPCList = (props) => {
     axios.get(`http://localhost:8082${address}/${npcID}`)
     .then((res) => {
       setName(res.data.name)
+      setImageURL(res.data.imageURL)
       setBio(res.data.bio)
       setDetails(res.data.details)
       setNPC(res.data)
@@ -39,7 +41,7 @@ const NPCList = (props) => {
 
   const list = npcs.map((character) => {
       return (
-      <NPCListItem id={character.id}  name={character.name} bio={character.bio} details={character.details} alive={character.alive} />
+      <NPCListItem id={character.id}  image={character.imageURL} name={character.name} bio={character.bio} details={character.details} alive={character.alive} />
       )
   })
 
@@ -48,6 +50,7 @@ const NPCList = (props) => {
       axios.put(`http://localhost:8082${address}/${npcID}/edit`, { name, bio, details })
       .then((res) => {
         setName('');
+        setImageURL('');
         setBio('');
         setDetails('');
       })
@@ -58,18 +61,23 @@ const NPCList = (props) => {
   const cancelSubmit = (e) => {
     e.preventDefault();
       setName('');
+      setImageURL('');
       setBio('');
       setDetails('');
   }
 
   return (
-    <section className="flex flex-row ">
-      <div className="bg-primary m-2 p-4">
+    <section className="flex flex-row">
+      <div className="bg-primary p-4 m-6 rounded-xl">
         <h1 className="text-2xl text-textcolor p-2">Edit NPC!</h1>
       <form className="p-2 m-2" onSubmit={handleSave}>
           <label className="">
             <p className="text-textcolor text-lg p-2 m-2">Name</p>
             <input className="border-2 border-secondary rounded-md bg-bkgd mb-4" placeholder={name} type="text" onChange={e => setName(e.target.value)} value={name} />
+          </label>
+          <label className="">
+            <p className="text-textcolor text-lg p-2 m-2">Image URL</p>
+            <input className="border-2 border-secondary rounded-md bg-bkgd mb-4" type="text" onChange={e => setName(e.target.value)} value={imageURL} />
           </label>
           <label>
             <p className="text-textcolor text-lg p-2 m-2">Bio</p>
@@ -85,7 +93,7 @@ const NPCList = (props) => {
           </div>
         </form>
       </div>
-      <div className="npc-list flex flex-row flex-wrap">
+      <div className="npc-list flex flex-row flex-wrap mx-4">
         {list}
       </div>
     </section>
