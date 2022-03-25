@@ -111,24 +111,6 @@ const MapDetails = () => {
           { state.name }
         </h2>
         { storyCards }
-        {/* { !!Object.keys(state?.data?.StoryCards)?.length &&
-          <div className='card'>
-          <h3>Story Cards</h3>
-            <ul>
-              { dataHelpers().convertObjectToArray(state.data.StoryCards).map(card => {
-                return <li>
-                  <h3>
-                  { card.order }
-                  </h3>
-                  <p>
-                  { card.content }
-                  </p>
-                  Comepleted?: { card.completed.toString() }
-                </li>
-              })}
-          </ul>
-          </div>
-        } */}
         <div className='card'>
           <div className="tab-bar">
             <h3 onClick={ () => {
