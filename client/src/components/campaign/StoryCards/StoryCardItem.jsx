@@ -20,7 +20,7 @@ function StoryCardItem(props) {
           <button alt="Story Card Completed" className="button confirm">
           ✅
           </button>
-          <button alt="Delete Story Card" className="button death">
+          <button alt="Delete Story Card" className="button death" onClick={props.onDelete}>
           🗑️
           </button>
             <div className="card__title">

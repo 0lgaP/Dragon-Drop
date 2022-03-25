@@ -12,7 +12,7 @@ export default function StoryCardsList() {
   const { auth } = useContext(AuthContext);
   const { campaign } = useContext(CampContext);
   const c_id = campaign()
-  console.log("STORY CARD LIST", story)
+  // console.log("STORY CARD LIST", story)
   const u_id = auth.user_id
 
   const address = `/users/${u_id}/campaigns/${c_id}`
@@ -27,14 +27,16 @@ export default function StoryCardsList() {
     })
   }, [])
 
-const onDelete = (id) => {
+const onDelete = (event, id) => {
+  event.preventDefault()
   axios.delete(`${address}/story/${id}`)
   .then(() => {
-    setStory({...story})
+    console.log("DELETED STORY")
   })
+  .catch((err) => console.log("Error From StoryCardList Component", err))
 }
 
-const parsedListItem = story && story.map(card => <StoryCardItem key={card.id} text={card.story_card_text} order={card.order_num} />);
+const parsedListItem = story && story.map(card => <StoryCardItem key={card.id} text={card.story_card_text} order={card.order_num} onDelete={(event) => onDelete(event, card.id)}/>);
   return (
   
     <div>
