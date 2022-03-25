@@ -4,7 +4,7 @@ const PlayerList = () => {
 
   return (
     <section>
-      <div className="bg-primary rounded-xl text-textcolor ">
+      <div className="bg-primary rounded-xl text-textcolor m-2">
         <h1 className="text-2xl m-4 p-5">Party Details</h1>
       </div>
       <div>
