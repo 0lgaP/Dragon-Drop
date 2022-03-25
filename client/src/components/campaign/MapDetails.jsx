@@ -99,7 +99,9 @@ const MapDetails = () => {
     axios.get(`/users/${urlParams.u_id}/campaigns/${urlParams.c_id}/maps`).then(result => setMapsForCampaign(result.data));
   }, [])
 
-  const storyCards = state.data.StoryCards ? dataHelpers().convertObjectToArray(state.data.StoryCards).map(card => <StoryCardItem { ...card } text={ card.content } /> ) : null
+  const storyCardsForMap = state.data.StoryCards ? dataHelpers().convertObjectToArray(state.data.StoryCards).map(card => <StoryCardItem { ...card } text={ card.content } />) : null
+  
+  const entireStory = state.data.Story ? state.data.Story.map(card => <StoryCardItem { ...card } text={ card.story_card_text } order={ card.order_num } />) : null;
 
   return (
     <container className='mapContainer' id={ urlParams.mapId }>
@@ -107,7 +109,8 @@ const MapDetails = () => {
         <h2>
           { state.name }
         </h2>
-        { storyCards }
+        {/* Story cards assets for map */}
+        { storyCardsForMap }
         <div className='card'>
           <div className="tab-bar">
             <h3 onClick={ () => {
@@ -121,9 +124,7 @@ const MapDetails = () => {
               })
             }}>Notes</h3>
           </div>
-          { tabStatus.tStoryFNotes && 
-'Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique tenetur explicabo suscipit quaerat totam doloremque voluptates dolores, atque, eaque ullam officiis dicta beatae labore adipisci? Doloribus atque expedita recusandae sequi.'
-}
+          { tabStatus.tStoryFNotes && entireStory }
           { !tabStatus.tStoryFNotes && 
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae ipsum unde maiores accusantium dolore officia architecto natus, esse in, sunt facere, ducimus accusamus distinctio. Rem dolorem iusto ut minima quos. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non nostrum iure dolore iusto. Ea ab, perferendis optio placeat officia earum cumque molestiae, illo recusandae explicabo cupiditate impedit dolorum magni expedita.'
 }

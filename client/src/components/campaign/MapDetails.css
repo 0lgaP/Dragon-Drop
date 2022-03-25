@@ -1,11 +1,13 @@
 .mapContainer {
-  @apply flex flex-row h-full
+  @apply flex flex-row h-full max-h-screen
 }
 .map {
-  @apply w-full
+  /* @apply min-w-min */
+  @apply w-fit mx-auto
 }
 .sidebar {
-  @apply p-5 w-1/4
+  /* @apply p-5 min-w-max overflow-y-auto */
+  @apply p-5 w-[40%] overflow-y-auto
 }
 .card {
   @apply bg-primary mt-4

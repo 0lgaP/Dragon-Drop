@@ -8,18 +8,18 @@ import { useParams } from "react-router-dom";
 import AuthContext from "../../providers/AuthProvider";
 
 const styles = {
-  width: "100%",
+  width: "fit-content",
   height: "100%",
   border: "1px solid black",
-  position: "relative"
+  position: "relative",
+  margin: '0 auto'
 };
 
 const imageStyles = {
   align: "left",
   objectFit: "contain",
   objectPosition: "left top",
-  maxHeight: "100%",
-  width: "100%"
+  maxHeight: "100%"
 };
 export const MapContainer = ({ mapState, setMapState }) => {
   // const [assets, setAssets] = useState(mapState.data);
