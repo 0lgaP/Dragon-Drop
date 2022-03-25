@@ -9,6 +9,9 @@ module.exports = (router, db) => {
     .then((result) => {
       // console.log(`db result: `, result.rows)
       res.json(result.rows)
-    });
+    })
+    .catch((err) => {
+      console.log(err.message)
+    })
 });
 }

@@ -5,13 +5,16 @@
   @apply w-full
 }
 .sidebar {
-  @apply p-5 w-1/6
+  @apply p-5 w-1/4
 }
 .card {
   @apply bg-primary mt-4
 }
 .card-body {
   @apply flex flex-col p-2
+}
+.card-body h1 {
+  @apply text-xl bg-sky-light
 }
 .tab-bar {
   @apply flex flex-row justify-evenly
@@ -24,4 +27,11 @@
 }
 .tab-bar > h3:active {
   @apply bg-primary cursor-pointer 
+}
+
+.asset-card {
+  @apply bg-header m-2
+}
+.asset-card button{
+  @apply bg-secondary m-2 w-1/2
 }
