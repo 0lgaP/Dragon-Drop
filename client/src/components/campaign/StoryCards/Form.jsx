@@ -7,7 +7,7 @@ import AuthContext from "../../../providers/AuthProvider";
 import CampContext from "../../../providers/CampProvider";
 import axios from "../../../api/axios";
 
-function Form() {
+function Form({allStories, setStories}) {
   const { auth } = useContext(AuthContext);
   const { campaign } = useContext(CampContext);
   const u_id = auth.user_id
@@ -49,8 +49,16 @@ function Form() {
   const createStory = (event) => {
     event.preventDefault()
       axios.post(`${address}`, story)
-      .then(() => {
-        setStory({...story, map_id: '', npc_id: '', text: ''})
+      .then((result) => {
+        console.log('Return add Card from DB',result)
+        setStory(prev => {
+          return {...prev, map_id: '', npc_id: '', text: ''}
+        })
+
+        const card = result.data
+        setStories(prev => {
+          return {...prev, [card.id]: {...card} }
+        })
       })
       .catch((err) => console.log("Error form Form Component", err))
   }

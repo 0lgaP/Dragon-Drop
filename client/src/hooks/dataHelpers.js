@@ -8,7 +8,10 @@ function dataHelpers() {
       };
     }, initialValue);
   }
-  return { convertArrayToObject };
+  function convertObjectToArray(object) {
+    return Object.keys(object).map(key => object[key])
+  }
+  return { convertArrayToObject, convertObjectToArray };
 }
 
 export default dataHelpers;

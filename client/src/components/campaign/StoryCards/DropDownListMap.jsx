@@ -7,13 +7,13 @@ import CampContext from "../../../providers/CampProvider";
 export default function DropDownListMap(props) {
   const [maps, setMaps] = useState([])
   const { auth } = useContext(AuthContext);
-  const { campaign_id } = useContext(CampContext);
+  const { campaign } = useContext(CampContext);
   
   const u_id = auth.user_id
-  const c_id = campaign_id
 
 
-  const address = `/users/${u_id}/campaigns/${c_id}`
+
+  const address = `/users/${u_id}/campaigns/${campaign()}`
 
 
   useEffect(() => {
