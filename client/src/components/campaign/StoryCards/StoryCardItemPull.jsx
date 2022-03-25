@@ -1,18 +1,24 @@
 import React from 'react'
 
 function StoryCardItemPull(props) {
+
+
+
   return (
     <section className="card">
       <form autoComplete="off">
         <article className="card__container">
-          <button className="button cancel">
+          <button alt="Edit" className="button cancel">
             Edit
           </button>
-          <button className="button death" >
-          Toggle 💀
+          <button alt="Toggle Alive" className="button death" >
+          💀
           </button>
-          <button className="button confirm">
-            Done
+          <button alt="Story Card Completed" className="button confirm">
+          ✅
+          </button>
+          <button alt="Delete Story Card" className="button death" onClick={props.onDelete}>
+          🗑️
           </button>
             <div className="card__title">
             {props.text}

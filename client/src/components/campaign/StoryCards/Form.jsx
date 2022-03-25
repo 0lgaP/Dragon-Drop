@@ -7,20 +7,23 @@ import AuthContext from "../../../providers/AuthProvider";
 import CampContext from "../../../providers/CampProvider";
 import axios from "../../../api/axios";
 
-function Form({allStories, setStories}) {
+function Form({allStories, setStories, text, id, setView}) {
   const { auth } = useContext(AuthContext);
   const { campaign } = useContext(CampContext);
   const u_id = auth.user_id
   const c_id = campaign()
   // console.log("PROVIDER", campaign_id)
   const address = `/users/${u_id}/campaigns/${c_id}/story`
-
+  console.log("TEXT", text)
   const [story, setStory] = useState({
     npc_id: '',
     map_id: '',
-    text: ''
+    text: text
   })
 
+  useEffect(()=>{
+    setStoryText(text)
+  },[text])
 
   const setNpc = (e) => {
     const selectedNpc = e.target.value;
@@ -54,7 +57,6 @@ function Form({allStories, setStories}) {
         setStory(prev => {
           return {...prev, map_id: '', npc_id: '', text: ''}
         })
-
         const card = result.data
         setStories(prev => {
           return {...prev, [card.id]: {...card} }
@@ -63,17 +65,36 @@ function Form({allStories, setStories}) {
       .catch((err) => console.log("Error form Form Component", err))
   }
 
+  const editStory = (event) => {
+  event.preventDefault()
+  console.log("onEDIT", id)
+  axios.put(`${address}/${id}`, story)
+  .then((res) => {
+    console.log("Return Edit Card from DB", res)
+    console.log("EDIT STORY", allStories)
+    setStory(prev => {
+      return {...prev, map_id: '', npc_id: '', text: ''}
+    })
+    const card = res.data
+    setStories(prev => {
+      return {...prev, [card.id]: {...card}}
+    })
+    setView(CREATE)
+  })
+  .catch((err) => console.log("Error From FORM's EDIT Client Call"))
+}
+
   return (
   <section className="card">
     <form autoComplete="off">
       <article className="card__container">
         <label className="card__title">
-          Add Story Card
+          {id ? "Update Story" : "Add Story Card"}
         </label>
         < textarea 
         className="card__text-area"
         value={story.text}
-        onChange={(e) => {setStoryText(e.target.value)}}
+        onChange={(e) => setStoryText(e.target.value)}
         />
       <article className="card__container">
 
@@ -82,7 +103,7 @@ function Form({allStories, setStories}) {
 
       </article>
 
-        <button className="button confirm" type="submit" onClick={createStory}>
+        <button className="button confirm" type="submit" onClick={id ? editStory : createStory}>
           Submit
         </button>
 

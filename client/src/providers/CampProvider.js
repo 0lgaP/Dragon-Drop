@@ -8,6 +8,7 @@ export const CampProvider = (props) => {
   // useEffect(() => {
   //   // console.log("campProv", localVal);
   //   // console.log(!!!campaign && !!localVal);
+  //   // getCampaign()
   // }, []);
 
   function getCampaign() {
