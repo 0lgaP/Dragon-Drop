@@ -27,7 +27,7 @@ module.exports = {
         merriweather: ['Merriweather', 'serif'],
         alegreya: ['Alegreya', 'serif'],
         cinzel: ['Cinzel', 'serif'],
-        fellEnglish: ['IM Fell English SC', 'serif']
+        fellEnglish: ['IM Fell English', 'serif']
       }
     },
   },
