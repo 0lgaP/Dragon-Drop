@@ -9,6 +9,7 @@ import update from "immutability-helper";
 
 import './MapDetails.css'
 import CampContext from "../../providers/CampProvider";
+import StoryCardItem from "./StoryCards/StoryCardItem";
 
 // Test URL
 // http://localhost:3002/users/2c41cf56-a6d7-11ec-b909-0242ac120002/campaigns/8a89386b-de43-4c63-9127-3a78394d4253/maps/927432f7-7839-4a6d-817f-8e1a925b2706
@@ -98,13 +99,19 @@ const MapDetails = () => {
     axios.get(`/users/${urlParams.u_id}/campaigns/${urlParams.c_id}/maps`).then(result => setMapsForCampaign(result.data));
   }, [])
 
+  const storyCards = state.data.StoryCards ? dataHelpers().convertObjectToArray(state.data.StoryCards).map(card => {
+    return <StoryCardItem { ...card } text={ card.content } />
+    // return <h1>hi</h1>
+  }) : null
+
   return (
     <container className='mapContainer' id={ urlParams.mapId }>
       <div className='sidebar'>
         <h2>
           { state.name }
         </h2>
-        { !!Object.keys(state?.data?.StoryCards)?.length &&
+        { storyCards }
+        {/* { !!Object.keys(state?.data?.StoryCards)?.length &&
           <div className='card'>
           <h3>Story Cards</h3>
             <ul>
@@ -121,7 +128,7 @@ const MapDetails = () => {
               })}
           </ul>
           </div>
-        }
+        } */}
         <div className='card'>
           <div className="tab-bar">
             <h3 onClick={ () => {

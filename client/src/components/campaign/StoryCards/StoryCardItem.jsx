@@ -2,8 +2,6 @@ import React from 'react'
 
 function StoryCardItem(props) {
 
-
-
   return (
     <section className="card">
       <form autoComplete="off">
