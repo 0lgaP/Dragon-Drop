@@ -5,10 +5,10 @@ const CampContext = createContext({});
 export const CampProvider = (props) => {
   const [stateCampaign, setStateCampaign] = useState("");
 
-  useEffect(() => {
-    // console.log("campProv", localVal);
-    // console.log(!!!campaign && !!localVal);
-  }, []);
+  // useEffect(() => {
+  //   // console.log("campProv", localVal);
+  //   // console.log(!!!campaign && !!localVal);
+  // }, []);
 
   function getCampaign() {
     const localVal = window.localStorage.getItem("campaign_id");
