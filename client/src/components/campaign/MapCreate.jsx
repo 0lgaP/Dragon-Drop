@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import NPCCardItem from "./NPCCardItem";
 
 const MapCreate = (props) => {
+  
   return <h1>Map Create</h1>;
 }
 
