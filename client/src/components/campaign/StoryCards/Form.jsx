@@ -85,8 +85,8 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
   }
   axios.put(`${address}/${id}`, story)
   .then((res) => {
-    console.log("Return Edit Card from DB", res)
-    console.log("EDIT STORY", allStories)
+    // console.log("Return Edit Card from DB", res)
+    // console.log("EDIT STORY", allStories)
     const card = res.data
     setStories(prev => {
       return {...prev, [card.id]: {...card}}

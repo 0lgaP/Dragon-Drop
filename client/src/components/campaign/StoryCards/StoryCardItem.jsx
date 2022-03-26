@@ -5,14 +5,24 @@ function StoryCardItem(props) {
   // const onClick = () => {
   //   console.log('CLicked')
   // }
+  // const getName = (id, array) => {
+  //   return array[id].name
+  // }
+  // const npcName = getName(props.npcId, props.allNpcs)
+  const getName = (id, objArr) => {
+    const name = objArr.find(element => element.id === id)
+    const nameName = name.name
+    return nameName
+  }
+  const npcName = getName(props.npcId, props.allNpcs)
 
   return (
     <section className="card">
       {/* <form autoComplete="off"> */}
         <article className="card__container">
-          {/* <button className="button order">
-            {props.order}
-          </button> */}
+          <button className="button order">
+            {npcName}
+          </button>
           <button alt="Edit" className="button cancel" onClick={props.onEdit}>
             Edit
           </button>

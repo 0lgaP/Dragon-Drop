@@ -20,12 +20,13 @@ export default function StoryCardsList({allStories, setStories, onEdit, allNpcs,
     completed: false
   })
 
-const onDelete = (event, id) => {
+  
+  const onDelete = (event, id) => {
   event.preventDefault()
   axios.delete(`${address}/${id}`)
   .then(() => {
-    console.log("ID", id)
-    console.log("DELETED STORY", allStories)
+    // console.log("ID", id)
+    // console.log("DELETED STORY", allStories)
     setStories(prev => {
       const newState = {...prev}
       delete newState[id]
@@ -35,9 +36,9 @@ const onDelete = (event, id) => {
   .catch((err) => console.log("Error From StoryCardList Component", err))
 }
 
-
 const onComplete = (event, id, card) => {
   event.preventDefault()
+  console.log("CARD", card)
   story.map_id = card.maps_id
   story.npc_id = card.npcs_id
   story.text = card.story_card_text
@@ -51,16 +52,20 @@ const onComplete = (event, id, card) => {
       return newState
     })
   })
-  
 }
 
+console.log("ALL NPC", allNpcs)
+//card: campaigns_id, completed, created_on, id, maps_id, npcs_id, order_num, story_card_text
+
 const parsedListItem = allStories && dataHelper().convertObjectToArray(allStories).map(card => <StoryCardItem 
-                                                                                                  key={card.id} 
-                                                                                                  text={card.story_card_text} 
-                                                                                                  order={card.order_num} 
-                                                                                                  onDelete={(event) => onDelete(event, card.id)} 
-                                                                                                  onEdit={() => onEdit(card)}
-                                                                                                  onComplete={(event) => {onComplete(event, card.id, card)}}/>);
+  key={card.id}
+  npcId={card.npcs_id}
+  allNpcs={allNpcs}
+  text={card.story_card_text} 
+  order={card.order_num} 
+  onDelete={(event) => onDelete(event, card.id)} 
+  onEdit={() => onEdit(card)}
+  onComplete={(event) => {onComplete(event, card.id, card)}}/>);
 return (
   
   <div>
@@ -71,7 +76,7 @@ return (
 
 // OLD
 // [
-//   {
+  //   {
 //     id: 'asdhaskd-23w1dw232-dasd2'
 //     content: 'hello'
 //     <div className=""></div>
