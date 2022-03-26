@@ -19,10 +19,11 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
   const [story, setStory] = useState({
     npc_id: '',
     map_id: '',
-    text: text
+    text: text,
+    completed: false
   })
 
-  console.log("PROPS FORM", text, id, npc, map, view )
+  // console.log("PROPS FORM", text, id, npc, map, view )
 
   useEffect(()=>{
     setStoryText(text)
@@ -41,10 +42,10 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
     setStory({...story, map_id: selectedMap})
   }
 
-  const setItem = (e, item) => {
-    const selectedItem = e.target.value;
-    setStory({...story, [item]: selectedItem})
-  }
+  // const setItem = (e, item) => {
+  //   const selectedItem = e.target.value;
+  //   setStory({...story, [item]: selectedItem})
+  // }
 
   const setStoryText = (newStory) => {
     setStory({...story, text: newStory})

@@ -27,10 +27,10 @@ console.log(props.value, "VAL PROP")
   return (
     <select className="card__dropdown" 
     onChange={props.onChange}
-    // value={props.value}
+    value={props.value}
     >
       <option value="Set Npc">Set Npc</option>
-      {npc.map(npc => <option key={npc.id} value={npc.id} selected={props.value === npc.id}>{npc.name}</option>)}
+      {npc.map(npc => <option key={npc.id} value={npc.id} >{npc.name}</option>)}
     </select>
   )
 }

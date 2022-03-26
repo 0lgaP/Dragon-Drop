@@ -22,7 +22,6 @@ export default function StoryCards() {
   const address = `/users/${u_id}/campaigns/${campaign()}`
 
   const [allStories, setStories] = useState('');
-
   const [view, setView] = useState(viewObj.CREATE);
   const [currentStory, setCurrentStory] = useState({});
 
@@ -39,6 +38,9 @@ export default function StoryCards() {
     setCurrentStory(story)
     setView(viewObj.EDIT)
     console.log("VIEW", view)
+  }
+  const onComplete = (story) => {
+    setCurrentStory(story)
   }
 
 console.log("CURRENT STORY", currentStory)
@@ -59,10 +61,11 @@ console.log("CURRENT STORY", currentStory)
     allStories={allStories} 
     setStories={setStories} 
     onEdit={onEdit} 
-    text={currentStory.story_card_text}
-    id={currentStory.id} 
-    npc={currentStory.npcs_id} 
-    map={currentStory.maps_id} 
+    // onComplete={onComplete}
+    // text={currentStory.story_card_text}
+    // id={currentStory.id} 
+    // npc={currentStory.npcs_id} 
+    // map={currentStory.maps_id} 
     />
     {/* <StoryCardContainerPull allStories={allStories} setStories={setStories}/> */}
     </div>
