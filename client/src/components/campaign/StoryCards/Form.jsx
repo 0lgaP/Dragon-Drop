@@ -6,6 +6,7 @@ import './Card.css';
 import AuthContext from "../../../providers/AuthProvider";
 import CampContext from "../../../providers/CampProvider";
 import axios from "../../../api/axios";
+import DropDownListItem from "./DropDownListItem";
 
 function Form({allStories, setStories, text, id, npc, map, view, setView, viewObj}) {
   const { auth } = useContext(AuthContext);
@@ -38,6 +39,11 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
     const selectedMap = e.target.value;
     console.log(selectedMap)
     setStory({...story, map_id: selectedMap})
+  }
+
+  const setItem = (e, item) => {
+    const selectedItem = e.target.value;
+    setStory({...story, [item]: selectedItem})
   }
 
   const setStoryText = (newStory) => {
@@ -104,6 +110,8 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
 
         <DropDownListMap onChange={setMap} value={map}/>
         <DropDownListNpc onChange={setNpc} value={npc}/>
+        {/* <DropDownListItem onChange={setMap} item={`npcs`} value={npc} special={`Npc`}/>
+        <DropDownListItem onChange={setNpc} item={`maps`} value={npc} special={`Npc`}/> */}
 
       </article>
 
