@@ -3,9 +3,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        bkgd: "#f7f9fb",
+        bkgd: "#7b6d8d",
         transparent: "transparent",
         current: "currentColor",
+        gunmetal: "#2c363f",
         white: "#ffffff",
         purple: "#3f3cbb",
         midnight: "#121063",
@@ -16,13 +17,23 @@ module.exports = {
         bermuda: "#78dcca",
         sky: "#5085A5",
         "sky-light": "#8FC1E3",
+        green: "#69b578",
+        pink: "#f46197",
+        orange: "#ec7357",
         confirm: "#B3F2E8",
         cancel: "#F0C0A6",
-        header: "#31708e",
-        primary: "#5085a5",
-        secondary: "#8fc1e3",
-        textcolor: "#f7f9fb",
+        header: "#593f62",
+        primary: "#2c363f",
+        secondary: "#f7f9fb",
+        tertiary: "#542344",
+        textcolor: "#f7f9fb"
       },
+      fontFamily: {
+        merriweather: ['Merriweather', 'serif'],
+        alegreya: ['Alegreya', 'serif'],
+        cinzel: ['Cinzel', 'serif'],
+        fellEnglish: ['IM Fell English', 'serif']
+      }
     },
   },
   plugins: [],

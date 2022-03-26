@@ -4,8 +4,8 @@ import CampContext from "../../../providers/CampProvider";
 import AuthContext from "../../../providers/AuthProvider";
 
 
-export default function DropDownListNpc(props) {
-  const [npc, setNpc] = useState([])
+export default function DropDownListItem( { onChange, value, item, special} ) {
+  const [state, setState] = useState([])
   const { auth } = useContext(AuthContext);
   const { campaign } = useContext(CampContext);
 
@@ -14,22 +14,18 @@ export default function DropDownListNpc(props) {
   const address = `/users/${u_id}/campaigns/${campaign()}`
 
   useEffect(() => {
-    axios.get(`${address}/npcs`)
+    axios.get(`${address}/${item}`)
     .then((res) => {
-      setNpc(res.data)
-
+      setState(res.data)
     })
   }, [])
 
-console.log(props.value, "VAL PROP")
-
   return (
     <select className="card__dropdown" 
-    onChange={props.onChange}
-    value={props.value}
+    onChange={onChange}
     >
-      <option value="Set Npc">Set Npc</option>
-      {npc.map(npc => <option key={npc.id} value={npc.id} >{npc.name}</option>)}
+      <option value={`Set ${value}`}>Set {special}</option>
+      {state.map(each => <option key={each.id} value={each.id} selected={value === each.id}>{each.name}</option>)}
     </select>
   )
 }

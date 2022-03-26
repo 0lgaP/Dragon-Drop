@@ -8,28 +8,21 @@ import axios from "../../../api/axios";
 import dataHelper from '../../../hooks/dataHelpers'
 
 
-export default function StoryCardsList({allStories, setStories}) {
+export default function StoryCardsList({allStories, setStories, onEdit, allNpcs, allMaps}) {
   const { auth } = useContext(AuthContext);
   const { campaign } = useContext(CampContext);
-  // console.log("STORY CARD LIST", story)
   const u_id = auth.user_id
-
-  const address = `/users/${u_id}/campaigns/${campaign()}`
-
-
-
-  useEffect(() => {
-    axios.get(`${address}/story`)
-    .then((res) => {
-      const storyCardsObject = dataHelper().convertArrayToObject(res.data, 'id')
-      setStories(storyCardsObject)
-
-    })
-  }, [])
+  const address = `/users/${u_id}/campaigns/${campaign()}/story`
+  const [story, setStory] = useState({
+    npc_id: '',
+    map_id: '',
+    text: '',
+    completed: false
+  })
 
 const onDelete = (event, id) => {
   event.preventDefault()
-  axios.delete(`${address}/story/${id}`)
+  axios.delete(`${address}/${id}`)
   .then(() => {
     console.log("ID", id)
     console.log("DELETED STORY", allStories)
@@ -38,9 +31,42 @@ const onDelete = (event, id) => {
       delete newState[id]
       return newState;
     })
-
   })
   .catch((err) => console.log("Error From StoryCardList Component", err))
+}
+
+
+const onComplete = (event, id, card) => {
+  event.preventDefault()
+  story.map_id = card.maps_id
+  story.npc_id = card.npcs_id
+  story.text = card.story_card_text
+  story.completed = true
+  setStory(story)
+  axios.put(`${address}/${id}`, story)
+  .then(() => {
+    setStories(prev => {
+      const newState = {...prev}
+      delete newState[id]
+      return newState
+    })
+  })
+  
+}
+
+const parsedListItem = allStories && dataHelper().convertObjectToArray(allStories).map(card => <StoryCardItem 
+                                                                                                  key={card.id} 
+                                                                                                  text={card.story_card_text} 
+                                                                                                  order={card.order_num} 
+                                                                                                  onDelete={(event) => onDelete(event, card.id)} 
+                                                                                                  onEdit={() => onEdit(card)}
+                                                                                                  onComplete={(event) => {onComplete(event, card.id, card)}}/>);
+return (
+  
+  <div>
+      {parsedListItem}
+  </div>
+)
 }
 
 // OLD
@@ -68,11 +94,3 @@ const onDelete = (event, id) => {
 //     content: 'world'
 //   }
 // }
-const parsedListItem = allStories && dataHelper().convertObjectToArray(allStories).map(card => <StoryCardItem key={card.id} text={card.story_card_text} order={card.order_num} onDelete={(event) => onDelete(event, card.id)}/>);
-  return (
-  
-    <div>
-      {parsedListItem}
-    </div>
-  )
-}
