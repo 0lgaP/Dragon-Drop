@@ -24,7 +24,6 @@ const handleDelete = () => {
   console.log(`npc id`, npcID)
   axios.delete(deleteAddress, { data: {npcID} })
     window.location.reload(true);
-
 }
 
 return (
