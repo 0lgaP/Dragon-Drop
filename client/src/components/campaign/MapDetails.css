@@ -44,5 +44,8 @@
   @apply bg-header text-textcolor m-2 rounded-xl p-2
 }
 .asset-card button{
-  @apply bg-secondary rounded-md text-gunmetal m-2 w-1/2
+  @apply bg-secondary rounded-md text-gunmetal m-2 w-1/2 drop-shadow-lg transition-all ease-in-out
+}
+.asset-card button:hover {
+  @apply drop-shadow-xl -translate-y-0 -translate-x-1 scale-105
 }
