@@ -29,7 +29,14 @@ const MapList = () => {
     setEditMode((prev) => !prev);
   }
 
-  function addMap() {}
+  function addMap(map) {
+    setMaps((prev) => {
+      const newState = [...prev];
+      if (map) newState.push(map);
+      console.log("newState", newState, map);
+      return newState;
+    });
+  }
 
   useEffect(() => {
     axios

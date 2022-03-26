@@ -12,7 +12,7 @@ const MapCreate = (props) => {
   const { auth } = useContext(AuthContext);
 
   async function saveToDb() {
-    const result = await axios.post(
+    const map = await axios.post(
       `/users/${auth.user_id}/campaigns/${campaign()}/maps`,
       {
         name: mapName,
@@ -21,7 +21,7 @@ const MapCreate = (props) => {
     );
     setMapName("");
     setMapUrl("");
-    console.log("hi");
+    props.addMap(map.data);
   }
 
   return (
