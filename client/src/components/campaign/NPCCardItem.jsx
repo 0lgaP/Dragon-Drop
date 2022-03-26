@@ -4,7 +4,7 @@ import React from "react";
 const NPCCardItem = (props) => {
 
 return (
-  <div className="bg-secondary text-textcolor p-5 m-6  w-80 max-w-lg rounded-xl">
+  <div className="bg-secondary text-gunmetal p-5 m-6  w-80 max-w-lg rounded-xl">
     <div className="npc-card--header flex flex-row justify-start content-center h-10 pb-5 mb-4">
       <img className="rounded-full border-primary border-2 w-20 h-20 mr-8" src={props.image}></img>
       <h5 className="mt-5 text-2xl">{props.name}</h5>
@@ -13,6 +13,7 @@ return (
       <p className="m-2">{props.bio}</p>
       <p className="m-2">{props.details}</p>
     </div>
+    {props.children}
   </div>
 )
 }
