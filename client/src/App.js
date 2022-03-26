@@ -46,11 +46,11 @@ function App() {
             <Route exact path="/users/:u_id/campaigns/:c_id/maps">
               <MapList />
             </Route>
-            <Route exact path="/users/:u_id/campaigns/:c_id/maps/:m_id">
-              <MapDetails />
-            </Route>
             <Route exact path="/users/:u_id/campaigns/:c_id/maps/new">
               <MapCreate />
+            </Route>
+            <Route exact path="/users/:u_id/campaigns/:c_id/maps/:m_id">
+              <MapDetails />
             </Route>
             <Route exact path="/users/:u_id/campaigns/:c_id/story">
               <Story />

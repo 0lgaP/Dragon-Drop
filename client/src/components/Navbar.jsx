@@ -17,7 +17,7 @@ const Navbar = (props) => {
           <div className="dropdown">
             <Link to={ `/users/${u_id}/campaigns/${campaign()}/maps` } className="hover:font-bold">Maps</Link>
                 <div class="dropdown-content">
-                  <a href="#">New Map</a>
+              <Link to={`/users/${u_id}/campaigns/${campaign()}/maps/new`}>New Map</Link>
                   <a href="#">Delete Map</a>
                 </div>
           </div>
