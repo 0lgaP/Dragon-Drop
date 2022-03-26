@@ -11,6 +11,7 @@ import './MapDetails.css'
 import CampContext from "../../providers/CampProvider";
 import StoryCardItem from "./StoryCards/StoryCardItem";
 import AuthContext from "../../providers/AuthProvider";
+import NPCCardItem from "./NPCCardItem";
 
 // Test URL
 // http://localhost:3002/users/2c41cf56-a6d7-11ec-b909-0242ac120002/campaigns/8a89386b-de43-4c63-9127-3a78394d4253/maps/927432f7-7839-4a6d-817f-8e1a925b2706
@@ -236,7 +237,6 @@ const MapDetails = () => {
                 )
               })
             }
-            {/* + JSON.stringify(campaignAssets) */ }
             { !!tabStatus.tAssetsFMaps &&
               <>
                 <h1>Available Assets</h1> <hr /> 
@@ -246,23 +246,10 @@ const MapDetails = () => {
               Object.keys(campaignAssets.NPCs).map((id) => {
                 return (
                   <div className="asset-card">
-                    <h1 style={ {
-                    backgroundPosition: 'top',
-                    backgroundSize: 'cover',
-                    backgroundRepeat: 'no-repeat',
-                    objectFit: 'contain'
-                  } }>NPC - { campaignAssets.NPCs[id].name }</h1>
-                    <h3>Is alive?: { campaignAssets.NPCs[id].alive.toString() }</h3>
-                      <ol>
-                        <li>
-                          { campaignAssets.NPCs[id].bio }
-                        </li>
-                        <li>
-                          { campaignAssets.NPCs[id].details }
-                        </li>
-                      </ol>
+                    <NPCCardItem { ...campaignAssets.NPCs[id] } image={ campaignAssets.NPCs[id].img }>
                     <button onClick={() => addAssetToMap(id, 'npc')}>Add</button>
-                  </div>                  
+                    </NPCCardItem>
+                  </div>
                 )
               })
             }
@@ -274,8 +261,10 @@ const MapDetails = () => {
                     backgroundPosition: 'center',
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
-                    objectFit: 'contain'
+                    objectFit: 'contain',
+                    height: 'fit-content'
                   } }>
+                    <img src={`${campaignAssets.Images[id].src}`} style={{visibility: 'hidden'}} />
                     <h3>IMG - { campaignAssets.Images[id].name }</h3>
                     <button onClick={() => addAssetToMap(id, 'img')}>Add</button>
                   </div>                  
