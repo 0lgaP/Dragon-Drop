@@ -8,11 +8,12 @@ import axios from "../../../api/axios";
 import dataHelper from '../../../hooks/dataHelpers'
 
 
-export default function StoryCardsList({allStories, setStories, onEdit, allNpcs, allMaps}) {
+export default function StoryCardsList({allStories, setStories, onEdit}) {
   const { auth } = useContext(AuthContext);
   const { campaign } = useContext(CampContext);
   const u_id = auth.user_id
-  const address = `/users/${u_id}/campaigns/${campaign()}/story`
+  const address = `/users/${u_id}/campaigns/${campaign()}`
+  console.log("ADDRESS", address)
   const [story, setStory] = useState({
     npc_id: '',
     map_id: '',
@@ -20,15 +21,29 @@ export default function StoryCardsList({allStories, setStories, onEdit, allNpcs,
     completed: false
   })
   
+  const [state, setState] = useState({
+    npcs: [],
+    maps: [],
+  })
 
 
+  useEffect(() => {
+    Promise.all([
+      axios.get(`${address}/npcs`),
+      axios.get(`${address}/maps`),
+    ]).then((all) => {
+      setState(prev => {
+        return {...prev,
+        npcs: all[0].data,
+        maps: all[1].data,
+      }});
+    });
+  }, []);
 
   const onDelete = (event, id) => {
   event.preventDefault()
-  axios.delete(`${address}/${id}`)
+  axios.delete(`${address}/story/${id}`)
   .then(() => {
-    // console.log("ID", id)
-    // console.log("DELETED STORY", allStories)
     setStories(prev => {
       const newState = {...prev}
       delete newState[id]
@@ -40,13 +55,12 @@ export default function StoryCardsList({allStories, setStories, onEdit, allNpcs,
 
 const onComplete = (event, id, card) => {
   event.preventDefault()
-  console.log("CARD", card)
   story.map_id = card.maps_id
   story.npc_id = card.npcs_id
   story.text = card.story_card_text
   story.completed = true
   setStory(story)
-  axios.put(`${address}/${id}`, story)
+  axios.put(`${address}/story/${id}`, story)
   .then(() => {
     setStories(prev => {
       const newState = {...prev}
@@ -56,40 +70,38 @@ const onComplete = (event, id, card) => {
   })
 }
 
-const onKill = (event, id, card) => {
-  event.preventDefault()
-  console.log("CARD", card)
-  story.map_id = card.maps_id
-  story.npc_id = card.npcs_id
-  story.text = card.story_card_text
-  story.completed = true
-  setStory(story)
-  axios.put(`${address}/${id}`, story)
-  .then(() => {
-    setStories(prev => {
-      const newState = {...prev}
-      delete newState[id]
-      return newState
-    })
-  })
-}
+// const onKill = (event, id, card) => {
+//   event.preventDefault()
+//   console.log("CARD", card)
+//   story.map_id = card.maps_id
+//   story.npc_id = card.npcs_id
+//   story.text = card.story_card_text
+//   story.completed = true
+//   setStory(story)
+//   axios.put(`${address}/${id}`, story)
+//   .then(() => {
+//     setStories(prev => {
+//       const newState = {...prev}
+//       delete newState[id]
+//       return newState
+//     })
+//   })
+// }
 
-console.log("ALL NPC", allNpcs)
 //card: campaigns_id, completed, created_on, id, maps_id, npcs_id, order_num, story_card_text
 
 const parsedListItem = allStories && dataHelper().convertObjectToArray(allStories).map(card => <StoryCardItem 
   key={card.id}
   npcId={card.npcs_id}
   mapId={card.maps_id}
-  allNpcs={allNpcs}
-  allMaps={allMaps}
+  allNpcs={state.npcs}
+  allMaps={state.maps}
   text={card.story_card_text} 
   order={card.order_num} 
   onDelete={(event) => onDelete(event, card.id)} 
   onEdit={() => onEdit(card)}
   onComplete={(event) => {onComplete(event, card.id, card)}}/>);
 return (
-  
   <div>
       {parsedListItem}
   </div>

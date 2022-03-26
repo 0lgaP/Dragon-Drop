@@ -29,24 +29,24 @@ export default function StoryCards() {
   //state.npc: id, bio, details(mapname) img, campaign_id, name, alive
   //state.story: campaigns_id, completed, created_on, id, maps_id, npc_id, order_num, story_card_text
 
-  const [state, setState] = useState({
-    npcs: [],
-    maps: []
-  })
+  // const [state, setState] = useState({
+  //   npcs: [],
+  //   maps: []
+  // })
 
 
-  useEffect(() => {
-    Promise.all([
-      axios.get(`${address}/npcs`),
-      axios.get(`${address}/maps`),
-    ]).then((all) => {
-      setState((prev) => ({
-        ...prev,
-        npcs: all[0].data,
-        maps: all[1].data,
-      }));
-    });
-  }, []);
+  // useEffect(() => {
+  //   Promise.all([
+  //     axios.get(`${address}/npcs`),
+  //     axios.get(`${address}/maps`),
+  //   ]).then((all) => {
+  //     setState((prev) => ({
+  //       ...prev,
+  //       npcs: all[0].data,
+  //       maps: all[1].data,
+  //     }));
+  //   });
+  // }, []);
 
   useEffect(() => {
     axios.get(`${address}/story`)
@@ -80,9 +80,6 @@ console.log("CURRENT STORY", currentStory)
     <StoryCardContainer
     allStories={allStories} 
     setStories={setStories} 
-    allNpcs={state.npcs}
-    setAllNpcs={setState.npcs}
-    allMaps={state.maps}
     onEdit={onEdit} 
     />
     {/* <StoryCardContainerPull allStories={allStories} setStories={setStories}/> */}

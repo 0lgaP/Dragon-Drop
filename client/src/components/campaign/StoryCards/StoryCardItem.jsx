@@ -1,43 +1,29 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 
 function StoryCardItem(props) {
 
-
   const getName = (id, objArr) => {
-    const name = objArr.find(element => element.id === id)
-    return name.name
+    const found = objArr.find(element => element.id === id)
+    console.log("FOUND",found)
+    return found && found.name
   }
+
   const getLife = (id, objArr) => {
   const alive = objArr.find(element => element.id === id)
-  return alive.alive ? '😎' : '💀'
-}
-  // const setIcon = (id, objArr, element) => {
-  //   const name = objArr.find(element => element.id === id)
-  //   if(name[element] === true) {
-  //     return '😎'
-  //   } else {
-  //     return '💀'
-  //   }
-  // }
+  return alive && alive.alive ? '😎' : '💀'
+  }
+
   const npcName = getName(props.npcId, props.allNpcs)
   const mapName = getName(props.mapId, props.allMaps)
   const alive = getLife(props.npcId, props.allNpcs)
-
-  
-
-
-
 
   const viewMode = props.view
 
   return (
     <section className="card">
-      {/* <form autoComplete="off"> */}
         <article className="card__container">
-          {/* <button className="button order">
-            {npcName}
-          </button> */}
-          {viewMode !== 'SHOW' && <button alt="Edit" className="button cancel" onClick={props.onEdit}>
+          {viewMode !== 'SHOW' && <button 
+          alt="Edit" className="button cancel" onClick={props.onEdit}>
             Edit
           </button>}
           <button alt="Toggle Alive" className="button death" >
@@ -56,10 +42,9 @@ function StoryCardItem(props) {
             {alive}{npcName}
             </div>
             <div>
-              {mapName}
+            {mapName}
             </div>
         </article>
-      {/* </form> */}
     </section>
   )
 }
