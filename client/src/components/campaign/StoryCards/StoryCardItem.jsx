@@ -2,6 +2,8 @@ import React from 'react'
 
 function StoryCardItem(props) {
 
+  const viewMode = props.view
+
   return (
     <section className="card">
       {/* <form autoComplete="off"> */}
@@ -9,7 +11,7 @@ function StoryCardItem(props) {
           {/* <button className="button order">
             {props.order}
           </button> */}
-          {!props.view === 'SHOW' && <button alt="Edit" className="button cancel" onClick={props.onEdit}>
+          {viewMode !== 'SHOW' && <button alt="Edit" className="button cancel" onClick={props.onEdit}>
             Edit
           </button>}
           <button alt="Toggle Alive" className="button death" >
@@ -18,7 +20,7 @@ function StoryCardItem(props) {
           <button alt="Story Card Completed" className="button confirm" onClick={props.onComplete}>
           ✅
           </button>
-          {!props.view === 'SHOW' && <button alt="Delete Story Card" className="button death" onClick={props.onDelete}>
+          {viewMode !== 'SHOW' && <button alt="Delete Story Card" className="button death" onClick={props.onDelete}>
           🗑️
           </button>}
             <div className="card__title">
