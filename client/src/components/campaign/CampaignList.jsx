@@ -17,16 +17,27 @@ const CampaignList = () => {
 
   const address = `/users/${userAuth}/campaigns`;
 
-
+  let clicked = false;
   // ADD VISIBLE STYLE TO FORM WITH FUNCTION //
-  const createStyle = "flex flex-row bg-primary m-6 p-4 h-18 rounded-xl content-center w-fit hidden";
-
-  const createForm = () => {
-    
-  }
+  const hiddenStyle = "invisible flex flex-row bg-primary m-6 p-4 h-18 rounded-xl content-center w-fit";
+  const visibleStyle = "flex flex-row bg-primary m-6 p-4 h-18 rounded-xl content-center w-fit visible";
 
   const makeFormVisible = () => {
+    if (clicked) {
+      clicked = false
+    }
+    else {
+      clicked = true
+    }
+    console.log(clicked)
+  }
 
+  const determineStyle = () => {
+    if (clicked) {
+      return visibleStyle;
+    } else {
+      return hiddenStyle;
+    }
   }
 
 
@@ -55,7 +66,7 @@ const CampaignList = () => {
         <div className="p-8 px-4 m-6 text-xl text-textcolor bg-header w-80 rounded-xl h-18 content-center">
          <button onClick={makeFormVisible}>+ Create a New Campaign!</button>
         </div>
-        <div className={createForm}>
+        <div className={determineStyle}>
           <form className="flex flex-row">
             <label className="flex flex-row">
               <p className="text-textcolor content-center text-xl m-4 pr-4">Name: </p>
