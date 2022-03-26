@@ -25,6 +25,29 @@ export default function StoryCards() {
   const [view, setView] = useState(viewObj.CREATE);
   const [currentStory, setCurrentStory] = useState({});
 
+  //state.maps: id, name, campaign_id, background
+  //state.npc: id, bio, details(mapname) img, campaign_id, name, alive
+  //state.story: campaigns_id, completed, created_on, id, maps_id, npc_id, order_num, story_card_text
+
+  const [state, setState] = useState({
+    npcs: [],
+    maps: []
+  })
+  console.log("MAPS?", state.maps)
+
+  useEffect(() => {
+    Promise.all([
+      axios.get(`${address}/npcs`),
+      axios.get(`${address}/maps`),
+    ]).then((all) => {
+      setState((prev) => ({
+        ...prev,
+        npcs: all[0].data,
+        maps: all[1].data,
+      }));
+    });
+  }, []);
+
   useEffect(() => {
     axios.get(`${address}/story`)
     .then((res) => {
@@ -38,9 +61,6 @@ export default function StoryCards() {
     setCurrentStory(story)
     setView(viewObj.EDIT)
     console.log("VIEW", view)
-  }
-  const onComplete = (story) => {
-    setCurrentStory(story)
   }
 
 console.log("CURRENT STORY", currentStory)
@@ -60,12 +80,9 @@ console.log("CURRENT STORY", currentStory)
     <StoryCardContainer
     allStories={allStories} 
     setStories={setStories} 
+    allNpcs={state.npcs}
+    allMaps={state.maps}
     onEdit={onEdit} 
-    // onComplete={onComplete}
-    // text={currentStory.story_card_text}
-    // id={currentStory.id} 
-    // npc={currentStory.npcs_id} 
-    // map={currentStory.maps_id} 
     />
     {/* <StoryCardContainerPull allStories={allStories} setStories={setStories}/> */}
     </div>

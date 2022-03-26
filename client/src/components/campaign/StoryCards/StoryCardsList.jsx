@@ -8,7 +8,7 @@ import axios from "../../../api/axios";
 import dataHelper from '../../../hooks/dataHelpers'
 
 
-export default function StoryCardsList({allStories, setStories, onEdit, text, npc, map, onComplete}) {
+export default function StoryCardsList({allStories, setStories, onEdit, allNpcs, allMaps}) {
   const { auth } = useContext(AuthContext);
   const { campaign } = useContext(CampContext);
   const u_id = auth.user_id
@@ -19,7 +19,6 @@ export default function StoryCardsList({allStories, setStories, onEdit, text, np
     text: '',
     completed: false
   })
-  console.log("++++", npc, map, text)
 
 const onDelete = (event, id) => {
   event.preventDefault()
@@ -32,27 +31,20 @@ const onDelete = (event, id) => {
       delete newState[id]
       return newState;
     })
-
   })
   .catch((err) => console.log("Error From StoryCardList Component", err))
 }
 
 
-const onMarkComplete = (event, id, card) => {
+const onComplete = (event, id, card) => {
   event.preventDefault()
-  // onComplete(card)
-  console.log("onComplete CARD", card)
   story.map_id = card.maps_id
   story.npc_id = card.npcs_id
   story.text = card.story_card_text
   story.completed = true
   setStory(story)
-  console.log("THE STORY ON COMPLETE", story)
-  console.log("ALL STORIES", allStories)
   axios.put(`${address}/${id}`, story)
   .then(() => {
-    console.log("ID", id)
-    console.log("COMPLETE STORY", allStories)
     setStories(prev => {
       const newState = {...prev}
       delete newState[id]
@@ -68,8 +60,7 @@ const parsedListItem = allStories && dataHelper().convertObjectToArray(allStorie
                                                                                                   order={card.order_num} 
                                                                                                   onDelete={(event) => onDelete(event, card.id)} 
                                                                                                   onEdit={() => onEdit(card)}
-                                                                                                  onComplete={(event) => {
-                                                                                                    onMarkComplete(event, card.id, card)}}/>);
+                                                                                                  onComplete={(event) => {onComplete(event, card.id, card)}}/>);
 return (
   
   <div>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "../../../api/axios";
-import { useParams } from "react-router-dom";
 import AuthContext from "../../../providers/AuthProvider";
 import CampContext from "../../../providers/CampProvider";
 
@@ -20,7 +19,6 @@ export default function DropDownListMap(props) {
     axios.get(`${address}/maps`)
     .then((res) => {
       setMaps(res.data)
-
     })
   }, [])
 
