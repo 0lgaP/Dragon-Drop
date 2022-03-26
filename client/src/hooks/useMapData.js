@@ -1,11 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import dataHelpers from "./dataHelpers";
+import AuthContext from "../providers/AuthProvider";
 // import AuthContext from "../providers/AuthProvider";
 
 function useMapData(mapId, campaignId, userId) {
   // const [tick, setTock] = useState(false);
-  // const { auth } = useContext(AuthContext);
+  const { auth } = useContext(AuthContext);
 
   const [state, setState] = useState({
     userId,
@@ -23,6 +24,9 @@ function useMapData(mapId, campaignId, userId) {
         `/users/${userId}/campaigns/${campaignId}/maps/${state.mapId}/assets`
       ),
       axios.get(`/users/${userId}/campaigns/${campaignId}/story`),
+      axios.post(`/users/${userId}/campaigns/${campaignId}/notes`, {
+        user_id: auth.user_id,
+      }),
     ]).then((all) => {
       setState((prev) => ({
         ...prev,
@@ -37,6 +41,7 @@ function useMapData(mapId, campaignId, userId) {
           ),
           Players: all[1].data.Players,
           Story: all[2].data,
+          Notes: all[3].data,
         },
       }));
     });

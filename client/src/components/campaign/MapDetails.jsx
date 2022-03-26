@@ -10,6 +10,7 @@ import update from "immutability-helper";
 import './MapDetails.css'
 import CampContext from "../../providers/CampProvider";
 import StoryCardItem from "./StoryCards/StoryCardItem";
+import AuthContext from "../../providers/AuthProvider";
 
 // Test URL
 // http://localhost:3002/users/2c41cf56-a6d7-11ec-b909-0242ac120002/campaigns/8a89386b-de43-4c63-9127-3a78394d4253/maps/927432f7-7839-4a6d-817f-8e1a925b2706
@@ -21,6 +22,7 @@ const MapDetails = () => {
   const params = useParams();
   const [urlParams, setUrlParams] = useState({ ...params });
   const { campaign } = useContext(CampContext)
+  const { auth } = useContext(AuthContext)
   const { state, setState } = useMapData(urlParams.m_id, urlParams.c_id, urlParams.u_id)
   const { campaignAssets } = useCampaignAssets()
   const [mapsForCampaign, setMapsForCampaign] = useState([]);
@@ -93,6 +95,22 @@ const MapDetails = () => {
   function getLayer(type, id) {
     return state.data[type][id].layer_order;
   }
+  async function updateNotes(text) {
+    const result = await axios.put(`/users/${urlParams.u_id}/campaigns/${campaign()}/notes`, { user_id: auth.user_id, content: text });
+    console.log('put notes',result)
+      setState(
+        update(state, {
+          data: {
+            Notes: {
+              $merge : {content: result.data.content}
+            }
+          }
+        })
+      );
+  }
+  function getNotes() {
+    return state.data.Notes.content;
+  }
 
 
   useEffect(() => {
@@ -126,7 +144,16 @@ const MapDetails = () => {
           </div>
           { tabStatus.tStoryFNotes && entireStory }
           { !tabStatus.tStoryFNotes && 
-            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae ipsum unde maiores accusantium dolore officia architecto natus, esse in, sunt facere, ducimus accusamus distinctio. Rem dolorem iusto ut minima quos. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non nostrum iure dolore iusto. Ea ab, perferendis optio placeat officia earum cumque molestiae, illo recusandae explicabo cupiditate impedit dolorum magni expedita.'
+            (
+              <React.Fragment>
+                <label>Notes : </label>
+                <textarea type="textarea" 
+                name="textValue"
+                value={getNotes()}
+                onChange={ e => updateNotes(e.target.value)}
+                />
+              </React.Fragment>
+            )
 }
 </div>
       </div>
