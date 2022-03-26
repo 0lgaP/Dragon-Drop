@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "../../../api/axios";
-import CampContext, { CampProvider } from "../../../providers/CampProvider";
-import AuthContext, { AuthProvider } from "../../../providers/AuthProvider";
+import CampContext from "../../../providers/CampProvider";
+import AuthContext from "../../../providers/AuthProvider";
 
 
 export default function DropDownListNpc(props) {
@@ -22,13 +22,15 @@ export default function DropDownListNpc(props) {
     })
   }, [])
 
+console.log(props.value, "VAL PROP")
+
   return (
     <select className="card__dropdown" 
     onChange={props.onChange}
-    value={props.value}
+    // value={props.value}
     >
       <option value="Set Npc">Set Npc</option>
-      {npc.map(npc => <option key={npc.id} value={npc.id}>{npc.name}</option>)}
+      {npc.map(npc => <option key={npc.id} value={npc.id} selected={props.value === npc.id}>{npc.name}</option>)}
     </select>
   )
 }

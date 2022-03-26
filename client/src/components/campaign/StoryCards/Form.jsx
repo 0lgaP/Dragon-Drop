@@ -7,7 +7,7 @@ import AuthContext from "../../../providers/AuthProvider";
 import CampContext from "../../../providers/CampProvider";
 import axios from "../../../api/axios";
 
-function Form({allStories, setStories, text, id, setView}) {
+function Form({allStories, setStories, text, id, npc, map, view, setView, viewObj}) {
   const { auth } = useContext(AuthContext);
   const { campaign } = useContext(CampContext);
   const u_id = auth.user_id
@@ -20,6 +20,8 @@ function Form({allStories, setStories, text, id, setView}) {
     map_id: '',
     text: text
   })
+
+  console.log("PROPS FORM", text, id, npc, map, view )
 
   useEffect(()=>{
     setStoryText(text)
@@ -72,13 +74,16 @@ function Form({allStories, setStories, text, id, setView}) {
   .then((res) => {
     console.log("Return Edit Card from DB", res)
     console.log("EDIT STORY", allStories)
-    setStory(prev => {
-      return {...prev, map_id: '', npc_id: '', text: ''}
-    })
     const card = res.data
     setStories(prev => {
       return {...prev, [card.id]: {...card}}
     })
+    setStory(prev => {
+      return {...prev, map_id: '', npc_id: '', text: ''}
+    })
+    if(view === viewObj.EDIT){
+      setView(viewObj.CREATE)
+    }
   })
   .catch((err) => console.log("Error From FORM's EDIT Client Call"))
 }
@@ -97,8 +102,8 @@ function Form({allStories, setStories, text, id, setView}) {
         />
       <article className="card__container">
 
-        <DropDownListMap onChange={setMap} value={story.map_id}/>
-        <DropDownListNpc onChange={setNpc} value={story.npc_id}/>
+        <DropDownListMap onChange={setMap} value={map}/>
+        <DropDownListNpc onChange={setNpc} value={npc}/>
 
       </article>
 

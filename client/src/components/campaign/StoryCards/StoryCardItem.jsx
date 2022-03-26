@@ -10,9 +10,9 @@ function StoryCardItem(props) {
     <section className="card">
       {/* <form autoComplete="off"> */}
         <article className="card__container">
-          <button className="button order">
+          {/* <button className="button order">
             {props.order}
-          </button>
+          </button> */}
           <button alt="Edit" className="button cancel" onClick={props.onEdit}>
             Edit
           </button>

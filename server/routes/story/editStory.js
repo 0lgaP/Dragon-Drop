@@ -16,7 +16,7 @@ module.exports = (router, db) => {
     db.query(storyCardUpdateQuery, variables)
     .then((result) => {
       console.log("EDIT RESULT.ROWS[0]", result.rows[0])
-      if (result.rows[0]) return res.status(200).send('edited');
+      if (result.rows[0]) return res.status(200).send(result.rows[0]);
       res.status(404).send("Nothing to edit")
     })
     .catch((err) => {

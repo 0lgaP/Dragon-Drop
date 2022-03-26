@@ -8,8 +8,11 @@ import dataHelper from '../../../hooks/dataHelpers';
 import AuthContext from '../../../providers/AuthProvider';
 import CampContext from '../../../providers/CampProvider';
 
-const CREATE = 'CREATE'
-const EDIT = 'EDIT'
+
+const viewObj = {
+  CREATE: 'CREATE',
+  EDIT: 'EDIT'
+}
 
 export default function StoryCards() {
   const { auth } = useContext(AuthContext);
@@ -20,7 +23,7 @@ export default function StoryCards() {
 
   const [allStories, setStories] = useState('');
 
-  const [view, setView] = useState(CREATE);
+  const [view, setView] = useState(viewObj.CREATE);
   const [currentStory, setCurrentStory] = useState({});
 
   useEffect(() => {
@@ -34,7 +37,7 @@ export default function StoryCards() {
 
   const onEdit = (story) => {
     setCurrentStory(story)
-    setView(EDIT)
+    setView(viewObj.EDIT)
     console.log("VIEW", view)
   }
 
@@ -42,13 +45,14 @@ console.log("CURRENT STORY", currentStory)
 
   return(
     <div className="grid-cols-3 flex">
-    { view === CREATE ? <Form setStories={setStories}/> :
+    { view === viewObj.CREATE ? <Form setStories={setStories}/> :
     <Form text={currentStory.story_card_text}
     id={currentStory.id} 
     npc={currentStory.npcs_id} 
     map={currentStory.maps_id} 
     setStories={setStories}
     view={view}
+    viewObj={viewObj}
     setView={setView}/>}
     <StoryCardContainer allStories={allStories} setStories={setStories} onEdit={onEdit} />
     {/* <StoryCardContainerPull allStories={allStories} setStories={setStories}/> */}
