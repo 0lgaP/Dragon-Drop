@@ -9,18 +9,18 @@ function StoryCardItem(props) {
           {/* <button className="button order">
             {props.order}
           </button> */}
-          <button alt="Edit" className="button cancel" onClick={props.onEdit}>
+          {!props.view === 'SHOW' && <button alt="Edit" className="button cancel" onClick={props.onEdit}>
             Edit
-          </button>
+          </button>}
           <button alt="Toggle Alive" className="button death" >
           💀
           </button>
           <button alt="Story Card Completed" className="button confirm" onClick={props.onComplete}>
           ✅
           </button>
-          <button alt="Delete Story Card" className="button death" onClick={props.onDelete}>
+          {!props.view === 'SHOW' && <button alt="Delete Story Card" className="button death" onClick={props.onDelete}>
           🗑️
-          </button>
+          </button>}
             <div className="card__title">
             {props.text}
             </div>

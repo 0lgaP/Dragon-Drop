@@ -120,9 +120,9 @@ const MapDetails = () => {
     axios.get(`/users/${urlParams.u_id}/campaigns/${urlParams.c_id}/maps`).then(result => setMapsForCampaign(result.data));
   }, [])
 
-  const storyCardsForMap = state.data.StoryCards ? dataHelpers().convertObjectToArray(state.data.StoryCards).map(card => <StoryCardItem { ...card } text={ card.content } />) : null
+  const storyCardsForMap = state.data.StoryCards ? dataHelpers().convertObjectToArray(state.data.StoryCards).map(card => <StoryCardItem { ...card } text={ card.content } view='SHOW'/>) : null
   
-  const entireStory = state.data.Story ? state.data.Story.map(card => <StoryCardItem { ...card } text={ card.story_card_text } order={ card.order_num } />) : null;
+  const entireStory = state.data.Story ? state.data.Story.map(card => <StoryCardItem { ...card } text={ card.story_card_text } order={ card.order_num } view='SHOW'/>) : null;
 
   return (
     <container className='mapContainer' id={ urlParams.mapId }>
@@ -169,8 +169,8 @@ const MapDetails = () => {
               }}>Save</button>
               </React.Fragment>
             )
-}
-</div>
+          }
+        </div>
       </div>
       <div className='map'>
         { Object.keys(state.data).length && <Map mapState={ state } setMapState={ setState } id={ state.mapId } key={ state.mapId } /> }
