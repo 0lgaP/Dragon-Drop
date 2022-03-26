@@ -8,14 +8,18 @@ import axios from "../../../api/axios";
 import dataHelper from '../../../hooks/dataHelpers'
 
 
-export default function StoryCardsList({allStories, setStories, onEdit}) {
+export default function StoryCardsList({allStories, setStories, onEdit, text, id, npc, map}) {
   const { auth } = useContext(AuthContext);
   const { campaign } = useContext(CampContext);
   // console.log("STORY CARD LIST", story)
   const u_id = auth.user_id
 
   const address = `/users/${u_id}/campaigns/${campaign()}`
-
+  const [story, setStory] = useState({
+    npc_id: npc,
+    map_id: map,
+    text: text
+  })
 
 const onDelete = (event, id) => {
   event.preventDefault()
