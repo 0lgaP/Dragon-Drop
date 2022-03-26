@@ -101,7 +101,7 @@ const MapDetails = () => {
   return (
     <container className='mapContainer' id={ urlParams.mapId }>
       <div className='sidebar'>
-        <h2>
+        <h2 className='text-textcolor text-3xl m-2 mb-4 bg-header rounded-lg p-4'>
           { state.name }
         </h2>
         { !!state?.data?.StoryCards?.length &&
@@ -116,7 +116,7 @@ const MapDetails = () => {
                   <p>
                   { card.content }
                   </p>
-                  Comepleted?: { card.completed.toString() }
+                  Completed?: { card.completed.toString() }
                 </li>
               })}
           </ul>
@@ -178,10 +178,11 @@ const MapDetails = () => {
             { !!tabStatus.tAssetsFMaps &&
             Object.keys(state.data.NPCs).map((key) => {
               return (
-                <p>
+                <p className="text-lg">
                   { state.data.NPCs[key].name }
-                  <button onClick={ () => deleteAssetFromMap('NPCs', key) }>DEL</button>
+                  <button onClick={ () => deleteAssetFromMap('NPCs', key) }>Delete</button>
                   <input
+                    className="w-8 m-2 rounded-md text-2xl"
                     name="layer"
                     type="number"
                     value={getLayer('NPCs', key)}
@@ -193,10 +194,11 @@ const MapDetails = () => {
             { !!tabStatus.tAssetsFMaps &&
             Object.keys(state.data.Images).map((key) => {
                 return (
-                  <p>
+                  <p className="text-lg">
                     { state.data.Images[key].name }
-                    <button onClick={ () => deleteAssetFromMap('Images', key) }>DEL</button>
+                    <button onClick={ () => deleteAssetFromMap('Images', key) }>Delete</button>
                     <input
+                      className="w-8 m-2 text-2xl rounded-md"
                       name="layer"
                       type="number"
                       value={getLayer('Images', key)}
@@ -217,7 +219,6 @@ const MapDetails = () => {
                 return (
                   <div className="asset-card">
                     <h1 style={ {
-                    backgroundImage: `url("${campaignAssets.NPCs[id].img}")`,
                     backgroundPosition: 'top',
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
