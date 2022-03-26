@@ -55,7 +55,15 @@ console.log("CURRENT STORY", currentStory)
     viewObj={viewObj}
     setView={setView}
     css='card_edit'/>}
-    <StoryCardContainer allStories={allStories} setStories={setStories} onEdit={onEdit} />
+    <StoryCardContainer
+    allStories={allStories} 
+    setStories={setStories} 
+    onEdit={onEdit} 
+    text={currentStory.story_card_text}
+    id={currentStory.id} 
+    npc={currentStory.npcs_id} 
+    map={currentStory.maps_id} 
+    />
     {/* <StoryCardContainerPull allStories={allStories} setStories={setStories}/> */}
     </div>
   );

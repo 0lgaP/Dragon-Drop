@@ -17,8 +17,8 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
   const address = `/users/${u_id}/campaigns/${c_id}/story`
   console.log("TEXT", text)
   const [story, setStory] = useState({
-    npc_id: '',
-    map_id: '',
+    npc_id: npc,
+    map_id: map,
     text: text
   })
 
@@ -76,12 +76,12 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
   const editStory = (event) => {
   event.preventDefault()
   console.log("onEDIT", id)
-  if(story.map_id === ''){
-    story.map_id = map
-  }
-  if(story.npc_id === ''){
-    story.npc_id = npc
-  }
+  // if(story.map_id === ''){
+  //   story.map_id = map
+  // }
+  // if(story.npc_id === ''){
+  //   story.npc_id = npc
+  // }
   axios.put(`${address}/${id}`, story)
   .then((res) => {
     console.log("Return Edit Card from DB", res)
