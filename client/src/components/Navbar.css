@@ -18,6 +18,7 @@
   text-decoration: none;
   display: block;
   text-align: left;
+  transition: all .25s;
 }
 nav .dropdown-content a:hover, .dropdown:hover .dropbtn {
   background-color: red;

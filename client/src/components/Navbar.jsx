@@ -15,11 +15,20 @@ const Navbar = (props) => {
       <nav className="bg-primary h-1/16 p-1 ">
         <div className="links flex flex-row justify-evenly h-1/16 m-6 text-textcolor text-xl">
           <div className="dropdown">
-            <Link to={ `/users/${u_id}/campaigns/${campaign()}/maps` } className="hover:font-bold">Maps</Link>
-                <div class="dropdown-content">
-              <Link to={`/users/${u_id}/campaigns/${campaign()}/maps/new`}>New Map</Link>
-                  <a href="#">Delete Map</a>
-                </div>
+
+            <Link to={ `/users/${u_id}/campaigns/${campaign()}/maps` } className="hover:font-bold">
+              Maps
+            </Link>
+
+            
+            <div class="dropdown-content">
+
+              <Link to={ `/users/${u_id}/campaigns/${campaign()}/maps/new` }>
+                New Map
+              </Link>
+
+              <a href="#">Delete Map</a>
+            </div>
           </div>
           <Link to={`/users/${u_id}/campaigns/${campaign()}/story`} className="hover:font-bold">Story</Link>
           <Link to={`/users/${u_id}/campaigns/${campaign()}/party`} className="hover:font-bold">Party</Link>
