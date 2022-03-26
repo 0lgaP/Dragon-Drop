@@ -22,9 +22,31 @@ export default function StoryCards() {
   const address = `/users/${u_id}/campaigns/${campaign()}`
 
   const [allStories, setStories] = useState('');
-
   const [view, setView] = useState(viewObj.CREATE);
   const [currentStory, setCurrentStory] = useState({});
+
+  //state.maps: id, name, campaign_id, background
+  //state.npc: id, bio, details(mapname) img, campaign_id, name, alive
+  //state.story: campaigns_id, completed, created_on, id, maps_id, npc_id, order_num, story_card_text
+
+  const [state, setState] = useState({
+    npcs: [],
+    maps: []
+  })
+  console.log("MAPS?", state.maps)
+
+  useEffect(() => {
+    Promise.all([
+      axios.get(`${address}/npcs`),
+      axios.get(`${address}/maps`),
+    ]).then((all) => {
+      setState((prev) => ({
+        ...prev,
+        npcs: all[0].data,
+        maps: all[1].data,
+      }));
+    });
+  }, []);
 
   useEffect(() => {
     axios.get(`${address}/story`)
@@ -45,7 +67,7 @@ console.log("CURRENT STORY", currentStory)
 
   return(
     <div className="grid-cols-3 flex">
-    { view === viewObj.CREATE ? <Form setStories={setStories}/> :
+    { view === viewObj.CREATE ? <Form css='card' setStories={setStories}/> :
     <Form text={currentStory.story_card_text}
     id={currentStory.id} 
     npc={currentStory.npcs_id} 
@@ -53,8 +75,15 @@ console.log("CURRENT STORY", currentStory)
     setStories={setStories}
     view={view}
     viewObj={viewObj}
-    setView={setView}/>}
-    <StoryCardContainer allStories={allStories} setStories={setStories} onEdit={onEdit} />
+    setView={setView}
+    css='card_edit'/>}
+    <StoryCardContainer
+    allStories={allStories} 
+    setStories={setStories} 
+    allNpcs={state.npcs}
+    allMaps={state.maps}
+    onEdit={onEdit} 
+    />
     {/* <StoryCardContainerPull allStories={allStories} setStories={setStories}/> */}
     </div>
   );
