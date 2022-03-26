@@ -45,7 +45,7 @@ console.log("CURRENT STORY", currentStory)
 
   return(
     <div className="grid-cols-3 flex">
-    { view === viewObj.CREATE ? <Form setStories={setStories}/> :
+    { view === viewObj.CREATE ? <Form css='card' setStories={setStories}/> :
     <Form text={currentStory.story_card_text}
     id={currentStory.id} 
     npc={currentStory.npcs_id} 
@@ -53,7 +53,8 @@ console.log("CURRENT STORY", currentStory)
     setStories={setStories}
     view={view}
     viewObj={viewObj}
-    setView={setView}/>}
+    setView={setView}
+    css='card_edit'/>}
     <StoryCardContainer allStories={allStories} setStories={setStories} onEdit={onEdit} />
     {/* <StoryCardContainerPull allStories={allStories} setStories={setStories}/> */}
     </div>

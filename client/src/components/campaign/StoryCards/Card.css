@@ -17,3 +17,7 @@
 .card__dropdown {
   @apply inline-block bg-sky-light rounded px-3 py-1 text-sm font-semibold m-2 text-sky
 }
+
+.card_edit{
+  @apply max-w-sm rounded overflow-hidden shadow-lg bg-bubble-gum m-2
+}

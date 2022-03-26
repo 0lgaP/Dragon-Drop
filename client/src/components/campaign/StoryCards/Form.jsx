@@ -8,7 +8,7 @@ import CampContext from "../../../providers/CampProvider";
 import axios from "../../../api/axios";
 import DropDownListItem from "./DropDownListItem";
 
-function Form({allStories, setStories, text, id, npc, map, view, setView, viewObj}) {
+function Form({allStories, setStories, text, id, npc, map, view, setView, viewObj, css}) {
   const { auth } = useContext(AuthContext);
   const { campaign } = useContext(CampContext);
   const u_id = auth.user_id
@@ -76,6 +76,12 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
   const editStory = (event) => {
   event.preventDefault()
   console.log("onEDIT", id)
+  if(story.map_id === ''){
+    story.map_id = map
+  }
+  if(story.npc_id === ''){
+    story.npc_id = npc
+  }
   axios.put(`${address}/${id}`, story)
   .then((res) => {
     console.log("Return Edit Card from DB", res)
@@ -95,9 +101,9 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
 }
 
   return (
-  <section className="card">
+  <section className={[`card ${css}`]}>
     <form autoComplete="off">
-      <article className="card__container">
+      <article className={[`card__container`]}>
         <label className="card__title">
           {id ? "Update Story" : "Add Story Card"}
         </label>
