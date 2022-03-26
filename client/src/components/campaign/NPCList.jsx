@@ -56,7 +56,7 @@ const NPCList = (props) => {
     <section className="flex flex-row">
       <div className="bg-primary m-6 p-4 rounded-xl">
         <h1 className="text-2xl text-textcolor p-2">Create a new NPC!</h1>
-      <form className="p-2 m-2">
+        <form className="p-2 m-2">
           <label className="">
             <p className="text-textcolor text-lg p-2 m-2">Name</p>
             <input className="border-2 border-secondary rounded-md bg-bkgd mb-4 w-60 text-textcolor" type="text" onChange={e => setName(e.target.value)} value={name} />
