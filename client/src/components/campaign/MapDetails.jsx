@@ -95,20 +95,22 @@ const MapDetails = () => {
   function getLayer(type, id) {
     return state.data[type][id].layer_order;
   }
-  async function updateNotes(text) {
-    const result = await axios.put(`/users/${urlParams.u_id}/campaigns/${campaign()}/notes`, { user_id: auth.user_id, content: text });
-    console.log('put notes',result)
+
+  async function updateNotes(text, updateDB) {
+    if (updateDB) await axios.put(`/users/${urlParams.u_id}/campaigns/${campaign()}/notes`, { user_id: auth.user_id, content: text });
+    // console.log('put notes',result)
       setState(
         update(state, {
           data: {
             Notes: {
-              $merge : {content: result.data.content}
+              $merge : {content: text}
             }
           }
         })
       );
   }
-  function getNotes() {
+  function getNotes(test) {
+    // console.log(state.data.Notes.content.split(/\r\n|\r|\n/).length)
     return state.data.Notes.content;
   }
 
@@ -146,12 +148,24 @@ const MapDetails = () => {
           { !tabStatus.tStoryFNotes && 
             (
               <React.Fragment>
-                <label>Notes : </label>
-                <textarea type="textarea" 
-                name="textValue"
-                value={getNotes()}
-                onChange={ e => updateNotes(e.target.value)}
+              <label>Notes : </label>
+              <textarea type="textarea"
+                name="notes"
+                id='notesArea'
+                value={ getNotes() }
+                onChange={ e => {
+                  e.target.style.height = "";
+                  e.target.style.height = e.target.scrollHeight + "px"
+                      updateNotes(document.getElementById('notesArea').value, false)
+                } }
+                onFocus={e => {
+                  e.target.style.height = "";
+                  e.target.style.height = e.target.scrollHeight + "px"
+                } }
                 />
+              <button onClick={ (e) => {
+                  updateNotes(document.getElementById('notesArea').value, true)
+              }}>Save</button>
               </React.Fragment>
             )
 }
