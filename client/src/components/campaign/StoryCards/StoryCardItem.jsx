@@ -2,13 +2,7 @@ import React from 'react'
 
 function StoryCardItem(props) {
 
-  // const onClick = () => {
-  //   console.log('CLicked')
-  // }
-  // const getName = (id, array) => {
-  //   return array[id].name
-  // }
-  // const npcName = getName(props.npcId, props.allNpcs)
+
   const getName = (id, objArr) => {
     const name = objArr.find(element => element.id === id)
     return name.name
@@ -34,6 +28,7 @@ function StoryCardItem(props) {
 
 
 
+  const viewMode = props.view
 
   return (
     <section className="card">
@@ -42,18 +37,18 @@ function StoryCardItem(props) {
           {/* <button className="button order">
             {npcName}
           </button> */}
-          <button alt="Edit" className="button cancel" onClick={props.onEdit}>
+          {viewMode !== 'SHOW' && <button alt="Edit" className="button cancel" onClick={props.onEdit}>
             Edit
-          </button>
+          </button>}
           <button alt="Toggle Alive" className="button death" >
           💀
           </button>
           <button alt="Story Card Completed" className="button confirm" onClick={props.onComplete}>
           ✅
           </button>
-          <button alt="Delete Story Card" className="button death" onClick={props.onDelete}>
+          {viewMode !== 'SHOW' && <button alt="Delete Story Card" className="button death" onClick={props.onDelete}>
           🗑️
-          </button>
+          </button>}
             <div className="card__title">
             {props.text}
             </div>

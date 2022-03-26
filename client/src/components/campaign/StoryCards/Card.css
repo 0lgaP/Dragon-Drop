@@ -1,5 +1,5 @@
 .card {
-  @apply max-w-sm rounded overflow-hidden shadow-lg bg-sky m-2
+  @apply max-w-sm rounded overflow-hidden shadow-lg bg-secondary m-2
 }
 
 .card__container {
@@ -7,15 +7,15 @@
 }
 
 .card__title {
-  @apply font-bold text-xl text-white 
+  @apply font-bold text-xl text-gunmetal
 }
 
 .card__text-area {
-  @apply shadow-sm mt-4 block w-full h-32 p-4 lg:text-lg rounded-md bg-sky-light text-white
+  @apply shadow-sm mt-4 block w-full h-32 p-4 lg:text-lg rounded-md bg-bkgd text-textcolor
 }
 
 .card__dropdown {
-  @apply inline-block bg-sky-light rounded px-3 py-1 text-sm font-semibold m-2 text-sky
+  @apply inline-block bg-bkgd rounded px-3 py-1 text-sm font-semibold m-2 text-textcolor
 }
 
 .card_edit{
