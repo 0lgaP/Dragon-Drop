@@ -12,9 +12,10 @@ const MapList = () => {
 
   const [maps, setMaps] = useState([])
 
-  function deleteMap(mapId) {
+  async function deleteMap(mapId) {
     for (const index in maps) {
       if (maps[index].id !== mapId) continue;
+      await axios.delete(`/users/${u_id}/campaigns/${c_id}/maps/${mapId}`)
       return setMaps(prev => {
         const newState = [...prev]
         newState.splice(index, 1);
