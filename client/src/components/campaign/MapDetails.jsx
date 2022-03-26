@@ -235,7 +235,6 @@ const MapDetails = () => {
                     objectFit: 'contain'
                   } }>
                     <h3>IMG - { campaignAssets.Images[id].name }</h3>
-                    {/* <h3>Is alive?: { campaignAssets.Images[id].alive.toString() }</h3> */}
                     <button onClick={() => addAssetToMap(id, 'img')}>Add</button>
                   </div>                  
                 )

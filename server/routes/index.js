@@ -5,6 +5,7 @@ const partyRoutes = require("./party/index");
 const usersRoutes = require("./users/index");
 const storyRoutes = require("./story/index");
 const assetRoutes = require("./assets");
+const noteRoutes = require("./notes");
 
 module.exports = (router, db) => {
   campaignRoutes(router, db);
@@ -24,6 +25,8 @@ module.exports = (router, db) => {
   storyRoutes(router, db);
 
   assetRoutes(router, db);
+
+  noteRoutes(router, db);
 
   // // HOME PAGE
   // router.get("/", function (req, res, next) {
