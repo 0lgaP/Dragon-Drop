@@ -19,8 +19,10 @@ export default function StoryCardsList({allStories, setStories, onEdit, allNpcs,
     text: '',
     completed: false
   })
-
   
+
+
+
   const onDelete = (event, id) => {
   event.preventDefault()
   axios.delete(`${address}/${id}`)
@@ -54,13 +56,33 @@ const onComplete = (event, id, card) => {
   })
 }
 
+const onKill = (event, id, card) => {
+  event.preventDefault()
+  console.log("CARD", card)
+  story.map_id = card.maps_id
+  story.npc_id = card.npcs_id
+  story.text = card.story_card_text
+  story.completed = true
+  setStory(story)
+  axios.put(`${address}/${id}`, story)
+  .then(() => {
+    setStories(prev => {
+      const newState = {...prev}
+      delete newState[id]
+      return newState
+    })
+  })
+}
+
 console.log("ALL NPC", allNpcs)
 //card: campaigns_id, completed, created_on, id, maps_id, npcs_id, order_num, story_card_text
 
 const parsedListItem = allStories && dataHelper().convertObjectToArray(allStories).map(card => <StoryCardItem 
   key={card.id}
   npcId={card.npcs_id}
+  mapId={card.maps_id}
   allNpcs={allNpcs}
+  allMaps={allMaps}
   text={card.story_card_text} 
   order={card.order_num} 
   onDelete={(event) => onDelete(event, card.id)} 

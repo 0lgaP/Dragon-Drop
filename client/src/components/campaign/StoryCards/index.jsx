@@ -33,7 +33,7 @@ export default function StoryCards() {
     npcs: [],
     maps: []
   })
-  console.log("MAPS?", state.maps)
+
 
   useEffect(() => {
     Promise.all([
@@ -81,6 +81,7 @@ console.log("CURRENT STORY", currentStory)
     allStories={allStories} 
     setStories={setStories} 
     allNpcs={state.npcs}
+    setAllNpcs={setState.npcs}
     allMaps={state.maps}
     onEdit={onEdit} 
     />

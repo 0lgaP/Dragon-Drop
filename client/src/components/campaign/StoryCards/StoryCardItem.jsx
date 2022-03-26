@@ -11,18 +11,37 @@ function StoryCardItem(props) {
   // const npcName = getName(props.npcId, props.allNpcs)
   const getName = (id, objArr) => {
     const name = objArr.find(element => element.id === id)
-    const nameName = name.name
-    return nameName
+    return name.name
   }
+  const getLife = (id, objArr) => {
+  const alive = objArr.find(element => element.id === id)
+  return alive.alive ? '😎' : '💀'
+}
+  // const setIcon = (id, objArr, element) => {
+  //   const name = objArr.find(element => element.id === id)
+  //   if(name[element] === true) {
+  //     return '😎'
+  //   } else {
+  //     return '💀'
+  //   }
+  // }
   const npcName = getName(props.npcId, props.allNpcs)
+  const mapName = getName(props.mapId, props.allMaps)
+  const alive = getLife(props.npcId, props.allNpcs)
+
+  
+
+
+
+
 
   return (
     <section className="card">
       {/* <form autoComplete="off"> */}
         <article className="card__container">
-          <button className="button order">
+          {/* <button className="button order">
             {npcName}
-          </button>
+          </button> */}
           <button alt="Edit" className="button cancel" onClick={props.onEdit}>
             Edit
           </button>
@@ -37,6 +56,12 @@ function StoryCardItem(props) {
           </button>
             <div className="card__title">
             {props.text}
+            </div>
+            <div>
+            {alive}{npcName}
+            </div>
+            <div>
+              {mapName}
             </div>
         </article>
       {/* </form> */}
