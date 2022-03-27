@@ -11,17 +11,17 @@ function DndStoryCardItem(props) {
   // const alive = objArr.find(element => element.id === id)
   // return alive && alive.alive ? '😎' : '💀'
   // }
-  console.log("DND PROPS",props)
-  const npcName = props.npc.name
-  const mapName = props.map.name
-  const alive = props.npc.alive
+  // console.log("DND PROPS",props)
+  // const npcName = props.npc.name
+  // const mapName = props.map.name
+  // const alive = props.npc.alive
 
-  const viewMode = props.view
-
+  // const viewMode = props.view
+  // console.log("CARD PROPS!!!!", props.text)
   return (
     <section className="card">
         <article className="card__container">
-          {viewMode !== 'SHOW' && <button 
+          {/* {viewMode !== 'SHOW' && <button 
           alt="Edit" className="button cancel" onClick={props.onEdit}>
             Edit
           </button>}
@@ -33,16 +33,16 @@ function DndStoryCardItem(props) {
           </button>
           {viewMode !== 'SHOW' && <button alt="Delete Story Card" className="button death" onClick={props.onDelete}>
           🗑️
-          </button>}
+          </button>} */}
             <div className="card__title">
             {props.text}
             </div>
-            <div>
+            {/* <div>
             {alive}{npcName}
             </div>
             <div>
             {mapName}
-            </div>
+            </div> */}
         </article>
     </section>
   )

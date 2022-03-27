@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DndStoryCardsList from "./DndStoryCardsList";
 
 // export default function DndStoryCardContainer(props) {
@@ -14,6 +14,7 @@ import { useDrop } from 'react-dnd';
 import { Card } from './Card';
 import update from 'immutability-helper';
 import { ItemTypes } from './ItemTypes';
+import axios from "../../../api/axios";
 const style = {
     width: 400,
 };
@@ -54,9 +55,9 @@ const ITEMS = [
 // setDndStory={setDndStory}
 // onEdit={onEdit} 
 export const DndStoryCardContainer = memo(function DndStoryCardContainer(props) {
-  console.log("dndSTATE", props.dndStory)
+  // console.log("dndSTATE", props.dndStory)
     const [cards, setCards] = useState(props.dndStory);
-    console.log("CARDS", cards)
+    // console.log("CARDS", cards)
     const findCard = useCallback((id) => {
         const card = cards.filter((c) => `${c.id}` === id)[0];
         return {
@@ -65,17 +66,37 @@ export const DndStoryCardContainer = memo(function DndStoryCardContainer(props) 
         };
     }, [cards]);
     const moveCard = useCallback((id, atIndex) => {
+
         const { card, index } = findCard(id);
+        console.log("movingBEFORE", cards)
         setCards(update(cards, {
             $splice: [
                 [index, 1],
                 [atIndex, 0, card],
             ],
         }));
+        console.log("Card ADFET", cards)
+        // props.setDndStory(prev => {
+        //   return {
+        //     ...prev,
+        //     ...card
+        //   }
+        // })
+        // console.log("moving aorund INDEX AFTER", atIndex)
+        // console.log("CARD ID !!!!!!!!!+++++", card.id)
+
     }, [findCard, cards, setCards]);
+    useEffect(() => {
+      console.log(cards, "USE")
+      for (let cardIndex in cards){
+        axios.put(`/users/:id/campaigns/:c_id/story/${cards[cardIndex].id}/order`, {order: cardIndex})
+        .then(result => console.log(result))
+      }
+    }, [cards])
+    
     const [, drop] = useDrop(() => ({ accept: ItemTypes.CARD }));
     return (<div ref={drop} style={style}>
-			{cards.map((card) => (<Card key={card.id} id={`${card.id}`} text={card.text} moveCard={moveCard} findCard={findCard}/>))}
+			{cards.map((card) => (<Card key={card.id} id={`${card.id}`} text={card.story_card_text} moveCard={moveCard} findCard={findCard}/>))}
 		</div>);
 });
 

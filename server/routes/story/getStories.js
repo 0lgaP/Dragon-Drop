@@ -6,7 +6,7 @@ module.exports = (router, db) => {
     // console.log("CAMP DB", campaign_id)
     db.query(`SELECT * FROM story_cards
     WHERE campaigns_id = $1
-    ORDER BY order_num DESC;`, [campaign_id])
+    ORDER BY order_num;`, [campaign_id])
     // db.query(`SELECT * FROM story_cards`)
     .then(data => {
       // console.log("DB",data)

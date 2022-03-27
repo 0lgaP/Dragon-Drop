@@ -10,6 +10,7 @@ const style = {
   cursor: "move",
 };
 export const Card = memo(function Card({ id, text, moveCard, findCard }) {
+  // console.log("CARD TEXT PROP", text)
   const originalIndex = findCard(id).index;
   const [{ isDragging }, drag] = useDrag(
     () => ({
@@ -43,7 +44,7 @@ export const Card = memo(function Card({ id, text, moveCard, findCard }) {
   const opacity = isDragging ? 0 : 1;
   return (
     <div ref={(node) => drag(drop(node))} style={{ ...style, opacity }}>
-      <DndStoryCardItem prop='POPR'/>
+      <DndStoryCardItem text={text}/>
     </div>
   );
 });

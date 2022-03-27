@@ -99,23 +99,23 @@ const onKill = (event, card) => {
 
 //card: campaigns_id, completed, created_on, id, maps_id, npcs_id, order_num, story_card_text
 
-const parsedListItem = Object.keys(allStories).length && dataHelper().convertObjectToArray(allStories).map(card => <DndStoryCardItem 
-  {...card}
-  key={card.id}
-  npcId={card.npcs_id}
-  mapId={card.maps_id}
-  npc={state.npcs[card.npcs_id]}
-  map={state.maps[card.maps_id]}
-  text={card.story_card_text} 
-  order={card.order_num}
-  onDelete={(event) => onDelete(event, card.id)} 
-  onEdit={() => onEdit(card)}
-  onComplete={(event) => {onComplete(event, card.id, card)}}
-  onKill={(event) => onKill(event, card.npcs_id)} 
-  />);
+// const parsedListItem = Object.keys(allStories).length && dataHelper().convertObjectToArray(allStories).map(card => <DndStoryCardItem 
+//   {...card}
+//   key={card.id}
+//   npcId={card.npcs_id}
+//   mapId={card.maps_id}
+//   npc={state.npcs[card.npcs_id]}
+//   map={state.maps[card.maps_id]}
+//   text={card.story_card_text} 
+//   order={card.order_num}
+//   onDelete={(event) => onDelete(event, card.id)} 
+//   onEdit={() => onEdit(card)}
+//   onComplete={(event) => {onComplete(event, card.id, card)}}
+//   onKill={(event) => onKill(event, card.npcs_id)} 
+//   />);
 return (
   <div>
-      {parsedListItem}
+      
   </div>
 )
 }
