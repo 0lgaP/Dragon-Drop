@@ -12,7 +12,7 @@ import CampaignDetails from "./components/campaign/CampaignDetails";
 import MapList from "./components/campaign/MapList";
 import MapDetails from "./components/campaign/MapDetails";
 import Story from "./components/campaign/Story";
-import PlayerList from "./components/campaign/PlayerList";
+import PlayerList from "./components/campaign/Party/PlayerList";
 import NPCList from "./components/campaign/NPCList";
 import NPCEdit from "./components/campaign/NPCEdit";
 import MapCreate from "./components/campaign/MapCreate";
