@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import NPCCardItem from "../NPCCardItem";
 
 const PlayerListItem = (props) => {
-  const { id, user_id, name, sheet_url, profile_pic, view } = props;
+  const { id, user_id, name, sheet_url, profile_pic, view, setPlayers } = props;
 
   const [playerInfo, setPlayerInfo] = useState({
     name,
@@ -13,11 +13,22 @@ const PlayerListItem = (props) => {
   });
 
   function updatePlayer() {
-    axios.put(`/users/:id/campaigns/:c_id/party/${id}`, {
-      name: playerInfo.name,
-      profile_pic: playerInfo.profile_pic,
-      sheet_url: playerInfo.sheet_url,
-    });
+    axios
+      .put(`/users/:id/campaigns/:c_id/party/${id}`, {
+        name: playerInfo.name,
+        profile_pic: playerInfo.profile_pic,
+        sheet_url: playerInfo.sheet_url,
+      })
+      .then((result) => {
+        const playerInfo = result.data;
+        setPlayers((prev) => {
+          const newState = { ...prev };
+          newState[playerInfo.id].name = playerInfo.name;
+          newState[playerInfo.id].sheet_url = playerInfo.sheet_url;
+          newState[playerInfo.id].profile_pic = playerInfo.profile_pic;
+          return newState;
+        });
+      });
   }
 
   const viewCard = (

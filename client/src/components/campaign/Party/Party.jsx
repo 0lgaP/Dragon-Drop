@@ -42,6 +42,7 @@ export const Party = () => {
         <PlayerList
           players={players}
           view={{ mode: viewMode, states: viewModes }}
+          setPlayers={setPlayers}
         />
       </div>
     </section>
