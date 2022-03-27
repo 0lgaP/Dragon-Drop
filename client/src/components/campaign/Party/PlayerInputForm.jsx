@@ -15,6 +15,16 @@ export default function PlayerInputForm(props) {
     email: view.mode === view.states.ADD ? "" : email,
   });
 
+  function deletePlayer() {
+    axios.delete(`/users/:id/campaigns/:c_id/party/${id}`).then(() => {
+      setPlayers((prev) => {
+        const newState = { ...prev };
+        delete newState[id];
+        return newState;
+      });
+    });
+  }
+
   function addPlayer() {
     axios
       .post(`/users/:id/campaigns/${campaign()}/party`, { ...playerInfo })
@@ -116,6 +126,9 @@ export default function PlayerInputForm(props) {
       >
         SAVE
       </button>
+      {view.mode === view.states.EDIT && (
+        <button onClick={deletePlayer}>DELETE</button>
+      )}
     </div>
   );
 }
