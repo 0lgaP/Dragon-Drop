@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import NPCCardItem from "../NPCCardItem";
 
 const PlayerListItem = (props) => {
-  const { id, user_id, name, sheet_url, profile_pic } = props;
+  const { id, user_id, name, sheet_url, profile_pic, view } = props;
 
-  return (
+  const viewCard = (
     <NPCCardItem {...props} image={profile_pic}>
       <div className="text-textcolor">
         <Link to={{ pathname: sheet_url }} target="_blank">
@@ -15,6 +15,22 @@ const PlayerListItem = (props) => {
         </Link>
       </div>
     </NPCCardItem>
+  );
+  const editCard = (
+    <NPCCardItem {...props} image={profile_pic}>
+      <div className="text-textcolor">
+        <Link to={{ pathname: sheet_url }} target="_blank">
+          Edit me
+        </Link>
+      </div>
+    </NPCCardItem>
+  );
+
+  return (
+    <React.Fragment>
+      {view.mode === view.states.VIEW && viewCard}
+      {view.mode === view.states.EDIT && editCard}
+    </React.Fragment>
   );
 };
 
