@@ -21,8 +21,6 @@ export default function DropDownListNpc(props) {
     })
   }, [])
 
-console.log(props.value, "VAL PROP")
-
   return (
     <select className="card__dropdown" 
     onChange={props.onChange}
