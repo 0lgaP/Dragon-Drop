@@ -6,11 +6,7 @@ export const PlayerList = ({ players }) => {
   const playerCards = players
     ? dataHelpers()
         .convertObjectToArray(players)
-        .map((player) => (
-          <div>
-            <PlayerListItem {...player} />
-          </div>
-        ))
+        .map((player) => <PlayerListItem key={player.id} {...player} />)
     : null;
   return (
     <div className="grid grid-cols-2 gap-6 mx-20 mt-4 px-10">{playerCards}</div>
