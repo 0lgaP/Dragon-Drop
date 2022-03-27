@@ -4,7 +4,6 @@ function StoryCardItem(props) {
 
   const getName = (id, objArr) => {
     const found = objArr.find(element => element.id === id)
-    console.log("FOUND",found)
     return found && found.name
   }
 
@@ -26,7 +25,7 @@ function StoryCardItem(props) {
           alt="Edit" className="button cancel" onClick={props.onEdit}>
             Edit
           </button>}
-          <button alt="Toggle Alive" className="button death" >
+          <button alt="Toggle Alive" className="button death" onClick={props.onKill}>
           💀
           </button>
           <button alt="Story Card Completed" className="button confirm" onClick={props.onComplete}>

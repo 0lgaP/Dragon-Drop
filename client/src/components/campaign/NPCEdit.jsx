@@ -15,6 +15,7 @@ const NPCList = (props) => {
   const [imageURL, setImageURL] = useState('')
   const [bio, setBio] = useState()
   const [details, setDetails] = useState()
+  const [alive, setAlive] = useState(true);
   const address = `/users/${auth.user_id}/campaigns/${campaign()}/npcs`;
   const npcID = window.localStorage.getItem("npc_id");
   const u_id = JSON.parse(window.localStorage.getItem("user_id"));
@@ -48,7 +49,7 @@ const NPCList = (props) => {
 
   const handleSave = ()=> { 
   // UPDATE ENTRY IN DB
-      axios.put(`${address}/${npcID}/edit`, { name, bio, details, imageURL })
+      axios.put(`${address}/${npcID}/edit`, { name, bio, alive, details, imageURL })
       .then((res) => {
         setName('');
         setImageURL('');

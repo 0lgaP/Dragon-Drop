@@ -76,7 +76,7 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
 
   const editStory = (event) => {
   event.preventDefault()
-  console.log("onEDIT", id)
+  // console.log("onEDIT", id)
   if(story.map_id === ''){
     story.map_id = map
   }
