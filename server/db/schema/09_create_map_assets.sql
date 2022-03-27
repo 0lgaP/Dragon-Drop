@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS map_assets CASCADE;
 -- CREATE USERS
 CREATE TABLE map_assets (
   id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
-  map_id uuid REFERENCES maps(id),
+  map_id uuid REFERENCES maps(id) ON DELETE CASCADE,
   asset_id uuid NOT NULL,
   type_id uuid REFERENCES asset_types(id),
   scale float(4) DEFAULT 10,

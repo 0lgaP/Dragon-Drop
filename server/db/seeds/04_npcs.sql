@@ -15,5 +15,5 @@ INSERT INTO npcs (id, img, campaign_id, name, alive, bio, details)
 INSERT INTO npcs (id, img, campaign_id, name, alive, bio, details) 
   VALUES ('753edd75-7cda-4953-a1fb-f160e7330c7b', 'https://www.serebii.net/pokemonmasters/syncpairs/james.png', 'b819024a-4fd2-4316-8697-411ad293bb71', 'James', true, 'Member of Team Rocket.', 'Viridian City');
 INSERT INTO npcs (id, img, campaign_id, name, alive, bio, details) 
-  VALUES ('c6f18a16-9d2e-4ec7-995c-be066f95b2d7', 'https://static.pokemonpets.com/images/monsters-images-800-800/2052-Shiny-Meowth.webp', 'b819024a-4fd2-4316-8697-411ad293bb71', 'Meowth', true, 'Member of Team Rocket.', 'Viridian City');
+  VALUES ('c6f18a16-9d2e-4ec7-995c-be066f95b2d7', 'https://static.pokemonpets.com/images/monsters-images-800-800/2052-Shiny-Meowth.webp', 'b819024a-4fd2-4316-8697-411ad293bb71', 'Meowth', false, 'Member of Team Rocket.', 'Viridian City');
 

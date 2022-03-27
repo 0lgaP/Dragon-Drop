@@ -15,9 +15,9 @@ import Story from "./components/campaign/Story";
 import PlayerList from "./components/campaign/PlayerList";
 import NPCList from "./components/campaign/NPCList";
 import NPCEdit from "./components/campaign/NPCEdit";
+import MapCreate from "./components/campaign/MapCreate";
 
 function App() {
-
   return (
     <Router>
       <div className="App font-fellEnglish">
@@ -45,6 +45,9 @@ function App() {
             </Route>
             <Route exact path="/users/:u_id/campaigns/:c_id/maps">
               <MapList />
+            </Route>
+            <Route exact path="/users/:u_id/campaigns/:c_id/maps/new">
+              <MapCreate />
             </Route>
             <Route exact path="/users/:u_id/campaigns/:c_id/maps/:m_id">
               <MapDetails />

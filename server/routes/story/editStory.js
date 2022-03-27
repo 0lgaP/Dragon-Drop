@@ -4,14 +4,14 @@ module.exports = (router, db) => {
     // console.log("REQ PARAMS", req.params);
     const sc_id = req.params.sc_id
     // console.log("CARD ID", sc_id)
-    const {map_id, npc_id, text} = req.body;
+    const {map_id, npc_id, text, completed} = req.body;
 
     const storyCardUpdateQuery = `
-    UPDATE story_cards SET npcs_id = $1, maps_id = $2, story_card_text = $3
-    WHERE id = $4
+    UPDATE story_cards SET npcs_id = $1, maps_id = $2, story_card_text = $3, completed = $4
+    WHERE id = $5
     RETURNING *;
     `
-    const variables = [ npc_id, map_id, text, sc_id ]
+    const variables = [ npc_id, map_id, text, completed, sc_id ]
 
     db.query(storyCardUpdateQuery, variables)
     .then((result) => {

@@ -1,5 +1,5 @@
 .button {
-  @apply shadow-lg text-textcolor font-semibold py-1 px-4 rounded shadow m-2
+  @apply shadow-lg text-textcolor font-semibold py-1 px-4 rounded m-2
 }
 
 .confirm {

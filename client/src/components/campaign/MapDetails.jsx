@@ -9,6 +9,9 @@ import update from "immutability-helper";
 
 import './MapDetails.css'
 import CampContext from "../../providers/CampProvider";
+import StoryCardItem from "./StoryCards/StoryCardItem";
+import AuthContext from "../../providers/AuthProvider";
+import NPCCardItem from "./NPCCardItem";
 
 // Test URL
 // http://localhost:3002/users/2c41cf56-a6d7-11ec-b909-0242ac120002/campaigns/8a89386b-de43-4c63-9127-3a78394d4253/maps/927432f7-7839-4a6d-817f-8e1a925b2706
@@ -20,6 +23,7 @@ const MapDetails = () => {
   const params = useParams();
   const [urlParams, setUrlParams] = useState({ ...params });
   const { campaign } = useContext(CampContext)
+  const { auth } = useContext(AuthContext)
   const { state, setState } = useMapData(urlParams.m_id, urlParams.c_id, urlParams.u_id)
   const { campaignAssets } = useCampaignAssets()
   const [mapsForCampaign, setMapsForCampaign] = useState([]);
@@ -93,10 +97,32 @@ const MapDetails = () => {
     return state.data[type][id].layer_order;
   }
 
+  async function updateNotes(text, updateDB) {
+    if (updateDB) await axios.put(`/users/${urlParams.u_id}/campaigns/${campaign()}/notes`, { user_id: auth.user_id, content: text });
+    // console.log('put notes',result)
+      setState(
+        update(state, {
+          data: {
+            Notes: {
+              $merge : {content: text}
+            }
+          }
+        })
+      );
+  }
+  function getNotes(test) {
+    // console.log(state.data.Notes.content.split(/\r\n|\r|\n/).length)
+    return state.data.Notes.content;
+  }
+
 
   useEffect(() => {
     axios.get(`/users/${urlParams.u_id}/campaigns/${urlParams.c_id}/maps`).then(result => setMapsForCampaign(result.data));
   }, [])
+
+  const storyCardsForMap = state.data.StoryCards ? dataHelpers().convertObjectToArray(state.data.StoryCards).map(card => <StoryCardItem { ...card } text={ card.content } view='SHOW'/>) : null
+  
+  const entireStory = state.data.Story ? state.data.Story.map(card => <StoryCardItem { ...card } text={ card.story_card_text } order={ card.order_num } view='SHOW'/>) : null;
 
   return (
     <container className='mapContainer' id={ urlParams.mapId }>
@@ -104,24 +130,8 @@ const MapDetails = () => {
         <h2 className='text-textcolor text-3xl m-2 mb-4 bg-header rounded-lg p-4'>
           { state.name }
         </h2>
-        { !!state?.data?.StoryCards?.length &&
-          <div className='card'>
-          <h3>Story Cards</h3>
-            <ul>
-              { state.data.StoryCards.map(card => {
-                return <li>
-                  <h3>
-                  { card.order }
-                  </h3>
-                  <p>
-                  { card.content }
-                  </p>
-                  Completed?: { card.completed.toString() }
-                </li>
-              })}
-          </ul>
-          </div>
-        }
+        {/* Story cards assets for map */}
+        { storyCardsForMap }
         <div className='card'>
           <div className="tab-bar">
             <h3 onClick={ () => {
@@ -135,13 +145,32 @@ const MapDetails = () => {
               })
             }}>Notes</h3>
           </div>
-          { tabStatus.tStoryFNotes && 
-'Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique tenetur explicabo suscipit quaerat totam doloremque voluptates dolores, atque, eaque ullam officiis dicta beatae labore adipisci? Doloribus atque expedita recusandae sequi.'
-}
+          { tabStatus.tStoryFNotes && entireStory }
           { !tabStatus.tStoryFNotes && 
-            'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae ipsum unde maiores accusantium dolore officia architecto natus, esse in, sunt facere, ducimus accusamus distinctio. Rem dolorem iusto ut minima quos. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non nostrum iure dolore iusto. Ea ab, perferendis optio placeat officia earum cumque molestiae, illo recusandae explicabo cupiditate impedit dolorum magni expedita.'
-}
-</div>
+            (
+              <React.Fragment>
+              <label>Notes : </label>
+              <textarea type="textarea"
+                name="notes"
+                id='notesArea'
+                value={ getNotes() }
+                onChange={ e => {
+                  e.target.style.height = "";
+                  e.target.style.height = e.target.scrollHeight + "px"
+                      updateNotes(document.getElementById('notesArea').value, false)
+                } }
+                onFocus={e => {
+                  e.target.style.height = "";
+                  e.target.style.height = e.target.scrollHeight + "px"
+                } }
+                />
+              <button onClick={ (e) => {
+                  updateNotes(document.getElementById('notesArea').value, true)
+              }}>Save</button>
+              </React.Fragment>
+            )
+          }
+        </div>
       </div>
       <div className='map'>
         { Object.keys(state.data).length && <Map mapState={ state } setMapState={ setState } id={ state.mapId } key={ state.mapId } /> }
@@ -208,7 +237,6 @@ const MapDetails = () => {
                 )
               })
             }
-            {/* + JSON.stringify(campaignAssets) */ }
             { !!tabStatus.tAssetsFMaps &&
               <>
                 <h1>Available Assets</h1> <hr /> 
@@ -218,23 +246,10 @@ const MapDetails = () => {
               Object.keys(campaignAssets.NPCs).map((id) => {
                 return (
                   <div className="asset-card">
-                    <h1 style={ {
-                    backgroundPosition: 'top',
-                    backgroundSize: 'cover',
-                    backgroundRepeat: 'no-repeat',
-                    objectFit: 'contain'
-                  } }>NPC - { campaignAssets.NPCs[id].name }</h1>
-                    <h3>Is alive?: { campaignAssets.NPCs[id].alive.toString() }</h3>
-                      <ol>
-                        <li>
-                          { campaignAssets.NPCs[id].bio }
-                        </li>
-                        <li>
-                          { campaignAssets.NPCs[id].details }
-                        </li>
-                      </ol>
+                    <NPCCardItem { ...campaignAssets.NPCs[id] } image={ campaignAssets.NPCs[id].img }>
                     <button onClick={() => addAssetToMap(id, 'npc')}>Add</button>
-                  </div>                  
+                    </NPCCardItem>
+                  </div>
                 )
               })
             }
@@ -246,10 +261,11 @@ const MapDetails = () => {
                     backgroundPosition: 'center',
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
-                    objectFit: 'contain'
+                    objectFit: 'contain',
+                    height: 'fit-content'
                   } }>
+                    <img src={`${campaignAssets.Images[id].src}`} style={{visibility: 'hidden'}} />
                     <h3>IMG - { campaignAssets.Images[id].name }</h3>
-                    {/* <h3>Is alive?: { campaignAssets.Images[id].alive.toString() }</h3> */}
                     <button onClick={() => addAssetToMap(id, 'img')}>Add</button>
                   </div>                  
                 )
