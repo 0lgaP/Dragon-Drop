@@ -8,7 +8,8 @@ module.exports = (router, db) => {
 
     const getPlayersQuery = `
     SELECT * FROM players
-    WHERE campaign_id = $1;
+    WHERE campaign_id = $1
+    ORDER BY id ASC;
     `;
 
     helpers.tryReturnJson(res, getPlayersQuery, params);
