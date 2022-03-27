@@ -9,10 +9,10 @@ export default function PlayerInputForm(props) {
   const { campaign } = useContext(CampContext);
 
   const [playerInfo, setPlayerInfo] = useState({
-    name,
-    sheet_url,
-    profile_pic,
-    email,
+    name: view.mode === view.states.ADD ? "" : name,
+    sheet_url: view.mode === view.states.ADD ? "" : sheet_url,
+    profile_pic: view.mode === view.states.ADD ? "" : profile_pic,
+    email: view.mode === view.states.ADD ? "" : email,
   });
 
   function addPlayer() {
@@ -57,7 +57,7 @@ export default function PlayerInputForm(props) {
           <input
             type="text"
             placeholder={name}
-            value={view.mode === view.states.ADD ? "" : playerInfo.name}
+            value={playerInfo.name}
             onChange={(e) =>
               setPlayerInfo((prev) => {
                 const newState = { ...prev };
@@ -70,7 +70,7 @@ export default function PlayerInputForm(props) {
             <input
               type="text"
               placeholder={email}
-              value={view.mode === view.states.ADD ? "" : playerInfo.email}
+              value={playerInfo.email}
               onChange={(e) =>
                 setPlayerInfo((prev) => {
                   const newState = { ...prev };
@@ -87,7 +87,7 @@ export default function PlayerInputForm(props) {
         <input
           type="text"
           placeholder={profile_pic}
-          value={view.mode === view.states.ADD ? "" : playerInfo.profile_pic}
+          value={playerInfo.profile_pic}
           onChange={(e) =>
             setPlayerInfo((prev) => {
               const newState = { ...prev };
@@ -101,7 +101,7 @@ export default function PlayerInputForm(props) {
         <input
           type="text"
           placeholder={sheet_url}
-          value={view.mode === view.states.ADD ? "" : playerInfo.sheet_url}
+          value={playerInfo.sheet_url}
           onChange={(e) =>
             setPlayerInfo((prev) => {
               const newState = { ...prev };
