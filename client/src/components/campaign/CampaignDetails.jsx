@@ -1,21 +1,111 @@
-import { React, useContext, useEffect } from "react";
+import { React, useContext, useEffect, useState } from "react";
 import CampContext from "../../providers/CampProvider";
 import { useParams } from 'react-router-dom';
+import NPCCardItem from "../campaign/NPCCardItem";
+import StoryCardItem from "./StoryCards/StoryCardItem";
+import axios from "axios";
 
 
 const CampaignDetails = (props) => {
-  const {campaign, setCampaign} = useContext(CampContext)
+  const {setCampaign} = useContext(CampContext)
   const { c_id } = useParams();
+  const user_id = window.localStorage.getItem("user_id")
+  const u_id = JSON.parse(user_id)
+  const [state, setState] = useState({
+    npcs: [],
+    maps: [],
+    players: [],
+    storyCards: [],
+    deadNPCs: [],
+    deadStoryCards: []
+  })
+  setCampaign(c_id)
   
   useEffect(()=> {
-    setCampaign(c_id)
-    // console.log(`id being set to campaign useContext: `, c_id)
+    Promise.all([
+      axios.get(`/users/${u_id}/campaigns/${c_id}/maps`),
+      axios.get(`/users/${u_id}/campaigns/${c_id}/npcs`),
+      axios.get(`/users/${u_id}/campaigns/${c_id}/story`),
+    ])
+    .then((res) => {
+      setState({
+        maps: res[0].data,
+        npcs: res[1].data,
+        storyCards: res[2].data,
+      })
+    })
   }, [])
+  const aliveNPCs = state.npcs.filter((char) => char.alive === true);
+  const deadNPCs = state.npcs.filter((char) => char.alive === false);
+  const unusedStories = state.storyCards.filter((story) => story.completed === false);
+  const deadStories = state.storyCards.filter((story) => story.completed === true);
 
-// console.log(`campaign`, campaign)
+  const npcList = aliveNPCs.map((character) => {
+      return (
+      <NPCCardItem id={character.id}  image={character.img} name={character.name} bio={character.bio} details={character.details} alive={character.alive} />
+      )
+  })
+
+  const storyCardList = unusedStories.map((card) => {
+    return(
+    <StoryCardItem 
+      key={card.id} 
+      text={card.story_card_text} 
+      order={card.order_num} 
+    />
+    )
+  })
+
+  // const mapList = state.maps.map((map) => {
+  //     return (
+  //       <div className="map-card w-80 h-80 m-2 mt-4 rounded-xl p-2">
+  //         <h2>{ map.name }</h2>
+  //           <img className="map-thumbnail" src={ map.background } alt={ map.name } />
+  //       </div>
+  //     )
+  // })
+
+  const deadNPCList = deadNPCs.map((character) => {
+    return (
+      <div className="bg-bkgd m-6 p-0.5 rounded-xl opacity-75">
+    <NPCCardItem id={character.id}  image={character.img} name={character.name} bio={character.bio} details={character.details} alive={character.alive} />
+    </div>
+    )
+})
+
+const deadStoryCardList = deadStories.map((card) => {
+  return(
+  <StoryCardItem 
+    key={card.id} 
+    text={card.story_card_text} 
+    order={card.order_num} 
+  />
+  )
+})
+
 
 return(
-  <div>HALLO</div>
+  <section className="flex flex-column justify-center content-center">
+    {/* <div className="m-2">
+      <div className="">{mapList}</div>
+    </div> */}
+    <div className="bg-dragongreen/50 rounded-xl m-4 w-1/4">
+    <h1 className="text-2xl m-4 text-textcolor p-2">Story Cards</h1>
+      {storyCardList}
+    </div>
+    <div className="bg-gunmetal rounded-xl m-4 w-1/4">
+      <h1 className="text-2xl m-4 text-textcolor p-2">Story History</h1>
+      {deadStoryCardList}
+    </div>
+    <div className="bg-dragongreen/50 rounded-xl m-4">
+    <h1 className="text-2xl m-4 text-textcolor p-2">NPCs in Play</h1>
+      {npcList}
+    </div>
+    <div className="bg-gunmetal rounded-xl m-4">
+      <h1 className="text-2xl m-4 text-textcolor p-2">💀 The Graveyard 💀</h1>
+      {deadNPCList}
+    </div>
+  </section>
 )
 }
 

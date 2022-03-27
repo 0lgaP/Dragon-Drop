@@ -76,7 +76,7 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
 
   const editStory = (event) => {
   event.preventDefault()
-  console.log("onEDIT", id)
+  // console.log("onEDIT", id)
   if(story.map_id === ''){
     story.map_id = map
   }
@@ -85,8 +85,6 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
   }
   axios.put(`${address}/${id}`, story)
   .then((res) => {
-    console.log("Return Edit Card from DB", res)
-    console.log("EDIT STORY", allStories)
     const card = res.data
     setStories(prev => {
       return {...prev, [card.id]: {...card}}
@@ -114,22 +112,15 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
         onChange={(e) => setStoryText(e.target.value)}
         />
       <article className="card__container">
-
         <DropDownListMap onChange={setMap} value={map}/>
         <DropDownListNpc onChange={setNpc} value={npc}/>
-        {/* <DropDownListItem onChange={setMap} item={`npcs`} value={npc} special={`Npc`}/>
-        <DropDownListItem onChange={setNpc} item={`maps`} value={npc} special={`Npc`}/> */}
-
       </article>
-
         <button className="button confirm" type="submit" onClick={id ? editStory : createStory}>
           Submit
         </button>
-
         <button className="button cancel" onClick={reset} >
           Reset
         </button>
-
       </article>
     </form>
   </section>

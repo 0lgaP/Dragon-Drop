@@ -27,12 +27,5 @@ module.exports = (router, db) => {
   assetRoutes(router, db);
 
   noteRoutes(router, db);
-
-  // // HOME PAGE
-  // router.get("/", function (req, res, next) {
-  //   res.render("index");
-  // });
-
-  // // GET LOGIN PAGE
-  // app.use("/login", (req, res) => {});
+  
 };

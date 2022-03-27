@@ -10,14 +10,16 @@ const CampaignListItem = (props) => {
 
   const rawAuth = window.localStorage.getItem("user_id")
   const userAuth = JSON.parse(rawAuth)
-  const {setCampaign} = useContext(CampContext)
+  const { setCampaign } = useContext(CampContext)
 
 
-return(
-  <Link to={`/users/${userAuth}/campaigns/${props.id}`}>
-  <div>{props.name}</div>
-  </Link>
-)
+  return (
+    <div className="p-2 m-2">
+      <Link to={`/users/${userAuth}/campaigns/${props.id}`}>
+        <div>{props.name}</div>
+      </Link>
+    </div>
+  )
 }
 
 export default CampaignListItem;
