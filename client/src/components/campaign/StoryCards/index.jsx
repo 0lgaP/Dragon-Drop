@@ -2,11 +2,14 @@
 import React, {useState, useEffect, useContext} from 'react';
 import Form from "./Form";
 import StoryCardContainer from './StoryCardContainer';
-import StoryCardContainerPull from './StoryCardContainerPull';
+import DndStoryCardContainer from './DndStoryCardContainer';
 import axios from '../../../api/axios';
 import dataHelper from '../../../hooks/dataHelpers';
 import AuthContext from '../../../providers/AuthProvider';
 import CampContext from '../../../providers/CampProvider';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+
 
 
 const viewObj = {
@@ -22,31 +25,10 @@ export default function StoryCards() {
   const address = `/users/${u_id}/campaigns/${campaign()}`
 
   const [allStories, setStories] = useState('');
+  console.log("ALL STORIES", allStories)
   const [view, setView] = useState(viewObj.CREATE);
   const [currentStory, setCurrentStory] = useState({});
 
-  //state.maps: id, name, campaign_id, background
-  //state.npc: id, bio, details(mapname) img, campaign_id, name, alive
-  //state.story: campaigns_id, completed, created_on, id, maps_id, npc_id, order_num, story_card_text
-
-  // const [state, setState] = useState({
-  //   npcs: [],
-  //   maps: []
-  // })
-
-
-  // useEffect(() => {
-  //   Promise.all([
-  //     axios.get(`${address}/npcs`),
-  //     axios.get(`${address}/maps`),
-  //   ]).then((all) => {
-  //     setState((prev) => ({
-  //       ...prev,
-  //       npcs: all[0].data,
-  //       maps: all[1].data,
-  //     }));
-  //   });
-  // }, []);
 
   useEffect(() => {
     axios.get(`${address}/story`)
@@ -82,7 +64,12 @@ console.log("CURRENT STORY", currentStory)
     setStories={setStories} 
     onEdit={onEdit} 
     />
-    {/* <StoryCardContainerPull allStories={allStories} setStories={setStories}/> */}
+    <DndStoryCardContainer
+    allStories={allStories} 
+    setStories={setStories} 
+    onEdit={onEdit} 
+    />
+
     </div>
   );
 }
