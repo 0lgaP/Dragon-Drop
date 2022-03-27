@@ -1,7 +1,7 @@
 
 import React, {useState, useEffect, useContext} from 'react';
 import Form from "./Form";
-import StoryCardContainer from './StoryCardContainer';
+// import StoryCardContainer from './StoryCardContainer';
 import {DndStoryCardContainer} from './DndStoryCardContainer';
 import axios from '../../../api/axios';
 import dataHelper from '../../../hooks/dataHelpers';
@@ -28,6 +28,7 @@ export default function StoryCards() {
   console.log("ALL STORIES", allStories)
   const [view, setView] = useState(viewObj.CREATE);
   const [currentStory, setCurrentStory] = useState({});
+  // array of stories
   const [dndStory, setDndStory] = useState('');
 
   
@@ -61,43 +62,25 @@ export default function StoryCards() {
     view={view}
     viewObj={viewObj}
     setView={setView}
+    dndStory={dndStory}
+    setDndStory={setDndStory}
     css='card_edit'/>}
-    <StoryCardContainer
+    {/* <StoryCardContainer
     allStories={allStories} 
     setStories={setStories} 
     onEdit={onEdit} 
-    />
+      /> */}
+      <section className="card">
 <DndProvider backend={HTML5Backend}>
     {dndStory.length && <DndStoryCardContainer
     allStories={allStories} 
     setStories={setStories}
     dndStory={dndStory}
     setDndStory={setDndStory}
-    onEdit={onEdit} 
+            onEdit={onEdit}
     />}
 </DndProvider>
+    </section>
     </div>
   );
 }
-    //state.maps: id, name, campaign_id, background
-    //state.npc: id, bio, details(mapname) img, campaign_id, name, alive
-    //state.story: campaigns_id, completed, created_on, id, maps_id, npc_id, order_num, story_card_text
-  
-    // const [state, setState] = useState({
-    //   npcs: [],
-    //   maps: []
-    // })
-  
-  
-    // useEffect(() => {
-    //   Promise.all([
-    //     axios.get(`${address}/npcs`),
-    //     axios.get(`${address}/maps`),
-    //   ]).then((all) => {
-    //     setState((prev) => ({
-    //       ...prev,
-    //       npcs: all[0].data,
-    //       maps: all[1].data,
-    //     }));
-    //   });
-    // }, []);

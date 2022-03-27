@@ -8,7 +8,7 @@ import CampContext from "../../../providers/CampProvider";
 import axios from "../../../api/axios";
 import DropDownListItem from "./DropDownListItem";
 
-function Form({allStories, setStories, text, id, npc, map, view, setView, viewObj, css}) {
+function Form({allStories, setStories, text, id, npc, map, view, setView, viewObj, css, dndStory, setDndStory}) {
   const { auth } = useContext(AuthContext);
   const { campaign } = useContext(CampContext);
   const u_id = auth.user_id
@@ -83,14 +83,29 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
   if(story.npc_id === ''){
     story.npc_id = npc
   }
+  console.log('all stories',allStories)
   axios.put(`${address}/${id}`, story)
   .then((res) => {
     const card = res.data
     setStories(prev => {
-      return {...prev, [card.id]: {...card}}
+      const newState = {...prev}
+      return {...newState, [card.id]: {...card}}
     })
     setStory(prev => {
       return {...prev, map_id: '', npc_id: '', text: ''}
+    })
+    setDndStory(prev => {
+      const newState = [...prev];
+
+      for (const index in newState) {
+        console.log('loop', newState[index], card)
+        if (newState[index].id !== card.id) continue;
+        newState[index] = card;
+        console.log('newState', newState[index], card)
+        break;
+      }
+      
+      return newState
     })
     if(view === viewObj.EDIT){
       setView(viewObj.CREATE)
