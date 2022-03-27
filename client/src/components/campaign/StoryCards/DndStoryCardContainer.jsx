@@ -17,6 +17,9 @@ import { ItemTypes } from './ItemTypes';
 const style = {
     width: 400,
 };
+
+// allStories={allStories} 
+// setStories={setStories}
 const ITEMS = [
     {
         id: 1,
@@ -47,8 +50,13 @@ const ITEMS = [
         text: 'PROFIT',
     },
 ];
-export const DndStoryCardContainer = memo(function DndStoryCardContainer() {
-    const [cards, setCards] = useState(ITEMS);
+// dndStory={dndStory}
+// setDndStory={setDndStory}
+// onEdit={onEdit} 
+export const DndStoryCardContainer = memo(function DndStoryCardContainer(props) {
+  console.log("dndSTATE", props.dndStory)
+    const [cards, setCards] = useState(props.dndStory);
+    console.log("CARDS", cards)
     const findCard = useCallback((id) => {
         const card = cards.filter((c) => `${c.id}` === id)[0];
         return {

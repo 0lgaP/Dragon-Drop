@@ -68,13 +68,13 @@ export default function StoryCards() {
     onEdit={onEdit} 
     />
 <DndProvider backend={HTML5Backend}>
-    <DndStoryCardContainer
+    {dndStory.length && <DndStoryCardContainer
     allStories={allStories} 
     setStories={setStories}
     dndStory={dndStory}
     setDndStory={setDndStory}
     onEdit={onEdit} 
-    />
+    />}
 </DndProvider>
     </div>
   );

@@ -2,19 +2,19 @@ import React, {useState, useEffect} from 'react'
 
 function DndStoryCardItem(props) {
 
-  const getName = (id, objArr) => {
-    const found = objArr.find(element => element.id === id)
-    return found && found.name
-  }
+  // const getName = (id, objArr) => {
+  //   const found = objArr.find(element => element.id === id)
+  //   return found && found.name
+  // }
 
-  const getLife = (id, objArr) => {
-  const alive = objArr.find(element => element.id === id)
-  return alive && alive.alive ? '😎' : '💀'
-  }
-
-  const npcName = getName(props.npcId, props.allNpcs)
-  const mapName = getName(props.mapId, props.allMaps)
-  const alive = getLife(props.npcId, props.allNpcs)
+  // const getLife = (id, objArr) => {
+  // const alive = objArr.find(element => element.id === id)
+  // return alive && alive.alive ? '😎' : '💀'
+  // }
+  console.log("DND PROPS",props)
+  const npcName = props.npc.name
+  const mapName = props.map.name
+  const alive = props.npc.alive
 
   const viewMode = props.view
 
