@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import dataHelpers from "../../../hooks/dataHelpers";
 import CampContext from "../../../providers/CampProvider";
+import PlayerInputForm from "./PlayerInputForm";
 import { PlayerList } from "./PlayerList";
 
 const viewModes = {
@@ -35,6 +36,16 @@ export const Party = () => {
         )}
         {viewMode !== viewModes.VIEW && (
           <button onClick={() => setViewMode(viewModes.VIEW)}>VIEW</button>
+        )}
+        {viewMode === viewModes.ADD && (
+          <PlayerInputForm
+            setPlayers={setPlayers}
+            name="Player Name"
+            sheet_url="Link to Char Sheet"
+            profile_pic="Link to Char Picture"
+            email="Player Email"
+            view={{ mode: viewMode, states: viewModes }}
+          />
         )}
       </div>
       <div>
