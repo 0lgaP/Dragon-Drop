@@ -2,7 +2,7 @@
 import React, {useState, useEffect, useContext} from 'react';
 import Form from "./Form";
 import StoryCardContainer from './StoryCardContainer';
-import DndStoryCardContainer from './DndStoryCardContainer';
+import {DndStoryCardContainer} from './DndStoryCardContainer';
 import axios from '../../../api/axios';
 import dataHelper from '../../../hooks/dataHelpers';
 import AuthContext from '../../../providers/AuthProvider';
@@ -28,6 +28,7 @@ export default function StoryCards() {
   console.log("ALL STORIES", allStories)
   const [view, setView] = useState(viewObj.CREATE);
   const [currentStory, setCurrentStory] = useState({});
+  const [dndStory, setDndStory] = useState('');
 
   
   useEffect(() => {
@@ -35,9 +36,11 @@ export default function StoryCards() {
     .then((res) => {
       const storyCardsObject = dataHelper().convertArrayToObject(res.data, 'id')
       setStories(storyCardsObject)
-      
+      setDndStory(res.data)
     })
   }, [])
+
+  // console.log("DND STORY STATE", dndStory)
   
   const onEdit = (story) => {
     setCurrentStory(story)
@@ -64,12 +67,15 @@ export default function StoryCards() {
     setStories={setStories} 
     onEdit={onEdit} 
     />
+<DndProvider backend={HTML5Backend}>
     <DndStoryCardContainer
     allStories={allStories} 
-    setStories={setStories} 
+    setStories={setStories}
+    dndStory={dndStory}
+    setDndStory={setDndStory}
     onEdit={onEdit} 
     />
-
+</DndProvider>
     </div>
   );
 }
