@@ -1,12 +1,10 @@
 import React from "react";
+import PlayerListItem from "./PlayerListItem";
 
 export const PlayerList = () => {
   return (
-    <section>
-      <div className="bg-primary rounded-xl text-textcolor m-2">
-        <h1 className="text-2xl m-4 p-5">Party Details</h1>
-      </div>
-      <div>{/* IMAGES HERE - BASE , CARDS - STRETCH */}</div>
-    </section>
+    <div className="bg-primary rounded-xl text-textcolor m-2">
+      <PlayerListItem />
+    </div>
   );
 };
