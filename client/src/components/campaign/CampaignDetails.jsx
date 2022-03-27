@@ -89,7 +89,7 @@ return(
     {/* <div className="m-2">
       <div className="">{mapList}</div>
     </div> */}
-    <div className="bg-header rounded-xl m-4 w-1/4">
+    <div className="bg-dragongreen/50 rounded-xl m-4 w-1/4">
     <h1 className="text-2xl m-4 text-textcolor p-2">Story Cards</h1>
       {storyCardList}
     </div>
@@ -97,7 +97,7 @@ return(
       <h1 className="text-2xl m-4 text-textcolor p-2">Story History</h1>
       {deadStoryCardList}
     </div>
-    <div className="bg-header rounded-xl m-4">
+    <div className="bg-dragongreen/50 rounded-xl m-4">
     <h1 className="text-2xl m-4 text-textcolor p-2">NPCs in Play</h1>
       {npcList}
     </div>
