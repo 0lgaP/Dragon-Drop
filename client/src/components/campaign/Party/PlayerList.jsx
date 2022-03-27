@@ -1,10 +1,18 @@
 import React from "react";
+import dataHelpers from "../../../hooks/dataHelpers";
 import PlayerListItem from "./PlayerListItem";
 
-export const PlayerList = () => {
+export const PlayerList = ({ players }) => {
+  const playerCards = players
+    ? dataHelpers()
+        .convertObjectToArray(players)
+        .map((player) => (
+          <div>
+            <PlayerListItem {...player} />
+          </div>
+        ))
+    : null;
   return (
-    <div className="bg-primary rounded-xl text-textcolor m-2">
-      <PlayerListItem />
-    </div>
+    <div className="grid grid-cols-2 gap-6 mx-20 mt-4 px-10">{playerCards}</div>
   );
 };
