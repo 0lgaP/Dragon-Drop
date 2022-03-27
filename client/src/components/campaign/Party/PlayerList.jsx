@@ -1,6 +1,6 @@
 import React from "react";
 
-const PlayerList = () => {
+export const PlayerList = () => {
   return (
     <section>
       <div className="bg-primary rounded-xl text-textcolor m-2">
@@ -10,5 +10,3 @@ const PlayerList = () => {
     </section>
   );
 };
-
-export default PlayerList;
