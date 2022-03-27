@@ -26,7 +26,8 @@ module.exports = {
         primary: "#2c363f",
         secondary: "#f7f9fb",
         tertiary: "#542344",
-        textcolor: "#f7f9fb"
+        textcolor: "#f7f9fb",
+        dragongreen: "#54ce08"
       },
       fontFamily: {
         merriweather: ['Merriweather', 'serif'],
