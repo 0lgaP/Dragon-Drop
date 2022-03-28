@@ -76,6 +76,7 @@ export default function StoryCards() {
       dndStory={dndStory}
       setDndStory={setDndStory}
       onEdit={onEdit}
+      id={currentStory.id} 
       />}
       {dndStory.length === 0 && <Empty/>}
       </DndProvider>

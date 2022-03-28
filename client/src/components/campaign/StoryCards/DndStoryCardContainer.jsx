@@ -134,6 +134,9 @@ const onKill = (event, card) => {
     }, [cards])
     
     const [, drop] = useDrop(() => ({ accept: ItemTypes.CARD }));
+
+    // console.log("I'mBEING EDITED HERE", props.id)
+
     return (
     <div className="" ref={drop}>
       {cards.map((card) => {
@@ -154,6 +157,7 @@ const onKill = (event, card) => {
               onEdit={() => onEdit(card)}
               onComplete={(event) => { onComplete(event, card.id, card) }}
               onKill={(event) => onKill(event, card.npcs_id)} 
+              css={card.id === props.id ? 'edit' : 'active'}
               />
           )
       })}
