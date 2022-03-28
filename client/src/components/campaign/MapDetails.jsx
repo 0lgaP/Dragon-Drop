@@ -139,30 +139,66 @@ const MapDetails = () => {
       .then((result) => setMapsForCampaign(result.data));
   }, []);
 
-  const storyCardsForMap = state.data.StoryCards
-    ? dataHelpers()
-        .convertObjectToArray(state.data.StoryCards)
-        .map((card) => (
+  const [allNpcs, setAllNpcs] = useState([]);
+  // console.log("NPCS state.npcs", state.npcs)
+  useEffect(() => {
+    axios
+      .get(`/users/0/campaigns/${campaign()}/npcs`)
+      .then((all) => setAllNpcs([...all.data]));
+  }, []);
+  // const storyCardsForMap = null;
+
+  const [storyCardHackery, setStoryCardHackery] = useState({
+    npcs: [],
+    maps: [],
+  });
+  // console.log("NPCS state.npcs", state.npcs)
+  useEffect(() => {
+    Promise.all([
+      axios.get(`/users/0/campaigns/${campaign()}/npcs`),
+      axios.get(`/users/0/campaigns/${campaign()}/maps`),
+    ]).then((all) => {
+      setStoryCardHackery((prev) => {
+        return { ...prev, npcs: all[0].data, maps: all[1].data };
+      });
+    });
+  }, []);
+
+  const storyCardsForMap =
+    state.data.StoryCards && allNpcs.length
+      ? state.data.Story.map((card) => {
+          if (card.maps_id !== state.mapId) return null;
+          return (
+            <StoryCardItem
+              {...card}
+              npcId={card.npcs_id}
+              allMaps={storyCardHackery.maps}
+              allNpcs={storyCardHackery.npcs}
+              key={card.id + 1}
+              text={card.story_card_text}
+              order={card.order_num}
+              view="SHOW"
+            />
+          );
+        })
+      : null;
+
+  // const entireStory = null;
+  const entireStory =
+    state.data.Story && allNpcs.length
+      ? state.data.Story.map((card) => (
           <StoryCardItem
             {...card}
-            key={card.id}
-            text={card.content}
+            npcId={card.npcs_id}
+            allMaps={storyCardHackery.maps}
+            allNpcs={storyCardHackery.npcs}
+            key={card.id + 1}
+            text={card.story_card_text}
+            order={card.order_num}
             view="SHOW"
           />
         ))
-    : null;
-
-  const entireStory = state.data.Story
-    ? state.data.Story.map((card) => (
-        <StoryCardItem
-          {...card}
-          key={card.id + 1}
-          text={card.story_card_text}
-          order={card.order_num}
-          view="SHOW"
-        />
-      ))
-    : null;
+      : null;
 
   return (
     <container className="mapContainer" id={urlParams.mapId}>
