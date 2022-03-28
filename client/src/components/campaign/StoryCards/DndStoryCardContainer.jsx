@@ -42,7 +42,7 @@ export const DndStoryCardContainer = memo(function DndStoryCardContainer(props) 
     npcs: [],
     maps: [],
   })
-// console.log("NPCS state.npcs", state.npcs)
+
   useEffect(() => {
     Promise.all([
       axios.get(`${address}/npcs`),
@@ -80,20 +80,15 @@ const onComplete = (event, id, card) => {
   story.completed = true
   setStory(story)
   axios.put(`${address}/story/${id}`, story)
-      .then(() => {
-          props.setDndStory(prev => {
-            const newState = [...prev];
-              for (const index in newState) {
-                  if (newState[index].id !== id) continue;
-                  newState[index].completed = true
-                  return newState
-              }
-          })
-    // setStories(prev => {
-    //   const newState = {...prev}
-    //   delete newState[id]
-    //   return newState
-    // })
+  .then(() => {
+    props.setDndStory(prev => {
+    const newState = [...prev];
+      for (const index in newState) {
+        if (newState[index].id !== id) continue;
+        newState[index].completed = true
+        return newState
+      }
+    })
   })
 }
 
@@ -114,7 +109,6 @@ const onKill = (event, card) => {
     imageURL: NPC.img
   })
     .then((res) => {
-      console.log(`SUCCESS KILL`, res.data)
       const npcUpdate = res.data
       setState(prev => {
         return {
@@ -125,11 +119,9 @@ const onKill = (event, card) => {
     })
     .catch((err) => console.log("Error From FORM's KILL Client Call", err))
 }
-  // console.log("dndSTATE", props.dndStory)
-    // const [cards, setCards] = useState(props.dndStory);
+
     const cards = props.dndStory;
     const setCards = props.setDndStory;
-    // console.log("CARDS", cards)
     const findCard = useCallback((id) => {
         const card = cards.filter((c) => `${c.id}` === id)[0];
         return {
@@ -139,7 +131,6 @@ const onKill = (event, card) => {
     }, [cards]);
     const moveCard = useCallback((id, atIndex) => {
         const { card, index } = findCard(id);
-        console.log("movingBEFORE", cards)
         setCards(update(cards, {
             $splice: [
                 [index, 1],
@@ -155,21 +146,30 @@ const onKill = (event, card) => {
     }, [cards])
     
     const [, drop] = useDrop(() => ({ accept: ItemTypes.CARD }));
-    return (<div ref={drop} style={style}>
-        {cards.map((card) => {
-            if (card.completed) return null;
-            return (<Card key={card.id} id={`${card.id}`} text={card.story_card_text} moveCard={moveCard} findCard={findCard}
-                npcId={card.npcs_id}
-                mapId={card.maps_id}
-                allNpcs={state.npcs}
-                allMaps={state.maps}
-                order={card.order_num}
-                onDelete={(event) => onDelete(event, card.id)}
-                onEdit={() => onEdit(card)}
-                onComplete={(event) => { onComplete(event, card.id, card) }}
-                onKill={(event) => onKill(event, card.npcs_id)} />
-            )
-        })}
-		</div>);
+    return (
+    <div ref={drop} style={style}>
+      {cards.map((card) => {
+        if (card.completed) return null;
+          return (
+            <Card 
+              key={card.id} 
+              id={`${card.id}`} 
+              text={card.story_card_text} 
+              moveCard={moveCard} 
+              findCard={findCard}
+              npcId={card.npcs_id}
+              mapId={card.maps_id}
+              allNpcs={state.npcs}
+              allMaps={state.maps}
+              order={card.order_num}
+              onDelete={(event) => onDelete(event, card.id)}
+              onEdit={() => onEdit(card)}
+              onComplete={(event) => { onComplete(event, card.id, card) }}
+              onKill={(event) => onKill(event, card.npcs_id)} 
+              />
+          )
+      })}
+		</div>
+    );
 });
 

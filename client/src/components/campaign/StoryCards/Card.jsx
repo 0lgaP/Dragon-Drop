@@ -3,14 +3,10 @@ import { useDrag, useDrop } from "react-dnd";
 import { ItemTypes } from "./ItemTypes";
 import StoryCardItem from "./StoryCardItem";
 const style = {
-  border: "1px dashed gray",
-  padding: "0.5rem 1rem",
-  marginBottom: ".5rem",
-  backgroundColor: "white",
   cursor: "move",
 };
 export const Card = memo(function Card(props) {
-  const { id, text, moveCard, findCard } = props;
+  const { id, moveCard, findCard } = props;
   // console.log("CARD TEXT PROP", text)
   const originalIndex = findCard(id).index;
   const [{ isDragging }, drag] = useDrag(
