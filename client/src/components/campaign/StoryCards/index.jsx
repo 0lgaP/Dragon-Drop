@@ -1,7 +1,6 @@
 
 import React, {useState, useEffect, useContext} from 'react';
 import Form from "./Form";
-// import StoryCardContainer from './StoryCardContainer';
 import {DndStoryCardContainer} from './DndStoryCardContainer';
 import axios from '../../../api/axios';
 import dataHelper from '../../../hooks/dataHelpers';
@@ -9,7 +8,7 @@ import AuthContext from '../../../providers/AuthProvider';
 import CampContext from '../../../providers/CampProvider';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import DropDownListMap from './DropDownListMap';
+import Empty from './Empty';
 
 
 
@@ -50,37 +49,39 @@ export default function StoryCards() {
 
 
   return(
-    <div className="grid-cols-3 flex">
 
-    { (view === viewObj.CREATE && setDndStory) ? <Form css='card' setStories={setStories} setDndStory={setDndStory}  view={view}
-    viewObj={viewObj}  setView={setView}/> :
-    <Form text={currentStory.story_card_text}
-    id={currentStory.id} 
-    npc={currentStory.npcs_id} 
-    map={currentStory.maps_id} 
-    setStories={setStories}
-    view={view}
-    viewObj={viewObj}
-    setView={setView}
-    dndStory={dndStory}
-    setDndStory={setDndStory}
-    css='card_edit'/>}
-    {/* <StoryCardContainer
-    allStories={allStories} 
-    setStories={setStories} 
-    onEdit={onEdit} 
-      /> */}
-      <section className="card">
-<DndProvider backend={HTML5Backend}>
-    {dndStory.length && <DndStoryCardContainer
-    allStories={allStories} 
-    setStories={setStories}
-    dndStory={dndStory}
-    setDndStory={setDndStory}
-    onEdit={onEdit}
-    />}
-</DndProvider>
+    <div className="flex m-2">
+      <section className='w-1/3 flex justify-center  '>
+        <article className='fixed w-1/3 '>
+      { (view === viewObj.CREATE && setDndStory) ? <Form css='create' setStories={setStories} setDndStory={setDndStory}  view={view}
+      viewObj={viewObj}  setView={setView}/> :
+      <Form text={currentStory.story_card_text}
+      id={currentStory.id} 
+      npc={currentStory.npcs_id} 
+      map={currentStory.maps_id} 
+      setStories={setStories}
+      view={view}
+      viewObj={viewObj}
+      setView={setView}
+      dndStory={dndStory}
+      setDndStory={setDndStory}
+      css='edit'/>}
+        </article>
+      </section>
+      <section className='w-2/3 '>
+      <DndProvider backend={HTML5Backend}>
+      {dndStory.length > 0 && <DndStoryCardContainer
+      allStories={allStories} 
+      setStories={setStories}
+      dndStory={dndStory}
+      setDndStory={setDndStory}
+      onEdit={onEdit}
+      />}
+      {dndStory.length === 0 && <Empty/>}
+      </DndProvider>
+
     </section>
     </div>
+
   );
 }

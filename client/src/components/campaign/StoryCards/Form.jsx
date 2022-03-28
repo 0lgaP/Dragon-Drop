@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import DropDownListMap from "./DropDownListMap";
 import DropDownListNpc from "./DropDownListNpc";
 import './Button.css';
-import './Card.css';
+import './Form.css';
 import AuthContext from "../../../providers/AuthProvider";
 import CampContext from "../../../providers/CampProvider";
 import axios from "../../../api/axios";
@@ -120,18 +120,18 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
 }
 
   return (
-  <section className={[`card ${css}`]}>
+  <section className={[`form `]}>
     <form autoComplete="off">
-      <article className={[`card__container`]}>
-        <label className="card__title">
+      <article className={[`form__container ${css}`]}>
+        <label className="form__title">
           {id ? "Update Story" : "Add Story Card"}
         </label>
         < textarea 
-        className="card__text-area"
+        className="form__text-area"
         value={story.text}
         onChange={(e) => setStoryText(e.target.value)}
         />
-      <article className="card__container">
+      <article className="form__dropdown_container">
         <DropDownListMap onChange={setMap} value={map}/>
         <DropDownListNpc onChange={setNpc} value={npc}/>
       </article>

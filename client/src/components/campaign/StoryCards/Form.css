@@ -1,0 +1,29 @@
+.form {
+  @apply max-w-[100%] rounded overflow-hidden shadow-lg m-2 
+}
+.create {
+  @apply bg-secondary
+}
+.edit{
+  @apply bg-pink 
+}
+
+.form__container {
+  @apply rounded overflow-hidden px-8 py-4 
+}
+
+.form__dropdown_container {
+  @apply rounded px-8 py-4  
+}
+
+.form__title {
+  @apply font-bold text-xl text-gunmetal
+}
+
+.form__text-area {
+  @apply shadow-sm mt-4 block w-full h-64 p-4 lg:text-lg rounded-md bg-bkgd text-textcolor
+}
+
+.form__dropdown {
+  @apply inline-block bg-bkgd rounded px-3 py-1 text-sm font-semibold m-2 text-textcolor
+}
