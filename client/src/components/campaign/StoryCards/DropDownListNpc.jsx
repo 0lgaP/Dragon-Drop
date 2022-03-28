@@ -22,7 +22,7 @@ export default function DropDownListNpc(props) {
   }, [])
 
   return (
-    <select className="card__dropdown" 
+    <select className="form__dropdown" 
     onChange={props.onChange}
     value={props.value}
     >

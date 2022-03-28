@@ -1,5 +1,5 @@
 .card {
-  @apply max-w-[100%] rounded overflow-hidden shadow-lg bg-secondary m-2 
+  @apply max-w-[100%] rounded overflow-hidden shadow-lg m-2 bg-secondary hover:bg-pink
 }
 
 .card__container {
@@ -7,11 +7,24 @@
 }
 
 .story_card__container {
-  @apply rounded overflow-hidden shadow-lg bg-secondary m-2 
+  @apply rounded overflow-hidden shadow-lg m-2 
 
 }
+
+.active{
+  @apply bg-secondary
+}
+
+.non_active{
+  @apply bg-dragongreen
+}
+
+.edit{
+  @apply bg-pink 
+}
+
 .card__title {
-  @apply font-bold text-xl text-gunmetal break-words
+  @apply font-bold text-xl text-gunmetal break-words 
 }
 
 .card__text-area {

@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 
 function StoryCardItem(props) {
+  const css = props.css
+  const currentEdit = props.currentEdit
+
+  
+
+
+
 
   const getName = (id, objArr) => {
     const found = objArr.find((element) => element.id === id);
@@ -19,7 +26,7 @@ function StoryCardItem(props) {
   const viewMode = props.view;
 
   return (
-    <section className="story_card__container">
+    <section className={[`story_card__container ${css}`]}>
       <article className="card__container">
         {viewMode !== "SHOW" && (
           <button alt="Edit" className="button cancel" onClick={props.onEdit}>
