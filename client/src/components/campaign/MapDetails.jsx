@@ -139,30 +139,33 @@ const MapDetails = () => {
       .then((result) => setMapsForCampaign(result.data));
   }, []);
 
-  const storyCardsForMap = state.data.StoryCards
-    ? dataHelpers()
-        .convertObjectToArray(state.data.StoryCards)
-        .map((card) => (
-          <StoryCardItem
-            {...card}
-            key={card.id}
-            text={card.content}
-            view="SHOW"
-          />
-        ))
-    : null;
+  const storyCardsForMap = null;
 
-  const entireStory = state.data.Story
-    ? state.data.Story.map((card) => (
-        <StoryCardItem
-          {...card}
-          key={card.id + 1}
-          text={card.story_card_text}
-          order={card.order_num}
-          view="SHOW"
-        />
-      ))
-    : null;
+  const entireStory = null;
+  // const storyCardsForMap = state.data.StoryCards
+  //   ? dataHelpers()
+  //       .convertObjectToArray(state.data.StoryCards)
+  //       .map((card) => (
+  //         <StoryCardItem
+  //           {...card}
+  //           key={card.id}
+  //           text={card.content}
+  //           view="SHOW"
+  //         />
+  //       ))
+  //   : null;
+
+  // const entireStory = state.data.Story
+  //   ? state.data.Story.map((card) => (
+  //       <StoryCardItem
+  //         {...card}
+  //         key={card.id + 1}
+  //         text={card.story_card_text}
+  //         order={card.order_num}
+  //         view="SHOW"
+  //       />
+  //     ))
+  //   : null;
 
   return (
     <container className="mapContainer" id={urlParams.mapId}>
