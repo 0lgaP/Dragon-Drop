@@ -135,7 +135,7 @@ const onKill = (event, card) => {
     
     const [, drop] = useDrop(() => ({ accept: ItemTypes.CARD }));
     return (
-    <div ref={drop}>
+    <div className="" ref={drop}>
       {cards.map((card) => {
         if (card.completed) return null;
           return (

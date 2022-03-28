@@ -19,7 +19,7 @@ function StoryCardItem(props) {
   const viewMode = props.view;
 
   return (
-    <section className="card">
+    <section className="story_card__container">
       <article className="card__container">
         {viewMode !== "SHOW" && (
           <button alt="Edit" className="button cancel" onClick={props.onEdit}>

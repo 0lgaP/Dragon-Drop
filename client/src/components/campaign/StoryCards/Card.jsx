@@ -40,7 +40,7 @@ export const Card = memo(function Card(props) {
   );
   const opacity = isDragging ? 0 : 1;
   return (
-    <div ref={(node) => drag(drop(node))} style={{ ...style, opacity }}>
+    <div className="story_card__drag-drop-container" ref={(node) => drag(drop(node))} style={{ ...style, opacity }}>
       <StoryCardItem {...props} />
     </div>
   );
