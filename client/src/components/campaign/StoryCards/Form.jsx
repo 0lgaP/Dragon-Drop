@@ -15,7 +15,6 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
   const c_id = campaign()
   // console.log("PROVIDER", campaign_id)
   const address = `/users/${u_id}/campaigns/${c_id}/story`
-  console.log("TEXT", text)
   const [story, setStory] = useState({
     npc_id: '',
     map_id: '',
@@ -63,12 +62,12 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
       axios.post(`${address}`, story)
       .then((result) => {
         console.log('Return add Card from DB',result)
-        setStory(prev => {
-          return {...prev, map_id: '', npc_id: '', text: ''}
-        })
         const card = result.data
         setStories(prev => {
           return {...prev, [card.id]: {...card} }
+        })
+        setStory(prev => {
+          return {...prev, map_id: '', npc_id: '', text: ''}
         })
       })
       .catch((err) => console.log("Error form Form Component", err))

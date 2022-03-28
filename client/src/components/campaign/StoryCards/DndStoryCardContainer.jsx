@@ -149,10 +149,8 @@ const onKill = (event, card) => {
 
     }, [findCard, cards, setCards]);
     useEffect(() => {
-      console.log(cards, "USE")
       for (let cardIndex in cards){
         axios.put(`/users/:id/campaigns/:c_id/story/${cards[cardIndex].id}/order`, {order: cardIndex})
-        .then(result => console.log(result))
       }
     }, [cards])
     

@@ -25,7 +25,6 @@ export default function StoryCards() {
   const address = `/users/${u_id}/campaigns/${campaign()}`
 
   const [allStories, setStories] = useState('');
-  console.log("ALL STORIES", allStories)
   const [view, setView] = useState(viewObj.CREATE);
   const [currentStory, setCurrentStory] = useState({});
   // array of stories
@@ -48,8 +47,6 @@ export default function StoryCards() {
     setView(viewObj.EDIT)
     console.log("VIEW", view)
   }
-
-  console.log("CURRENT STORY", currentStory)
   
   return(
     <div className="grid-cols-3 flex">
