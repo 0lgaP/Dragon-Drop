@@ -9,12 +9,14 @@ import AuthContext from '../../../providers/AuthProvider';
 import CampContext from '../../../providers/CampProvider';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import DropDownListMap from './DropDownListMap';
 
 
 
 const viewObj = {
   CREATE: 'CREATE',
-  EDIT: 'EDIT'
+  EDIT: 'EDIT',
+  EMPTY: 'EMPTY'
 }
 
 export default function StoryCards() {
@@ -29,6 +31,7 @@ export default function StoryCards() {
   const [currentStory, setCurrentStory] = useState({});
   // array of stories
   const [dndStory, setDndStory] = useState('');
+  const [currentMap, setCurrentMap] = useState('');
 
   
   useEffect(() => {
@@ -48,8 +51,18 @@ export default function StoryCards() {
     console.log("VIEW", view)
   }
   
+  const setStoryPageMap = (e) => {
+    const selectedMap = e.target.value;
+    console.log("SetStoryPageMap set to:", selectedMap)
+    setCurrentMap(selectedMap)
+  }
+
+
   return(
     <div className="grid-cols-3 flex">
+      <div>
+        <DropDownListMap onChange={setStoryPageMap} value={currentMap}/>
+      </div>
     { view === viewObj.CREATE ? <Form css='card' setStories={setStories}/> :
     <Form text={currentStory.story_card_text}
     id={currentStory.id} 
@@ -74,7 +87,8 @@ export default function StoryCards() {
     setStories={setStories}
     dndStory={dndStory}
     setDndStory={setDndStory}
-            onEdit={onEdit}
+    onEdit={onEdit}
+    currentMap={currentMap}
     />}
 </DndProvider>
     </section>
