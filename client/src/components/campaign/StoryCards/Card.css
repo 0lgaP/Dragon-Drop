@@ -1,9 +1,9 @@
 .card {
-  @apply max-w-sm rounded overflow-hidden shadow-lg bg-secondary m-2
+  @apply max-w-sm rounded overflow-hidden shadow-lg bg-secondary m-2 
 }
 
 .card__container {
-  @apply px-2 py-4
+  @apply px-8 py-4
 }
 
 .card__title {

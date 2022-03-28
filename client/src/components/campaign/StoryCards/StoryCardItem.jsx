@@ -49,12 +49,18 @@ function StoryCardItem(props) {
             🗑️
           </button>
         )}
-        <div className="card__title">{props.text}</div>
-        <div>
+        <section className="card__title" alt="card text">{props.text}</section>
+        <div >
+
+        <aside className="flex justify-end">
           {alive}
+          {" "}
           {npcName}
+        </aside>
+        <aside className="flex justify-end">
+          {mapName}
+        </aside>
         </div>
-        <div>{mapName}</div>
       </article>
     </section>
   );

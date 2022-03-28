@@ -50,7 +50,7 @@ export default function StoryCards() {
 
   return(
 
-    <div className="grid-cols-2 flex justify-center">
+    <div className="grid-cols-2 auto-cols-auto flex justify-center">
 
       { (view === viewObj.CREATE && setDndStory) ? <Form css='card' setStories={setStories} setDndStory={setDndStory}  view={view}
       viewObj={viewObj}  setView={setView}/> :

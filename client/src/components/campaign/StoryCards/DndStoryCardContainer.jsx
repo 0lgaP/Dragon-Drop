@@ -1,14 +1,4 @@
 import React, { useEffect, useContext } from "react";
-// import DndStoryCardsList from "./DndStoryCardsList";
-
-// export default function DndStoryCardContainer(props) {
-
-//   return (
-//     <section className="card">
-//       <DndStoryCardsList {...props} />
-//     </section>
-//   )
-// }
 import { memo, useCallback, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import { Card } from './Card';
@@ -17,9 +7,7 @@ import { ItemTypes } from './ItemTypes';
 import axios from "../../../api/axios";
 import AuthContext from "../../../providers/AuthProvider";
 import CampContext from "../../../providers/CampProvider";
-const style = {
-    width: 400,
-};
+
     // allStories={allStories} 
     // setStories={setStories}
     // dndStory={dndStory}
@@ -147,7 +135,7 @@ const onKill = (event, card) => {
     
     const [, drop] = useDrop(() => ({ accept: ItemTypes.CARD }));
     return (
-    <div ref={drop} style={style}>
+    <div ref={drop}>
       {cards.map((card) => {
         if (card.completed) return null;
           return (
