@@ -50,9 +50,9 @@ export default function StoryCards() {
 
   return(
 
-    <div className="flex justify-center">
-      <section className='w-1/3 flex justify-center'>
-        <section className='fixed '>
+    <div className="flex">
+      <section className='w-1/3 flex justify-center  '>
+        <article className='fixed w-1/3 mx-2'>
       { (view === viewObj.CREATE && setDndStory) ? <Form css='card' setStories={setStories} setDndStory={setDndStory}  view={view}
       viewObj={viewObj}  setView={setView}/> :
       <Form text={currentStory.story_card_text}
@@ -65,10 +65,10 @@ export default function StoryCards() {
       setView={setView}
       dndStory={dndStory}
       setDndStory={setDndStory}
-      css='card_edit'/>}
-        </section>
+      css='form_edit'/>}
+        </article>
       </section>
-      <section className='w-2/3'>
+      <section className='w-2/3 mx-2'>
       <DndProvider backend={HTML5Backend}>
       {dndStory.length > 0 && <DndStoryCardContainer
       allStories={allStories} 
