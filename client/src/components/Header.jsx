@@ -14,7 +14,7 @@ const userAuth = window.localStorage.getItem("user_id")
   if (userAuth && JSON.parse(userAuth) === auth.user_id) {
     const u_id = auth.user_id
     return (
-      <div className="bg-header text-xl text-textcolor flex flex-row w-screen" >
+      <div className="bg-header text-xl text-textcolor flex flex-row w-full" >
         < div className="header-left flex flex-row m-4 justify-start w-full">
             <div>
               <img className="m-1 mr-4 w-20" src="https://i.imgur.com/pMfFYJc.png" alt='dragon drop logo'></img>
@@ -40,15 +40,15 @@ const userAuth = window.localStorage.getItem("user_id")
   else {
     return (
       <div className="bg-header text-xl text-textcolor flex flex-row p-2 w-full">
-        <div className="header-left p-2 ">
-          <img className="logo"></img>
-          <h2 id="app-name" className="">Dragon Drop</h2>
+        <div className="header-left flex flex-row m-4 justify-start w-full">
+        <img className="m-1 mr-4 w-20" src="https://i.imgur.com/pMfFYJc.png" alt='dragon drop logo'></img>
+          <h2 id="app-name" className="m-4 mt-6 text-3xl">Dragon Drop</h2>
         </div>
-        <div className="header-right flex flex-row m-4 justify-end">
-          <div className="p-2">
+        <div className="header-right flex flex-row m-4 mt-8 justify-end">
+          <div className="m-4">
           <Link to="/register"><h3>Register</h3></Link>
           </div>
-          <div className="p-2">
+          <div className="m-4">
           <Link to="/login"><h3>Login</h3></Link>
           </div>
         </div>

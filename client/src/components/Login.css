@@ -1,0 +1,19 @@
+.login-page {
+@apply flex flex-col items-center justify-center content-center w-full text-3xl m-8 text-textcolor
+}
+
+.login-form {
+  @apply flex flex-col bg-gunmetal text-textcolor w-fit justify-center content-center rounded-xl p-4 text-lg mt-10
+}
+
+.input-label {
+  @apply p-2 m-4
+}
+
+.input-field {
+  @apply p-2 rounded-lg text-textcolor bg-bkgd/40
+}
+
+.submit-button {
+  @apply m-6 p-2 text-textcolor bg-bkgd/40 rounded-lg border-2 border-textcolor
+}
