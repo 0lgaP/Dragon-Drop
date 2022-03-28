@@ -54,6 +54,7 @@ const MapList = () => {
             return (
               <div
                 className={"map-card" + (inEditMode ? " !transition-none" : "")}
+                key={map.id}
               >
                 <div>
                   <h2>{map.name}</h2>

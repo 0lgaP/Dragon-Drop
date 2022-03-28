@@ -12,10 +12,10 @@ import CampaignDetails from "./components/campaign/CampaignDetails";
 import MapList from "./components/campaign/MapList";
 import MapDetails from "./components/campaign/MapDetails";
 import Story from "./components/campaign/Story";
-import PlayerList from "./components/campaign/PlayerList";
 import NPCList from "./components/campaign/NPCList";
 import NPCEdit from "./components/campaign/NPCEdit";
 import MapCreate from "./components/campaign/MapCreate";
+import Party from "./components/campaign/Party";
 
 function App() {
   return (
@@ -56,7 +56,7 @@ function App() {
               <Story />
             </Route>
             <Route exact path="/users/:u_id/campaigns/:c_id/party">
-              <PlayerList />
+              <Party />
             </Route>
             <Route exact path="/users/:u_id/campaigns/:c_id/npcs">
               <NPCList />
