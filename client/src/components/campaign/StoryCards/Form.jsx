@@ -120,9 +120,9 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
 }
 
   return (
-  <section className={[`form ${css}`]}>
+  <section className={[`form `]}>
     <form autoComplete="off">
-      <article className={[`form__container`]}>
+      <article className={[`form__container ${css}`]}>
         <label className="form__title">
           {id ? "Update Story" : "Add Story Card"}
         </label>
@@ -131,7 +131,7 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
         value={story.text}
         onChange={(e) => setStoryText(e.target.value)}
         />
-      <article className="form__container">
+      <article className="form__dropdown_container">
         <DropDownListMap onChange={setMap} value={map}/>
         <DropDownListNpc onChange={setNpc} value={npc}/>
       </article>

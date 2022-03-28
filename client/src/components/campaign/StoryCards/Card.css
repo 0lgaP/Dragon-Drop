@@ -11,11 +11,11 @@
 
 }
 .card__title {
-  @apply font-bold text-xl text-gunmetal
+  @apply font-bold text-xl text-gunmetal break-words
 }
 
 .card__text-area {
-  @apply shadow-sm mt-4 block w-full h-64 p-4 lg:text-lg rounded-md bg-bkgd text-textcolor
+  @apply shadow-sm mt-4 block w-full h-64 p-4 lg:text-lg rounded-md bg-bkgd text-textcolor 
 }
 
 .card__dropdown {

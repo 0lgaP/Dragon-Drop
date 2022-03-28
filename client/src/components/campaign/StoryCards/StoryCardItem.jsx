@@ -49,9 +49,9 @@ function StoryCardItem(props) {
             🗑️
           </button>
         )}
-        <section className="card__title" alt="card text">{props.text}</section>
-        <div >
-
+        <section className="card__title" >{props.text}</section>
+      
+      <div>     
         <aside className="flex justify-end">
           {alive}
           {" "}
