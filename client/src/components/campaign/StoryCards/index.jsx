@@ -65,7 +65,8 @@ export default function StoryCards() {
       setView={setView}
       dndStory={dndStory}
       setDndStory={setDndStory}
-      css='edit'/>}
+      css='edit_form'
+      setCurrentStory={setCurrentStory}/>}
         </article>
       </section>
       <section className='w-2/3 '>

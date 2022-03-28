@@ -157,7 +157,7 @@ const onKill = (event, card) => {
               onEdit={() => onEdit(card)}
               onComplete={(event) => { onComplete(event, card.id, card) }}
               onKill={(event) => onKill(event, card.npcs_id)} 
-              css={card.id === props.id ? 'edit' : 'active'}
+              css={card.id !== props.id ? 'active' : 'edit'}
               />
           )
       })}

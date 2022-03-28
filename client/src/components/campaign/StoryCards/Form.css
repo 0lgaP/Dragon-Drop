@@ -4,7 +4,7 @@
 .create {
   @apply bg-secondary
 }
-.edit{
+.edit_form{
   @apply bg-pink 
 }
 
