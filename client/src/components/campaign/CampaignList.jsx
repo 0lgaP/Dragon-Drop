@@ -77,9 +77,9 @@ const CampaignList = () => {
         </div>
       </div >
     <section>
-      <div className="card__container bg-secondary text-gunmetal text-2xl rounded-lg border-2 p-6 px-10 m-6">
+      <div className="card__container text-gunmetal text-2xl rounded-lg p-6 px-10 m-6">
         {campaigns.map(camp =>
-          <CampaignListItem id={camp.id} name={camp.name} />
+          <div className="bg-secondary rounded-xl m-4"><CampaignListItem id={camp.id} name={camp.name} /></div>
         )}
       </div>
     </section>
