@@ -1,7 +1,6 @@
 
 import React, {useState, useEffect, useContext} from 'react';
 import Form from "./Form";
-// import StoryCardContainer from './StoryCardContainer';
 import {DndStoryCardContainer} from './DndStoryCardContainer';
 import axios from '../../../api/axios';
 import dataHelper from '../../../hooks/dataHelpers';
@@ -9,7 +8,7 @@ import AuthContext from '../../../providers/AuthProvider';
 import CampContext from '../../../providers/CampProvider';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import DropDownListMap from './DropDownListMap';
+import Empty from './Empty';
 
 
 
@@ -65,21 +64,19 @@ export default function StoryCards() {
     dndStory={dndStory}
     setDndStory={setDndStory}
     css='card_edit'/>}
-    {/* <StoryCardContainer
-    allStories={allStories} 
-    setStories={setStories} 
-    onEdit={onEdit} 
-      /> */}
+
       <section className="card">
 <DndProvider backend={HTML5Backend}>
-    {dndStory.length && <DndStoryCardContainer
+    {dndStory.length > 0 && <DndStoryCardContainer
     allStories={allStories} 
     setStories={setStories}
     dndStory={dndStory}
     setDndStory={setDndStory}
     onEdit={onEdit}
     />}
+    {dndStory.length === 0 && <Empty/>}
 </DndProvider>
+
     </section>
     </div>
   );

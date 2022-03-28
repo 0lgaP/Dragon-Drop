@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 function StoryCardItem(props) {
-  console.log("sci", props);
 
   const getName = (id, objArr) => {
     const found = objArr.find((element) => element.id === id);
