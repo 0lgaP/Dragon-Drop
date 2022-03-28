@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Redirect } from 'react-router-dom'
 import AuthContext from "../providers/AuthProvider";
-// import CampContext from "../providers/CampProvider";
+import './Login.css'
 import axios from '../api/axios'
 
 const LOGIN_URL = "/login";
@@ -40,19 +40,19 @@ const Login = () => {
   }
   if (!userAuth) {
     return (
-      <section>
+      <section className="login-page">
         <h1>Login</h1>
-        <form onSubmit={handleSubmit}>
-          <label>
+        <form className="login-form" onSubmit={handleSubmit}>
+          <label className="input-label">
             <p>Email</p>
-            <input type="text" onChange={e => setEmail(e.target.value)} value={email} />
+            <input className="input-field" type="text" onChange={e => setEmail(e.target.value)} value={email} />
           </label>
-          <label>
+          <label className="input-label">
             <p>Password</p>
-            <input type="password" onChange={e => setPassword(e.target.value)} value={password} />
+            <input className="input-field" type="password" onChange={e => setPassword(e.target.value)} value={password} />
           </label>
           <div>
-            <button type="submit">Submit</button>
+            <button className="submit-button" type="submit">Submit</button>
           </div>
         </form>
       </section>

@@ -1,23 +1,27 @@
 import { React, useState } from "react";
+import './Register.css';
 
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   
 return (
-  <form>
-  <label>
+  <section className="register-page">
+    <h1>Register here!</h1>
+  <form className="register-form">
+  <label className="input-label">
     <p>Email</p>
-    <input type="text" onChange={e => setEmail(e.target.value)}/>
+    <input className="input-field" type="text" onChange={e => setEmail(e.target.value)}/>
   </label>
-  <label>
+  <label className="input-label">
     <p>Password</p>
-    <input type="password" onChange={e => setPassword(e.target.value)}/>
+    <input className="input-field" type="password" onChange={e => setPassword(e.target.value)}/>
   </label>
   <div>
-    <button type="submit">Submit</button>
+    <button className="submit-button" type="submit">Sign Up</button>
   </div>
 </form>
+</section>
 )
 }
 
