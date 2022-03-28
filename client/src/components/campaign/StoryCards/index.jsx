@@ -1,11 +1,16 @@
 
 import React, {useState, useEffect, useContext} from 'react';
 import Form from "./Form";
-import StoryCardContainer from './StoryCardContainer';
+// import StoryCardContainer from './StoryCardContainer';
+import {DndStoryCardContainer} from './DndStoryCardContainer';
 import axios from '../../../api/axios';
 import dataHelper from '../../../hooks/dataHelpers';
 import AuthContext from '../../../providers/AuthProvider';
 import CampContext from '../../../providers/CampProvider';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import DropDownListMap from './DropDownListMap';
+
 
 
 const viewObj = {
@@ -23,28 +28,32 @@ export default function StoryCards() {
   const [allStories, setStories] = useState('');
   const [view, setView] = useState(viewObj.CREATE);
   const [currentStory, setCurrentStory] = useState({});
-
+ 
+  const [dndStory, setDndStory] = useState('');
   
   useEffect(() => {
     axios.get(`${address}/story`)
     .then((res) => {
       const storyCardsObject = dataHelper().convertArrayToObject(res.data, 'id')
       setStories(storyCardsObject)
-      
+      setDndStory(res.data)
     })
   }, [])
+
+
   
   const onEdit = (story) => {
     setCurrentStory(story)
     setView(viewObj.EDIT)
-    console.log("VIEW", view)
   }
-
-  console.log("CURRENT STORY", currentStory)
   
+
+
   return(
     <div className="grid-cols-3 flex">
-    { view === viewObj.CREATE ? <Form css='card' setStories={setStories}/> :
+
+    { (view === viewObj.CREATE && setDndStory) ? <Form css='card' setStories={setStories} setDndStory={setDndStory}  view={view}
+    viewObj={viewObj}  setView={setView}/> :
     <Form text={currentStory.story_card_text}
     id={currentStory.id} 
     npc={currentStory.npcs_id} 
@@ -53,35 +62,25 @@ export default function StoryCards() {
     view={view}
     viewObj={viewObj}
     setView={setView}
+    dndStory={dndStory}
+    setDndStory={setDndStory}
     css='card_edit'/>}
-    <StoryCardContainer
+    {/* <StoryCardContainer
     allStories={allStories} 
     setStories={setStories} 
     onEdit={onEdit} 
-    />
-    {/* <StoryCardContainerPull allStories={allStories} setStories={setStories}/> */}
+      /> */}
+      <section className="card">
+<DndProvider backend={HTML5Backend}>
+    {dndStory.length && <DndStoryCardContainer
+    allStories={allStories} 
+    setStories={setStories}
+    dndStory={dndStory}
+    setDndStory={setDndStory}
+    onEdit={onEdit}
+    />}
+</DndProvider>
+    </section>
     </div>
   );
 }
-    //state.maps: id, name, campaign_id, background
-    //state.npc: id, bio, details(mapname) img, campaign_id, name, alive
-    //state.story: campaigns_id, completed, created_on, id, maps_id, npc_id, order_num, story_card_text
-  
-    // const [state, setState] = useState({
-    //   npcs: [],
-    //   maps: []
-    // })
-  
-  
-    // useEffect(() => {
-    //   Promise.all([
-    //     axios.get(`${address}/npcs`),
-    //     axios.get(`${address}/maps`),
-    //   ]).then((all) => {
-    //     setState((prev) => ({
-    //       ...prev,
-    //       npcs: all[0].data,
-    //       maps: all[1].data,
-    //     }));
-    //   });
-    // }, []);

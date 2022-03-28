@@ -7,7 +7,7 @@ module.exports = (router, db) => {
     const {c_id} = req.params;
     const {map_id, npc_id, text, completed} = req.body;
     let newCard = {};
-
+    console.log("REQ BOCY POST", req.body)
       const storyCardQuery = `
       INSERT INTO story_cards(campaigns_id, npcs_id, maps_id, order_num, story_card_text, completed)
       VALUES($1, $2, $3, $4, $5, $6)

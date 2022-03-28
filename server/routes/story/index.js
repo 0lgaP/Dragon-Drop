@@ -4,7 +4,7 @@ const editStory = require("./editStory");
 const deleteStory = require("./deleteStory");
 const fetchStory = require("./fetchStory");
 
-// const editOrder = require("./editOrder");
+const editOrder = require("./editOrder");
 // const completeCard = require("./completeCard");
 
 module.exports = (router, db) => {
@@ -21,7 +21,7 @@ module.exports = (router, db) => {
 
 
 
-  // editOrder(router, db);
+  editOrder(router, db);
 
   // completeCard(router, db);
 
