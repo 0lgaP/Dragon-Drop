@@ -28,10 +28,8 @@ export default function StoryCards() {
   const [allStories, setStories] = useState('');
   const [view, setView] = useState(viewObj.CREATE);
   const [currentStory, setCurrentStory] = useState({});
-  // array of stories
+ 
   const [dndStory, setDndStory] = useState('');
-
-  const [currentMap, setCurrentMap] = useState('');
   
   useEffect(() => {
     axios.get(`${address}/story`)
@@ -42,27 +40,20 @@ export default function StoryCards() {
     })
   }, [])
 
-  // console.log("DND STORY STATE", dndStory)
+
   
   const onEdit = (story) => {
     setCurrentStory(story)
     setView(viewObj.EDIT)
-    console.log("VIEW", view)
   }
   
-  const setStoryPageMap = (e) => {
-    const selectedMap = e.target.value;
-    console.log("SetStoryPageMap set to:", selectedMap)
-    setCurrentMap(selectedMap)
-  }
 
 
   return(
     <div className="grid-cols-3 flex">
-      <div>
-        <DropDownListMap onChange={setStoryPageMap} value={currentMap}/>
-      </div>
-    { view === viewObj.CREATE ? <Form css='card' setStories={setStories}/> :
+
+    { (view === viewObj.CREATE && setDndStory) ? <Form css='card' setStories={setStories} setDndStory={setDndStory}  view={view}
+    viewObj={viewObj}  setView={setView}/> :
     <Form text={currentStory.story_card_text}
     id={currentStory.id} 
     npc={currentStory.npcs_id} 
@@ -87,7 +78,6 @@ export default function StoryCards() {
     dndStory={dndStory}
     setDndStory={setDndStory}
     onEdit={onEdit}
-    currentMap={currentMap}
     />}
 </DndProvider>
     </section>

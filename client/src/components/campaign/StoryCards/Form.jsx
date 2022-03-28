@@ -13,7 +13,7 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
   const { campaign } = useContext(CampContext);
   const u_id = auth.user_id
   const c_id = campaign()
-  // console.log("PROVIDER", campaign_id)
+
   const address = `/users/${u_id}/campaigns/${c_id}/story`
   const [story, setStory] = useState({
     npc_id: '',
@@ -22,7 +22,6 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
     completed: false
   })
 
-  // console.log("PROPS FORM", text, id, npc, map, view )
 
   useEffect(()=>{
     setStoryText(text)
@@ -30,21 +29,17 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
 
   const setNpc = (e) => {
     const selectedNpc = e.target.value;
-    console.log("INSIDE SET NPC", selectedNpc)
+
     setStory({...story, npc_id: selectedNpc})
   }
 
 
   const setMap = (e) => {
     const selectedMap = e.target.value;
-    console.log(selectedMap)
+
     setStory({...story, map_id: selectedMap})
   }
 
-  // const setItem = (e, item) => {
-  //   const selectedItem = e.target.value;
-  //   setStory({...story, [item]: selectedItem})
-  // }
 
   const setStoryText = (newStory) => {
     setStory({...story, text: newStory})
@@ -56,33 +51,44 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
     setStory({...story, map_id: '', npc_id: '', text: ''})
   }
 
-  // console.log("STORY", story)
+
   const createStory = (event) => {
     event.preventDefault()
+
       axios.post(`${address}`, story)
-      .then((result) => {
-        console.log('Return add Card from DB',result)
-        const card = result.data
+      .then((res) => {
+
+        const card = res.data
         setStories(prev => {
-          return {...prev, [card.id]: {...card} }
+          const newState = {...prev}
+          return {...newState, [card.id]: {...card}}
         })
         setStory(prev => {
           return {...prev, map_id: '', npc_id: '', text: ''}
         })
+        setDndStory(prev => {
+          const newState = [...prev];
+    
+          newState.push(card)
+          return newState
+        })
+        if(view === viewObj.EDIT){
+          setView(viewObj.CREATE)
+        }
       })
-      .catch((err) => console.log("Error form Form Component", err))
+      .catch((err) => console.log("Error From FORM's POST Client Call", err))
   }
 
   const editStory = (event) => {
   event.preventDefault()
-  // console.log("onEDIT", id)
+
   if(story.map_id === ''){
     story.map_id = map
   }
   if(story.npc_id === ''){
     story.npc_id = npc
   }
-  console.log('all stories',allStories)
+
   axios.put(`${address}/${id}`, story)
   .then((res) => {
     const card = res.data
@@ -97,10 +103,10 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
       const newState = [...prev];
 
       for (const index in newState) {
-        console.log('loop', newState[index], card)
+
         if (newState[index].id !== card.id) continue;
         newState[index] = card;
-        console.log('newState', newState[index], card)
+
         break;
       }
       

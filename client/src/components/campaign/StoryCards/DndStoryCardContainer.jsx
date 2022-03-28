@@ -157,7 +157,6 @@ const onKill = (event, card) => {
     const [, drop] = useDrop(() => ({ accept: ItemTypes.CARD }));
     return (<div ref={drop} style={style}>
         {cards.map((card) => {
-          if (props.currentMap !== card.maps_id) return null;
             if (card.completed) return null;
             return (<Card key={card.id} id={`${card.id}`} text={card.story_card_text} moveCard={moveCard} findCard={findCard}
                 npcId={card.npcs_id}
