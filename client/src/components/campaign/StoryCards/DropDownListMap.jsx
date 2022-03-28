@@ -23,7 +23,7 @@ export default function DropDownListMap(props) {
   }, [])
 
   return (
-    <select className="form__dropdown" 
+    <select className="card__dropdown" 
     onChange={props.onChange}
     value={props.value}
     >
