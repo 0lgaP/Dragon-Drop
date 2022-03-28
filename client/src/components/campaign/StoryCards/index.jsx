@@ -15,8 +15,7 @@ import DropDownListMap from './DropDownListMap';
 
 const viewObj = {
   CREATE: 'CREATE',
-  EDIT: 'EDIT',
-  EMPTY: 'EMPTY'
+  EDIT: 'EDIT'
 }
 
 export default function StoryCards() {
@@ -31,8 +30,8 @@ export default function StoryCards() {
   const [currentStory, setCurrentStory] = useState({});
   // array of stories
   const [dndStory, setDndStory] = useState('');
-  const [currentMap, setCurrentMap] = useState('');
 
+  const [currentMap, setCurrentMap] = useState('');
   
   useEffect(() => {
     axios.get(`${address}/story`)
