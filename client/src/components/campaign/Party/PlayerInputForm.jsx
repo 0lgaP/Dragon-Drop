@@ -60,7 +60,7 @@ export default function PlayerInputForm(props) {
       <div className="npc-card--header flex flex-row justify-start content-center h-10 pb-5 mb-4">
         <img
           className="rounded-full border-primary border-2 w-20 h-20 mr-8"
-          src={profile_pic}
+          src={playerInfo.profile_pic}
           alt={name}
         ></img>
         <h5 className="mt-5 text-2xl">
