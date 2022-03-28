@@ -2,6 +2,13 @@ import React, { useState, useEffect } from "react";
 
 function StoryCardItem(props) {
   const css = props.css
+  const currentEdit = props.currentEdit
+
+  
+
+
+
+
   const getName = (id, objArr) => {
     const found = objArr.find((element) => element.id === id);
     return found && found.name;

@@ -15,6 +15,10 @@
   @apply bg-secondary
 }
 
+.non_active{
+  @apply bg-dragongreen
+}
+
 .edit{
   @apply bg-pink 
 }

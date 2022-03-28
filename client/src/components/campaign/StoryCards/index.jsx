@@ -27,7 +27,7 @@ export default function StoryCards() {
   const [allStories, setStories] = useState('');
   const [view, setView] = useState(viewObj.CREATE);
   const [currentStory, setCurrentStory] = useState({});
- 
+
   const [dndStory, setDndStory] = useState('');
   
   useEffect(() => {
