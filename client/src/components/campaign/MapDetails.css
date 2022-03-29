@@ -22,7 +22,11 @@
 @apply bg-bkgd rounded-l-xl p-4 m-2 mr-0
 }
 .card-body .delete-button {
-@apply bg-bkgd rounded-r-xl p-4 m-2 mr-0 cursor-pointer
+  @apply bg-bkgd rounded-r-xl p-4 m-2 mr-0 cursor-pointer flex items-center justify-center font-bold text-3xl transition-all;
+	color: #F2542D;
+}
+.card-body .delete-button:hover {
+  @apply bg-primary;
 }
 .card-body button {
   @apply m-2

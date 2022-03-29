@@ -286,12 +286,14 @@ const MapDetails = () => {
                     <h4>- npc</h4>
                   </div>
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col items-center">
                   <label>Layer</label>
                   <input
-                    className="w-8 m-2 rounded-md text-2xl"
+                    className="w-8 m-2 rounded-md text-2xl w-[50px]"
                     name="layer"
                     type="number"
+                    min={1}
+                    max={300}
                     value={getLayer("NPCs", key)}
                     onChange={(e) => updateLayer("NPCs", key, e.target.value)}
                   />
@@ -325,11 +327,13 @@ const MapDetails = () => {
                     <h4>- image</h4>
                   </div>
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col items-center">
                   <label>Layer</label>
                   <input
-                    className="w-8 m-2 rounded-md text-2xl"
+                    className="w-8 m-2 rounded-md text-2xl w-[50px]"
                     name="layer"
+                    min={1}
+                    max={300}
                     type="number"
                     value={getLayer("Images", key)}
                     onChange={(e) => updateLayer("Images", key, e.target.value)}
@@ -337,7 +341,7 @@ const MapDetails = () => {
                 </div>
               </div>
               <div
-                className="text-red-600 delete-button"
+                className="delete-button"
                 onClick={() => deleteAssetFromMap("Images", key)}
               >
                 Delete
@@ -345,23 +349,7 @@ const MapDetails = () => {
             </div>
           );
         })
-      : //   return (
-        //     <p className="text-lg">
-        //       {state.data.Images[key].name}
-        //       <button onClick={() => deleteAssetFromMap("Images", key)}>
-        //         Delete
-        //       </button>
-        //       <input
-        //         className="w-8 m-2 text-2xl rounded-md"
-        //         name="layer"
-        //         type="number"
-        //         value={getLayer("Images", key)}
-        //         onChange={(e) => updateLayer("Images", key, e.target.value)}
-        //       />
-        //     </p>
-        //   );
-        // })
-        null;
+      : null;
   return (
     <container className="mapContainer" id={urlParams.mapId}>
       <div className="map">
