@@ -32,8 +32,9 @@ const MapDetails = () => {
   const { campaignAssets } = useCampaignAssets();
   const [mapsForCampaign, setMapsForCampaign] = useState([]);
   const [tabStatus, setTabStatus] = useState({
-    tStoryFNotes: true,
-    tAssetsFMaps: false,
+    playerMaps: "player",
+    assetsMapStoriesStorys: "map stories",
+    assets_currNpcPlayerImages: "current",
   });
 
   function addAssetToMap(asset_id, type) {
@@ -200,68 +201,68 @@ const MapDetails = () => {
         ))
       : null;
 
+  // <div className="sidebar">
+  //   <h2 className="text-textcolor text-3xl m-2 mb-4 bg-header rounded-lg p-4">
+  //     {state.name}
+  //   </h2>
+  //   {/* Story cards assets for map */}
+  //   {storyCardsForMap}
+  //   <div className="card">
+  //     <div className="tab-bar">
+  //       <h3
+  //         onClick={() => {
+  //           setTabStatus((prev) => {
+  //             return { ...prev, tStoryFNotes: true };
+  //           });
+  //         }}
+  //       >
+  //         Story
+  //       </h3>
+  //       <h3
+  //         onClick={() => {
+  //           setTabStatus((prev) => {
+  //             return { ...prev, tStoryFNotes: false };
+  //           });
+  //         }}
+  //       >
+  //         Notes
+  //       </h3>
+  //     </div>
+  //     {tabStatus.tStoryFNotes && entireStory}
+  //     {!tabStatus.tStoryFNotes && (
+  //       <React.Fragment>
+  //         <label>Notes : </label>
+  //         <textarea
+  //           type="textarea"
+  //           name="notes"
+  //           id="notesArea"
+  //           value={getNotes()}
+  //           onChange={(e) => {
+  //             e.target.style.height = "";
+  //             e.target.style.height = e.target.scrollHeight + "px";
+  //             updateNotes(
+  //               document.getElementById("notesArea").value,
+  //               false
+  //             );
+  //           }}
+  //           onFocus={(e) => {
+  //             e.target.style.height = "";
+  //             e.target.style.height = e.target.scrollHeight + "px";
+  //           }}
+  //         />
+  //         <button
+  //           onClick={(e) => {
+  //             updateNotes(document.getElementById("notesArea").value, true);
+  //           }}
+  //         >
+  //           Save
+  //         </button>
+  //       </React.Fragment>
+  //     )}
+  //   </div>
+  // </div>
   return (
     <container className="mapContainer" id={urlParams.mapId}>
-      <div className="sidebar">
-        <h2 className="text-textcolor text-3xl m-2 mb-4 bg-header rounded-lg p-4">
-          {state.name}
-        </h2>
-        {/* Story cards assets for map */}
-        {storyCardsForMap}
-        <div className="card">
-          <div className="tab-bar">
-            <h3
-              onClick={() => {
-                setTabStatus((prev) => {
-                  return { ...prev, tStoryFNotes: true };
-                });
-              }}
-            >
-              Story
-            </h3>
-            <h3
-              onClick={() => {
-                setTabStatus((prev) => {
-                  return { ...prev, tStoryFNotes: false };
-                });
-              }}
-            >
-              Notes
-            </h3>
-          </div>
-          {tabStatus.tStoryFNotes && entireStory}
-          {!tabStatus.tStoryFNotes && (
-            <React.Fragment>
-              <label>Notes : </label>
-              <textarea
-                type="textarea"
-                name="notes"
-                id="notesArea"
-                value={getNotes()}
-                onChange={(e) => {
-                  e.target.style.height = "";
-                  e.target.style.height = e.target.scrollHeight + "px";
-                  updateNotes(
-                    document.getElementById("notesArea").value,
-                    false
-                  );
-                }}
-                onFocus={(e) => {
-                  e.target.style.height = "";
-                  e.target.style.height = e.target.scrollHeight + "px";
-                }}
-              />
-              <button
-                onClick={(e) => {
-                  updateNotes(document.getElementById("notesArea").value, true);
-                }}
-              >
-                Save
-              </button>
-            </React.Fragment>
-          )}
-        </div>
-      </div>
       <div className="map">
         {Object.keys(state.data).length && (
           <Map
@@ -275,13 +276,68 @@ const MapDetails = () => {
       <div className="sidebar">
         {/* Players List */}
         <div className="card">
-          <h3>Players</h3>
-          <ul>
-            {!!state?.data?.Players?.length &&
-              state.data.Players.map((player) => {
-                return <li>{player.email}</li>;
-              })}
-          </ul>
+          <div className="tab-bar">
+            <h3
+              onClick={() => {
+                setTabStatus((prev) => {
+                  return { ...prev, playerMaps: "player" };
+                });
+              }}
+            >
+              Players
+            </h3>
+            <h3
+              onClick={() => {
+                setTabStatus((prev) => {
+                  return { ...prev, playerMaps: "maps" };
+                });
+              }}
+            >
+              Maps
+            </h3>
+          </div>
+          {tabStatus.playerMaps === "player" && (
+            <React.Fragment>
+              <h3>Players</h3>
+              <ul>
+                {!!state?.data?.Players?.length &&
+                  state.data.Players.map((player) => {
+                    return <li>{player.email}</li>;
+                  })}
+              </ul>
+            </React.Fragment>
+          )}
+          {/* Maps Card */}
+          {tabStatus.playerMaps === "maps" &&
+            !!mapsForCampaign.length &&
+            mapsForCampaign.map((map) => {
+              return (
+                <Link
+                  to={`${map.id}`}
+                  onClick={() =>
+                    setState((prev) => {
+                      return {
+                        ...prev,
+                        mapId: map.id,
+                        background:
+                          map.id === prev.mapId ? prev.background : null,
+                        data:
+                          map.id === prev.mapId
+                            ? { ...prev.data }
+                            : {
+                                ...prev.data,
+                                Images: {},
+                                NPCs: {},
+                                StoryCards: {},
+                              },
+                      };
+                    })
+                  }
+                >
+                  {map.name}
+                </Link>
+              );
+            })}
         </div>
         {/* Assets/Maps tabs */}
         <div className="card">
@@ -289,7 +345,7 @@ const MapDetails = () => {
             <h3
               onClick={() => {
                 setTabStatus((prev) => {
-                  return { ...prev, tAssetsFMaps: true };
+                  return { ...prev, assetsMapStoriesStorys: "assets" };
                 });
               }}
             >
@@ -298,17 +354,76 @@ const MapDetails = () => {
             <h3
               onClick={() => {
                 setTabStatus((prev) => {
-                  return { ...prev, tAssetsFMaps: false };
+                  return { ...prev, assetsMapStoriesStorys: "map stories" };
                 });
               }}
             >
-              Maps
+              Map Stories
+            </h3>
+            <h3
+              onClick={() => {
+                setTabStatus((prev) => {
+                  return { ...prev, assetsMapStoriesStorys: "story" };
+                });
+              }}
+            >
+              Story
             </h3>
           </div>
+
           <div className="card-body">
+            {/* Tabs for Asset Page */}
+            {tabStatus.assetsMapStoriesStorys === "assets" && (
+              <div className="tab-bar">
+                <h3
+                  onClick={() => {
+                    setTabStatus((prev) => {
+                      return { ...prev, assets_currNpcPlayerImages: "current" };
+                    });
+                  }}
+                >
+                  Current
+                </h3>
+                <h3
+                  onClick={() => {
+                    setTabStatus((prev) => {
+                      return { ...prev, assets_currNpcPlayerImages: "npcs" };
+                    });
+                  }}
+                >
+                  NPCs
+                </h3>
+                <h3
+                  onClick={() => {
+                    setTabStatus((prev) => {
+                      return { ...prev, assets_currNpcPlayerImages: "players" };
+                    });
+                  }}
+                >
+                  Players
+                </h3>
+                <h3
+                  onClick={() => {
+                    setTabStatus((prev) => {
+                      return { ...prev, assets_currNpcPlayerImages: "images" };
+                    });
+                  }}
+                >
+                  Images
+                </h3>
+              </div>
+            )}
+
+            {/* story cards for map */}
+            {tabStatus.assetsMapStoriesStorys === "map stories" &&
+              storyCardsForMap}
+
+            {/* Entire Story */}
+            {tabStatus.assetsMapStoriesStorys === "story" && entireStory}
+
             {/* Assets Card */}
 
-            {!!tabStatus.tAssetsFMaps &&
+            {tabStatus.assets_currNpcPlayerImages === "current" &&
               Object.keys(state.data.NPCs).map((key) => {
                 return (
                   <p className="text-lg">
@@ -326,7 +441,7 @@ const MapDetails = () => {
                   </p>
                 );
               })}
-            {!!tabStatus.tAssetsFMaps &&
+            {tabStatus.assets_currNpcPlayerImages === "current" &&
               Object.keys(state.data.Images).map((key) => {
                 return (
                   <p className="text-lg">
@@ -346,12 +461,13 @@ const MapDetails = () => {
                   </p>
                 );
               })}
-            {!!tabStatus.tAssetsFMaps && (
+            {tabStatus.assets_currNpcPlayerImages !== "current" && (
               <>
-                <h1>Available Assets</h1> <hr />
+                <h1>Available Assets</h1>
+                <hr />
               </>
             )}
-            {!!tabStatus.tAssetsFMaps &&
+            {tabStatus.assets_currNpcPlayerImages === "npcs" &&
               Object.keys(campaignAssets.NPCs).map((id) => {
                 return (
                   <div className="asset-card">
@@ -366,7 +482,7 @@ const MapDetails = () => {
                   </div>
                 );
               })}
-            {!!tabStatus.tAssetsFMaps &&
+            {tabStatus.assets_currNpcPlayerImages === "images" &&
               Object.keys(campaignAssets.Images).map((id) => {
                 return (
                   <div
@@ -389,38 +505,6 @@ const MapDetails = () => {
                       Add
                     </button>
                   </div>
-                );
-              })}
-
-            {/* Maps Card */}
-            {!!!tabStatus.tAssetsFMaps &&
-              !!mapsForCampaign.length &&
-              mapsForCampaign.map((map) => {
-                return (
-                  <Link
-                    to={`${map.id}`}
-                    onClick={() =>
-                      setState((prev) => {
-                        return {
-                          ...prev,
-                          mapId: map.id,
-                          background:
-                            map.id === prev.mapId ? prev.background : null,
-                          data:
-                            map.id === prev.mapId
-                              ? { ...prev.data }
-                              : {
-                                  ...prev.data,
-                                  Images: {},
-                                  NPCs: {},
-                                  StoryCards: {},
-                                },
-                        };
-                      })
-                    }
-                  >
-                    {map.name}
-                  </Link>
                 );
               })}
           </div>
