@@ -31,7 +31,7 @@ module.exports = (router, db) => {
       WHERE ma.map_id = $1 AND at.name = $2;
       `;
     const queryPlayersForCampaign = `
-      SELECT u.email, u.id
+      SELECT *
       FROM users u
         JOIN players p ON u.id = p.user_id
       WHERE p.campaign_id = $1;

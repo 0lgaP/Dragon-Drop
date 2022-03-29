@@ -363,7 +363,7 @@ const MapDetails = () => {
         )}
       </div>
       <div className="sidebar">
-        <div className="grow relative">
+        <div className="grow relative ">
           <button
             className="absolute right-0 top-[-10px] mr-[8px]"
             onClick={() => setHideMe((prev) => !prev)}
@@ -371,14 +371,14 @@ const MapDetails = () => {
             {hideMe ? "Show" : "Hide"}
           </button>
           {!hideMe && (
-            <div className="flex w-full max-h-[25%]">
+            <div className="flex w-full max-h-fit">
               {/* Map Info */}
               <div className="card transition-all ease-in-out basis-1/2 hover:basis-5/6">
                 <h1 className="md-title">{state.name}</h1>
                 <h3 className="md-bio">{state.bio}</h3>
               </div>
               {/* Player/Map List */}
-              <div className="card basis-1/2">
+              <div className="card basis-1/2 overflow-y-auto max-h-[100%]">
                 {/* Player/Map Tab Select */}
                 <div className="tab-bar">
                   <h3
@@ -401,52 +401,87 @@ const MapDetails = () => {
                   </h3>
                 </div>
                 {tabStatus.playerMaps === "player" && (
-                  <React.Fragment>
-                    <h3>Players</h3>
-                    <ul>
-                      {!!state?.data?.Players?.length &&
-                        state.data.Players.map((player) => {
-                          return <li>{player.email}</li>;
-                        })}
-                    </ul>
-                  </React.Fragment>
-                )}
-                {/* Maps Card */}
-                {tabStatus.playerMaps === "maps" && !!mapsForCampaign.length && (
-                  <React.Fragment>
-                    <div className="flex flex-col">
-                      {mapsForCampaign.map((map) => {
+                  <ul>
+                    {!!state?.data?.Players?.length &&
+                      state.data.Players.map((player) => {
                         return (
-                          <Link
-                            to={`${map.id}`}
-                            onClick={() =>
-                              setState((prev) => {
-                                return {
-                                  ...prev,
-                                  mapId: map.id,
-                                  background:
-                                    map.id === prev.mapId
-                                      ? prev.background
-                                      : null,
-                                  data:
-                                    map.id === prev.mapId
-                                      ? { ...prev.data }
-                                      : {
-                                          ...prev.data,
-                                          Images: {},
-                                          NPCs: {},
-                                          StoryCards: {},
-                                        },
-                                };
-                              })
-                            }
-                          >
-                            {map.name}
-                          </Link>
+                          <li className="my-1 px-1">
+                            <div className="flex w-full">
+                              <div className="current-asset text-lg flex justify-between space-between place-items-center w-full">
+                                <div className="flex place-items-center">
+                                  <img
+                                    className="rounded-full border-primary border-2 w-16 h-16 mr-8 object-cover object-top"
+                                    src={player.profile_pic}
+                                    alt={player.name}
+                                  ></img>
+                                  <div className="text-left">
+                                    <h3>{player.name}</h3>
+                                  </div>
+                                </div>
+                              </div>
+                              <div
+                                className="flex items-center justify-center bg-bkgd h-auto rounded-lg my-auto py-2 px-1 cursor-pointer"
+                                onClick={() =>
+                                  window.open(player.sheet_url, "_blank")
+                                }
+                              >
+                                Sheet
+                              </div>
+                            </div>
+                          </li>
                         );
                       })}
-                    </div>
-                  </React.Fragment>
+                  </ul>
+                )}
+
+                {/* Maps Card */}
+                {tabStatus.playerMaps === "maps" && !!mapsForCampaign.length && (
+                  <div className="flex flex-col">
+                    {mapsForCampaign.map((map) => {
+                      return (
+                        <Link
+                          to={`${map.id}`}
+                          className="py-1 transition-all hover:bg-metal"
+                          onClick={() =>
+                            setState((prev) => {
+                              return {
+                                ...prev,
+                                mapId: map.id,
+                                background:
+                                  map.id === prev.mapId
+                                    ? prev.background
+                                    : null,
+                                data:
+                                  map.id === prev.mapId
+                                    ? { ...prev.data }
+                                    : {
+                                        ...prev.data,
+                                        Images: {},
+                                        NPCs: {},
+                                        StoryCards: {},
+                                      },
+                              };
+                            })
+                          }
+                        >
+                          <div className="flex w-full">
+                            <div className="current-asset text-lg flex justify-between space-between place-items-center w-full">
+                              <div className="flex place-items-center">
+                                <img
+                                  className="rounded-lg border-primary border-2 w-16 h-16 mr-8 object-cover object-top"
+                                  src={map.background}
+                                  alt={map.name}
+                                ></img>
+                                <div className="text-left">
+                                  <h3>{map.name}</h3>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </div>
                 )}
               </div>
             </div>
