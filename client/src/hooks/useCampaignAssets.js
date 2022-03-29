@@ -9,6 +9,7 @@ function useCampaignAssets(campaignId, userId = 0) {
     campaignId: campaignId ? campaignId : campaign(),
     NPCs: {},
     Images: {},
+    Players: {},
   });
 
   useEffect(() => {
@@ -24,6 +25,7 @@ function useCampaignAssets(campaignId, userId = 0) {
           ...prev,
           Images: dataHelpers().convertArrayToObject(res.data.Images, "id"),
           NPCs: dataHelpers().convertArrayToObject(res.data.NPCs, "id"),
+          Players: dataHelpers().convertArrayToObject(res.data.Players, "id"),
         }));
       });
   }, [campaignAssets.campaignId, campaign_id]);

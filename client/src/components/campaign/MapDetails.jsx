@@ -62,6 +62,9 @@ const MapDetails = () => {
           case "S":
             stateType = "StoryCards";
             break;
+          case "P":
+            stateType = "PlayerAssets";
+            break;
           default:
             stateType = "Images";
         }
@@ -265,6 +268,49 @@ const MapDetails = () => {
               onComplete={(e) => onComplete(e, card.id, card)}
               onKill={(e) => onKill(e, card, card.npcs_id)}
             />
+          );
+        })
+      : null;
+
+  const currentPlayers =
+    state.data.NPCs && Object.keys(state.data.PlayerAssets).length
+      ? Object.keys(state.data.PlayerAssets).map((key) => {
+          return (
+            <div className="flex w-full">
+              <div className="current-asset text-lg flex justify-between space-between place-items-center w-full">
+                <div className="flex place-items-center">
+                  <img
+                    className="rounded-full border-primary border-2 w-20 h-20 mr-8 object-cover object-top"
+                    src={state.data.PlayerAssets[key].img}
+                    alt={state.data.PlayerAssets[key].name}
+                  ></img>
+                  <div className="text-left">
+                    <h3>{state.data.PlayerAssets[key].name}</h3>
+                    <h4>- player</h4>
+                  </div>
+                </div>
+                <div className="flex flex-col items-center">
+                  <label>Layer</label>
+                  <input
+                    className="w-8 m-2 rounded-md text-2xl w-[50px]"
+                    name="layer"
+                    type="number"
+                    min={1}
+                    max={300}
+                    value={getLayer("PlayerAssets", key)}
+                    onChange={(e) =>
+                      updateLayer("PlayerAssets", key, e.target.value)
+                    }
+                  />
+                </div>
+              </div>
+              <div
+                className="text-red-600 delete-button"
+                onClick={() => deleteAssetFromMap("PlayerAssets", key)}
+              >
+                Delete
+              </div>
+            </div>
           );
         })
       : null;
@@ -574,6 +620,10 @@ const MapDetails = () => {
 
             {tabStatus.assetsMapStoriesStorys === "assets" &&
               tabStatus.assets_currNpcPlayerImages === "current" &&
+              currentPlayers}
+
+            {tabStatus.assetsMapStoriesStorys === "assets" &&
+              tabStatus.assets_currNpcPlayerImages === "current" &&
               currentNpcs}
 
             {tabStatus.assetsMapStoriesStorys === "assets" &&
@@ -596,6 +646,22 @@ const MapDetails = () => {
                       image={campaignAssets.NPCs[id].img}
                     >
                       <button onClick={() => addAssetToMap(id, "npc")}>
+                        Add
+                      </button>
+                    </NPCCardItem>
+                  </div>
+                );
+              })}
+            {tabStatus.assetsMapStoriesStorys === "assets" &&
+              tabStatus.assets_currNpcPlayerImages === "players" &&
+              Object.keys(campaignAssets.Players).map((id) => {
+                return (
+                  <div className="asset-card">
+                    <NPCCardItem
+                      {...campaignAssets.Players[id]}
+                      image={campaignAssets.Players[id].profile_pic}
+                    >
+                      <button onClick={() => addAssetToMap(id, "player")}>
                         Add
                       </button>
                     </NPCCardItem>
