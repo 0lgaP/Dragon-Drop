@@ -52,7 +52,7 @@ function StoryCardItem(props) {
           </button>
         )}
         <div className="card__title">{props.text}</div>
-        <div className="px-4">
+        <div className="">
           {alive}
           {npcName}
         </div>
