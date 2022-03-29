@@ -5,10 +5,16 @@ import CampContext from "../../providers/CampProvider";
 import MapCreate from "./MapCreate";
 import "./MapList.css";
 
+const viewModes = {
+  VIEW: "v",
+  EDIT: "e",
+  ADD: "a",
+};
+
 const MapList = () => {
   const { c_id, u_id } = useParams();
   const { campaign } = useContext(CampContext);
-  const [inEditMode, setEditMode] = useState(false);
+  const [mode, setMode] = useState(viewModes.VIEW);
 
   const [maps, setMaps] = useState([]);
 
@@ -25,8 +31,9 @@ const MapList = () => {
     }
   }
 
-  function toggleEdit() {
-    setEditMode((prev) => !prev);
+  function toggleEdit(view) {
+    if (view === mode) return setMode(viewModes.view);
+    setMode(view);
   }
 
   function addMap(map) {
@@ -46,19 +53,49 @@ const MapList = () => {
 
   return (
     <>
-      <button onClick={toggleEdit}>EDIT</button>
-      {inEditMode && <MapCreate toggleEdit={toggleEdit} addMap={addMap} />}
+      {mode === viewModes.VIEW && (
+        <React.Fragment>
+          <button
+            className="maplist--button"
+            onClick={() => toggleEdit(viewModes.ADD)}
+          >
+            ADD
+          </button>
+          <button
+            className="maplist--button"
+            onClick={() => toggleEdit(viewModes.EDIT)}
+          >
+            EDIT
+          </button>
+        </React.Fragment>
+      )}
+      {mode !== viewModes.VIEW && (
+        <React.Fragment>
+          <button
+            className="maplist--button"
+            onClick={() => toggleEdit(viewModes.VIEW)}
+          >
+            BACK
+          </button>
+        </React.Fragment>
+      )}
+      {mode === viewModes.ADD && (
+        <MapCreate toggleEdit={toggleEdit} addMap={addMap} />
+      )}
       <div className="map-container">
         {maps.length &&
           maps.map((map) => {
             return (
               <div
-                className={"map-card" + (inEditMode ? " !transition-none" : "")}
+                className={
+                  "map-card" +
+                  (mode === viewModes.EDIT ? " !transition-none" : "")
+                }
                 key={map.id}
               >
                 <div>
                   <h2 className="ml-title">{map.name}</h2>
-                  {inEditMode && (
+                  {mode === viewModes.EDIT && (
                     <button onClick={() => deleteMap(map.id)}>DELETE</button>
                   )}
                 </div>
