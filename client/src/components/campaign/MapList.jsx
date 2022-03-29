@@ -57,7 +57,7 @@ const MapList = () => {
                 key={map.id}
               >
                 <div>
-                  <h2>{map.name}</h2>
+                  <h2 className="ml-title">{map.name}</h2>
                   {inEditMode && (
                     <button onClick={() => deleteMap(map.id)}>DELETE</button>
                   )}

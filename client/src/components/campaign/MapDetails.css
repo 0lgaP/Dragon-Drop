@@ -52,3 +52,9 @@
 .asset-card button:hover {
   @apply drop-shadow-xl -translate-y-0 -translate-x-1 scale-105
 }
+.md-title {
+  @apply text-5xl
+}
+.md-bio {
+  @apply text-xl
+}

@@ -377,17 +377,17 @@ const MapDetails = () => {
       <div className="sidebar">
         <div className="grow relative">
           <button
-            className="absolute right-0 top-[-10px]"
+            className="absolute right-0 top-[-10px] mr-[8px]"
             onClick={() => setHideMe((prev) => !prev)}
           >
             {hideMe ? "Show" : "Hide"}
           </button>
           {!hideMe && (
-            <div className="flex w-full">
+            <div className="flex w-full max-h-[25%]">
               {/* Map Info */}
               <div className="card transition-all ease-in-out basis-1/2 hover:basis-5/6">
-                <h1>{state.name}</h1>
-                <h3>{state.bio}</h3>
+                <h1 className="md-title">{state.name}</h1>
+                <h3 className="md-bio">{state.bio}</h3>
               </div>
               {/* Player/Map List */}
               <div className="card basis-1/2">

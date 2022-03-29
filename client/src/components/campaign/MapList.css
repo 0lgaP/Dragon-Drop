@@ -10,3 +10,6 @@
 .map-thumbnail {
   @apply m-auto
 }
+.ml-title {
+  @apply text-5xl
+}
