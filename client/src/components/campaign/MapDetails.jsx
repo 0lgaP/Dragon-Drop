@@ -201,6 +201,48 @@ const MapDetails = () => {
         ))
       : null;
 
+  const currentNpcs =
+    state.data.NPCs && Object.keys(state.data.NPCs).length
+      ? Object.keys(state.data.NPCs).map((key) => {
+          return (
+            <p className="text-lg">
+              {state.data.NPCs[key].name}
+              <button onClick={() => deleteAssetFromMap("NPCs", key)}>
+                Delete
+              </button>
+              <input
+                className="w-8 m-2 rounded-md text-2xl"
+                name="layer"
+                type="number"
+                value={getLayer("NPCs", key)}
+                onChange={(e) => updateLayer("NPCs", key, e.target.value)}
+              />
+            </p>
+          );
+        })
+      : null;
+
+  const currentImages =
+    state.data.Images && Object.keys(state.data.Images).length
+      ? Object.keys(state.data.Images).map((key) => {
+          return (
+            <p className="text-lg">
+              {state.data.Images[key].name}
+              <button onClick={() => deleteAssetFromMap("Images", key)}>
+                Delete
+              </button>
+              <input
+                className="w-8 m-2 text-2xl rounded-md"
+                name="layer"
+                type="number"
+                value={getLayer("Images", key)}
+                onChange={(e) => updateLayer("Images", key, e.target.value)}
+              />
+            </p>
+          );
+        })
+      : null;
+
   // <div className="sidebar">
   //   <h2 className="text-textcolor text-3xl m-2 mb-4 bg-header rounded-lg p-4">
   //     {state.name}
@@ -339,7 +381,7 @@ const MapDetails = () => {
               );
             })}
         </div>
-        {/* Assets/Maps tabs */}
+        {/* Assets/Maps stories/Story tabs */}
         <div className="card">
           <div className="tab-bar">
             <h3
@@ -423,51 +465,22 @@ const MapDetails = () => {
 
             {/* Assets Card */}
 
-            {tabStatus.assets_currNpcPlayerImages === "current" &&
-              Object.keys(state.data.NPCs).map((key) => {
-                return (
-                  <p className="text-lg">
-                    {state.data.NPCs[key].name}
-                    <button onClick={() => deleteAssetFromMap("NPCs", key)}>
-                      Delete
-                    </button>
-                    <input
-                      className="w-8 m-2 rounded-md text-2xl"
-                      name="layer"
-                      type="number"
-                      value={getLayer("NPCs", key)}
-                      onChange={(e) => updateLayer("NPCs", key, e.target.value)}
-                    />
-                  </p>
-                );
-              })}
-            {tabStatus.assets_currNpcPlayerImages === "current" &&
-              Object.keys(state.data.Images).map((key) => {
-                return (
-                  <p className="text-lg">
-                    {state.data.Images[key].name}
-                    <button onClick={() => deleteAssetFromMap("Images", key)}>
-                      Delete
-                    </button>
-                    <input
-                      className="w-8 m-2 text-2xl rounded-md"
-                      name="layer"
-                      type="number"
-                      value={getLayer("Images", key)}
-                      onChange={(e) =>
-                        updateLayer("Images", key, e.target.value)
-                      }
-                    />
-                  </p>
-                );
-              })}
-            {tabStatus.assets_currNpcPlayerImages !== "current" && (
-              <>
-                <h1>Available Assets</h1>
-                <hr />
-              </>
-            )}
-            {tabStatus.assets_currNpcPlayerImages === "npcs" &&
+            {tabStatus.assetsMapStoriesStorys === "assets" &&
+              tabStatus.assets_currNpcPlayerImages === "current" &&
+              currentNpcs}
+
+            {tabStatus.assetsMapStoriesStorys === "assets" &&
+              tabStatus.assets_currNpcPlayerImages === "current" &&
+              currentImages}
+            {tabStatus.assetsMapStoriesStorys === "assets" &&
+              tabStatus.assets_currNpcPlayerImages !== "current" && (
+                <>
+                  <h1>Available Assets</h1>
+                  <hr />
+                </>
+              )}
+            {tabStatus.assetsMapStoriesStorys === "assets" &&
+              tabStatus.assets_currNpcPlayerImages === "npcs" &&
               Object.keys(campaignAssets.NPCs).map((id) => {
                 return (
                   <div className="asset-card">
@@ -482,7 +495,8 @@ const MapDetails = () => {
                   </div>
                 );
               })}
-            {tabStatus.assets_currNpcPlayerImages === "images" &&
+            {tabStatus.assetsMapStoriesStorys === "assets" &&
+              tabStatus.assets_currNpcPlayerImages === "images" &&
               Object.keys(campaignAssets.Images).map((id) => {
                 return (
                   <div
