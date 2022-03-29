@@ -2,11 +2,21 @@
   @apply grid grid-cols-2 gap-6 mx-20 mt-4 px-10
 }
 .map-card {
-  @apply bg-header text-textcolor w-[75%] m-auto p-4 delay-150 transition-all ease-in-out
+  @apply bg-header text-textcolor w-[75%] m-auto p-4 delay-150 transition-all ease-in-out rounded-xl font-merriweather text-lg
 }
 .map-card:hover {
   @apply bg-primary m-auto p-2 -translate-y-1 scale-110
 }
 .map-thumbnail {
-  @apply m-auto
+  @apply m-auto pt-4
+}
+.map-name {
+  @apply text-2xl
+}
+.edit-button {
+  @apply font-fellEnglish text-xl bg-gunmetal text-textcolor rounded-xl p-4 px-6 mt-6
+}
+
+.delete-button {
+  @apply font-fellEnglish text-xl bg-gunmetal text-textcolor rounded-xl p-4 px-6 mt-6
 }

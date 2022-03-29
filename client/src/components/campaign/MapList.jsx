@@ -5,6 +5,7 @@ import CampContext from "../../providers/CampProvider";
 import MapCreate from "./MapCreate";
 import "./MapList.css";
 
+
 const MapList = () => {
   const { c_id, u_id } = useParams();
   const { campaign } = useContext(CampContext);
@@ -46,7 +47,7 @@ const MapList = () => {
 
   return (
     <>
-      <button onClick={toggleEdit}>EDIT</button>
+      <button className="edit-button" onClick={toggleEdit}>Edit</button>
       {inEditMode && <MapCreate toggleEdit={toggleEdit} addMap={addMap} />}
       <div className="map-container">
         {maps.length &&
@@ -57,9 +58,9 @@ const MapList = () => {
                 key={map.id}
               >
                 <div>
-                  <h2>{map.name}</h2>
+                  <h2 className="map-name">{map.name}</h2>
                   {inEditMode && (
-                    <button onClick={() => deleteMap(map.id)}>DELETE</button>
+                    <button className="delete-button" onClick={() => deleteMap(map.id)}>Delete</button>
                   )}
                 </div>
                 <Link to={`maps/${map.id}`}>

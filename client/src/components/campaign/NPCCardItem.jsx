@@ -9,7 +9,7 @@ return (
       <img className="rounded-full border-primary border-2 w-20 h-20 mr-8" src={ props.image } alt={props.name}></img>
       <h5 className="mt-5 text-2xl">{props.name}</h5>
     </div>
-    <div className="npc-card--content flex flex-column flex-wrap justify-start m-2 mt-14">
+    <div className="npc-card--content flex flex-column flex-wrap justify-start m-2 mt-14 font-merriweather text-lg">
       <p className="m-2">{props.bio}</p>
       <p className="m-2">{props.details}</p>
     </div>

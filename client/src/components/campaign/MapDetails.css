@@ -9,7 +9,7 @@
   /* @apply p-5 min-w-max overflow-y-auto */
   @apply p-5 w-[46%] overflow-y-auto
 }
-.card {
+/* .card {
   @apply bg-primary mt-4 rounded-xl
 }
 .card-body {
@@ -23,7 +23,7 @@
 }
 .card-body button {
   @apply m-2
-}
+} */
 .tab-bar {
   @apply flex flex-row justify-evenly bg-header text-textcolor
 }

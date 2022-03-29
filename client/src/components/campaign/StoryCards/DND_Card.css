@@ -1,5 +1,5 @@
 .dnd_card {
-  @apply max-w-[100%] rounded overflow-hidden shadow-lg m-2 bg-secondary hover:bg-pink
+  @apply font-merriweather max-w-[100%] rounded overflow-hidden shadow-lg m-2 bg-secondary hover:bg-pink
 }
 
 .dnd_card__container {
@@ -16,15 +16,15 @@
 }
 
 .dnd_edit{
-  @apply bg-pink 
+  @apply bg-pink font-merriweather 
 }
 
 .dnd_card__title {
-  @apply font-bold text-xl text-gunmetal break-words 
+  @apply text-xl text-gunmetal break-words 
 }
 
 .dnd_card__text {
-  @apply font-bold text-xl text-gunmetal break-words font-inputFont
+  @apply text-xl text-gunmetal break-words mt-2
 }
 
 .dnd_card__text-area {
@@ -36,9 +36,9 @@
 }
 
 .dnd_card__tags {
-  @apply font-bold text-base text-gunmetal break-words font-inputFont justify-self-end 
+  @apply font-merriweather font-bold text-base text-gunmetal break-words font-inputFont justify-self-end 
 }
 
 .dnd_card__dropdown {
-  @apply inline-block bg-bkgd rounded px-3 py-1 text-sm font-semibold m-2 text-textcolor
+  @apply font-merriweather inline-block bg-dragongreen/75 rounded px-3 py-1 text-sm m-2 text-textcolor
 }
