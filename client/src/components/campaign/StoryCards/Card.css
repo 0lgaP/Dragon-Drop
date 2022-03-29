@@ -1,5 +1,5 @@
 .card {
-  @apply font-merriweather max-w-[100%] rounded overflow-hidden shadow-lg bg-secondary m-2 
+  @apply font-merriweather max-w-[100%] rounded-xl overflow-hidden shadow-lg bg-secondary m-2
 }
 
 .card__container {
