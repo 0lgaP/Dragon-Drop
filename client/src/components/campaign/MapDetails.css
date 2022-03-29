@@ -18,8 +18,11 @@
 .card-body h1 {
   @apply text-xl bg-secondary text-gunmetal pb-2
 }
-.card-body p {
-@apply bg-bkgd rounded-xl p-4 m-2
+.card-body .current-asset {
+@apply bg-bkgd rounded-l-xl p-4 m-2 mr-0
+}
+.card-body .delete-button {
+@apply bg-bkgd rounded-r-xl p-4 m-2 mr-0 cursor-pointer
 }
 .card-body button {
   @apply m-2

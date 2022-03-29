@@ -206,19 +206,37 @@ const MapDetails = () => {
     state.data.NPCs && Object.keys(state.data.NPCs).length
       ? Object.keys(state.data.NPCs).map((key) => {
           return (
-            <p className="text-lg">
-              {state.data.NPCs[key].name}
-              <button onClick={() => deleteAssetFromMap("NPCs", key)}>
+            <div className="flex w-full">
+              <div className="current-asset text-lg flex justify-between space-between place-items-center w-full">
+                <div className="flex place-items-center">
+                  <img
+                    className="rounded-full border-primary border-2 w-20 h-20 mr-8 object-cover object-top"
+                    src={state.data.NPCs[key].img}
+                    alt={state.data.NPCs[key].name}
+                  ></img>
+                  <div className="text-left">
+                    <h3>{state.data.NPCs[key].name}</h3>
+                    <h4>- npc</h4>
+                  </div>
+                </div>
+                <div className="flex flex-col">
+                  <label>Layer</label>
+                  <input
+                    className="w-8 m-2 rounded-md text-2xl"
+                    name="layer"
+                    type="number"
+                    value={getLayer("NPCs", key)}
+                    onChange={(e) => updateLayer("NPCs", key, e.target.value)}
+                  />
+                </div>
+              </div>
+              <div
+                className="text-red-600 delete-button"
+                onClick={() => deleteAssetFromMap("NPCs", key)}
+              >
                 Delete
-              </button>
-              <input
-                className="w-8 m-2 rounded-md text-2xl"
-                name="layer"
-                type="number"
-                value={getLayer("NPCs", key)}
-                onChange={(e) => updateLayer("NPCs", key, e.target.value)}
-              />
-            </p>
+              </div>
+            </div>
           );
         })
       : null;
@@ -227,22 +245,56 @@ const MapDetails = () => {
     state.data.Images && Object.keys(state.data.Images).length
       ? Object.keys(state.data.Images).map((key) => {
           return (
-            <p className="text-lg">
-              {state.data.Images[key].name}
-              <button onClick={() => deleteAssetFromMap("Images", key)}>
+            <div className="flex w-full">
+              <div className="current-asset flex justify-between space-between place-items-center w-full">
+                <div className="flex place-items-center">
+                  <img
+                    className="rounded-full border-primary border-2 w-20 h-20 mr-8 object-cover object-top"
+                    src={state.data.Images[key].img}
+                    alt={state.data.Images[key].name}
+                  ></img>
+                  <div className="text-left">
+                    <h3>{state.data.Images[key].name}</h3>
+                    <h4>- image</h4>
+                  </div>
+                </div>
+                <div className="flex flex-col">
+                  <label>Layer</label>
+                  <input
+                    className="w-8 m-2 rounded-md text-2xl"
+                    name="layer"
+                    type="number"
+                    value={getLayer("Images", key)}
+                    onChange={(e) => updateLayer("Images", key, e.target.value)}
+                  />
+                </div>
+              </div>
+              <div
+                className="text-red-600 delete-button"
+                onClick={() => deleteAssetFromMap("Images", key)}
+              >
                 Delete
-              </button>
-              <input
-                className="w-8 m-2 text-2xl rounded-md"
-                name="layer"
-                type="number"
-                value={getLayer("Images", key)}
-                onChange={(e) => updateLayer("Images", key, e.target.value)}
-              />
-            </p>
+              </div>
+            </div>
           );
         })
-      : null;
+      : //   return (
+        //     <p className="text-lg">
+        //       {state.data.Images[key].name}
+        //       <button onClick={() => deleteAssetFromMap("Images", key)}>
+        //         Delete
+        //       </button>
+        //       <input
+        //         className="w-8 m-2 text-2xl rounded-md"
+        //         name="layer"
+        //         type="number"
+        //         value={getLayer("Images", key)}
+        //         onChange={(e) => updateLayer("Images", key, e.target.value)}
+        //       />
+        //     </p>
+        //   );
+        // })
+        null;
   return (
     <container className="mapContainer" id={urlParams.mapId}>
       <div className="map">
