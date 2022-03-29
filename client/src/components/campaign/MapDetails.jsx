@@ -166,10 +166,70 @@ const MapDetails = () => {
     });
   }, []);
 
+  //////////////////////////
+  // Story Card Functions
+  //////////////////////////
+  const onComplete = (event, id, card) => {
+    event.preventDefault();
+    console.log("fired");
+    axios
+      .put(`/users/0/campaigns/${campaign()}/story/${id}`, {
+        map_id: card.maps_id,
+        npc_id: card.npcs_id,
+        text: card.story_card_text,
+        completed: true,
+      })
+      .then(() => {
+        setState((prev) => {
+          const newState = { ...prev };
+          for (const index in newState.data.Story) {
+            if (newState.data.Story[index].id === id) {
+              newState.data.Story[index].completed = true;
+              break;
+            }
+          }
+          return newState;
+        });
+      });
+  };
+  const onKill = (event, card, npc_id) => {
+    event.preventDefault();
+    const npc = storyCardHackery.npcs.find((npc) => npc.id === npc_id);
+    console.log(npc, storyCardHackery, card);
+    npc.alive = !npc.alive;
+    //change what the name of the put request is//
+    axios
+      .put(`/users/0/campaigns/${campaign()}/npcs/${npc.id}/edit`, {
+        ...npc,
+        imageURL: npc.img,
+      })
+      .then(() => {
+        setState((prev) => {
+          const newState = { ...prev };
+
+          if (newState.data?.NPCs[npc.id]?.name) {
+            newState.data.NPCs[npc.id].alive = npc.alive;
+          }
+          return newState;
+        });
+        setStoryCardHackery((prev) => {
+          const newState = { ...prev };
+
+          const index = newState.npcs.findIndex((npc) => npc.id === npc_id);
+          newState.npcs[index].alive = npc.alive;
+
+          return newState;
+        });
+      })
+      .catch((err) => console.log("Error From FORM's KILL Client Call", err));
+  };
+
   const storyCardsForMap =
     state.data.StoryCards && allNpcs.length
       ? state.data.Story.map((card) => {
           if (card.maps_id !== state.mapId) return null;
+          if (card.completed) return null;
+
           return (
             <StoryCardItem
               {...card}
@@ -180,6 +240,8 @@ const MapDetails = () => {
               text={card.story_card_text}
               order={card.order_num}
               view="SHOW"
+              onComplete={(e) => onComplete(e, card.id, card)}
+              onKill={(e) => onKill(e, card, card.npcs_id)}
             />
           );
         })
@@ -188,18 +250,23 @@ const MapDetails = () => {
   // const entireStory = null;
   const entireStory =
     state.data.Story && allNpcs.length
-      ? state.data.Story.map((card) => (
-          <StoryCardItem
-            {...card}
-            npcId={card.npcs_id}
-            allMaps={storyCardHackery.maps}
-            allNpcs={storyCardHackery.npcs}
-            key={card.id + 1}
-            text={card.story_card_text}
-            order={card.order_num}
-            view="SHOW"
-          />
-        ))
+      ? state.data.Story.map((card) => {
+          if (card.completed) return null;
+          return (
+            <StoryCardItem
+              {...card}
+              npcId={card.npcs_id}
+              allMaps={storyCardHackery.maps}
+              allNpcs={storyCardHackery.npcs}
+              key={card.id + 1}
+              text={card.story_card_text}
+              order={card.order_num}
+              view="SHOW"
+              onComplete={(e) => onComplete(e, card.id, card)}
+              onKill={(e) => onKill(e, card, card.npcs_id)}
+            />
+          );
+        })
       : null;
 
   const currentNpcs =
