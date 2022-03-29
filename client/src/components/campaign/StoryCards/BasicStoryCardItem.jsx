@@ -22,34 +22,6 @@ function StoryCardItem(props) {
   return (
     <section className="card">
       <article className="card__container">
-      {viewMode !== "SHOW" && (
-          <button alt="Edit" className="button cancel" onClick={props.onEdit}>
-            Edit
-          </button>
-        )}
-        <button
-          alt="Toggle Alive"
-          className="button death"
-          onClick={props.onKill}
-        >
-          💀
-        </button>
-        <button
-          alt="Story Card Completed"
-          className="button confirm"
-          onClick={props.onComplete}
-        >
-          ✅
-        </button>
-        {viewMode !== "SHOW" && (
-          <button
-            alt="Delete Story Card"
-            className="button death"
-            onClick={props.onDelete}
-          >
-            🗑️
-          </button>
-        )}
         <div className="card__title">{props.text}</div>
         <div>
           {alive}
