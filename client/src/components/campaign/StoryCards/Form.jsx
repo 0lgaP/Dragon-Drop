@@ -8,7 +8,7 @@ import CampContext from "../../../providers/CampProvider";
 import axios from "../../../api/axios";
 import DropDownListItem from "./DropDownListItem";
 
-function Form({allStories, setStories, text, id, npc, map, view, setView, viewObj, css, dndStory, setDndStory}) {
+function Form({allStories, setStories, text, id, npc, map, view, setView, viewObj, css, dndStory, setDndStory, setCurrentStory}) {
   const { auth } = useContext(AuthContext);
   const { campaign } = useContext(CampContext);
   const u_id = auth.user_id
@@ -49,6 +49,10 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
   const reset = (e) =>{
     e.preventDefault()
     setStory({...story, map_id: '', npc_id: '', text: ''})
+    setCurrentStory({})
+    if(view === viewObj.EDIT){
+      setView(viewObj.CREATE)
+    }
   }
 
 
@@ -68,7 +72,6 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
         })
         setDndStory(prev => {
           const newState = [...prev];
-    
           newState.push(card)
           return newState
         })
@@ -92,6 +95,7 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
   axios.put(`${address}/${id}`, story)
   .then((res) => {
     const card = res.data
+    setCurrentStory({})
     setStories(prev => {
       const newState = {...prev}
       return {...newState, [card.id]: {...card}}

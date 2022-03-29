@@ -135,7 +135,7 @@ const onKill = (event, card) => {
     
     const [, drop] = useDrop(() => ({ accept: ItemTypes.CARD }));
     return (
-    <div className="" ref={drop}>
+    <div  ref={drop}>
       {cards.map((card) => {
         if (card.completed) return null;
           return (
@@ -154,6 +154,7 @@ const onKill = (event, card) => {
               onEdit={() => onEdit(card)}
               onComplete={(event) => { onComplete(event, card.id, card) }}
               onKill={(event) => onKill(event, card.npcs_id)} 
+              css={card.id === props.id ? 'dnd_edit' : 'dnd_active'}
               />
           )
       })}

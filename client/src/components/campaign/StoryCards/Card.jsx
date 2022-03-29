@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { ItemTypes } from "./ItemTypes";
-import StoryCardItem from "./StoryCardItem";
+import DndStoryCardItem from "./DndStoryCardItem";
 const style = {
   cursor: "move",
 };
@@ -41,7 +41,7 @@ export const Card = memo(function Card(props) {
   const opacity = isDragging ? 0 : 1;
   return (
     <div className="card" ref={(node) => drag(drop(node))} style={{ ...style, opacity }}>
-      <StoryCardItem {...props} />
+      <DndStoryCardItem {...props} />
     </div>
   );
 });

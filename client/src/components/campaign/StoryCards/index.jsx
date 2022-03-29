@@ -1,4 +1,3 @@
-
 import React, {useState, useEffect, useContext} from 'react';
 import Form from "./Form";
 import {DndStoryCardContainer} from './DndStoryCardContainer';
@@ -27,7 +26,7 @@ export default function StoryCards() {
   const [allStories, setStories] = useState('');
   const [view, setView] = useState(viewObj.CREATE);
   const [currentStory, setCurrentStory] = useState({});
- 
+
   const [dndStory, setDndStory] = useState('');
   
   useEffect(() => {
@@ -65,7 +64,8 @@ export default function StoryCards() {
       setView={setView}
       dndStory={dndStory}
       setDndStory={setDndStory}
-      css='edit'/>}
+      css='edit_form'
+      setCurrentStory={setCurrentStory}/>}
         </article>
       </section>
       <section className='w-2/3 '>
@@ -76,6 +76,7 @@ export default function StoryCards() {
       dndStory={dndStory}
       setDndStory={setDndStory}
       onEdit={onEdit}
+      id={currentStory.id} 
       />}
       {dndStory.length === 0 && <Empty/>}
       </DndProvider>

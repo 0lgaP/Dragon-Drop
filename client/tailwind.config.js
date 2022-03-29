@@ -33,7 +33,9 @@ module.exports = {
         merriweather: ['Merriweather', 'serif'],
         alegreya: ['Alegreya', 'serif'],
         cinzel: ['Cinzel', 'serif'],
-        fellEnglish: ['IM Fell English', 'serif']
+        fellEnglish: ['IM Fell English', 'serif'],
+        title: ['Oswald', 'sans-serif'],
+        inputFont: ['Roboto\\Condensed', 'sans-serif']
       }
     },
   },
