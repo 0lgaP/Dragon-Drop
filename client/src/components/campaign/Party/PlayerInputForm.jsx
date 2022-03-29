@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import CampContext from "../../../providers/CampProvider";
+import "../StoryCards/Button.css"
 
 export default function PlayerInputForm(props) {
   const { id, user_id, name, sheet_url, profile_pic, view, setPlayers, email } =
@@ -56,15 +57,16 @@ export default function PlayerInputForm(props) {
   }
 
   return (
-    <div className="bg-secondary text-gunmetal p-5 m-6  w-80 max-w-lg rounded-xl">
-      <div className="npc-card--header flex flex-row justify-start content-center h-10 pb-5 mb-4">
-        <img
+    <div className="bg-secondary text-gunmetal p-5 m-6  w-80 max-w-lg rounded-xl flex flex-col items-center">
+      <div className="npc-card--header h-10 rounded-xl">
+        {/* <img
           className="rounded-full border-primary border-2 w-20 h-20 mr-8"
           src={playerInfo.profile_pic}
           alt={name}
-        ></img>
-        <h5 className="mt-5 text-2xl">
+        ></img> */}
+        <h5 className="text-xl">
           <input
+          className="m-2 bg-dragongreen/20 rounded-lg"
             type="text"
             placeholder={name}
             value={playerInfo.name}
@@ -77,7 +79,8 @@ export default function PlayerInputForm(props) {
             }
           />
           {view.mode === view.states.ADD && (
-            <input
+              <input
+              className="m-2 bg-dragongreen/20 rounded-lg"
               type="text"
               placeholder={email}
               value={playerInfo.email}
@@ -92,9 +95,10 @@ export default function PlayerInputForm(props) {
           )}
         </h5>
       </div>
-      <div className="npc-card--content flex flex-column flex-wrap justify-start m-2 mt-14">
+      <div className="npc-card--content m-2 mt-14">
         {/* Profile Pic */}
         <input
+        className="m-2 bg-dragongreen/20 rounded-lg"
           type="text"
           placeholder={profile_pic}
           value={playerInfo.profile_pic}
@@ -109,6 +113,7 @@ export default function PlayerInputForm(props) {
 
         {/* DND Sheet */}
         <input
+        className="m-2 bg-dragongreen/20 rounded-lg"
           type="text"
           placeholder={sheet_url}
           value={playerInfo.sheet_url}
@@ -121,13 +126,13 @@ export default function PlayerInputForm(props) {
           }
         />
       </div>
-      <button
+      <button className="confirm p-2 px-4 rounded-xl w-fit m-2"
         onClick={view.mode === view.states.EDIT ? updatePlayer : addPlayer}
       >
-        SAVE
+        Save
       </button>
       {view.mode === view.states.EDIT && (
-        <button onClick={deletePlayer}>DELETE</button>
+        <button className="bg-header p-2 px-4 rounded-xl w-fit m-2 text-textcolor" onClick={deletePlayer}>Delete</button>
       )}
     </div>
   );
