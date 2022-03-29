@@ -68,7 +68,6 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
         })
         setDndStory(prev => {
           const newState = [...prev];
-    
           newState.push(card)
           return newState
         })
