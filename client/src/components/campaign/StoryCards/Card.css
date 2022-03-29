@@ -1,23 +1,23 @@
 .card {
-  @apply max-w-sm rounded overflow-hidden shadow-lg bg-secondary m-2
+  @apply max-w-[100%] rounded overflow-hidden shadow-lg bg-secondary m-2 
 }
 
 .card__container {
-  @apply px-2 py-4
+  @apply px-8 py-4 
 }
 
+.story_card__container {
+  @apply rounded overflow-hidden shadow-lg bg-secondary m-2 
+
+}
 .card__title {
-  @apply font-bold text-xl text-gunmetal
+  @apply font-bold text-xl text-gunmetal break-words
 }
 
 .card__text-area {
-  @apply shadow-sm mt-4 block w-full h-32 p-4 lg:text-lg rounded-md bg-bkgd text-textcolor
+  @apply shadow-sm mt-4 block w-full h-64 p-4 lg:text-lg rounded-md bg-bkgd text-textcolor 
 }
 
 .card__dropdown {
   @apply inline-block bg-bkgd rounded px-3 py-1 text-sm font-semibold m-2 text-textcolor
-}
-
-.card_edit{
-  @apply max-w-sm rounded overflow-hidden shadow-lg bg-bubble-gum m-2
 }

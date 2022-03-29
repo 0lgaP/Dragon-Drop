@@ -2,13 +2,13 @@ import React, { useState, useContext, useEffect } from "react";
 import DropDownListMap from "./DropDownListMap";
 import DropDownListNpc from "./DropDownListNpc";
 import './Button.css';
-import './Card.css';
+import './Form.css';
 import AuthContext from "../../../providers/AuthProvider";
 import CampContext from "../../../providers/CampProvider";
 import axios from "../../../api/axios";
 import DropDownListItem from "./DropDownListItem";
 
-function Form({allStories, setStories, text, id, npc, map, view, setView, viewObj, css, dndStory, setDndStory}) {
+function Form({allStories, setStories, text, id, npc, map, view, setView, viewObj, css, dndStory, setDndStory, setCurrentStory}) {
   const { auth } = useContext(AuthContext);
   const { campaign } = useContext(CampContext);
   const u_id = auth.user_id
@@ -49,6 +49,10 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
   const reset = (e) =>{
     e.preventDefault()
     setStory({...story, map_id: '', npc_id: '', text: ''})
+    setCurrentStory({})
+    if(view === viewObj.EDIT){
+      setView(viewObj.CREATE)
+    }
   }
 
 
@@ -68,7 +72,6 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
         })
         setDndStory(prev => {
           const newState = [...prev];
-    
           newState.push(card)
           return newState
         })
@@ -92,6 +95,7 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
   axios.put(`${address}/${id}`, story)
   .then((res) => {
     const card = res.data
+    setCurrentStory({})
     setStories(prev => {
       const newState = {...prev}
       return {...newState, [card.id]: {...card}}
@@ -120,18 +124,18 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
 }
 
   return (
-  <section className={[`card ${css}`]}>
+  <section className={[`form `]}>
     <form autoComplete="off">
-      <article className={[`card__container`]}>
-        <label className="card__title">
+      <article className={[`form__container ${css}`]}>
+        <label className="form__title">
           {id ? "Update Story" : "Add Story Card"}
         </label>
         < textarea 
-        className="card__text-area"
+        className="form__text-area"
         value={story.text}
         onChange={(e) => setStoryText(e.target.value)}
         />
-      <article className="card__container">
+      <article className="form__dropdown_container">
         <DropDownListMap onChange={setMap} value={map}/>
         <DropDownListNpc onChange={setNpc} value={npc}/>
       </article>

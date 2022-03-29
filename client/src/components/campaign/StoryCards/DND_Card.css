@@ -1,0 +1,44 @@
+.dnd_card {
+  @apply max-w-[100%] rounded overflow-hidden shadow-lg m-2 bg-secondary hover:bg-pink
+}
+
+.dnd_card__container {
+  @apply px-8 py-4 
+}
+
+.dnd_story_card__container {
+  @apply rounded overflow-hidden shadow-lg m-2 
+
+}
+
+.dnd_active{
+  @apply bg-secondary
+}
+
+.dnd_edit{
+  @apply bg-pink 
+}
+
+.dnd_card__title {
+  @apply font-bold text-xl text-gunmetal break-words 
+}
+
+.dnd_card__text {
+  @apply font-bold text-xl text-gunmetal break-words font-inputFont
+}
+
+.dnd_card__text-area {
+  @apply shadow-sm mt-4 block w-full h-64 p-4 lg:text-lg rounded-md bg-bkgd text-textcolor 
+}
+
+.dnd_card__tags_container {
+  @apply justify-end flex grid shadow-sm
+}
+
+.dnd_card__tags {
+  @apply font-bold text-base text-gunmetal break-words font-inputFont justify-self-end 
+}
+
+.dnd_card__dropdown {
+  @apply inline-block bg-bkgd rounded px-3 py-1 text-sm font-semibold m-2 text-textcolor
+}

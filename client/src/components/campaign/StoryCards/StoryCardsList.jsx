@@ -24,7 +24,7 @@ export default function StoryCardsList({allStories, setStories, onEdit}) {
     npcs: [],
     maps: [],
   })
-// console.log("NPCS state.npcs", state.npcs)
+
   useEffect(() => {
     Promise.all([
       axios.get(`${address}/npcs`),
@@ -96,21 +96,6 @@ const onKill = (event, card) => {
     })
     .catch((err) => console.log("Error From FORM's KILL Client Call", err))
 }
-
-
-  // story.map_id = card.maps_id
-  // story.npc_id = card.npcs_id
-  // story.text = card.story_card_text
-  // story.completed = true
-  // setStory(story)
-  // axios.put(`${address}/${id}`, story)
-  // .then(() => {
-  //   setStories(prev => {
-  //     const newState = {...prev}
-  //     delete newState[id]
-  //     return newState
-  //   })
-  // })
 
 //card: campaigns_id, completed, created_on, id, maps_id, npcs_id, order_num, story_card_text
 
