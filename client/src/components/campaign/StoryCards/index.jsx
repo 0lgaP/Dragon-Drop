@@ -52,8 +52,8 @@ export default function StoryCards() {
     <div className="flex m-2">
       <section className='w-1/3 flex justify-center  '>
         <article className='fixed w-1/3 '>
-      { (view === viewObj.CREATE && setDndStory) ? <Form css='create' setStories={setStories} setDndStory={setDndStory}  view={view}
-      viewObj={viewObj}  setView={setView}/> :
+          {(view === viewObj.CREATE && setDndStory) ? <Form css='create' setStories={setStories} setDndStory={setDndStory} view={view}
+            viewObj={viewObj} setView={setView} npc='' map=''/> :
       <Form text={currentStory.story_card_text}
       id={currentStory.id} 
       npc={currentStory.npcs_id} 
