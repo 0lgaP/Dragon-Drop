@@ -7,7 +7,7 @@ import "./MapList.css";
 
 const MapList = () => {
   const { c_id, u_id } = useParams();
-  const { campaign, setCampaign } = useContext(CampContext);
+  const { campaign } = useContext(CampContext);
   const [inEditMode, setEditMode] = useState(false);
 
   const [maps, setMaps] = useState([]);

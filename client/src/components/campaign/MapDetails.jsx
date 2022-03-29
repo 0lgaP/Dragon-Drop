@@ -32,9 +32,11 @@ const MapDetails = () => {
   const { campaignAssets } = useCampaignAssets();
   const [mapsForCampaign, setMapsForCampaign] = useState([]);
   const [tabStatus, setTabStatus] = useState({
-    tStoryFNotes: true,
-    tAssetsFMaps: false,
+    playerMaps: "player",
+    assetsMapStoriesStorys: "map stories",
+    assets_currNpcPlayerImages: "current",
   });
+  const [hideMe, setHideMe] = useState(false);
 
   function addAssetToMap(asset_id, type) {
     // state.mapId
@@ -200,68 +202,49 @@ const MapDetails = () => {
         ))
       : null;
 
+  const currentNpcs =
+    state.data.NPCs && Object.keys(state.data.NPCs).length
+      ? Object.keys(state.data.NPCs).map((key) => {
+          return (
+            <p className="text-lg">
+              {state.data.NPCs[key].name}
+              <button onClick={() => deleteAssetFromMap("NPCs", key)}>
+                Delete
+              </button>
+              <input
+                className="w-8 m-2 rounded-md text-2xl"
+                name="layer"
+                type="number"
+                value={getLayer("NPCs", key)}
+                onChange={(e) => updateLayer("NPCs", key, e.target.value)}
+              />
+            </p>
+          );
+        })
+      : null;
+
+  const currentImages =
+    state.data.Images && Object.keys(state.data.Images).length
+      ? Object.keys(state.data.Images).map((key) => {
+          return (
+            <p className="text-lg">
+              {state.data.Images[key].name}
+              <button onClick={() => deleteAssetFromMap("Images", key)}>
+                Delete
+              </button>
+              <input
+                className="w-8 m-2 text-2xl rounded-md"
+                name="layer"
+                type="number"
+                value={getLayer("Images", key)}
+                onChange={(e) => updateLayer("Images", key, e.target.value)}
+              />
+            </p>
+          );
+        })
+      : null;
   return (
     <container className="mapContainer" id={urlParams.mapId}>
-      <div className="sidebar">
-        <h2 className="text-textcolor text-3xl m-2 mb-4 bg-header rounded-lg p-4">
-          {state.name}
-        </h2>
-        {/* Story cards assets for map */}
-        {storyCardsForMap}
-        <div className="card">
-          <div className="tab-bar">
-            <h3
-              onClick={() => {
-                setTabStatus((prev) => {
-                  return { ...prev, tStoryFNotes: true };
-                });
-              }}
-            >
-              Story
-            </h3>
-            <h3
-              onClick={() => {
-                setTabStatus((prev) => {
-                  return { ...prev, tStoryFNotes: false };
-                });
-              }}
-            >
-              Notes
-            </h3>
-          </div>
-          {tabStatus.tStoryFNotes && entireStory}
-          {!tabStatus.tStoryFNotes && (
-            <React.Fragment>
-              <label>Notes : </label>
-              <textarea
-                type="textarea"
-                name="notes"
-                id="notesArea"
-                value={getNotes()}
-                onChange={(e) => {
-                  e.target.style.height = "";
-                  e.target.style.height = e.target.scrollHeight + "px";
-                  updateNotes(
-                    document.getElementById("notesArea").value,
-                    false
-                  );
-                }}
-                onFocus={(e) => {
-                  e.target.style.height = "";
-                  e.target.style.height = e.target.scrollHeight + "px";
-                }}
-              />
-              <button
-                onClick={(e) => {
-                  updateNotes(document.getElementById("notesArea").value, true);
-                }}
-              >
-                Save
-              </button>
-            </React.Fragment>
-          )}
-        </div>
-      </div>
       <div className="map">
         {Object.keys(state.data).length && (
           <Map
@@ -273,23 +256,103 @@ const MapDetails = () => {
         )}
       </div>
       <div className="sidebar">
-        {/* Players List */}
-        <div className="card">
-          <h3>Players</h3>
-          <ul>
-            {!!state?.data?.Players?.length &&
-              state.data.Players.map((player) => {
-                return <li>{player.email}</li>;
-              })}
-          </ul>
+        <div className="grow relative">
+          <button
+            className="absolute right-0 top-[-10px]"
+            onClick={() => setHideMe((prev) => !prev)}
+          >
+            {hideMe ? "Show" : "Hide"}
+          </button>
+          {!hideMe && (
+            <div className="flex w-full">
+              {/* Map Info */}
+              <div className="card transition-all ease-in-out basis-1/2 hover:basis-5/6">
+                <h1>{state.name}</h1>
+                <h3>{state.bio}</h3>
+              </div>
+              {/* Player/Map List */}
+              <div className="card basis-1/2">
+                {/* Player/Map Tab Select */}
+                <div className="tab-bar">
+                  <h3
+                    onClick={() => {
+                      setTabStatus((prev) => {
+                        return { ...prev, playerMaps: "player" };
+                      });
+                    }}
+                  >
+                    Players
+                  </h3>
+                  <h3
+                    onClick={() => {
+                      setTabStatus((prev) => {
+                        return { ...prev, playerMaps: "maps" };
+                      });
+                    }}
+                  >
+                    Maps
+                  </h3>
+                </div>
+                {tabStatus.playerMaps === "player" && (
+                  <React.Fragment>
+                    <h3>Players</h3>
+                    <ul>
+                      {!!state?.data?.Players?.length &&
+                        state.data.Players.map((player) => {
+                          return <li>{player.email}</li>;
+                        })}
+                    </ul>
+                  </React.Fragment>
+                )}
+                {/* Maps Card */}
+                {tabStatus.playerMaps === "maps" && !!mapsForCampaign.length && (
+                  <React.Fragment>
+                    <div className="flex flex-col">
+                      {mapsForCampaign.map((map) => {
+                        return (
+                          <Link
+                            to={`${map.id}`}
+                            onClick={() =>
+                              setState((prev) => {
+                                return {
+                                  ...prev,
+                                  mapId: map.id,
+                                  background:
+                                    map.id === prev.mapId
+                                      ? prev.background
+                                      : null,
+                                  data:
+                                    map.id === prev.mapId
+                                      ? { ...prev.data }
+                                      : {
+                                          ...prev.data,
+                                          Images: {},
+                                          NPCs: {},
+                                          StoryCards: {},
+                                        },
+                                };
+                              })
+                            }
+                          >
+                            {map.name}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </React.Fragment>
+                )}
+              </div>
+            </div>
+          )}
         </div>
-        {/* Assets/Maps tabs */}
+
+        {/* Assets/Maps stories/Story tabs */}
         <div className="card">
           <div className="tab-bar">
             <h3
               onClick={() => {
                 setTabStatus((prev) => {
-                  return { ...prev, tAssetsFMaps: true };
+                  return { ...prev, assetsMapStoriesStorys: "assets" };
                 });
               }}
             >
@@ -298,60 +361,91 @@ const MapDetails = () => {
             <h3
               onClick={() => {
                 setTabStatus((prev) => {
-                  return { ...prev, tAssetsFMaps: false };
+                  return { ...prev, assetsMapStoriesStorys: "map stories" };
                 });
               }}
             >
-              Maps
+              Map Stories
+            </h3>
+            <h3
+              onClick={() => {
+                setTabStatus((prev) => {
+                  return { ...prev, assetsMapStoriesStorys: "story" };
+                });
+              }}
+            >
+              Story
             </h3>
           </div>
+
           <div className="card-body">
+            {/* Tabs for Asset Page */}
+            {tabStatus.assetsMapStoriesStorys === "assets" && (
+              <div className="tab-bar">
+                <h3
+                  onClick={() => {
+                    setTabStatus((prev) => {
+                      return { ...prev, assets_currNpcPlayerImages: "current" };
+                    });
+                  }}
+                >
+                  Current
+                </h3>
+                <h3
+                  onClick={() => {
+                    setTabStatus((prev) => {
+                      return { ...prev, assets_currNpcPlayerImages: "npcs" };
+                    });
+                  }}
+                >
+                  NPCs
+                </h3>
+                <h3
+                  onClick={() => {
+                    setTabStatus((prev) => {
+                      return { ...prev, assets_currNpcPlayerImages: "players" };
+                    });
+                  }}
+                >
+                  Players
+                </h3>
+                <h3
+                  onClick={() => {
+                    setTabStatus((prev) => {
+                      return { ...prev, assets_currNpcPlayerImages: "images" };
+                    });
+                  }}
+                >
+                  Images
+                </h3>
+              </div>
+            )}
+
+            {/* story cards for map */}
+            {tabStatus.assetsMapStoriesStorys === "map stories" &&
+              storyCardsForMap}
+
+            {/* Entire Story */}
+            {tabStatus.assetsMapStoriesStorys === "story" && entireStory}
+
             {/* Assets Card */}
 
-            {!!tabStatus.tAssetsFMaps &&
-              Object.keys(state.data.NPCs).map((key) => {
-                return (
-                  <p className="text-lg">
-                    {state.data.NPCs[key].name}
-                    <button onClick={() => deleteAssetFromMap("NPCs", key)}>
-                      Delete
-                    </button>
-                    <input
-                      className="w-8 m-2 rounded-md text-2xl"
-                      name="layer"
-                      type="number"
-                      value={getLayer("NPCs", key)}
-                      onChange={(e) => updateLayer("NPCs", key, e.target.value)}
-                    />
-                  </p>
-                );
-              })}
-            {!!tabStatus.tAssetsFMaps &&
-              Object.keys(state.data.Images).map((key) => {
-                return (
-                  <p className="text-lg">
-                    {state.data.Images[key].name}
-                    <button onClick={() => deleteAssetFromMap("Images", key)}>
-                      Delete
-                    </button>
-                    <input
-                      className="w-8 m-2 text-2xl rounded-md"
-                      name="layer"
-                      type="number"
-                      value={getLayer("Images", key)}
-                      onChange={(e) =>
-                        updateLayer("Images", key, e.target.value)
-                      }
-                    />
-                  </p>
-                );
-              })}
-            {!!tabStatus.tAssetsFMaps && (
-              <>
-                <h1>Available Assets</h1> <hr />
-              </>
-            )}
-            {!!tabStatus.tAssetsFMaps &&
+            {tabStatus.assetsMapStoriesStorys === "assets" &&
+              tabStatus.assets_currNpcPlayerImages === "current" &&
+              currentNpcs}
+
+            {tabStatus.assetsMapStoriesStorys === "assets" &&
+              tabStatus.assets_currNpcPlayerImages === "current" &&
+              currentImages}
+            {tabStatus.assetsMapStoriesStorys === "assets" &&
+              tabStatus.assets_currNpcPlayerImages !== "current" && (
+                <>
+                  <h1>Available Assets</h1>
+                  <hr />
+                </>
+              )}
+            {tabStatus.assetsMapStoriesStorys === "assets" &&
+              tabStatus.assets_currNpcPlayerImages === "npcs" &&
               Object.keys(campaignAssets.NPCs).map((id) => {
                 return (
                   <div className="asset-card">
@@ -366,7 +460,8 @@ const MapDetails = () => {
                   </div>
                 );
               })}
-            {!!tabStatus.tAssetsFMaps &&
+            {tabStatus.assetsMapStoriesStorys === "assets" &&
+              tabStatus.assets_currNpcPlayerImages === "images" &&
               Object.keys(campaignAssets.Images).map((id) => {
                 return (
                   <div
@@ -389,38 +484,6 @@ const MapDetails = () => {
                       Add
                     </button>
                   </div>
-                );
-              })}
-
-            {/* Maps Card */}
-            {!!!tabStatus.tAssetsFMaps &&
-              !!mapsForCampaign.length &&
-              mapsForCampaign.map((map) => {
-                return (
-                  <Link
-                    to={`${map.id}`}
-                    onClick={() =>
-                      setState((prev) => {
-                        return {
-                          ...prev,
-                          mapId: map.id,
-                          background:
-                            map.id === prev.mapId ? prev.background : null,
-                          data:
-                            map.id === prev.mapId
-                              ? { ...prev.data }
-                              : {
-                                  ...prev.data,
-                                  Images: {},
-                                  NPCs: {},
-                                  StoryCards: {},
-                                },
-                        };
-                      })
-                    }
-                  >
-                    {map.name}
-                  </Link>
                 );
               })}
           </div>

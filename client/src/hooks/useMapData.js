@@ -13,6 +13,7 @@ function useMapData(mapId, campaignId, userId) {
     campaignId,
     mapId,
     name: "",
+    bio: "bio",
     data: {},
   });
 
@@ -32,6 +33,7 @@ function useMapData(mapId, campaignId, userId) {
         ...prev,
         name: all[0].data.name,
         background: all[0].data.background,
+        bio: all[0].data.bio,
         data: {
           Images: dataHelpers().convertArrayToObject(all[1].data.Images, "id"),
           NPCs: dataHelpers().convertArrayToObject(all[1].data.NPCs, "id"),

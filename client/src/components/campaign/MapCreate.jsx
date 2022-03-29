@@ -8,6 +8,7 @@ import NPCCardItem from "./NPCCardItem";
 const MapCreate = (props) => {
   const [mapName, setMapName] = useState("");
   const [mapUrl, setMapUrl] = useState("");
+  const [bio, setBio] = useState("");
   const { campaign } = useContext(CampContext);
   const { auth } = useContext(AuthContext);
 
@@ -17,10 +18,12 @@ const MapCreate = (props) => {
       {
         name: mapName,
         imgUrl: mapUrl,
+        bio,
       }
     );
     setMapName("");
     setMapUrl("");
+    setBio("");
     props.addMap(map.data);
   }
 
@@ -36,6 +39,15 @@ const MapCreate = (props) => {
               type="text"
               value={mapName}
               onChange={(e) => setMapName(e.target.value)}
+            />
+          </label>
+          <label>
+            <p className="text-textcolor text-lg p-2 m-2">Bio</p>
+            <textarea
+              className="border-2 border-secondary rounded-md bg-bkgd mb-4 w-60 text-textcolor"
+              type="text"
+              value={bio}
+              onChange={(e) => setBio(e.target.value)}
             />
           </label>
           <label>
