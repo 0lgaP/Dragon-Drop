@@ -1,5 +1,5 @@
 .register-page {
-  @apply flex flex-col items-center justify-center content-center w-full text-3xl m-8 text-textcolor
+  @apply flex flex-col tracking-wide items-center justify-center content-center w-full text-3xl m-8 text-textcolor
   }
   
   .register-form {
@@ -7,13 +7,13 @@
   }
   
   .input-label {
-    @apply p-2 m-4
+    @apply p-2 m-4 font-cinzel
   }
   
   .input-field {
-    @apply p-2 rounded-lg text-textcolor bg-bkgd/40
+    @apply p-2 font-merriweather rounded-lg text-textcolor bg-bkgd/40
   }
   
   .submit-button {
-    @apply m-6 p-2 px-4 text-textcolor bg-bkgd/40 rounded-lg border-2 border-textcolor
+    @apply m-6 p-2 px-4 text-textcolor bg-dragongreen/60 rounded-lg border-2 border-textcolor
   }

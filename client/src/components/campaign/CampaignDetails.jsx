@@ -2,7 +2,7 @@ import { React, useContext, useEffect, useState } from "react";
 import CampContext from "../../providers/CampProvider";
 import { useParams } from "react-router-dom";
 import NPCCardItem from "../campaign/NPCCardItem";
-import StoryCardItem from "./StoryCards/StoryCardItem";
+import BasicStoryCardItem from "./StoryCards/BasicStoryCardItem";
 import axios from "axios";
 
 const CampaignDetails = (props) => {
@@ -73,7 +73,7 @@ const CampaignDetails = (props) => {
 
   const storyCardList = unusedStories.map((card) => {
     return (
-      <StoryCardItem
+      <BasicStoryCardItem
         key={card.id}
         npcId={card.npcs_id}
         allMaps={storyCardHackery.maps}
@@ -110,7 +110,7 @@ const CampaignDetails = (props) => {
 
   const deadStoryCardList = deadStories.map((card) => {
     return (
-      <StoryCardItem
+      <BasicStoryCardItem
         npcId={card.npcs_id}
         allMaps={storyCardHackery.maps}
         allNpcs={storyCardHackery.npcs}
