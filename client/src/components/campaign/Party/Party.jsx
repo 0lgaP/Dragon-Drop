@@ -4,6 +4,7 @@ import dataHelpers from "../../../hooks/dataHelpers";
 import CampContext from "../../../providers/CampProvider";
 import PlayerInputForm from "./PlayerInputForm";
 import { PlayerList } from "./PlayerList";
+import "./Party.css";
 
 const viewModes = {
   EDIT: "edit",
@@ -26,16 +27,22 @@ export const Party = () => {
 
   return (
     <section>
-      <div className="bg-primary rounded-xl text-textcolor m-2">
+      <div className="flex flex-col bg-primary rounded-xl text-textcolor m-2 justify-evenly">
         <h1 className="text-2xl m-4 p-5">Party Details</h1>
+        </div>
+        <div>
         {viewMode === viewModes.VIEW && (
           <React.Fragment>
-            <button onClick={() => setViewMode(viewModes.ADD)}>ADD</button>
-            <button onClick={() => setViewMode(viewModes.EDIT)}>EDIT</button>
+            <div className="party--button-panel">
+            <button className="party--button" onClick={() => setViewMode(viewModes.ADD)}>ADD</button>
+            <button className="party--button" onClick={() => setViewMode(viewModes.EDIT)}>EDIT</button>
+          </div>
           </React.Fragment>
         )}
         {viewMode !== viewModes.VIEW && (
-          <button onClick={() => setViewMode(viewModes.VIEW)}>VIEW</button>
+          <div className="party--button-panel">
+            <button className="party--button" onClick={() => setViewMode(viewModes.VIEW)}>VIEW</button>
+          </div>
         )}
         {viewMode === viewModes.ADD && (
           <PlayerInputForm

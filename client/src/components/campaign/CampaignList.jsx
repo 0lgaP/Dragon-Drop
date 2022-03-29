@@ -10,6 +10,7 @@ const CampaignList = () => {
   // dm_id, id, name
   const [campaigns, setCampaigns] = useState([]);
   const [name, setName] = useState("")
+  const [style, setStyle] = useState("")
   const { auth } = useContext(AuthContext);
 
   const rawAuth = window.localStorage.getItem("user_id")
@@ -19,26 +20,30 @@ const CampaignList = () => {
 
   let clicked = false;
   // ADD VISIBLE STYLE TO FORM WITH FUNCTION //
-  const hiddenStyle = "invisible flex flex-row bg-primary m-6 p-4 h-18 rounded-xl content-center w-fit";
-  const visibleStyle = "flex flex-row bg-primary m-6 p-4 h-18 rounded-xl content-center w-fit visible";
+  const hiddenStyle = "hidden flex flex-row bg-gunmetal m-6 p-4 h-18 rounded-xl content-center w-fit"
+  const visibleStyle = "flex flex-row bg-gunmetal m-6 p-4 h-18 rounded-xl content-center w-fit";
 
   const makeFormVisible = () => {
-    if (clicked) {
+    if (clicked === true) {
       clicked = false
+      console.log(`setting to hidden style`)
+      setStyle(hiddenStyle)
     }
     else {
       clicked = true
+      console.log(`setting to visible style`)
+      setStyle(visibleStyle)
     }
     console.log(clicked)
   }
 
-  const determineStyle = () => {
-    if (clicked) {
-      return visibleStyle;
-    } else {
-      return hiddenStyle;
-    }
-  }
+  // const determineStyle = () => {
+  //   if (clicked) {
+  //     return visibleStyle;
+  //   } else {
+  //     return hiddenStyle;
+  //   }
+  // }
 
 
   useEffect(() => {
@@ -49,13 +54,15 @@ const CampaignList = () => {
   }, [])
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
+    makeFormVisible();
     try {
       await axios.post(address, { name })
       setName('');
-      window.location.reload(true);
+      console.log(`after axios post`);
     }
     catch (err) {
-
+      
     }
   }
 
@@ -64,10 +71,10 @@ const CampaignList = () => {
     <div>
       <div className="flex flex-row justify-start">
         <div className="p-8 px-4 m-6 text-xl text-textcolor bg-header w-80 rounded-xl h-18 content-center">
-         <button onClick={makeFormVisible}>+ Create a New Campaign!</button>
+         <button className="flex flex-row items-center content-center" onClick={makeFormVisible}><div className="p-4">+</div><div> Create a New Campaign!</div></button>
         </div>
-        <div className={determineStyle}>
-          <form className="flex flex-row">
+        <div>
+          <form className={style}>
             <label className="flex flex-row">
               <p className="text-textcolor content-center text-xl m-4 pr-4">Name: </p>
               <input className="border-2 border-secondary rounded-md bg-bkgd m-4 w-80 h-8 text-textcolor" type ="text" onChange={e => setName(e.target.value)} value={name} />
@@ -77,9 +84,9 @@ const CampaignList = () => {
         </div>
       </div >
     <section>
-      <div className="card__container bg-secondary text-gunmetal text-2xl rounded-lg border-2 p-6 px-10 m-6">
+      <div className="card__container text-gunmetal text-2xl rounded-lg p-6 px-10 m-6">
         {campaigns.map(camp =>
-          <CampaignListItem id={camp.id} name={camp.name} />
+          <div className="bg-secondary rounded-xl m-4"><CampaignListItem id={camp.id} name={camp.name} /></div>
         )}
       </div>
     </section>

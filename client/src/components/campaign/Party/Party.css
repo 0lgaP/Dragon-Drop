@@ -1,0 +1,7 @@
+.party--button {
+  @apply w-40 rounded-lg p-4 px-10 m-6 bg-gunmetal text-textcolor
+}
+
+.party--button-panel {
+  @apply m-0 bg-bkgd
+}
