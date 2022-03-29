@@ -410,8 +410,9 @@ const MapDetails = () => {
       </div>
       <div className="sidebar">
         <div className="grow relative ">
+          <div className="mt-5"></div>
           <button
-            className="absolute right-0 top-[-10px] mr-[8px]"
+            className="absolute right-0 top-[-20px] mr-[8px]"
             onClick={() => setHideMe((prev) => !prev)}
           >
             {hideMe ? "Show" : "Hide"}
