@@ -242,67 +242,6 @@ const MapDetails = () => {
           );
         })
       : null;
-
-  // <div className="sidebar">
-  //   <h2 className="text-textcolor text-3xl m-2 mb-4 bg-header rounded-lg p-4">
-  //     {state.name}
-  //   </h2>
-  //   {/* Story cards assets for map */}
-  //   {storyCardsForMap}
-  //   <div className="card">
-  //     <div className="tab-bar">
-  //       <h3
-  //         onClick={() => {
-  //           setTabStatus((prev) => {
-  //             return { ...prev, tStoryFNotes: true };
-  //           });
-  //         }}
-  //       >
-  //         Story
-  //       </h3>
-  //       <h3
-  //         onClick={() => {
-  //           setTabStatus((prev) => {
-  //             return { ...prev, tStoryFNotes: false };
-  //           });
-  //         }}
-  //       >
-  //         Notes
-  //       </h3>
-  //     </div>
-  //     {tabStatus.tStoryFNotes && entireStory}
-  //     {!tabStatus.tStoryFNotes && (
-  //       <React.Fragment>
-  //         <label>Notes : </label>
-  //         <textarea
-  //           type="textarea"
-  //           name="notes"
-  //           id="notesArea"
-  //           value={getNotes()}
-  //           onChange={(e) => {
-  //             e.target.style.height = "";
-  //             e.target.style.height = e.target.scrollHeight + "px";
-  //             updateNotes(
-  //               document.getElementById("notesArea").value,
-  //               false
-  //             );
-  //           }}
-  //           onFocus={(e) => {
-  //             e.target.style.height = "";
-  //             e.target.style.height = e.target.scrollHeight + "px";
-  //           }}
-  //         />
-  //         <button
-  //           onClick={(e) => {
-  //             updateNotes(document.getElementById("notesArea").value, true);
-  //           }}
-  //         >
-  //           Save
-  //         </button>
-  //       </React.Fragment>
-  //     )}
-  //   </div>
-  // </div>
   return (
     <container className="mapContainer" id={urlParams.mapId}>
       <div className="map">
@@ -316,71 +255,79 @@ const MapDetails = () => {
         )}
       </div>
       <div className="sidebar">
-        {/* Players List */}
-        <div className="card">
-          <div className="tab-bar">
-            <h3
-              onClick={() => {
-                setTabStatus((prev) => {
-                  return { ...prev, playerMaps: "player" };
-                });
-              }}
-            >
-              Players
-            </h3>
-            <h3
-              onClick={() => {
-                setTabStatus((prev) => {
-                  return { ...prev, playerMaps: "maps" };
-                });
-              }}
-            >
-              Maps
-            </h3>
+        <div className="flex w-full">
+          {/* Town Info */}
+          <div className="card basis-1/2">
+            <h2>{state.name}</h2>
+            <h3>{state.bio}</h3>
           </div>
-          {tabStatus.playerMaps === "player" && (
-            <React.Fragment>
-              <h3>Players</h3>
-              <ul>
-                {!!state?.data?.Players?.length &&
-                  state.data.Players.map((player) => {
-                    return <li>{player.email}</li>;
-                  })}
-              </ul>
-            </React.Fragment>
-          )}
-          {/* Maps Card */}
-          {tabStatus.playerMaps === "maps" &&
-            !!mapsForCampaign.length &&
-            mapsForCampaign.map((map) => {
-              return (
-                <Link
-                  to={`${map.id}`}
-                  onClick={() =>
-                    setState((prev) => {
-                      return {
-                        ...prev,
-                        mapId: map.id,
-                        background:
-                          map.id === prev.mapId ? prev.background : null,
-                        data:
-                          map.id === prev.mapId
-                            ? { ...prev.data }
-                            : {
-                                ...prev.data,
-                                Images: {},
-                                NPCs: {},
-                                StoryCards: {},
-                              },
-                      };
-                    })
-                  }
-                >
-                  {map.name}
-                </Link>
-              );
-            })}
+          {/* Players List */}
+          <div className="card basis-1/2">
+            <div className="tab-bar">
+              <h3
+                onClick={() => {
+                  setTabStatus((prev) => {
+                    return { ...prev, playerMaps: "player" };
+                  });
+                }}
+              >
+                Players
+              </h3>
+              <h3
+                onClick={() => {
+                  setTabStatus((prev) => {
+                    return { ...prev, playerMaps: "maps" };
+                  });
+                }}
+              >
+                Maps
+              </h3>
+            </div>
+            {tabStatus.playerMaps === "player" && (
+              <React.Fragment>
+                <h3>Players</h3>
+                <ul>
+                  {!!state?.data?.Players?.length &&
+                    state.data.Players.map((player) => {
+                      return <li>{player.email}</li>;
+                    })}
+                </ul>
+              </React.Fragment>
+            )}
+            {/* Maps Card */}
+            {tabStatus.playerMaps === "maps" &&
+              !!mapsForCampaign.length &&
+              mapsForCampaign.map((map) => {
+                return (
+                  <Link
+                    to={`${map.id}`}
+                    onClick={() =>
+                      setState((prev) => {
+                        return {
+                          ...prev,
+                          mapId: map.id,
+                          background:
+                            map.id === prev.mapId ? prev.background : null,
+                          data:
+                            map.id === prev.mapId
+                              ? { ...prev.data }
+                              : {
+                                  ...prev.data,
+                                  Images: {},
+                                  NPCs: {},
+                                  StoryCards: {},
+                                },
+                        };
+                      })
+                    }
+                  >
+                    {map.name}
+                  </Link>
+                );
+              })}
+          </div>
         </div>
+
         {/* Assets/Maps stories/Story tabs */}
         <div className="card">
           <div className="tab-bar">
