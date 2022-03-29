@@ -13,7 +13,7 @@
 }
 
 .form__dropdown_container {
-  @apply rounded px-8 py-4 
+  @apply rounded px-8 py-4 font-inputFont
 }
 
 .form__title {

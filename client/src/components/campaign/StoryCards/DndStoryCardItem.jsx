@@ -52,18 +52,19 @@ function DndStoryCardItem(props) {
             🗑️
           </button>
         )}
-        <section className="dnd_card__title" >{props.text}</section>
+        <section className="dnd_card__text" >{props.text}</section>
       
-      <div>     
-        <aside className="flex justify-end">
+      <div className="dnd_card__tags_container"> 
+        <aside className="dnd_card__tags">
           {alive}
           {" "}
           {npcName}
         </aside>
-        <aside className="flex justify-end">
+        <aside className="dnd_card__tags">
           {mapName}
         </aside>
-        </div>
+      </div>
+
       </article>
     </section>
   );

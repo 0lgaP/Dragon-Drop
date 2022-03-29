@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 function StoryCardItem(props) {
+  console.log("sci", props);
 
   const getName = (id, objArr) => {
     const found = objArr.find((element) => element.id === id);
@@ -19,7 +20,7 @@ function StoryCardItem(props) {
   const viewMode = props.view;
 
   return (
-    <section className="story_card__container">
+    <section className="card">
       <article className="card__container">
         {viewMode !== "SHOW" && (
           <button alt="Edit" className="button cancel" onClick={props.onEdit}>
@@ -49,18 +50,12 @@ function StoryCardItem(props) {
             🗑️
           </button>
         )}
-        <section className="card__title" >{props.text}</section>
-      
-      <div>     
-        <aside className="flex justify-end">
+        <div className="card__title">{props.text}</div>
+        <div>
           {alive}
-          {" "}
           {npcName}
-        </aside>
-        <aside className="flex justify-end">
-          {mapName}
-        </aside>
         </div>
+        <div>{mapName}</div>
       </article>
     </section>
   );

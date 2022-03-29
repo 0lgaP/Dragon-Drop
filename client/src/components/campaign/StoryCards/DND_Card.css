@@ -23,8 +23,20 @@
   @apply font-bold text-xl text-gunmetal break-words 
 }
 
+.dnd_card__text {
+  @apply font-bold text-xl text-gunmetal break-words font-inputFont
+}
+
 .dnd_card__text-area {
   @apply shadow-sm mt-4 block w-full h-64 p-4 lg:text-lg rounded-md bg-bkgd text-textcolor 
+}
+
+.dnd_card__tags_container {
+  @apply justify-end flex grid shadow-sm
+}
+
+.dnd_card__tags {
+  @apply font-bold text-base text-gunmetal break-words font-inputFont justify-self-end 
 }
 
 .dnd_card__dropdown {
