@@ -96,7 +96,12 @@ const MapList = () => {
                 <div>
                   <h2 className="ml-title">{map.name}</h2>
                   {mode === viewModes.EDIT && (
-                    <button onClick={() => deleteMap(map.id)}>DELETE</button>
+                    <button
+                      className="maplist--delete-button"
+                      onClick={() => deleteMap(map.id)}
+                    >
+                      DELETE
+                    </button>
                   )}
                 </div>
                 <Link to={`maps/${map.id}`}>

@@ -30,7 +30,7 @@ const MapCreate = (props) => {
 
   return (
     <>
-      <div className="bg-primary m-6 p-4 rounded-xl ms-auto">
+      <div className="bg-primary m-6 mt-0 p-4 rounded-xl ms-auto">
         <h1 className="text-2xl text-textcolor p-2">Create a new Map!</h1>
         <div>
           <label>

@@ -21,3 +21,11 @@
 .maplist--button-panel {
   @apply m-0 bg-bkgd
 }
+
+.maplist--delete-button {
+  @apply bg-bkgd rounded-xl p-4 m-2 mx-auto cursor-pointer flex items-center justify-center font-bold text-3xl transition-all;
+	color: #F2542D;
+}
+.maplist--delete-button:hover {
+  @apply bg-metal;
+}
