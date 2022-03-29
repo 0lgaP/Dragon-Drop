@@ -257,7 +257,7 @@ const MapDetails = () => {
       <div className="sidebar">
         <div className="flex w-full">
           {/* Town Info */}
-          <div className="card basis-1/2">
+          <div className="card basis-1/2 hover:basis-5/6">
             <h2>{state.name}</h2>
             <h3>{state.bio}</h3>
           </div>
