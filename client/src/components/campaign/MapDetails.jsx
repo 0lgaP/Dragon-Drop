@@ -36,6 +36,7 @@ const MapDetails = () => {
     assetsMapStoriesStorys: "map stories",
     assets_currNpcPlayerImages: "current",
   });
+  const [hideMe, setHideMe] = useState(false);
 
   function addAssetToMap(asset_id, type) {
     // state.mapId
@@ -255,77 +256,94 @@ const MapDetails = () => {
         )}
       </div>
       <div className="sidebar">
-        <div className="flex w-full">
-          {/* Town Info */}
-          <div className="card basis-1/2 hover:basis-5/6">
-            <h2>{state.name}</h2>
-            <h3>{state.bio}</h3>
-          </div>
-          {/* Players List */}
-          <div className="card basis-1/2">
-            <div className="tab-bar">
-              <h3
-                onClick={() => {
-                  setTabStatus((prev) => {
-                    return { ...prev, playerMaps: "player" };
-                  });
-                }}
-              >
-                Players
-              </h3>
-              <h3
-                onClick={() => {
-                  setTabStatus((prev) => {
-                    return { ...prev, playerMaps: "maps" };
-                  });
-                }}
-              >
-                Maps
-              </h3>
-            </div>
-            {tabStatus.playerMaps === "player" && (
-              <React.Fragment>
-                <h3>Players</h3>
-                <ul>
-                  {!!state?.data?.Players?.length &&
-                    state.data.Players.map((player) => {
-                      return <li>{player.email}</li>;
-                    })}
-                </ul>
-              </React.Fragment>
-            )}
-            {/* Maps Card */}
-            {tabStatus.playerMaps === "maps" &&
-              !!mapsForCampaign.length &&
-              mapsForCampaign.map((map) => {
-                return (
-                  <Link
-                    to={`${map.id}`}
-                    onClick={() =>
-                      setState((prev) => {
-                        return {
-                          ...prev,
-                          mapId: map.id,
-                          background:
-                            map.id === prev.mapId ? prev.background : null,
-                          data:
-                            map.id === prev.mapId
-                              ? { ...prev.data }
-                              : {
-                                  ...prev.data,
-                                  Images: {},
-                                  NPCs: {},
-                                  StoryCards: {},
-                                },
-                        };
-                      })
-                    }
+        <div className="grow relative">
+          <button
+            className="absolute right-0 top-[-10px]"
+            onClick={() => setHideMe((prev) => !prev)}
+          >
+            {hideMe ? "Show" : "Hide"}
+          </button>
+          {!hideMe && (
+            <div className="flex w-full">
+              {/* Map Info */}
+              <div className="card transition-all ease-in-out basis-1/2 hover:basis-5/6">
+                <h1>{state.name}</h1>
+                <h3>{state.bio}</h3>
+              </div>
+              {/* Player/Map List */}
+              <div className="card basis-1/2">
+                {/* Player/Map Tab Select */}
+                <div className="tab-bar">
+                  <h3
+                    onClick={() => {
+                      setTabStatus((prev) => {
+                        return { ...prev, playerMaps: "player" };
+                      });
+                    }}
                   >
-                    {map.name}
-                  </Link>
-                );
-              })}
-          </div>
+                    Players
+                  </h3>
+                  <h3
+                    onClick={() => {
+                      setTabStatus((prev) => {
+                        return { ...prev, playerMaps: "maps" };
+                      });
+                    }}
+                  >
+                    Maps
+                  </h3>
+                </div>
+                {tabStatus.playerMaps === "player" && (
+                  <React.Fragment>
+                    <h3>Players</h3>
+                    <ul>
+                      {!!state?.data?.Players?.length &&
+                        state.data.Players.map((player) => {
+                          return <li>{player.email}</li>;
+                        })}
+                    </ul>
+                  </React.Fragment>
+                )}
+                {/* Maps Card */}
+                {tabStatus.playerMaps === "maps" && !!mapsForCampaign.length && (
+                  <React.Fragment>
+                    <div className="flex flex-col">
+                      {mapsForCampaign.map((map) => {
+                        return (
+                          <Link
+                            to={`${map.id}`}
+                            onClick={() =>
+                              setState((prev) => {
+                                return {
+                                  ...prev,
+                                  mapId: map.id,
+                                  background:
+                                    map.id === prev.mapId
+                                      ? prev.background
+                                      : null,
+                                  data:
+                                    map.id === prev.mapId
+                                      ? { ...prev.data }
+                                      : {
+                                          ...prev.data,
+                                          Images: {},
+                                          NPCs: {},
+                                          StoryCards: {},
+                                        },
+                                };
+                              })
+                            }
+                          >
+                            {map.name}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </React.Fragment>
+                )}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Assets/Maps stories/Story tabs */}
