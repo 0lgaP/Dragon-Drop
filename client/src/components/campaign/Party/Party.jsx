@@ -29,19 +29,34 @@ export const Party = () => {
     <section>
       <div className="flex flex-col bg-primary rounded-xl text-textcolor m-2 justify-evenly">
         <h1 className="text-2xl m-4 p-5">Party Details</h1>
-        </div>
-        <div>
+      </div>
+      <div>
         {viewMode === viewModes.VIEW && (
           <React.Fragment>
             <div className="party--button-panel">
-            <button className="party--button" onClick={() => setViewMode(viewModes.ADD)}>ADD</button>
-            <button className="party--button" onClick={() => setViewMode(viewModes.EDIT)}>EDIT</button>
-          </div>
+              <button
+                className="party--button"
+                onClick={() => setViewMode(viewModes.ADD)}
+              >
+                ADD
+              </button>
+              <button
+                className="party--button"
+                onClick={() => setViewMode(viewModes.EDIT)}
+              >
+                EDIT
+              </button>
+            </div>
           </React.Fragment>
         )}
         {viewMode !== viewModes.VIEW && (
           <div className="party--button-panel">
-            <button className="party--button" onClick={() => setViewMode(viewModes.VIEW)}>VIEW</button>
+            <button
+              className="party--button"
+              onClick={() => setViewMode(viewModes.VIEW)}
+            >
+              VIEW
+            </button>
           </div>
         )}
         {viewMode === viewModes.ADD && (
