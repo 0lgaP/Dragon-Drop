@@ -579,32 +579,35 @@ const MapDetails = () => {
                   </div>
                 );
               })}
-            {tabStatus.assetsMapStoriesStorys === "assets" &&
-              tabStatus.assets_currNpcPlayerImages === "images" &&
-              Object.keys(campaignAssets.Images).map((id) => {
-                return (
-                  <div
-                    className="asset-card"
-                    style={{
-                      backgroundImage: `url("${campaignAssets.Images[id].src}")`,
-                      backgroundPosition: "center",
-                      backgroundSize: "cover",
-                      backgroundRepeat: "no-repeat",
-                      objectFit: "contain",
-                      height: "fit-content",
-                    }}
-                  >
-                    <img
-                      src={`${campaignAssets.Images[id].src}`}
-                      style={{ visibility: "hidden" }}
-                    />
-                    <h3>IMG - {campaignAssets.Images[id].name}</h3>
-                    <button onClick={() => addAssetToMap(id, "img")}>
-                      Add
-                    </button>
-                  </div>
-                );
-              })}
+            <div className="grid grid-cols-2">
+              {tabStatus.assetsMapStoriesStorys === "assets" &&
+                tabStatus.assets_currNpcPlayerImages === "images" &&
+                Object.keys(campaignAssets.Images).map((id) => {
+                  return (
+                    <div
+                      className="asset-card"
+                      style={{
+                        backgroundImage: `url("${campaignAssets.Images[id].src}")`,
+                        backgroundPosition: "center",
+                        backgroundSize: "cover",
+                        backgroundRepeat: "no-repeat",
+                        objectFit: "contain",
+                        height: "fit-content",
+                      }}
+                    >
+                      <img
+                        src={`${campaignAssets.Images[id].src}`}
+                        style={{ visibility: "hidden" }}
+                        className="max-h-[50%]"
+                      />
+                      <h3>IMG - {campaignAssets.Images[id].name}</h3>
+                      <button onClick={() => addAssetToMap(id, "img")}>
+                        Add
+                      </button>
+                    </div>
+                  );
+                })}
+            </div>
           </div>
         </div>
       </div>
