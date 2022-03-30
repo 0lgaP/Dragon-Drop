@@ -16,10 +16,10 @@ module.exports = (router, db) => {
     `;
 
     const forAll =
-      "ma.scale, ma.top_pos, ma.left_pos, ma.layer_order, ma.layer_name, ma.id,";
+      "ma.scale, ma.top_pos, ma.left_pos, ma.layer_order, ma.layer_name, ma.id, at.name as type,";
 
     const queryNPCsForMap = `
-      SELECT ${forAll} n.name, n.alive, n.bio, n.details, n.img, at.name as type
+      SELECT ${forAll} n.name, n.alive, n.bio, n.details, n.img
       FROM map_assets ma
         JOIN asset_types at ON ma.type_id = at.id
         JOIN npcs n on ma.asset_id = n.id
@@ -27,7 +27,7 @@ module.exports = (router, db) => {
       LIMIT 1;
       `;
     const queryImagesForMap = `
-      SELECT ${forAll} img.name, img.src as img, at.name as type
+      SELECT ${forAll} img.name, img.src as img
       FROM map_assets ma
         JOIN asset_types at ON ma.type_id = at.id
         JOIN images img on ma.asset_id = img.id
@@ -35,10 +35,18 @@ module.exports = (router, db) => {
       LIMIT 1;
       `;
     const queryStoryCardsForMap = `
-      SELECT ${forAll} sc.completed, sc.created_on, sc.story_card_text as content, sc.campaigns_id, sc.order_num as order, at.name as type
+      SELECT ${forAll} sc.completed, sc.created_on, sc.story_card_text as content, sc.campaigns_id, sc.order_num as order
       FROM map_assets ma
         JOIN asset_types at ON ma.type_id = at.id
         JOIN story_cards sc on ma.asset_id = sc.id
+      WHERE ma.id = $1
+      LIMIT 1;
+      `;
+    const queryPlayerFromMap = `
+      SELECT ${forAll} p.profile_pic as img, p.name
+      FROM map_assets ma
+        JOIN asset_types at ON ma.type_id = at.id
+        JOIN players p on ma.asset_id = p.id
       WHERE ma.id = $1
       LIMIT 1;
       `;
@@ -55,6 +63,10 @@ module.exports = (router, db) => {
       case "s":
         typeId = "fa8dbb44-f356-45ae-9b57-4c07c95c56f0"; //Story_card
         queryString = queryStoryCardsForMap;
+        break;
+      case "p":
+        typeId = "c11c94ca-e8ef-4539-9b4c-35a4092ba526"; //Player
+        queryString = queryPlayerFromMap;
         break;
     }
 

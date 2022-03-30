@@ -10,3 +10,22 @@
 .map-thumbnail {
   @apply m-auto
 }
+.ml-title {
+  @apply text-5xl
+}
+
+.maplist--button {
+  @apply w-40 rounded-lg p-4 px-10 m-6 bg-gunmetal text-textcolor
+}
+
+.maplist--button-panel {
+  @apply m-0 bg-bkgd
+}
+
+.maplist--delete-button {
+  @apply bg-bkgd rounded-xl p-4 m-2 mx-auto cursor-pointer flex items-center justify-center font-bold text-3xl transition-all;
+	color: #F2542D;
+}
+.maplist--delete-button:hover {
+  @apply bg-metal;
+}

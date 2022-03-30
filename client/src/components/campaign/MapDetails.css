@@ -7,7 +7,7 @@
 }
 .sidebar {
   /* @apply p-5 min-w-max overflow-y-auto */
-  @apply p-5 w-[46%] overflow-y-auto
+  @apply m-5 w-[46%] overflow-y-auto max-h-screen
 }
 .card {
   @apply bg-primary mt-4 rounded-xl
@@ -18,8 +18,15 @@
 .card-body h1 {
   @apply text-xl bg-secondary text-gunmetal pb-2
 }
-.card-body p {
-@apply bg-bkgd rounded-xl p-4 m-2
+.card-body .current-asset {
+@apply bg-bkgd rounded-l-xl p-4 m-2 mr-0
+}
+.card-body .delete-button {
+  @apply bg-bkgd rounded-r-xl p-4 m-2 mr-0 cursor-pointer flex items-center justify-center font-bold text-3xl transition-all;
+	color: #F2542D;
+}
+.card-body .delete-button:hover {
+  @apply bg-primary;
 }
 .card-body button {
   @apply m-2
@@ -48,4 +55,10 @@
 }
 .asset-card button:hover {
   @apply drop-shadow-xl -translate-y-0 -translate-x-1 scale-105
+}
+.md-title {
+  @apply text-5xl
+}
+.md-bio {
+  @apply text-xl
 }
