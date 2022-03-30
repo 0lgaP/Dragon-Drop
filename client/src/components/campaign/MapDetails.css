@@ -7,7 +7,7 @@
 }
 .sidebar {
   /* @apply p-5 min-w-max overflow-y-auto */
-  @apply m-5 w-[46%] overflow-y-auto max-h-screen
+  @apply mx-2 w-[46%] overflow-y-auto max-h-screen
 }
 .card {
   @apply bg-primary mt-4 rounded-xl
