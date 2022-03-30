@@ -59,7 +59,7 @@ const NPCList = (props) => {
     <section className="flex flex-row">
       <div className="bg-primary m-6 p-4 rounded-xl">
         <h1 className="text-2xl text-textcolor p-2">Create a new NPC!</h1>
-        <form className="p-2 m-2 font-cinzel">
+        <form className="p-2 m-2">
           <label className="">
             <p className="text-textcolor text-lg p-2 m-2">Name</p>
             <input

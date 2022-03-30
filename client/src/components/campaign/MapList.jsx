@@ -56,16 +56,16 @@ const MapList = () => {
       {mode === viewModes.VIEW && (
         <React.Fragment>
           <button
-            className="edit-button m-2"
+            className="maplist--button"
             onClick={() => toggleEdit(viewModes.ADD)}
           >
-            Add
+            ADD
           </button>
           <button
-            className="edit-button m-2"
+            className="maplist--button"
             onClick={() => toggleEdit(viewModes.EDIT)}
           >
-            Edit
+            EDIT
           </button>
         </React.Fragment>
       )}
@@ -75,7 +75,7 @@ const MapList = () => {
             className="maplist--button"
             onClick={() => toggleEdit(viewModes.VIEW)}
           >
-            Back
+            BACK
           </button>
         </React.Fragment>
       )}
@@ -94,13 +94,13 @@ const MapList = () => {
                 key={map.id}
               >
                 <div>
-                  <h2 className="map-name">{map.name}</h2>
+                  <h2 className="ml-title">{map.name}</h2>
                   {mode === viewModes.EDIT && (
                     <button
-                      className="delete-button"
+                      className="maplist--delete-button"
                       onClick={() => deleteMap(map.id)}
                     >
-                      Delete
+                      DELETE
                     </button>
                   )}
                 </div>
