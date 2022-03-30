@@ -12,6 +12,7 @@ import CampContext from "../../providers/CampProvider";
 import StoryCardItem from "./StoryCards/StoryCardItem";
 import AuthContext from "../../providers/AuthProvider";
 import NPCCardItem from "./NPCCardItem";
+import NotePad from "./Notepad";
 
 // Test URL
 // http://localhost:3002/users/2c41cf56-a6d7-11ec-b909-0242ac120002/campaigns/8a89386b-de43-4c63-9127-3a78394d4253/maps/927432f7-7839-4a6d-817f-8e1a925b2706
@@ -114,28 +115,6 @@ const MapDetails = () => {
   }
   function getLayer(type, id) {
     return state.data[type][id].layer_order;
-  }
-
-  async function updateNotes(text, updateDB) {
-    if (updateDB)
-      await axios.put(
-        `/users/${urlParams.u_id}/campaigns/${campaign()}/notes`,
-        { user_id: auth.user_id, content: text }
-      );
-    // console.log('put notes',result)
-    setState(
-      update(state, {
-        data: {
-          Notes: {
-            $merge: { content: text },
-          },
-        },
-      })
-    );
-  }
-  function getNotes(test) {
-    // console.log(state.data.Notes.content.split(/\r\n|\r|\n/).length)
-    return state.data.Notes.content;
   }
 
   useEffect(() => {
@@ -624,40 +603,7 @@ const MapDetails = () => {
               storyCardsForMap}
 
             {/* Notes? */}
-            {tabStatus.assetsMapStoriesStorys === "notes" && (
-              <div className="flex flex-col">
-                <label>Notes : </label>
-                <textarea
-                  type="textarea"
-                  name="notes"
-                  id="notesArea"
-                  value={getNotes()}
-                  onChange={(e) => {
-                    e.target.style.height = "";
-                    e.target.style.height = e.target.scrollHeight + "px";
-                    updateNotes(
-                      document.getElementById("notesArea").value,
-                      false
-                    );
-                  }}
-                  onFocus={(e) => {
-                    e.target.style.height = "";
-                    e.target.style.height = e.target.scrollHeight + "px";
-                  }}
-                />
-                <div
-                  className="md-button mx-auto self-center"
-                  onClick={(e) => {
-                    updateNotes(
-                      document.getElementById("notesArea").value,
-                      true
-                    );
-                  }}
-                >
-                  Save
-                </div>
-              </div>
-            )}
+            {tabStatus.assetsMapStoriesStorys === "notes" && <NotePad />}
 
             {/* Entire Story */}
             {tabStatus.assetsMapStoriesStorys === "story" && entireStory}
