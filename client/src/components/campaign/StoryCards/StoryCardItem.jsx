@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./Card.css"
 
 function StoryCardItem(props) {
   console.log("sci", props);
@@ -36,10 +37,10 @@ function StoryCardItem(props) {
         </button>
         <button
           alt="Story Card Completed"
-          className="button confirm"
+          className="button confirm text-gunmetal"
           onClick={props.onComplete}
         >
-          ✅
+        ✔
         </button>
         {viewMode !== "SHOW" && (
           <button
@@ -47,11 +48,11 @@ function StoryCardItem(props) {
             className="button death"
             onClick={props.onDelete}
           >
-            🗑️
+          Delete
           </button>
         )}
         <div className="card__title">{props.text}</div>
-        <div>
+        <div className="">
           {alive}
           {npcName}
         </div>

@@ -17,11 +17,11 @@
 }
 
 .form__title {
-  @apply font-bold text-3xl font-title
+  @apply font-cinzel text-3xl m-4 py-6
 }
 
 .form__text-area {
-  @apply shadow-sm mt-4 block w-full h-64 p-4 lg:text-lg rounded-md bg-bkgd text-textcolor font-inputFont
+  @apply shadow-sm mt-4 block w-full h-64 p-4 lg:text-lg rounded-md bg-bkgd text-textcolor font-merriweather
 }
 
 .form__dropdown {

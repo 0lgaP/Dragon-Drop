@@ -8,6 +8,7 @@ import useMapData from "../../hooks/useMapData";
 import update from "immutability-helper";
 
 import "./MapDetails.css";
+import "./StoryCards/Card.css"
 import CampContext from "../../providers/CampProvider";
 import StoryCardItem from "./StoryCards/StoryCardItem";
 import AuthContext from "../../providers/AuthProvider";
@@ -412,17 +413,17 @@ const MapDetails = () => {
         <div className="grow relative ">
           <div className="mt-5"></div>
           <button
-            className="absolute right-0 top-[-20px] mr-[8px]"
+            className=" top-[-10px] shadow-lg text-textcolor bg-gunmetal font-fellEnglish font-bold py-2 px-6 rounded-xl"
             onClick={() => setHideMe((prev) => !prev)}
           >
             {hideMe ? "Show" : "Hide"}
           </button>
           {!hideMe && (
-            <div className="flex w-full max-h-fit">
+            <div className="flex w-full mt-10">
               {/* Map Info */}
-              <div className="card transition-all ease-in-out basis-1/2 hover:basis-5/6">
-                <h1 className="md-title">{state.name}</h1>
-                <h3 className="md-bio">{state.bio}</h3>
+              <div className="card text-xl p-2 transition-all ease-in-out basis-1/2 hover:basis-5/6">
+                <h1>{state.name}</h1>
+                <h3 className="text-lg">{state.bio}</h3>
               </div>
               {/* Player/Map List */}
               <div className="card basis-1/2 overflow-y-auto max-h-[100%]">

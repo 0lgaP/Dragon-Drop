@@ -1,5 +1,5 @@
 .card {
-  @apply max-w-[100%] rounded-xl overflow-hidden shadow-lg bg-secondary m-2 
+  @apply font-merriweather max-w-[100%] rounded-xl overflow-hidden shadow-lg bg-secondary m-2
 }
 
 .card__container {
@@ -11,7 +11,7 @@
 
 }
 .card__title {
-  @apply font-bold text-xl text-gunmetal break-words
+  @apply text-xl text-gunmetal break-words pb-4
 }
 
 .card__text-area {
@@ -19,5 +19,5 @@
 }
 
 .card__dropdown {
-  @apply inline-block bg-bkgd rounded px-3 py-1 text-sm font-semibold m-2 text-textcolor
+  @apply inline-block bg-header/90 rounded px-3 py-1 text-base font-merriweather m-2 text-textcolor
 }

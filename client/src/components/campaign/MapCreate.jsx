@@ -29,10 +29,10 @@ const MapCreate = (props) => {
   }
 
   return (
-    <>
-      <div className="bg-primary m-6 mt-0 p-4 rounded-xl ms-auto">
+    <section>
+      <div className="bg-primary m-6 p-4 rounded-xl ms-auto items-center mb-10">
         <h1 className="text-2xl text-textcolor p-2">Create a new Map!</h1>
-        <div>
+        <div className="font-cinzel">
           <label>
             <p className="text-textcolor text-lg p-2 m-2">Name</p>
             <input
@@ -65,14 +65,14 @@ const MapCreate = (props) => {
           <div className="flex flex-row justify-center p-4">
             <button
               onClick={saveToDb}
-              className="bg-secondary text-header rounded-md border-primary border-2 m-2 px-6 py-2"
+              className="font-fellEnglish bg-secondary text-header rounded-md border-primary border-2 m-2 px-6 py-2 text-lg"
               type="submit"
             >
               Submit
             </button>
             <button
               onClick={() => props.toggleEdit("v")}
-              className="bg-secondary text-header rounded-md border-primary border-2 m-2 px-6 py-2"
+              className="font-fellEnglish bg-secondary text-header rounded-md border-primary border-2 m-2 px-6 py-2 text-lg"
               type="submit"
             >
               Cancel
@@ -80,7 +80,7 @@ const MapCreate = (props) => {
           </div>
         </div>
       </div>
-    </>
+    </section>
   );
 };
 

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import CampContext from "../../../providers/CampProvider";
+import "../StoryCards/Button.css"
 
 export default function PlayerInputForm(props) {
   const {
@@ -66,34 +67,30 @@ export default function PlayerInputForm(props) {
   }
 
   return (
-    <div
-      className={`bg-secondary text-gunmetal p-5 mx-auto  w-80 max-w-lg rounded-xl`}
-    >
-      <div className="npc-card--header flex flex-row justify-start content-center h-10 pb-5 mb-4">
-        <img
-          className="rounded-full border-primary border-2 w-20 h-20 mr-1"
+    <div className="bg-secondary text-gunmetal p-5 m-6  w-80 max-w-lg rounded-xl flex flex-col items-center">
+      <div className="npc-card--header h-10 rounded-xl">
+        {/* <img
+          className="rounded-full border-primary border-2 w-20 h-20 mr-8"
           src={playerInfo.profile_pic}
           alt={name}
-        ></img>
-        <h5 className="text-2xl">
-          <label className="flex flex-col">
-            Name/Email
-            <input
-              type="text"
-              placeholder={name}
-              value={playerInfo.name}
-              className="w-40"
-              onChange={(e) =>
-                setPlayerInfo((prev) => {
-                  const newState = { ...prev };
-                  newState.name = e.target.value;
-                  return newState;
-                })
-              }
-            />
-          </label>
+        ></img> */}
+        <h5 className="text-xl">
+          <input
+          className="m-2 bg-dragongreen/20 rounded-lg"
+            type="text"
+            placeholder={name}
+            value={playerInfo.name}
+            onChange={(e) =>
+              setPlayerInfo((prev) => {
+                const newState = { ...prev };
+                newState.name = e.target.value;
+                return newState;
+              })
+            }
+          />
           {view.mode === view.states.ADD && (
-            <input
+              <input
+              className="m-2 bg-dragongreen/20 rounded-lg"
               type="text"
               placeholder={email}
               value={playerInfo.email}
@@ -109,11 +106,13 @@ export default function PlayerInputForm(props) {
           )}
         </h5>
       </div>
+      -----
       <div className="npc-card--content flex flex-col gap-4 flex-wrap justify-start m-2 mt-14">
         {/* Profile Pic */}
         <label className="flex flex-col mt-4">
-          Picure
+          Picture
           <input
+            className="m-2 bg-dragongreen/20 rounded-lg"
             type="text"
             placeholder={profile_pic}
             value={playerInfo.profile_pic}
@@ -126,11 +125,10 @@ export default function PlayerInputForm(props) {
             }
           />
         </label>
-
-        {/* DND Sheet */}
         <label className="flex flex-col">
           Sheet
           <input
+            className="m-2 bg-dragongreen/20 rounded-lg"
             type="text"
             placeholder={sheet_url}
             value={playerInfo.sheet_url}
@@ -141,21 +139,18 @@ export default function PlayerInputForm(props) {
                 return newState;
               })
             }
-          />
-        </label>
+          /> 
+          </label>
       </div>
       <div className="flex justify-center gap-3">
-        <button
-          className="party--form-button "
-          onClick={view.mode === view.states.EDIT ? updatePlayer : addPlayer}
-        >
-          SAVE
-        </button>
-        {view.mode === view.states.EDIT && (
-          <button className="party--form-button " onClick={deletePlayer}>
-            DELETE
-          </button>
-        )}
+      <button className="confirm p-2 px-4 rounded-xl w-fit m-2"
+        onClick={view.mode === view.states.EDIT ? updatePlayer : addPlayer}
+      >
+        Save
+      </button>
+      {view.mode === view.states.EDIT && (
+        <button className="bg-header p-2 px-4 rounded-xl w-fit m-2 text-textcolor" onClick={deletePlayer}>Delete</button>
+      )}
       </div>
     </div>
   );

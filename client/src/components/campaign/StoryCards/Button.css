@@ -1,9 +1,9 @@
 .button {
-  @apply shadow-lg text-textcolor font-inputFont font-bold py-1 px-4 rounded m-2
+  @apply shadow-lg text-textcolor font-fellEnglish font-bold py-1 px-4 rounded m-2
 }
 
 .confirm {
-  @apply bg-primary/75 
+  @apply bg-dragongreen text-header
 }
 
 .cancel {
@@ -15,5 +15,5 @@
 }
 
 .death {
-  @apply bg-primary/75
+  @apply bg-black/75
 }

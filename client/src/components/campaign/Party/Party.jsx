@@ -34,29 +34,14 @@ export const Party = () => {
         {viewMode === viewModes.VIEW && (
           <React.Fragment>
             <div className="party--button-panel">
-              <button
-                className="party--button"
-                onClick={() => setViewMode(viewModes.ADD)}
-              >
-                ADD
-              </button>
-              <button
-                className="party--button"
-                onClick={() => setViewMode(viewModes.EDIT)}
-              >
-                EDIT
-              </button>
-            </div>
+            <button className="party--button" onClick={() => setViewMode(viewModes.ADD)}>Add</button>
+            <button className="party--button" onClick={() => setViewMode(viewModes.EDIT)}>Edit</button>
+          </div>
           </React.Fragment>
         )}
         {viewMode !== viewModes.VIEW && (
           <div className="party--button-panel">
-            <button
-              className="party--button"
-              onClick={() => setViewMode(viewModes.VIEW)}
-            >
-              VIEW
-            </button>
+            <button className="party--button" onClick={() => setViewMode(viewModes.VIEW)}>View</button>
           </div>
         )}
         {viewMode === viewModes.ADD && (
