@@ -8,7 +8,7 @@ import CampContext from "../../../providers/CampProvider";
 import axios from "../../../api/axios";
 import DropDownListItem from "./DropDownListItem";
 
-function Form({allStories, setStories, text, id, npc, map, view, setView, viewObj, css, dndStory, setDndStory, setCurrentStory}) {
+function Form({allStories, setStories, text, id, npc, map, view, setView, viewObj, css, dndStory, setDndStory, setCurrentStory, currentStory}) {
   const { auth } = useContext(AuthContext);
   const { campaign } = useContext(CampContext);
   const u_id = auth.user_id
@@ -29,10 +29,11 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
 
   const setNpc = (e) => {
     const selectedNpc = e.target.value;
-
+    console.log("SelectedNPC", selectedNpc)
     setStory({...story, npc_id: selectedNpc})
+    console.log("STORY", story)
   }
-
+  console.log("OUTSIDE STORY", story)
 
   const setMap = (e) => {
     const selectedMap = e.target.value;
@@ -45,16 +46,14 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
     setStory({...story, text: newStory})
   }
 
-
   const reset = (e) =>{
     e.preventDefault()
     setStory({...story, map_id: '', npc_id: '', text: ''})
-    setCurrentStory({})
+    setCurrentStory({...currentStory, npcs_id: '', maps_id: ''})
     if(view === viewObj.EDIT){
       setView(viewObj.CREATE)
     }
   }
-
 
   const createStory = (event) => {
     event.preventDefault()
