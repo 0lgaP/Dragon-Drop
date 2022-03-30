@@ -67,6 +67,7 @@ export const Party = () => {
             profile_pic="Link to Char Picture"
             email="Player Email"
             view={{ mode: viewMode, states: viewModes }}
+            setView={setViewMode}
           />
         )}
       </div>
