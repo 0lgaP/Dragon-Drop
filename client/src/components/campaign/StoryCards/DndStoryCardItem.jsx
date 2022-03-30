@@ -25,7 +25,7 @@ function DndStoryCardItem(props) {
     <section className={[`dnd_card  ${css}`]}>
       <article className="dnd_card__container">
         {viewMode !== "SHOW" && (
-          <button alt="Edit" className="button cancel" onClick={props.onEdit}>
+          <button alt="Edit" className="button edit" onClick={props.onEdit}>
             Edit
           </button>
         )}
