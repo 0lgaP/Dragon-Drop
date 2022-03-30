@@ -16,7 +16,7 @@ export const PlayerList = ({ players, view, setPlayers }) => {
         ))
     : null;
   return (
-    <div className="flex flex-row flex-wrap gap-6 mt-4 w-5/6 mx-auto justify-center ">
+    <div className="flex flex-row flex-wrap gap-6 mt-4 w-5/6 mx-auto justify-center font-inputFont ">
       {playerCards}
     </div>
   );

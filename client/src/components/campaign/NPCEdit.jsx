@@ -69,16 +69,16 @@ const NPCList = (props) => {
   }
 
   return (
-    <section className="flex flex-row">
-      <div className="bg-primary p-4 m-6 rounded-xl">
-        <h1 className="text-2xl text-textcolor p-2">Edit NPC!</h1>
+    <section className="flex flex-row font-title">
+      <div className="bg-primary p-4 m-6 rounded-xl font-title">
+        <h1 className="text-2xl text-textcolor p-2 font-title">Edit NPC!</h1>
       <form className="p-2 m-2" onSubmit={handleSave}>
           <label className="">
-            <p className="text-textcolor text-lg p-2 m-2">Name</p>
+            <p className="text-textcolor text-lg p-2 m-2 font-title">Name</p>
             <input className="border-2 border-secondary rounded-md bg-bkgd mb-4" placeholder={name} type="text" onChange={e => setName(e.target.value)} value={name} />
           </label>
           <label className="">
-            <p className="text-textcolor text-lg p-2 m-2">Image URL</p>
+            <p className="text-textcolor text-lg p-2 m-2 font-title">Image URL</p>
             <input className="border-2 border-secondary rounded-md bg-bkgd mb-4" type="text" onChange={e => setName(e.target.value)} value={imageURL} />
           </label>
           <label>

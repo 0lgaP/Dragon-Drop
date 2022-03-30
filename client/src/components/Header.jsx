@@ -25,20 +25,20 @@ const Header = (props) => {
               alt="dragon drop logo"
             />
           </Link>
-          <h2 id="app-name" className="m-4 mt-6 text-4xl">
+          <h2 id="app-name" className="m-4 mt-6 text-5xl">
             Dragon Drop
           </h2>
         </div>
         <div className="header-right flex flex-row m-4 mt-8 justify-end text-2xl tracking-wide">
-          <div className="m-4 ">
+          <div className="m-4 font-title ">
             <Link to={`/users/${u_id}/campaigns`}>
               <h3>Campaigns</h3>
             </Link>
           </div>
-          <div className="m-4">
+          <div className="m-4 font-title">
             <Link to={`/users/${u_id}`}>{auth.email}</Link>
           </div>
-          <div className="m-4">
+          <div className="m-4 font-title">
             <LogoutButton />
           </div>
         </div>

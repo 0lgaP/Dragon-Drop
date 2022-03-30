@@ -34,7 +34,7 @@ module.exports = {
         alegreya: ['Alegreya', 'serif'],
         cinzel: ['Cinzel', 'serif'],
         fellEnglish: ['IM Fell English', 'serif'],
-        title: ['Oswald', 'sans-serif'],
+        title: ['Rubik', 'sans-serif'],
         inputFont: ['Roboto\\Condensed', 'sans-serif']
       }
     },

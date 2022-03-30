@@ -26,3 +26,7 @@ nav .dropdown-content a:hover, .dropdown:hover .dropbtn {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
+headingTitle {
+  @apply font-title
+}

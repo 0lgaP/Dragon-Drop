@@ -27,8 +27,8 @@ export const Party = () => {
 
   return (
     <section>
-      <div className="flex flex-col bg-primary rounded-xl text-textcolor m-2 justify-evenly">
-        <h1 className="text-2xl m-4 p-5">Party Details</h1>
+      <div className="flex flex-col bg-primary rounded-xl text-textcolor m-2 justify-evenly ">
+        {/* <h1 className=" m-4 p-5 font-title text-4xl">Party Details</h1> */}
       </div>
       <div>
         {viewMode === viewModes.VIEW && (

@@ -17,26 +17,26 @@ const Navbar = (props) => {
           <div className="dropdown">
             <Link
               to={`/users/${u_id}/campaigns/${campaign()}/maps`}
-              className="hover:font-bold flex flex-direction-row items-center"
+              className="hover:font-bold flex flex-direction-row items-center font-title text-3xl"
             >
               Maps
             </Link>
           </div>
           <Link
             to={`/users/${u_id}/campaigns/${campaign()}/story`}
-            className="hover:font-bold"
+            className="hover:font-bold font-title text-3xl"
           >
             Story
           </Link>
           <Link
             to={`/users/${u_id}/campaigns/${campaign()}/party`}
-            className="hover:font-bold"
+            className="hover:font-bold font-title text-3xl"
           >
             Party
           </Link>
           <Link
             to={`/users/${u_id}/campaigns/${campaign()}/npcs`}
-            className="hover:font-bold"
+            className="hover:font-bold font-title text-3xl"
           >
             NPCs
           </Link>
