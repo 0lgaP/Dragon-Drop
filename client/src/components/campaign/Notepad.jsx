@@ -31,7 +31,7 @@ const NotePad = () => {
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col card p-2 font-inputFont">
       <label>Notes : </label>
       <textarea
         type="textarea"
@@ -49,7 +49,7 @@ const NotePad = () => {
         }}
       />
       <div
-        className="md-button mx-auto self-center"
+        className="md-button mx-auto self-center font-title"
         onClick={(e) => {
           updateNotes(document.getElementById("notesArea").value, true);
         }}

@@ -146,11 +146,11 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
         <DropDownListMap onChange={setMap} value={map}/>
         <DropDownListNpc onChange={setNpc} value={npc}/>
       </article>
-        <button className="button confirm" type="submit" onClick={id ? editStory : createStory}>
+        <button className="md-button mx-auto self-center font-title" type="submit" onClick={id ? editStory : createStory}>
           Submit
         </button>
         <button className="button cancel" onClick={reset} >
-          Reset
+        Reset
         </button>
       </article>
     </form>
