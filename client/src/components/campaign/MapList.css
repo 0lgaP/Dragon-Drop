@@ -2,21 +2,30 @@
   @apply grid grid-cols-2 gap-6 mx-20 mt-4 px-10
 }
 .map-card {
-  @apply bg-header text-textcolor w-[75%] m-auto p-4 delay-150 transition-all ease-in-out rounded-xl font-merriweather text-lg
+  @apply bg-header text-textcolor w-[75%] m-auto p-4 delay-150 transition-all ease-in-out
 }
 .map-card:hover {
   @apply bg-primary m-auto p-2 -translate-y-1 scale-110
 }
 .map-thumbnail {
-  @apply m-auto pt-4
+  @apply m-auto
 }
-.map-name {
-  @apply text-2xl
-}
-.edit-button {
-  @apply font-fellEnglish text-xl bg-gunmetal text-textcolor rounded-xl p-4 px-6 mt-6
+.ml-title {
+  @apply text-5xl
 }
 
-.delete-button {
-  @apply font-fellEnglish text-xl bg-gunmetal text-textcolor rounded-xl p-4 px-6 mt-6
+.maplist--button {
+  @apply w-40 rounded-lg p-4 px-10 m-6 bg-gunmetal text-textcolor
+}
+
+.maplist--button-panel {
+  @apply m-0 bg-bkgd
+}
+
+.maplist--delete-button {
+  @apply bg-bkgd rounded-xl p-4 m-2 mx-auto cursor-pointer flex items-center justify-center font-bold text-3xl transition-all;
+	color: #F2542D;
+}
+.maplist--delete-button:hover {
+  @apply bg-metal;
 }

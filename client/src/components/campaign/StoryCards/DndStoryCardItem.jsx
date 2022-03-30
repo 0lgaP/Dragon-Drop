@@ -40,10 +40,10 @@ function DndStoryCardItem(props) {
 
         <button
           alt="Story Card Completed"
-          className="button confirm text-gunmetal"
+          className="button confirm"
           onClick={props.onComplete}
         >
-        ✔
+        ✅
         </button>
         {viewMode !== "SHOW" && (
           <button
@@ -51,7 +51,7 @@ function DndStoryCardItem(props) {
             className="button death"
             onClick={props.onDelete}
           >
-          Delete
+          🗑️
           </button>
         )}
         <section className="dnd_card__text" >{props.text}</section>
