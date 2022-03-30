@@ -29,15 +29,14 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
 
   const setNpc = (e) => {
     const selectedNpc = e.target.value;
-    console.log("SelectedNPC", selectedNpc)
+    // console.log("SelectedNPC", selectedNpc)
     setStory({...story, npc_id: selectedNpc})
-    console.log("STORY", story)
+    // console.log("STORY", story)
   }
-  console.log("OUTSIDE STORY", story)
+  // console.log("OUTSIDE STORY", story)
 
   const setMap = (e) => {
     const selectedMap = e.target.value;
-
     setStory({...story, map_id: selectedMap})
   }
 
@@ -57,23 +56,26 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
 
   const createStory = (event) => {
     event.preventDefault()
+    // console.log("))))))))))))))))))", story.map_id)
+    // console.log("{{{{{{{{{{{{{{{{{{", currentStory.maps_id)
+    // console.log("STORY", story)
     if(story.map_id === ''){
       story.map_id = map
     }
     if(story.npc_id === ''){
       story.npc_id = npc
     }
-    console.log("++++++++++++++++++++story.map_id ON CREATE", story.map_id)
+    // console.log("++++++++++++++++++++story.map_id ON CREATE", story.map_id)
       axios.post(`${address}`, story)
       .then((res) => {
-        console.log("+++++++AFTER CREATE", res)
+        // console.log("+++++++AFTER CREATE", res.data)
         const card = res.data
         setStories(prev => {
           const newState = {...prev}
           return {...newState, [card.id]: {...card}}
         })
         setStory(prev => {
-          return {...prev, map_id: '', npc_id: '', text: ''}
+          return {...prev, text: ''}
         })
         setDndStory(prev => {
           const newState = [...prev];
@@ -106,7 +108,7 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
       return {...newState, [card.id]: {...card}}
     })
     setStory(prev => {
-      return {...prev, map_id: '', npc_id: '', text: ''}
+      return {...prev, text: ''}
     })
     setDndStory(prev => {
       const newState = [...prev];
