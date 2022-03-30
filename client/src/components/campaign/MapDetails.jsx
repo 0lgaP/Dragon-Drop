@@ -565,6 +565,15 @@ const MapDetails = () => {
             >
               Story
             </h3>
+            <h3
+              onClick={() => {
+                setTabStatus((prev) => {
+                  return { ...prev, assetsMapStoriesStorys: "notes" };
+                });
+              }}
+            >
+              Notes
+            </h3>
           </div>
 
           <div className="card-body">
@@ -613,6 +622,42 @@ const MapDetails = () => {
             {/* story cards for map */}
             {tabStatus.assetsMapStoriesStorys === "map stories" &&
               storyCardsForMap}
+
+            {/* Notes? */}
+            {tabStatus.assetsMapStoriesStorys === "notes" && (
+              <div className="flex flex-col">
+                <label>Notes : </label>
+                <textarea
+                  type="textarea"
+                  name="notes"
+                  id="notesArea"
+                  value={getNotes()}
+                  onChange={(e) => {
+                    e.target.style.height = "";
+                    e.target.style.height = e.target.scrollHeight + "px";
+                    updateNotes(
+                      document.getElementById("notesArea").value,
+                      false
+                    );
+                  }}
+                  onFocus={(e) => {
+                    e.target.style.height = "";
+                    e.target.style.height = e.target.scrollHeight + "px";
+                  }}
+                />
+                <div
+                  className="md-button mx-auto self-center"
+                  onClick={(e) => {
+                    updateNotes(
+                      document.getElementById("notesArea").value,
+                      true
+                    );
+                  }}
+                >
+                  Save
+                </div>
+              </div>
+            )}
 
             {/* Entire Story */}
             {tabStatus.assetsMapStoriesStorys === "story" && entireStory}
