@@ -9,6 +9,9 @@
 .cancel {
   @apply bg-primary/75
 }
+.edit {
+  @apply bg-primary/75
+}
 
 .order {
   @apply bg-white text-primary rounded-full px-2 
