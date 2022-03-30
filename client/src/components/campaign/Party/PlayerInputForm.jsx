@@ -67,18 +67,19 @@ export default function PlayerInputForm(props) {
 
   return (
     <div
-      className={`bg-secondary text-gunmetal p-5 mx-auto  w-80 max-w-lg rounded-xl`}
+      className={`bg-secondary font-inputFont text-gunmetal p-5 mx-auto w-80 max-w-lg rounded-xl`}
     >
-      <div className="npc-card--header flex flex-row justify-start content-center h-10 pb-5 mb-4">
-        <img
+      <div className="npc-card--header flex flex-row justify-center content-center h-10 pb-5 mb-4">
+        {/* <img
           className="rounded-full border-primary border-2 w-20 h-20 mr-1"
           src={playerInfo.profile_pic}
           alt={name}
-        ></img>
+        ></img> */}
         <h5 className="text-2xl">
-          <label className="flex flex-col">
+          <label className="flex flex-col m-2">
             Name/Email
             <input
+            className="m-4 bg-bkgd/30 rounded-lg"
               type="text"
               placeholder={name}
               value={playerInfo.name}
@@ -94,6 +95,7 @@ export default function PlayerInputForm(props) {
           </label>
           {view.mode === view.states.ADD && (
             <input
+            className="m-4"
               type="text"
               placeholder={email}
               value={playerInfo.email}
@@ -111,9 +113,10 @@ export default function PlayerInputForm(props) {
       </div>
       <div className="npc-card--content flex flex-col gap-4 flex-wrap justify-start m-2 mt-14">
         {/* Profile Pic */}
-        <label className="flex flex-col mt-4">
-          Picure
+        <label className="flex flex-col mt-8">
+          Picture
           <input
+          className="m-2"
             type="text"
             placeholder={profile_pic}
             value={playerInfo.profile_pic}
@@ -131,6 +134,7 @@ export default function PlayerInputForm(props) {
         <label className="flex flex-col">
           Sheet
           <input
+          className="m-2"
             type="text"
             placeholder={sheet_url}
             value={playerInfo.sheet_url}
