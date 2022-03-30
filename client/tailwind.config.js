@@ -18,7 +18,7 @@ module.exports = {
         sky: "#5085A5",
         "sky-light": "#8FC1E3",
         green: "#69b578",
-        pink: "#f46197",
+        pink: "#D684D3",
         orange: "#ec7357",
         confirm: "#B3F2E8",
         cancel: "#F0C0A6",
@@ -27,7 +27,8 @@ module.exports = {
         secondary: "#f7f9fb",
         tertiary: "#542344",
         textcolor: "#f7f9fb",
-        dragongreen: "#54ce08"
+        dragongreen: "#54ce08",
+        edit: "#EADD8A"
       },
       fontFamily: {
         merriweather: ['Merriweather', 'serif'],
