@@ -56,13 +56,13 @@ const MapList = () => {
       {mode === viewModes.VIEW && (
         <React.Fragment>
           <button
-            className="maplist--button"
+            className="edit-button m-2"
             onClick={() => toggleEdit(viewModes.ADD)}
           >
             Add
           </button>
           <button
-            className="edit-button"
+            className="edit-button m-2"
             onClick={() => toggleEdit(viewModes.EDIT)}
           >
             Edit
