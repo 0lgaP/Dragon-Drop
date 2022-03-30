@@ -106,52 +106,13 @@ export default function PlayerInputForm(props) {
           )}
         </h5>
       </div>
-<<<<<<< HEAD
-      <div className="npc-card--content m-2 mt-14">
-        {/* Profile Pic */}
-        <input
-        className="m-2 bg-dragongreen/20 rounded-lg"
-          type="text"
-          placeholder={profile_pic}
-          value={playerInfo.profile_pic}
-          onChange={(e) =>
-            setPlayerInfo((prev) => {
-              const newState = { ...prev };
-              newState.profile_pic = e.target.value;
-              return newState;
-            })
-          }
-        />
-
-        {/* DND Sheet */}
-        <input
-        className="m-2 bg-dragongreen/20 rounded-lg"
-          type="text"
-          placeholder={sheet_url}
-          value={playerInfo.sheet_url}
-          onChange={(e) =>
-            setPlayerInfo((prev) => {
-              const newState = { ...prev };
-              newState.sheet_url = e.target.value;
-              return newState;
-            })
-          }
-        />
-      </div>
-      <button className="confirm p-2 px-4 rounded-xl w-fit m-2"
-        onClick={view.mode === view.states.EDIT ? updatePlayer : addPlayer}
-      >
-        Save
-      </button>
-      {view.mode === view.states.EDIT && (
-        <button className="bg-header p-2 px-4 rounded-xl w-fit m-2 text-textcolor" onClick={deletePlayer}>Delete</button>
-      )}
-=======
+      -----
       <div className="npc-card--content flex flex-col gap-4 flex-wrap justify-start m-2 mt-14">
         {/* Profile Pic */}
         <label className="flex flex-col mt-4">
-          Picure
+          Picture
           <input
+            className="m-2 bg-dragongreen/20 rounded-lg"
             type="text"
             placeholder={profile_pic}
             value={playerInfo.profile_pic}
@@ -164,11 +125,10 @@ export default function PlayerInputForm(props) {
             }
           />
         </label>
-
-        {/* DND Sheet */}
         <label className="flex flex-col">
           Sheet
           <input
+            className="m-2 bg-dragongreen/20 rounded-lg"
             type="text"
             placeholder={sheet_url}
             value={playerInfo.sheet_url}
@@ -179,23 +139,19 @@ export default function PlayerInputForm(props) {
                 return newState;
               })
             }
-          />
-        </label>
+          /> 
+          </label>
       </div>
       <div className="flex justify-center gap-3">
-        <button
-          className="party--form-button "
-          onClick={view.mode === view.states.EDIT ? updatePlayer : addPlayer}
-        >
-          SAVE
-        </button>
-        {view.mode === view.states.EDIT && (
-          <button className="party--form-button " onClick={deletePlayer}>
-            DELETE
-          </button>
-        )}
+      <button className="confirm p-2 px-4 rounded-xl w-fit m-2"
+        onClick={view.mode === view.states.EDIT ? updatePlayer : addPlayer}
+      >
+        Save
+      </button>
+      {view.mode === view.states.EDIT && (
+        <button className="bg-header p-2 px-4 rounded-xl w-fit m-2 text-textcolor" onClick={deletePlayer}>Delete</button>
+      )}
       </div>
->>>>>>> 627a03306fd13d26546aaee3b36e3690f1bae524
     </div>
   );
 }

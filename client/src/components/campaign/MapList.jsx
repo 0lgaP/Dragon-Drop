@@ -5,14 +5,11 @@ import CampContext from "../../providers/CampProvider";
 import MapCreate from "./MapCreate";
 import "./MapList.css";
 
-<<<<<<< HEAD
-=======
 const viewModes = {
   VIEW: "v",
   EDIT: "e",
   ADD: "a",
 };
->>>>>>> 627a03306fd13d26546aaee3b36e3690f1bae524
 
 const MapList = () => {
   const { c_id, u_id } = useParams();
@@ -56,23 +53,19 @@ const MapList = () => {
 
   return (
     <>
-<<<<<<< HEAD
-      <button className="edit-button" onClick={toggleEdit}>Edit</button>
-      {inEditMode && <MapCreate toggleEdit={toggleEdit} addMap={addMap} />}
-=======
       {mode === viewModes.VIEW && (
         <React.Fragment>
           <button
             className="maplist--button"
             onClick={() => toggleEdit(viewModes.ADD)}
           >
-            ADD
+            Add
           </button>
           <button
-            className="maplist--button"
+            className="edit-button"
             onClick={() => toggleEdit(viewModes.EDIT)}
           >
-            EDIT
+            Edit
           </button>
         </React.Fragment>
       )}
@@ -82,14 +75,13 @@ const MapList = () => {
             className="maplist--button"
             onClick={() => toggleEdit(viewModes.VIEW)}
           >
-            BACK
+            Back
           </button>
         </React.Fragment>
       )}
       {mode === viewModes.ADD && (
         <MapCreate toggleEdit={toggleEdit} addMap={addMap} />
       )}
->>>>>>> 627a03306fd13d26546aaee3b36e3690f1bae524
       <div className="map-container">
         {maps.length &&
           maps.map((map) => {
@@ -102,20 +94,14 @@ const MapList = () => {
                 key={map.id}
               >
                 <div>
-<<<<<<< HEAD
                   <h2 className="map-name">{map.name}</h2>
-                  {inEditMode && (
-                    <button className="delete-button" onClick={() => deleteMap(map.id)}>Delete</button>
-=======
-                  <h2 className="ml-title">{map.name}</h2>
                   {mode === viewModes.EDIT && (
                     <button
-                      className="maplist--delete-button"
+                      className="delete-button"
                       onClick={() => deleteMap(map.id)}
                     >
-                      DELETE
+                      Delete
                     </button>
->>>>>>> 627a03306fd13d26546aaee3b36e3690f1bae524
                   )}
                 </div>
                 <Link to={`maps/${map.id}`}>
