@@ -29,8 +29,8 @@ export const Party = () => {
     <section>
       <div className="flex flex-col bg-primary rounded-xl text-textcolor m-2 justify-evenly">
         <h1 className="text-2xl m-4 p-5">Party Details</h1>
-        </div>
-        <div>
+      </div>
+      <div>
         {viewMode === viewModes.VIEW && (
           <React.Fragment>
             <div className="party--button-panel">
@@ -52,6 +52,7 @@ export const Party = () => {
             profile_pic="Link to Char Picture"
             email="Player Email"
             view={{ mode: viewMode, states: viewModes }}
+            setView={setViewMode}
           />
         )}
       </div>

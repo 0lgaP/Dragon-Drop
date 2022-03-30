@@ -11,7 +11,9 @@ INSERT INTO npcs (id, img, campaign_id, name, alive, bio, details)
 INSERT INTO npcs (id, img, campaign_id, name, alive, bio, details) 
   VALUES ('6f83b2c1-7a35-431c-b6f7-b8998945c478', 'https://i.pinimg.com/originals/ea/cc/2d/eacc2d24f6da82df0d93695338e09f9e.jpg', 'b819024a-4fd2-4316-8697-411ad293bb71', 'Ash Ketchum', true, 'Aiming to be the worlds best Pokemon trainer!', 'Pallet Town');
 INSERT INTO npcs (id, img, campaign_id, name, alive, bio, details) 
-  VALUES ('315cbe8a-8bff-4e02-aa73-adeb16193374', 'https://www.serebii.net/pokemonmasters/syncpairs/jessie.png', 'b819024a-4fd2-4316-8697-411ad293bb71', 'Jesse', true, 'Member of Team Rocket.', 'Viridian City');
+  VALUES ('315cbe8a-8bff-4e02-aa73-adeb16193374', 'https://www.serebii.net/pokemonmasters/syncpairs/jessie.png', 'b819024a-4fd2-4316-8697-411ad293bb71', 'Jesse', true, 'Member of Team Rocket.', 'Viridian City'),
+        ('718586f3-9640-4c2d-8533-683095bfb632', 'https://i.imgur.com/zaevcoR.jpg', 'b819024a-4fd2-4316-8697-411ad293bb71', 'Nerrator', true, 'Game Master', 'Canada');
+
 INSERT INTO npcs (id, img, campaign_id, name, alive, bio, details) 
   VALUES ('753edd75-7cda-4953-a1fb-f160e7330c7b', 'https://www.serebii.net/pokemonmasters/syncpairs/james.png', 'b819024a-4fd2-4316-8697-411ad293bb71', 'James', true, 'Member of Team Rocket.', 'Viridian City');
 INSERT INTO npcs (id, img, campaign_id, name, alive, bio, details) 

@@ -5,3 +5,12 @@
 .party--button-panel {
   @apply m-0 bg-bkgd
 }
+
+.party--form-button {
+  @apply w-2/5 rounded-lg py-4 bg-gunmetal text-textcolor 
+}
+
+
+.party--form-button:active {
+  @apply bg-dragongreen
+}

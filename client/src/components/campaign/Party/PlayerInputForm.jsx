@@ -4,8 +4,17 @@ import CampContext from "../../../providers/CampProvider";
 import "../StoryCards/Button.css"
 
 export default function PlayerInputForm(props) {
-  const { id, user_id, name, sheet_url, profile_pic, view, setPlayers, email } =
-    props;
+  const {
+    id,
+    user_id,
+    name,
+    sheet_url,
+    profile_pic,
+    view,
+    setView,
+    setPlayers,
+    email,
+  } = props;
 
   const { campaign } = useContext(CampContext);
 
@@ -30,6 +39,7 @@ export default function PlayerInputForm(props) {
     axios
       .post(`/users/:id/campaigns/${campaign()}/party`, { ...playerInfo })
       .then((result) => {
+        setView(view.states.VIEW);
         const playerInfo = result.data;
         addPlayerToState(playerInfo);
       });
@@ -84,6 +94,7 @@ export default function PlayerInputForm(props) {
               type="text"
               placeholder={email}
               value={playerInfo.email}
+              className="w-40 mt-1"
               onChange={(e) =>
                 setPlayerInfo((prev) => {
                   const newState = { ...prev };
@@ -95,6 +106,7 @@ export default function PlayerInputForm(props) {
           )}
         </h5>
       </div>
+<<<<<<< HEAD
       <div className="npc-card--content m-2 mt-14">
         {/* Profile Pic */}
         <input
@@ -134,6 +146,56 @@ export default function PlayerInputForm(props) {
       {view.mode === view.states.EDIT && (
         <button className="bg-header p-2 px-4 rounded-xl w-fit m-2 text-textcolor" onClick={deletePlayer}>Delete</button>
       )}
+=======
+      <div className="npc-card--content flex flex-col gap-4 flex-wrap justify-start m-2 mt-14">
+        {/* Profile Pic */}
+        <label className="flex flex-col mt-4">
+          Picure
+          <input
+            type="text"
+            placeholder={profile_pic}
+            value={playerInfo.profile_pic}
+            onChange={(e) =>
+              setPlayerInfo((prev) => {
+                const newState = { ...prev };
+                newState.profile_pic = e.target.value;
+                return newState;
+              })
+            }
+          />
+        </label>
+
+        {/* DND Sheet */}
+        <label className="flex flex-col">
+          Sheet
+          <input
+            type="text"
+            placeholder={sheet_url}
+            value={playerInfo.sheet_url}
+            onChange={(e) =>
+              setPlayerInfo((prev) => {
+                const newState = { ...prev };
+                newState.sheet_url = e.target.value;
+                return newState;
+              })
+            }
+          />
+        </label>
+      </div>
+      <div className="flex justify-center gap-3">
+        <button
+          className="party--form-button "
+          onClick={view.mode === view.states.EDIT ? updatePlayer : addPlayer}
+        >
+          SAVE
+        </button>
+        {view.mode === view.states.EDIT && (
+          <button className="party--form-button " onClick={deletePlayer}>
+            DELETE
+          </button>
+        )}
+      </div>
+>>>>>>> 627a03306fd13d26546aaee3b36e3690f1bae524
     </div>
   );
 }

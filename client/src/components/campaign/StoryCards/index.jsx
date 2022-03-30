@@ -39,13 +39,13 @@ export default function StoryCards() {
   }, [])
 
 
-  
+
   const onEdit = (story) => {
     setCurrentStory(story)
     setView(viewObj.EDIT)
   }
   
-
+console.log("CS", currentStory)
 
   return(
 
@@ -53,7 +53,7 @@ export default function StoryCards() {
       <section className='w-1/3 flex justify-center  '>
         <article className='fixed w-1/3 '>
           {(view === viewObj.CREATE && setDndStory) ? <Form css='create' setStories={setStories} setDndStory={setDndStory} view={view}
-            viewObj={viewObj} setView={setView} npc='' map=''/> :
+            viewObj={viewObj} setView={setView} setCurrentStory={setCurrentStory} currentStory={currentStory}/> :
       <Form text={currentStory.story_card_text}
       id={currentStory.id} 
       npc={currentStory.npcs_id} 

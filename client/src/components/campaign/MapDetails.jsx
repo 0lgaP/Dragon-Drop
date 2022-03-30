@@ -63,6 +63,9 @@ const MapDetails = () => {
           case "S":
             stateType = "StoryCards";
             break;
+          case "P":
+            stateType = "PlayerAssets";
+            break;
           default:
             stateType = "Images";
         }
@@ -167,10 +170,70 @@ const MapDetails = () => {
     });
   }, []);
 
+  //////////////////////////
+  // Story Card Functions
+  //////////////////////////
+  const onComplete = (event, id, card) => {
+    event.preventDefault();
+    console.log("fired");
+    axios
+      .put(`/users/0/campaigns/${campaign()}/story/${id}`, {
+        map_id: card.maps_id,
+        npc_id: card.npcs_id,
+        text: card.story_card_text,
+        completed: true,
+      })
+      .then(() => {
+        setState((prev) => {
+          const newState = { ...prev };
+          for (const index in newState.data.Story) {
+            if (newState.data.Story[index].id === id) {
+              newState.data.Story[index].completed = true;
+              break;
+            }
+          }
+          return newState;
+        });
+      });
+  };
+  const onKill = (event, card, npc_id) => {
+    event.preventDefault();
+    const npc = storyCardHackery.npcs.find((npc) => npc.id === npc_id);
+    console.log(npc, storyCardHackery, card);
+    npc.alive = !npc.alive;
+    //change what the name of the put request is//
+    axios
+      .put(`/users/0/campaigns/${campaign()}/npcs/${npc.id}/edit`, {
+        ...npc,
+        imageURL: npc.img,
+      })
+      .then(() => {
+        setState((prev) => {
+          const newState = { ...prev };
+
+          if (newState.data?.NPCs[npc.id]?.name) {
+            newState.data.NPCs[npc.id].alive = npc.alive;
+          }
+          return newState;
+        });
+        setStoryCardHackery((prev) => {
+          const newState = { ...prev };
+
+          const index = newState.npcs.findIndex((npc) => npc.id === npc_id);
+          newState.npcs[index].alive = npc.alive;
+
+          return newState;
+        });
+      })
+      .catch((err) => console.log("Error From FORM's KILL Client Call", err));
+  };
+
   const storyCardsForMap =
     state.data.StoryCards && allNpcs.length
       ? state.data.Story.map((card) => {
           if (card.maps_id !== state.mapId) return null;
+          if (card.completed) return null;
+
           return (
             <StoryCardItem
               {...card}
@@ -181,6 +244,8 @@ const MapDetails = () => {
               text={card.story_card_text}
               order={card.order_num}
               view="SHOW"
+              onComplete={(e) => onComplete(e, card.id, card)}
+              onKill={(e) => onKill(e, card, card.npcs_id)}
             />
           );
         })
@@ -189,37 +254,105 @@ const MapDetails = () => {
   // const entireStory = null;
   const entireStory =
     state.data.Story && allNpcs.length
-      ? state.data.Story.map((card) => (
-          <StoryCardItem
-            {...card}
-            npcId={card.npcs_id}
-            allMaps={storyCardHackery.maps}
-            allNpcs={storyCardHackery.npcs}
-            key={card.id + 1}
-            text={card.story_card_text}
-            order={card.order_num}
-            view="SHOW"
-          />
-        ))
+      ? state.data.Story.map((card) => {
+          if (card.completed) return null;
+          return (
+            <StoryCardItem
+              {...card}
+              npcId={card.npcs_id}
+              allMaps={storyCardHackery.maps}
+              allNpcs={storyCardHackery.npcs}
+              key={card.id + 1}
+              text={card.story_card_text}
+              order={card.order_num}
+              view="SHOW"
+              onComplete={(e) => onComplete(e, card.id, card)}
+              onKill={(e) => onKill(e, card, card.npcs_id)}
+            />
+          );
+        })
+      : null;
+
+  const currentPlayers =
+    state.data.NPCs && Object.keys(state.data.PlayerAssets).length
+      ? Object.keys(state.data.PlayerAssets).map((key) => {
+          return (
+            <div className="flex w-full">
+              <div className="current-asset text-lg flex justify-between space-between place-items-center w-full">
+                <div className="flex place-items-center">
+                  <img
+                    className="rounded-full border-primary border-2 w-20 h-20 mr-8 object-cover object-top"
+                    src={state.data.PlayerAssets[key].img}
+                    alt={state.data.PlayerAssets[key].name}
+                  ></img>
+                  <div className="text-left">
+                    <h3>{state.data.PlayerAssets[key].name}</h3>
+                    <h4>- player</h4>
+                  </div>
+                </div>
+                <div className="flex flex-col items-center">
+                  <label>Layer</label>
+                  <input
+                    className="w-8 m-2 rounded-md text-2xl w-[50px]"
+                    name="layer"
+                    type="number"
+                    min={1}
+                    max={300}
+                    value={getLayer("PlayerAssets", key)}
+                    onChange={(e) =>
+                      updateLayer("PlayerAssets", key, e.target.value)
+                    }
+                  />
+                </div>
+              </div>
+              <div
+                className="text-red-600 delete-button"
+                onClick={() => deleteAssetFromMap("PlayerAssets", key)}
+              >
+                Delete
+              </div>
+            </div>
+          );
+        })
       : null;
 
   const currentNpcs =
     state.data.NPCs && Object.keys(state.data.NPCs).length
       ? Object.keys(state.data.NPCs).map((key) => {
           return (
-            <p className="text-lg">
-              {state.data.NPCs[key].name}
-              <button onClick={() => deleteAssetFromMap("NPCs", key)}>
+            <div className="flex w-full">
+              <div className="current-asset text-lg flex justify-between space-between place-items-center w-full">
+                <div className="flex place-items-center">
+                  <img
+                    className="rounded-full border-primary border-2 w-20 h-20 mr-8 object-cover object-top"
+                    src={state.data.NPCs[key].img}
+                    alt={state.data.NPCs[key].name}
+                  ></img>
+                  <div className="text-left">
+                    <h3>{state.data.NPCs[key].name}</h3>
+                    <h4>- npc</h4>
+                  </div>
+                </div>
+                <div className="flex flex-col items-center">
+                  <label>Layer</label>
+                  <input
+                    className="w-8 m-2 rounded-md text-2xl w-[50px]"
+                    name="layer"
+                    type="number"
+                    min={1}
+                    max={300}
+                    value={getLayer("NPCs", key)}
+                    onChange={(e) => updateLayer("NPCs", key, e.target.value)}
+                  />
+                </div>
+              </div>
+              <div
+                className="text-red-600 delete-button"
+                onClick={() => deleteAssetFromMap("NPCs", key)}
+              >
                 Delete
-              </button>
-              <input
-                className="w-8 m-2 rounded-md text-2xl"
-                name="layer"
-                type="number"
-                value={getLayer("NPCs", key)}
-                onChange={(e) => updateLayer("NPCs", key, e.target.value)}
-              />
-            </p>
+              </div>
+            </div>
           );
         })
       : null;
@@ -228,19 +361,39 @@ const MapDetails = () => {
     state.data.Images && Object.keys(state.data.Images).length
       ? Object.keys(state.data.Images).map((key) => {
           return (
-            <p className="text-lg">
-              {state.data.Images[key].name}
-              <button onClick={() => deleteAssetFromMap("Images", key)}>
+            <div className="flex w-full">
+              <div className="current-asset flex justify-between space-between place-items-center w-full">
+                <div className="flex place-items-center">
+                  <img
+                    className="rounded-full border-primary border-2 w-20 h-20 mr-8 object-cover object-top"
+                    src={state.data.Images[key].img}
+                    alt={state.data.Images[key].name}
+                  ></img>
+                  <div className="text-left">
+                    <h3>{state.data.Images[key].name}</h3>
+                    <h4>- image</h4>
+                  </div>
+                </div>
+                <div className="flex flex-col items-center">
+                  <label>Layer</label>
+                  <input
+                    className="w-8 m-2 rounded-md text-2xl w-[50px]"
+                    name="layer"
+                    min={1}
+                    max={300}
+                    type="number"
+                    value={getLayer("Images", key)}
+                    onChange={(e) => updateLayer("Images", key, e.target.value)}
+                  />
+                </div>
+              </div>
+              <div
+                className="delete-button"
+                onClick={() => deleteAssetFromMap("Images", key)}
+              >
                 Delete
-              </button>
-              <input
-                className="w-8 m-2 text-2xl rounded-md"
-                name="layer"
-                type="number"
-                value={getLayer("Images", key)}
-                onChange={(e) => updateLayer("Images", key, e.target.value)}
-              />
-            </p>
+              </div>
+            </div>
           );
         })
       : null;
@@ -257,7 +410,8 @@ const MapDetails = () => {
         )}
       </div>
       <div className="sidebar">
-        <div className="grow relative">
+        <div className="grow relative ">
+          <div className="mt-5"></div>
           <button
             className=" top-[-10px] shadow-lg text-textcolor bg-gunmetal font-fellEnglish font-bold py-2 px-6 rounded-xl"
             onClick={() => setHideMe((prev) => !prev)}
@@ -272,7 +426,7 @@ const MapDetails = () => {
                 <h3 className="text-lg">{state.bio}</h3>
               </div>
               {/* Player/Map List */}
-              <div className="card basis-1/2">
+              <div className="card basis-1/2 overflow-y-auto max-h-[100%]">
                 {/* Player/Map Tab Select */}
                 <div className="tab-bar">
                   <h3
@@ -295,52 +449,87 @@ const MapDetails = () => {
                   </h3>
                 </div>
                 {tabStatus.playerMaps === "player" && (
-                  <React.Fragment>
-                    <h3>Players</h3>
-                    <ul>
-                      {!!state?.data?.Players?.length &&
-                        state.data.Players.map((player) => {
-                          return <li>{player.email}</li>;
-                        })}
-                    </ul>
-                  </React.Fragment>
-                )}
-                {/* Maps Card */}
-                {tabStatus.playerMaps === "maps" && !!mapsForCampaign.length && (
-                  <React.Fragment>
-                    <div className="flex flex-col">
-                      {mapsForCampaign.map((map) => {
+                  <ul>
+                    {!!state?.data?.Players?.length &&
+                      state.data.Players.map((player) => {
                         return (
-                          <Link
-                            to={`${map.id}`}
-                            onClick={() =>
-                              setState((prev) => {
-                                return {
-                                  ...prev,
-                                  mapId: map.id,
-                                  background:
-                                    map.id === prev.mapId
-                                      ? prev.background
-                                      : null,
-                                  data:
-                                    map.id === prev.mapId
-                                      ? { ...prev.data }
-                                      : {
-                                          ...prev.data,
-                                          Images: {},
-                                          NPCs: {},
-                                          StoryCards: {},
-                                        },
-                                };
-                              })
-                            }
-                          >
-                            {map.name}
-                          </Link>
+                          <li className="my-1 px-1">
+                            <div className="flex w-full">
+                              <div className="current-asset text-lg flex justify-between space-between place-items-center w-full">
+                                <div className="flex place-items-center">
+                                  <img
+                                    className="rounded-full border-primary border-2 w-16 h-16 mr-8 object-cover object-top"
+                                    src={player.profile_pic}
+                                    alt={player.name}
+                                  ></img>
+                                  <div className="text-left">
+                                    <h3>{player.name}</h3>
+                                  </div>
+                                </div>
+                              </div>
+                              <div
+                                className="flex items-center justify-center bg-bkgd h-auto rounded-lg my-auto py-2 px-1 cursor-pointer"
+                                onClick={() =>
+                                  window.open(player.sheet_url, "_blank")
+                                }
+                              >
+                                Sheet
+                              </div>
+                            </div>
+                          </li>
                         );
                       })}
-                    </div>
-                  </React.Fragment>
+                  </ul>
+                )}
+
+                {/* Maps Card */}
+                {tabStatus.playerMaps === "maps" && !!mapsForCampaign.length && (
+                  <div className="flex flex-col">
+                    {mapsForCampaign.map((map) => {
+                      return (
+                        <Link
+                          to={`${map.id}`}
+                          className="py-1 transition-all hover:bg-metal"
+                          onClick={() =>
+                            setState((prev) => {
+                              return {
+                                ...prev,
+                                mapId: map.id,
+                                background:
+                                  map.id === prev.mapId
+                                    ? prev.background
+                                    : null,
+                                data:
+                                  map.id === prev.mapId
+                                    ? { ...prev.data }
+                                    : {
+                                        ...prev.data,
+                                        Images: {},
+                                        NPCs: {},
+                                        StoryCards: {},
+                                      },
+                              };
+                            })
+                          }
+                        >
+                          <div className="flex w-full">
+                            <div className="current-asset text-lg flex justify-between space-between place-items-center w-full">
+                              <div className="flex place-items-center">
+                                <img
+                                  className="rounded-lg border-primary border-2 w-16 h-16 mr-8 object-cover object-top"
+                                  src={map.background}
+                                  alt={map.name}
+                                ></img>
+                                <div className="text-left">
+                                  <h3>{map.name}</h3>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </Link>
+                      );
+                    })}
+                  </div>
                 )}
               </div>
             </div>
@@ -433,6 +622,10 @@ const MapDetails = () => {
 
             {tabStatus.assetsMapStoriesStorys === "assets" &&
               tabStatus.assets_currNpcPlayerImages === "current" &&
+              currentPlayers}
+
+            {tabStatus.assetsMapStoriesStorys === "assets" &&
+              tabStatus.assets_currNpcPlayerImages === "current" &&
               currentNpcs}
 
             {tabStatus.assetsMapStoriesStorys === "assets" &&
@@ -462,31 +655,50 @@ const MapDetails = () => {
                 );
               })}
             {tabStatus.assetsMapStoriesStorys === "assets" &&
-              tabStatus.assets_currNpcPlayerImages === "images" &&
-              Object.keys(campaignAssets.Images).map((id) => {
+              tabStatus.assets_currNpcPlayerImages === "players" &&
+              Object.keys(campaignAssets.Players).map((id) => {
                 return (
-                  <div
-                    className="asset-card"
-                    style={{
-                      backgroundImage: `url("${campaignAssets.Images[id].src}")`,
-                      backgroundPosition: "center",
-                      backgroundSize: "cover",
-                      backgroundRepeat: "no-repeat",
-                      objectFit: "contain",
-                      height: "fit-content",
-                    }}
-                  >
-                    <img
-                      src={`${campaignAssets.Images[id].src}`}
-                      style={{ visibility: "hidden" }}
-                    />
-                    <h3>IMG - {campaignAssets.Images[id].name}</h3>
-                    <button onClick={() => addAssetToMap(id, "img")}>
-                      Add
-                    </button>
+                  <div className="asset-card">
+                    <NPCCardItem
+                      {...campaignAssets.Players[id]}
+                      image={campaignAssets.Players[id].profile_pic}
+                    >
+                      <button onClick={() => addAssetToMap(id, "player")}>
+                        Add
+                      </button>
+                    </NPCCardItem>
                   </div>
                 );
               })}
+            <div className="grid grid-cols-2">
+              {tabStatus.assetsMapStoriesStorys === "assets" &&
+                tabStatus.assets_currNpcPlayerImages === "images" &&
+                Object.keys(campaignAssets.Images).map((id) => {
+                  return (
+                    <div
+                      className="asset-card"
+                      style={{
+                        backgroundImage: `url("${campaignAssets.Images[id].src}")`,
+                        backgroundPosition: "center",
+                        backgroundSize: "cover",
+                        backgroundRepeat: "no-repeat",
+                        objectFit: "contain",
+                        height: "fit-content",
+                      }}
+                    >
+                      <img
+                        src={`${campaignAssets.Images[id].src}`}
+                        style={{ visibility: "hidden" }}
+                        className="max-h-[50%]"
+                      />
+                      <h3>IMG - {campaignAssets.Images[id].name}</h3>
+                      <button onClick={() => addAssetToMap(id, "img")}>
+                        Add
+                      </button>
+                    </div>
+                  );
+                })}
+            </div>
           </div>
         </div>
       </div>

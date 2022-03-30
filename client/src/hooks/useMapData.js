@@ -29,6 +29,7 @@ function useMapData(mapId, campaignId, userId) {
         user_id: auth.user_id,
       }),
     ]).then((all) => {
+      console.log(all[1].data);
       setState((prev) => ({
         ...prev,
         name: all[0].data.name,
@@ -39,6 +40,10 @@ function useMapData(mapId, campaignId, userId) {
           NPCs: dataHelpers().convertArrayToObject(all[1].data.NPCs, "id"),
           StoryCards: dataHelpers().convertArrayToObject(
             all[1].data.StoryCards,
+            "id"
+          ),
+          PlayerAssets: dataHelpers().convertArrayToObject(
+            all[1].data.PlayerAssets,
             "id"
           ),
           Players: all[1].data.Players,

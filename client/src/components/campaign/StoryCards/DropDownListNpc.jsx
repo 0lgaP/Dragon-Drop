@@ -10,7 +10,7 @@ export default function DropDownListNpc(props) {
   const { campaign } = useContext(CampContext);
 
   const u_id = auth.user_id
-
+  console.log("NPC PROPS", props)
   const address = `/users/${u_id}/campaigns/${campaign()}`
 
   useEffect(() => {

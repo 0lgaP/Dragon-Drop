@@ -25,6 +25,7 @@ const MapCreate = (props) => {
     setMapUrl("");
     setBio("");
     props.addMap(map.data);
+    props.toggleEdit("v");
   }
 
   return (
@@ -70,7 +71,7 @@ const MapCreate = (props) => {
               Submit
             </button>
             <button
-              onClick={props.toggleEdit}
+              onClick={() => props.toggleEdit("v")}
               className="font-fellEnglish bg-secondary text-header rounded-md border-primary border-2 m-2 px-6 py-2 text-lg"
               type="submit"
             >
