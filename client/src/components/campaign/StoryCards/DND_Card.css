@@ -32,7 +32,7 @@
 }
 
 .dnd_card__tags_container {
-  @apply justify-end flex grid shadow-sm
+  @apply justify-end flex grid
 }
 
 .dnd_card__tags {

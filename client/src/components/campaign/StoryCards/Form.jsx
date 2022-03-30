@@ -57,10 +57,16 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
 
   const createStory = (event) => {
     event.preventDefault()
-
+    if(story.map_id === ''){
+      story.map_id = map
+    }
+    if(story.npc_id === ''){
+      story.npc_id = npc
+    }
+    console.log("++++++++++++++++++++story.map_id ON CREATE", story.map_id)
       axios.post(`${address}`, story)
       .then((res) => {
-
+        console.log("+++++++AFTER CREATE", res)
         const card = res.data
         setStories(prev => {
           const newState = {...prev}
@@ -83,7 +89,7 @@ function Form({allStories, setStories, text, id, npc, map, view, setView, viewOb
 
   const editStory = (event) => {
   event.preventDefault()
-
+    console.log("++++++++++++++++++++story.map_id", story.map_id)
   if(story.map_id === ''){
     story.map_id = map
   }
