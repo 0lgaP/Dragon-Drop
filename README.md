@@ -72,7 +72,7 @@ Olga - Story, selected art assets, player characters and logo<br>
 
 ### Selecting Campaign
 
-> ![Selecting Campaign](/readme/webms/1-selecting_campaign.webm.mov)
+> ![Selecting Campaign](/readme/webms/1-selecting_campaign.mp4)
 
 ---
 
