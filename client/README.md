@@ -7,12 +7,17 @@
   - [Technical Details](#technical-details)
   - [Features](#features)
   - [History](#history)
-- [Gifs/Pictures](#gifspictures)
-  - [Selecting Campaign](#selecting-campaign)
-  - [Using the Map](#using-the-map)
-  - [Story Page](#story-page)
-  - [Party Page](#party-page)
-  - [NPC Page](#npc-page)
+- [Pictures](#pictures)
+  - [Main Page](#main-page)
+  - [Public Maps](#public-maps)
+  - [Map Page](#map-page)
+  - [Add Place To Map Popup](#add-place-to-map-popup)
+  - [Edit Place On Map Popup](#edit-place-on-map-popup)
+  - [Maps User Can Contribute To](#maps-user-is-contributer-on)
+  - [Users Favourites](#users-favourites)
+  - [Users Created Maps](#users-created-maps)
+  - [Add Map Popup](#add-map-popup)
+  - [Edit Map Popup](#edit-map-popup)
 - [Getting Started](#getting-started)
 - [Dependencies](#dependencies)
 
@@ -39,11 +44,9 @@ Olga - Story, selected art assets, player characters and logo<br>
 ## Features
 
 - Story Editor/Maker
-  - Add Story Cards
-  - Edit Story Cards
-  - Link NPCs to Cards
-  - Mark Cards as Completed
-  - Toggle NPC Status
+    - Add Story Cards
+    - Edit Story Cards
+        - Link NPCs to Cards
 - NPC Manager
   - Add NPCs
   - Update NPCs
@@ -62,41 +65,71 @@ Olga - Story, selected art assets, player characters and logo<br>
 
 ### History
 
-> Dragon Drop was Started as a Finals project for [Lighthouse Labs full time web dev course](https://www.lighthouselabs.ca/en/web-development-bootcamp?gclid=CjwKCAiAx8KQBhAGEiwAD3EiP9K5uhrRFugeZydQWBfMfKlzszrgM5eBmYdxEhY6g8nt6hOxNGgqkxoCkQEQAvD_BwE)\
-> It was designed and developed in 2 weeks
-> We took This opportunity to Apply the skills we learned in ways new to us. This lead us to really understand how to break down problems to engineer solutions
+> Wiki maps is a midterm project done for [Lighthouse Labs full time web dev course](https://www.lighthouselabs.ca/en/web-development-bootcamp?gclid=CjwKCAiAx8KQBhAGEiwAD3EiP9K5uhrRFugeZydQWBfMfKlzszrgM5eBmYdxEhY6g8nt6hOxNGgqkxoCkQEQAvD_BwE)\
+> We had 10 topics to choose from.
+> Each one had their own requirements
 
-## Gifs/Pictures
-
----
-
-### Selecting Campaign
-
-> ![Selecting Campaign](/readme/webms/1-selecting_campaign.webm.mov)
+## Pictures
 
 ---
 
-### Using the Map
+### Main Page
 
-> ![Using the Map](/readme/webms/2-basic_map_usage.webm)
-
----
-
-### Story Page
-
-> ![Story Page](/readme/webms/3-Story.webm)
+> ![Main Page](/ReadMeData/Main%20Page.png)
 
 ---
 
-### Party Page
+### Public Maps
 
-> ![Party Page](/readme/webms/4-Party.webm)
+> ![Public Maps](/ReadMeData/Public%20Maps.png)
 
 ---
 
-### NPC Page
+### Map Page
 
-> ![NPC Page](/readme/webms/5-NPC.webm)
+> ![Map Page](/ReadMeData/Map.png)
+
+---
+
+### Add Place to Map Popup
+
+> ![Add Place To Map Popup](/ReadMeData/Add%20Place.png)
+
+---
+
+### Edit Place on Map Popup
+
+> ![Edit Place On Map Popup](/ReadMeData/Edit%20Place_fixed.png)
+
+---
+
+### Maps User is Contributer on
+
+> ![Maps User Can Contribute To](/ReadMeData/Maps%20user%20can%20Collaborate%20On.png)
+
+---
+
+### Users Favourites
+
+> ![Users Favourites](/ReadMeData/Users%20Favourites.png)
+
+---
+
+### Users Created Maps
+
+> ![Users Created Maps](/ReadMeData/Users%20Maps.png)
+
+---
+
+### Add Map Popup
+
+> ![Add Map Popup](/ReadMeData/Users%20Maps%20Add.png)
+
+---
+
+### Edit Map Popup
+
+> ![Edit Map Popup](/ReadMeData/Users%20Maps%20Edit.png)
 
 ---
 
