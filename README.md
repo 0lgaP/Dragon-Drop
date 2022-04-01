@@ -72,31 +72,31 @@ Olga - Story, selected art assets, player characters and logo<br>
 
 ### Selecting Campaign
 
-> ![Selecting Campaign](/readme/webms/1-selecting_campaign.mp4)
+> ![Selecting Campaign](/readme/webms/1-selecting_campaign.gif)
 
 ---
 
 ### Using the Map
 
-> ![Using the Map](/readme/webms/2-basic_map_usage.webm)
+> ![Using the Map](/readme/webms/2-basic_map_usage.gif)
 
 ---
 
 ### Story Page
 
-> ![Story Page](/readme/webms/3-Story.webm)
+> ![Story Page](/readme/webms/3-Story.gif)
 
 ---
 
 ### Party Page
 
-> ![Party Page](/readme/webms/4-Party.webm)
+> ![Party Page](/readme/webms/4-Party.gif)
 
 ---
 
 ### NPC Page
 
-> ![NPC Page](/readme/webms/5-NPC.webm)
+> ![NPC Page](/readme/webms/5-NPC.gif)
 
 ---
 
