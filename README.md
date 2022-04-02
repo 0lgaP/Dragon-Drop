@@ -20,7 +20,7 @@
 
 ### What it is
 
-This project was created by [Olga]https://github.com/0lgaP, [Sarah](https://github.com/sawrrawr) and [Josh](https://github.com/JoshuaOLoduca). For more information please check out our githubs :)
+This project was created by [Olga](https://github.com/0lgaP), [Sarah](https://github.com/sawrrawr) and [Josh](https://github.com/JoshuaOLoduca). For more information please check out our githubs :)
 <br>
 This App is designed for game masters and story tellers. This application serves as an interactive tool for worldbuilding. This app utilises the power of react-dnd library to allow the user to drag and drop various story components inorder to accomodate branching and complex storylines. This is a labour of love, if you are inetrested in contributing to this project, please get in touch!
 <br>
