@@ -1,5 +1,7 @@
 # Dragon Drop
 
+![StoryCardGif_01](https://user-images.githubusercontent.com/61428425/211402677-b37cbf92-b39e-42c9-a914-2dd371bb1b1c.gif)
+
 ## Table Of Contents
 
 - [Project Overview](#project-overview)
